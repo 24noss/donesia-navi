@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { categories, formatDate } from '../../lib/categories';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  return articles.map((article) => ({ params: { id: article.id }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const cat = categories[article.data.category];
+---
+<Base title={article.data.title} description={article.data.description}>
+  <article>
+    <header class="article-header">
+      <div class="article-meta">
+        <span class={`badge badge-${article.data.category}`}>{cat.name}</span>
+        <time>{formatDate(article.data.pubDate)}</time>
+      </div>
+      <h1>{article.data.title}</h1>
+      {article.data.tags.length > 0 && (
+        <div style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--color-text-muted);">
+          {article.data.tags.map((tag: string) => `#${tag}`).join('  ')}
+        </div>
+      )}
+    </header>
+
+    <div class="article-body">
+      <Content />
+    </div>
+
+    {article.data.sourceUrl && (
+      <div class="article-source">
+        情報ソース: <a href={article.data.sourceUrl} target="_blank" rel="noopener">{article.data.source || '原文'}</a>
+      </div>
+    )}
+
+    <div class="article-footer">
+      この記事はAIが生成し、人間の編集者がレビューしています。
+      情報の正確性には万全を期していますが、最新情報は公式ソースをご確認ください。
+    </div>
+  </article>
+
+  <div style="margin-top: 2rem;">
+    <a href="/">&larr; トップに戻る</a>
+  </div>
+</Base>

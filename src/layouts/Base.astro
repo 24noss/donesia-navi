@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import { categories } from '../lib/categories';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'インドネシア在住日本人のための日本語ニュース・生活情報ポータル' } = Astro.props;
+const fullTitle = title === 'DonesiaNavi' ? title : `${title} | DonesiaNavi`;
+---
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <title>{fullTitle}</title>
+  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ja_JP" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container-wide">
+      <div>
+        <a href="/" class="site-title">Donesia<span>Navi</span></a>
+        <div class="site-subtitle">インドネシア在住日本人のための情報ポータル</div>
+      </div>
+      <nav class="site-nav">
+        {Object.entries(categories).map(([slug, cat]) => (
+          <a href={`/category/${slug}/`}>{cat.name}</a>
+        ))}
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 2rem; padding-bottom: 2rem;">
+    <slot />
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; {new Date().getFullYear()} DonesiaNavi. この記事はAIが生成し、人間の編集者がレビューしています。</p>
+    </div>
+  </footer>
+</body>
+</html>

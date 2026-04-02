@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { categories, formatDate } from '../../lib/categories';
+import type { CategorySlug } from '../../lib/categories';
+
+export function getStaticPaths() {
+  return Object.keys(categories).map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const cat = categories[slug as CategorySlug];
+const allArticles = await getCollection('articles', ({ data }) => !data.draft && data.category === slug);
+const articles = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<Base title={cat.name}>
+  <h2 style="font-size: 1.2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-accent);">
+    <span class={`badge badge-${slug}`}>{cat.name}</span>
+  </h2>
+
+  {articles.length === 0 ? (
+    <p style="color: var(--color-text-muted); padding: 2rem 0;">このカテゴリの記事はまだありません。</p>
+  ) : (
+    <ul class="article-list">
+      {articles.map((article) => (
+        <li class="article-item">
+          <div class="article-meta">
+            <time>{formatDate(article.data.pubDate)}</time>
+          </div>
+          <h3 class="article-title">
+            <a href={`/articles/${article.id}/`}>{article.data.title}</a>
+          </h3>
+          <p class="article-excerpt">{article.data.description}</p>
+        </li>
+      ))}
+    </ul>
+  )}
+
+  <div style="margin-top: 2rem;">
+    <a href="/">&larr; トップに戻る</a>
+  </div>
+</Base>
