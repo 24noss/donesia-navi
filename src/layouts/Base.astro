@@ -24,7 +24,8 @@ const {
   noindex = false,
 } = Astro.props;
 
-const fullTitle = title === 'DonesiaNavi' ? title : `${title} | DonesiaNavi`;
+const isHome = title.startsWith('DonesiaNavi');
+const fullTitle = isHome ? title : `${title} | DonesiaNavi（ドネシアナビ）`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 const siteUrl = Astro.site?.href ?? 'https://indonesia-navi.com';
 const ogImageUrl = `${siteUrl}og-default.png`;
@@ -37,6 +38,7 @@ const currentPath = Astro.url.pathname;
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="agd-partner-manual-verification" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
