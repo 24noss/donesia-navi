@@ -12,9 +12,7 @@ const articles = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 const featured = articles[0];
 const rest = articles.slice(1);
 
-const today = new Date();
-const days = ['日', '月', '火', '水', '木', '金', '土'];
-const todayStr = `${today.getFullYear()}年${today.getMonth()+1}月${today.getDate()}日（${days[today.getDay()]}）`;
+const todayStr = formatDate(new Date());
 ---
 <Base title="DonesiaNavi" description="インドネシア在住日本人のための日本語ニュース・生活情報ポータル。安全情報、ビザ、経済、生活、旅行などの最新ニュースを毎日お届け。">
   <StructuredData slot="head" type="home" />

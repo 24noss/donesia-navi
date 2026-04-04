@@ -35,7 +35,7 @@ function relativeTime(date: Date): string {
 ---
 
 {featured ? (
-  <a href={url} class="featured" style="display:block;text-decoration:none;">
+  <a href={url} class="featured">
     <span class="featured-cat">{cat.name}</span>
     <h3 class="featured-title">{article.data.title}</h3>
     <p class="featured-excerpt">{article.data.description}</p>
@@ -45,7 +45,7 @@ function relativeTime(date: Date): string {
     </div>
   </a>
 ) : (
-  <a href={url} class="article-item" style="text-decoration:none;">
+  <a href={url} class="article-item">
     <span class={`cat-dot ${article.data.category}`}></span>
     <div class="article-item-body">
       <h4 class="article-item-title">{article.data.title}</h4>

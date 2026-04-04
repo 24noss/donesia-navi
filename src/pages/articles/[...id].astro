@@ -132,7 +132,7 @@ const popularArticles = [...allArticles]
         {article.data.tags.length > 0 && (
           <div class="tag-pills">
             {article.data.tags.map((tag: string) => (
-              <span class="tag-pill">{tag}</span>
+              <a class="tag-pill" href={`/tag/${tag}/`}>{tag}</a>
             ))}
           </div>
         )}

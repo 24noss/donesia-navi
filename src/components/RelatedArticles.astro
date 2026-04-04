@@ -42,7 +42,7 @@ const scored = allArticles
     {scored.map(({ article }) => (
       <div class="related-item">
         <span class="related-cat">{categories[article.data.category].name}</span>
-        <a class="related-title" href={`/articles/${article.id}/`} style="display:block;">
+        <a class="related-title" href={`/articles/${article.id}/`}>
           {article.data.title}
         </a>
         <div class="related-date">{formatDate(article.data.pubDate)}</div>
