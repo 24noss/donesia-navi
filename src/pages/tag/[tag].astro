@@ -1,0 +1,63 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { categories, formatDate } from '../../lib/categories';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  const allTags = new Set<string>();
+  articles.forEach(a => a.data.tags.forEach(t => allTags.add(t)));
+  return [...allTags].map(tag => ({
+    params: { tag },
+    props: { tag },
+  }));
+}
+
+const { tag } = Astro.props;
+const allArticles = await getCollection('articles', ({ data }) => !data.draft && data.tags.includes(tag));
+const articles = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<Base title={`#${tag} の記事一覧`} description={`「${tag}」タグが付いた記事の一覧です。`}>
+
+  <!-- Breadcrumb navigation -->
+  <nav aria-label="パンくずリスト" style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 1rem;">
+    <a href="/">ホーム</a>
+    <span style="margin: 0 0.3rem;">&gt;</span>
+    <span>タグ</span>
+    <span style="margin: 0 0.3rem;">&gt;</span>
+    <span>#{tag}</span>
+  </nav>
+
+  <h2 style="font-size: 1.2rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-accent);">
+    #{tag}
+  </h2>
+  <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">
+    「{tag}」タグが付いた記事 ({articles.length}件)
+  </p>
+
+  {articles.length === 0 ? (
+    <p style="color: var(--color-text-muted); padding: 2rem 0;">このタグの記事はまだありません。</p>
+  ) : (
+    <ul class="article-list">
+      {articles.map((article) => {
+        const cat = categories[article.data.category as keyof typeof categories];
+        return (
+          <li class="article-item">
+            <div class="article-meta">
+              {cat && <span class={`badge badge-${article.data.category}`}>{cat.name}</span>}
+              <time datetime={article.data.pubDate.toISOString()}>{formatDate(article.data.pubDate)}</time>
+            </div>
+            <h3 class="article-title">
+              <a href={`/articles/${article.id}/`}>{article.data.title}</a>
+            </h3>
+            <p class="article-excerpt">{article.data.description}</p>
+          </li>
+        );
+      })}
+    </ul>
+  )}
+
+  <div style="margin-top: 2rem;">
+    <a href="/">&larr; トップに戻る</a>
+  </div>
+</Base>

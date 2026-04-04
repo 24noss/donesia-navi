@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import StructuredData from '../../components/StructuredData.astro';
+import RelatedArticles from '../../components/RelatedArticles.astro';
 import { categories, formatDate } from '../../lib/categories';
 
 export async function getStaticPaths() {
@@ -11,21 +13,56 @@ export async function getStaticPaths() {
 const { article } = Astro.props;
 const { Content } = await render(article);
 const cat = categories[article.data.category];
+const articleUrl = new URL(`/articles/${article.id}/`, Astro.site).href;
 ---
-<Base title={article.data.title} description={article.data.description}>
+<Base
+  title={article.data.title}
+  description={article.data.description}
+  ogType="article"
+  publishedTime={article.data.pubDate.toISOString()}
+  modifiedTime={(article.data.updatedDate ?? article.data.pubDate).toISOString()}
+  articleSection={cat.name}
+  articleTags={article.data.tags}
+>
+  <StructuredData
+    slot="head"
+    type="article"
+    article={article.data}
+    articleUrl={articleUrl}
+  />
+
+  <!-- Breadcrumb navigation -->
+  <nav aria-label="パンくずリスト" style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 1rem;">
+    <a href="/">ホーム</a>
+    <span style="margin: 0 0.3rem;">&gt;</span>
+    <a href={`/category/${article.data.category}/`}>{cat.name}</a>
+    <span style="margin: 0 0.3rem;">&gt;</span>
+    <span>{article.data.title}</span>
+  </nav>
+
   <article>
     <header class="article-header">
       <div class="article-meta">
         <span class={`badge badge-${article.data.category}`}>{cat.name}</span>
-        <time>{formatDate(article.data.pubDate)}</time>
+        <time datetime={article.data.pubDate.toISOString()}>{formatDate(article.data.pubDate)}</time>
       </div>
       <h1>{article.data.title}</h1>
+      <div style="margin-top: 0.3rem; font-size: 0.8rem; color: var(--color-text-muted);">
+        著者: DonesiaNavi編集部
+      </div>
       {article.data.tags.length > 0 && (
         <div style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--color-text-muted);">
           {article.data.tags.map((tag: string) => `#${tag}`).join('  ')}
         </div>
       )}
     </header>
+
+    {article.data.hasAffiliate && (
+      <div style="background: #fff8e1; border: 1px solid #ffc107; border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 1.5rem; font-size: 0.85rem;">
+        <strong>PR</strong> この記事にはアフィリエイト広告が含まれています。
+        <a href="/policy/" style="margin-left: 0.5rem;">詳細</a>
+      </div>
+    )}
 
     <div class="article-body">
       <Content />
@@ -42,6 +79,13 @@ const cat = categories[article.data.category];
       情報の正確性には万全を期していますが、最新情報は公式ソースをご確認ください。
     </div>
   </article>
+
+  <!-- Related Articles -->
+  <RelatedArticles
+    currentId={article.id}
+    category={article.data.category}
+    tags={article.data.tags}
+  />
 
   <div style="margin-top: 2rem;">
     <a href="/">&larr; トップに戻る</a>

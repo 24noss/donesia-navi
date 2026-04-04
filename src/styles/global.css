@@ -3,8 +3,8 @@
   --color-text: #1a1a1a;
   --color-text-muted: #6b7280;
   --color-border: #e5e7eb;
-  --color-accent: #dc2626;
-  --color-accent-light: #fef2f2;
+  --color-accent: #1e3a5f;
+  --color-accent-light: #eef2f7;
   --color-link: #1d4ed8;
   --color-safety: #dc2626;
   --color-daily: #2563eb;
@@ -14,17 +14,37 @@
   --color-travel: #0891b2;
   --color-visa: #4f46e5;
   --color-regulation: #64748b;
+  --color-card-bg: #ffffff;
+  --color-header-bg: #ffffff;
+  --color-table-header-bg: #f9fafb;
+  --color-footer-bg: #f9fafb;
   --max-width: 800px;
   --max-width-wide: 1100px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f1419;
+    --color-text: #e7e9ea;
+    --color-text-muted: #8b98a5;
+    --color-border: #2f3336;
+    --color-accent: #5b8abf;
+    --color-accent-light: #1c2938;
+    --color-link: #6ba3eb;
+    --color-card-bg: #1a1f26;
+    --color-header-bg: #15191e;
+    --color-table-header-bg: #1a1f26;
+    --color-footer-bg: #1a1f26;
+  }
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic', sans-serif;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Yu Gothic UI', 'Meiryo', sans-serif;
   color: var(--color-text);
   background: var(--color-bg);
-  line-height: 1.8;
+  line-height: 1.9;
   font-size: 16px;
 }
 
@@ -38,7 +58,7 @@ a:hover { text-decoration: underline; }
 .site-header {
   border-bottom: 3px solid var(--color-accent);
   padding: 1rem 0;
-  background: #fff;
+  background: var(--color-header-bg);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -62,13 +82,23 @@ a:hover { text-decoration: underline; }
 }
 
 /* Navigation */
-.site-nav { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+.site-nav {
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.site-nav::-webkit-scrollbar { display: none; }
 .site-nav a {
   font-size: 0.8rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 4px;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
   color: var(--color-text);
   white-space: nowrap;
+  background: var(--color-accent-light);
 }
 .site-nav a:hover { background: var(--color-border); text-decoration: none; }
 
@@ -122,7 +152,7 @@ a:hover { text-decoration: underline; }
 /* Article page */
 .article-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-border); }
 .article-header h1 { font-size: 1.6rem; line-height: 1.4; margin-bottom: 0.75rem; }
-.article-body { font-size: 1rem; line-height: 2; }
+.article-body { font-size: 1rem; line-height: 2.0; }
 .article-body h2 { font-size: 1.3rem; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-border); }
 .article-body h3 { font-size: 1.1rem; margin: 1.5rem 0 0.75rem; }
 .article-body p { margin-bottom: 1.2rem; }
@@ -138,7 +168,7 @@ a:hover { text-decoration: underline; }
 }
 .article-body table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
 .article-body th, .article-body td { border: 1px solid var(--color-border); padding: 0.5rem 0.75rem; text-align: left; font-size: 0.9rem; }
-.article-body th { background: #f9fafb; font-weight: 700; }
+.article-body th { background: var(--color-table-header-bg); font-weight: 700; }
 
 .article-source {
   margin-top: 2rem;
@@ -150,7 +180,7 @@ a:hover { text-decoration: underline; }
 .article-footer {
   margin-top: 2rem;
   padding: 1rem;
-  background: #f9fafb;
+  background: var(--color-footer-bg);
   border-radius: 6px;
   font-size: 0.8rem;
   color: var(--color-text-muted);

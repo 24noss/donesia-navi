@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import StructuredData from '../components/StructuredData.astro';
+---
+<Base title="このサイトについて" description="DonesiaNavi（ドネシアナビ）はインドネシア在住日本人のための日本語ニュース・生活情報ポータルです。編集方針、AIコンテンツの取り扱いについてご説明します。">
+  <StructuredData slot="head" type="home" />
+
+  <nav aria-label="パンくずリスト" style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 1rem;">
+    <a href="/">ホーム</a>
+    <span style="margin: 0 0.3rem;">&gt;</span>
+    <span>このサイトについて</span>
+  </nav>
+
+  <article class="article-body">
+    <h1>DonesiaNavi（ドネシアナビ）について</h1>
+
+    <h2>サイト概要</h2>
+    <p>
+      DonesiaNavi（ドネシアナビ）は、インドネシアに在住する日本人のための日本語ニュース・生活情報ポータルサイトです。
+      インドネシア国内メディアの報道をもとに、在住日本人に関連性の高いニュースを毎日日本語でお届けしています。
+    </p>
+    <p>
+      安全・災害情報、ビザ・手続き、経済・ビジネス、生活・グルメ、旅行・お出かけ、規制・法務など、
+      インドネシアで暮らす日本人に必要な情報を幅広くカバーしています。
+    </p>
+
+    <h2>編集方針</h2>
+    <ul>
+      <li><strong>速報性：</strong>インドネシア現地メディアのニュースをいち早く日本語で要約・解説します。</li>
+      <li><strong>正確性：</strong>複数ソースの照合を基本とし、未確認情報は「〜と報じられています」と明記します。</li>
+      <li><strong>在住者視点：</strong>インドネシアに住む日本人にとって実用的な情報提供を最優先します。</li>
+      <li><strong>情報ソースの明示：</strong>すべての記事に元となる情報ソースへのリンクを掲載しています。</li>
+    </ul>
+
+    <h2>AI活用と人間レビューについて</h2>
+    <p>
+      DonesiaNaviの記事は、AI（人工知能）を活用して生成されています。
+      具体的には以下のプロセスで記事を制作しています。
+    </p>
+    <ol>
+      <li>インドネシア現地メディアのRSSフィードから最新ニュースを自動収集</li>
+      <li>在住日本人への関連度をスコアリングし、重要度の高いニュースを選定</li>
+      <li>AIが日本語での要約・解説記事を生成（原文の翻訳ではなく、要約と独自解説）</li>
+      <li><strong>人間の編集者がすべての記事をレビュー・承認してから公開</strong></li>
+    </ol>
+    <p>
+      AIは記事作成の効率化に活用していますが、最終的な品質管理と公開判断は人間の編集者が行っています。
+      情報の正確性には万全を期していますが、最新の正確な情報については公式ソースをご確認ください。
+    </p>
+
+    <h2>免責事項</h2>
+    <p>
+      当サイトに掲載されている情報は、発信時点の情報に基づいています。
+      法令・制度の変更、為替レートの変動等により、最新の情報と異なる場合があります。
+      重要な意思決定の際は、必ず公式機関や専門家にご確認ください。
+    </p>
+
+    <h2>お問い合わせ</h2>
+    <p>
+      記事の内容に関するご指摘、掲載情報の訂正依頼、その他お問い合わせは
+      以下までご連絡ください。
+    </p>
+    <p>
+      メール: <a href="mailto:info@indonesia-navi.com">info@indonesia-navi.com</a>
+    </p>
+
+    <h2>運営者情報</h2>
+    <p>
+      サイト名: DonesiaNavi（ドネシアナビ）<br />
+      URL: <a href="https://indonesia-navi.com">https://indonesia-navi.com</a><br />
+      運営: DonesiaNavi編集部
+    </p>
+  </article>
+
+  <div style="margin-top: 2rem;">
+    <a href="/">&larr; トップに戻る</a>
+  </div>
+</Base>

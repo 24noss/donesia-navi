@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import StructuredData from '../../components/StructuredData.astro';
 import { categories, formatDate } from '../../lib/categories';
 import type { CategorySlug } from '../../lib/categories';
 
@@ -13,10 +14,22 @@ const cat = categories[slug as CategorySlug];
 const allArticles = await getCollection('articles', ({ data }) => !data.draft && data.category === slug);
 const articles = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<Base title={cat.name}>
-  <h2 style="font-size: 1.2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-accent);">
+<Base title={cat.seoTitle} description={cat.description}>
+  <StructuredData slot="head" type="category" categorySlug={slug as CategorySlug} />
+
+  <!-- Breadcrumb navigation -->
+  <nav aria-label="パンくずリスト" style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 1rem;">
+    <a href="/">ホーム</a>
+    <span style="margin: 0 0.3rem;">&gt;</span>
+    <span>{cat.name}</span>
+  </nav>
+
+  <h2 style="font-size: 1.2rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-accent);">
     <span class={`badge badge-${slug}`}>{cat.name}</span>
   </h2>
+  <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">
+    {cat.description}
+  </p>
 
   {articles.length === 0 ? (
     <p style="color: var(--color-text-muted); padding: 2rem 0;">このカテゴリの記事はまだありません。</p>
@@ -25,7 +38,7 @@ const articles = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
       {articles.map((article) => (
         <li class="article-item">
           <div class="article-meta">
-            <time>{formatDate(article.data.pubDate)}</time>
+            <time datetime={article.data.pubDate.toISOString()}>{formatDate(article.data.pubDate)}</time>
           </div>
           <h3 class="article-title">
             <a href={`/articles/${article.id}/`}>{article.data.title}</a>

@@ -1,0 +1,58 @@
+---
+/**
+ * Related Articles component.
+ * Shows articles that share tags or category with the current article.
+ */
+import { getCollection } from 'astro:content';
+import { categories, formatDate } from '../lib/categories';
+import type { CategorySlug } from '../lib/categories';
+
+interface Props {
+  currentId: string;
+  category: CategorySlug;
+  tags: string[];
+  limit?: number;
+}
+
+const { currentId, category, tags, limit = 4 } = Astro.props;
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+
+// Score articles by relevance: shared tags (2 points each) + same category (1 point)
+const scored = allArticles
+  .filter((a) => a.id !== currentId)
+  .map((a) => {
+    let score = 0;
+    if (a.data.category === category) score += 1;
+    for (const tag of a.data.tags) {
+      if (tags.includes(tag)) score += 2;
+    }
+    return { article: a, score };
+  })
+  .filter((s) => s.score > 0)
+  .sort((a, b) => b.score - a.score || b.article.data.pubDate.valueOf() - a.article.data.pubDate.valueOf())
+  .slice(0, limit);
+---
+
+{scored.length > 0 && (
+  <div class="related-articles">
+    <h3 style="font-size: 1rem; margin-bottom: 0.75rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--color-accent);">
+      関連記事
+    </h3>
+    <ul class="article-list" style="margin: 0; padding: 0;">
+      {scored.map(({ article }) => (
+        <li class="article-item" style="padding: 0.5rem 0;">
+          <div class="article-meta">
+            <span class={`badge badge-${article.data.category}`}>
+              {categories[article.data.category].name}
+            </span>
+            <time>{formatDate(article.data.pubDate)}</time>
+          </div>
+          <a href={`/articles/${article.id}/`} style="font-weight: 600; font-size: 0.9rem;">
+            {article.data.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}

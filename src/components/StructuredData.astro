@@ -1,0 +1,135 @@
+---
+/**
+ * Structured Data (JSON-LD) component for SEO.
+ * Outputs NewsArticle, WebSite, and BreadcrumbList schemas.
+ */
+import { categories } from '../lib/categories';
+import type { CategorySlug } from '../lib/categories';
+
+interface ArticleData {
+  title: string;
+  description: string;
+  category: CategorySlug;
+  pubDate: Date;
+  updatedDate?: Date;
+  tags: string[];
+  source?: string;
+  sourceUrl?: string;
+}
+
+interface Props {
+  /** "home" | "article" | "category" */
+  type: 'home' | 'article' | 'category';
+  article?: ArticleData;
+  articleUrl?: string;
+  categorySlug?: CategorySlug;
+}
+
+const { type, article, articleUrl, categorySlug } = Astro.props;
+const siteUrl = Astro.site?.href ?? 'https://indonesia-navi.com';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+
+// --- WebSite schema (homepage) ---
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'DonesiaNavi',
+  alternateName: 'ドネシアナビ',
+  url: siteUrl,
+  description: 'インドネシア在住日本人のための日本語ニュース・生活情報ポータル',
+  inLanguage: 'ja',
+  publisher: {
+    '@type': 'Organization',
+    name: 'DonesiaNavi',
+    url: siteUrl,
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${siteUrl}?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+// --- NewsArticle schema ---
+function buildArticleSchema(data: ArticleData, url: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: data.title,
+    description: data.description,
+    datePublished: data.pubDate.toISOString(),
+    dateModified: (data.updatedDate ?? data.pubDate).toISOString(),
+    author: {
+      '@type': 'Organization',
+      name: 'DonesiaNavi編集部',
+      url: siteUrl,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'DonesiaNavi',
+      url: siteUrl,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
+    },
+    articleSection: categories[data.category]?.name ?? data.category,
+    keywords: data.tags.join(', '),
+    inLanguage: 'ja',
+    isAccessibleForFree: true,
+  };
+}
+
+// --- BreadcrumbList schema ---
+function buildBreadcrumbs(type: string, article?: ArticleData, categorySlug?: CategorySlug) {
+  const items: { name: string; url: string }[] = [
+    { name: 'ホーム', url: siteUrl },
+  ];
+
+  if (type === 'category' && categorySlug) {
+    const cat = categories[categorySlug];
+    items.push({ name: cat.name, url: `${siteUrl}category/${categorySlug}/` });
+  }
+
+  if (type === 'article' && article) {
+    const cat = categories[article.category];
+    items.push({ name: cat.name, url: `${siteUrl}category/${article.category}/` });
+    items.push({ name: article.title, url: canonicalUrl });
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
+// Build schemas based on page type
+const schemas: object[] = [];
+
+if (type === 'home') {
+  schemas.push(websiteSchema);
+  schemas.push(buildBreadcrumbs('home'));
+}
+
+if (type === 'article' && article && articleUrl) {
+  schemas.push(buildArticleSchema(article, articleUrl));
+  schemas.push(buildBreadcrumbs('article', article));
+}
+
+if (type === 'category' && categorySlug) {
+  schemas.push(buildBreadcrumbs('category', undefined, categorySlug));
+}
+---
+
+{schemas.map((schema) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

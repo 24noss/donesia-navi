@@ -13,6 +13,8 @@ const articles = defineCollection({
     source: z.string().optional(),
     sourceUrl: z.string().url().optional(),
     draft: z.boolean().default(false),
+    hasAffiliate: z.boolean().default(false),
+    affiliatePrograms: z.array(z.string()).default([]),
   }),
 });
 
