@@ -18,6 +18,13 @@ const todayStr = formatDate(new Date());
 <Base title="DonesiaNavi（ドネシアナビ） | インドネシア在住日本人向けニュース・生活情報" description="インドネシア在住日本人のための日本語ニュース・生活情報ポータル。安全情報、ビザ、経済、生活、旅行などの最新ニュースを毎日お届け。">
   <StructuredData slot="head" type="home" />
 
+  <!-- FULL-WIDTH HERO (G3 style - outside 2-column layout) -->
+  {featured && (
+    <div class="container" style="padding-top:24px;">
+      <ArticleCard article={featured} featured={true} />
+    </div>
+  )}
+
   <div class="container layout-2col">
 
     <!-- MAIN COLUMN -->
@@ -38,13 +45,7 @@ const todayStr = formatDate(new Date());
         <p style="color:var(--text-muted);padding:2rem 0;">記事の準備中です。</p>
       ) : (
         <>
-          <!-- Featured Article -->
-          <div class="section-header">
-            <h2 class="section-title">注目ニュース</h2>
-          </div>
-          {featured && <ArticleCard article={featured} featured={true} />}
-
-          <!-- Latest Articles -->
+          <!-- Latest Articles (G4 card grid) -->
           <div class="section-header">
             <h2 class="section-title">最新ニュース</h2>
           </div>
@@ -61,7 +62,7 @@ const todayStr = formatDate(new Date());
 
     <!-- SIDEBAR -->
     <div class="sidebar-col desktop-only">
-      <Sidebar showRate={true} showPopular={true} showCategories={true} showSafety={true} />
+      <Sidebar showRate={false} showPopular={true} showCategories={true} showSafety={true} />
     </div>
 
   </div>

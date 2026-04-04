@@ -12,6 +12,7 @@ interface Props {
       pubDate: Date;
       source?: string;
       tags: string[];
+      heroImage?: string;
     };
   };
   featured?: boolean;
@@ -21,7 +22,19 @@ const { article, featured = false } = Astro.props;
 const cat = categories[article.data.category];
 const url = `/articles/${article.id}/`;
 
-// Calculate relative time
+// Category-specific default images from Pexels (Indonesia-themed, free, no attribution)
+const categoryImages: Record<string, string> = {
+  safety: 'https://images.pexels.com/photos/1739855/pexels-photo-1739855.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
+  society: 'https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
+  business: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
+  lifestyle: 'https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
+  travel: 'https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
+  visa: 'https://images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
+  regulation: 'https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
+};
+
+const heroImage = article.data.heroImage || categoryImages[article.data.category] || categoryImages.society;
+
 function relativeTime(date: Date): string {
   const now = new Date();
   const diff = now.getTime() - date.getTime();
@@ -35,7 +48,7 @@ function relativeTime(date: Date): string {
 ---
 
 {featured ? (
-  <a href={url} class="featured-hero">
+  <a href={url} class="featured-hero" style={`background-image:linear-gradient(180deg, rgba(27,45,79,0.05) 0%, rgba(27,45,79,0.6) 40%, rgba(27,45,79,0.95) 100%), url('${heroImage}');background-size:cover;background-position:center;`}>
     <span class="featured-hero-badge">{cat.name}</span>
     <h3 class="featured-hero-title">{article.data.title}</h3>
     <p class="featured-hero-excerpt">{article.data.description}</p>
@@ -46,7 +59,7 @@ function relativeTime(date: Date): string {
   </a>
 ) : (
   <a href={url} class="article-card">
-    <div class="article-card-image"></div>
+    <div class="article-card-image" style={`background-image:url('${heroImage}');`}></div>
     <div class="article-card-body">
       <span class="article-card-badge">{cat.name}</span>
       <h4 class="article-card-title">{article.data.title}</h4>
