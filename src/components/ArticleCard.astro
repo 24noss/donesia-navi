@@ -1,0 +1,59 @@
+---
+import { categories, formatDate } from '../lib/categories';
+import type { CategorySlug } from '../lib/categories';
+
+interface Props {
+  article: {
+    id: string;
+    data: {
+      title: string;
+      description: string;
+      category: CategorySlug;
+      pubDate: Date;
+      source?: string;
+      tags: string[];
+    };
+  };
+  featured?: boolean;
+}
+
+const { article, featured = false } = Astro.props;
+const cat = categories[article.data.category];
+const url = `/articles/${article.id}/`;
+
+// Calculate relative time
+function relativeTime(date: Date): string {
+  const now = new Date();
+  const diff = now.getTime() - date.getTime();
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  if (hours < 1) return '数分前';
+  if (hours < 24) return `${hours}時間前`;
+  if (days < 7) return `${days}日前`;
+  return formatDate(date);
+}
+---
+
+{featured ? (
+  <a href={url} class="featured" style="display:block;text-decoration:none;">
+    <span class="featured-cat">{cat.name}</span>
+    <h3 class="featured-title">{article.data.title}</h3>
+    <p class="featured-excerpt">{article.data.description}</p>
+    <div class="featured-meta">
+      {article.data.source && <span class="source">{article.data.source}</span>}
+      <span>{relativeTime(article.data.pubDate)}</span>
+    </div>
+  </a>
+) : (
+  <a href={url} class="article-item" style="text-decoration:none;">
+    <span class={`cat-dot ${article.data.category}`}></span>
+    <div class="article-item-body">
+      <h4 class="article-item-title">{article.data.title}</h4>
+      <p class="article-item-excerpt">{article.data.description}</p>
+      <div class="article-item-meta">
+        {article.data.source && <span class="source">{article.data.source}</span>}
+        <span>{relativeTime(article.data.pubDate)}</span>
+      </div>
+    </div>
+  </a>
+)}

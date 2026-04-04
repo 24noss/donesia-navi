@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+import { categories } from '../lib/categories';
+
+interface Props {
+  showRate?: boolean;
+  showPopular?: boolean;
+  showCategories?: boolean;
+  showSafety?: boolean;
+}
+
+const {
+  showRate = true,
+  showPopular = true,
+  showCategories = true,
+  showSafety = false,
+} = Astro.props;
+
+// Get articles for popular list
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+const sortedByDate = [...allArticles].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const popularArticles = sortedByDate.slice(0, 5);
+
+// Count articles per category
+const categoryCounts: Record<string, number> = {};
+for (const article of allArticles) {
+  categoryCounts[article.data.category] = (categoryCounts[article.data.category] || 0) + 1;
+}
+---
+
+<div class="sidebar-sticky">
+
+  {showRate && (
+    <div class="widget">
+      <div class="widget-title"><span class="icon">&#9733;</span> 為替レート</div>
+      <div class="rate-big">--</div>
+      <div class="rate-pair">1 JPY = IDR</div>
+      <div class="rate-trend up">取得中...</div>
+      <a href="https://wise.com/jp/" target="_blank" rel="noopener noreferrer" class="wise-link">Wise で送金 →<span class="pr">PR</span></a>
+    </div>
+  )}
+
+  {showPopular && popularArticles.length > 0 && (
+    <div class="widget">
+      <div class="widget-title"><span class="icon">&#128293;</span> 人気記事</div>
+      <div class="popular-list">
+        {popularArticles.map((article, i) => (
+          <div class="popular-item">
+            <span class="popular-num">{i + 1}</span>
+            <a class="popular-title" href={`/articles/${article.id}/`}>{article.data.title}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {showCategories && (
+    <div class="widget">
+      <div class="widget-title"><span class="icon">&#128194;</span> カテゴリ</div>
+      <div class="cat-list">
+        {Object.entries(categories).map(([slug, cat]) => (
+          <div class="cat-item">
+            <a class="cat-item-name" href={`/category/${slug}/`}>{cat.name}</a>
+            <span class="cat-item-count">{categoryCounts[slug] || 0}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {showSafety && (
+    <div class="widget">
+      <div class="widget-title"><span style="color:var(--red)">&#9888;</span> 安全情報</div>
+      <div class="safety-widget-alert">
+        最新の安全情報は在インドネシア日本国大使館のウェブサイトをご確認ください。
+      </div>
+      <div class="safety-widget-date">
+        <a href="https://www.id.emb-japan.go.jp/" target="_blank" rel="noopener noreferrer" style="color:var(--teal);font-size:11px;">大使館ウェブサイト →</a>
+      </div>
+    </div>
+  )}
+
+</div>

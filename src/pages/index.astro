@@ -2,36 +2,67 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import StructuredData from '../components/StructuredData.astro';
-import { categories, formatDate } from '../lib/categories';
+import ArticleCard from '../components/ArticleCard.astro';
+import Sidebar from '../components/Sidebar.astro';
+import { formatDate } from '../lib/categories';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.draft);
 const articles = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const featured = articles[0];
+const rest = articles.slice(1);
+
+const today = new Date();
+const days = ['日', '月', '火', '水', '木', '金', '土'];
+const todayStr = `${today.getFullYear()}年${today.getMonth()+1}月${today.getDate()}日（${days[today.getDay()]}）`;
 ---
 <Base title="DonesiaNavi" description="インドネシア在住日本人のための日本語ニュース・生活情報ポータル。安全情報、ビザ、経済、生活、旅行などの最新ニュースを毎日お届け。">
   <StructuredData slot="head" type="home" />
 
-  <h2 style="font-size: 1.2rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-accent);">
-    最新記事
-  </h2>
+  <div class="container layout-2col">
 
-  {articles.length === 0 ? (
-    <p style="color: var(--color-text-muted); padding: 2rem 0;">記事の準備中です。</p>
-  ) : (
-    <ul class="article-list">
-      {articles.map((article) => (
-        <li class="article-item">
-          <div class="article-meta">
-            <span class={`badge badge-${article.data.category}`}>
-              {categories[article.data.category].name}
-            </span>
-            <time datetime={article.data.pubDate.toISOString()}>{formatDate(article.data.pubDate)}</time>
+    <!-- MAIN COLUMN -->
+    <div class="main-col fade-in">
+
+      <!-- Daily Digest Banner -->
+      <div class="digest-banner">
+        <div>
+          <div class="digest-date"><strong>今日のインドネシア</strong>{todayStr}</div>
+        </div>
+        <div class="digest-rate">
+          <span>1 JPY = -- IDR</span>
+          <small>| Wise レート</small>
+        </div>
+        <div class="digest-weather">ジャカルタ --°C<br><span style="font-size:11px;opacity:.6">天気情報取得中</span></div>
+      </div>
+
+      {articles.length === 0 ? (
+        <p style="color:var(--text-muted);padding:2rem 0;">記事の準備中です。</p>
+      ) : (
+        <>
+          <!-- Featured Article -->
+          <div class="section-header">
+            <h2 class="section-title">注目ニュース</h2>
           </div>
-          <h3 class="article-title">
-            <a href={`/articles/${article.id}/`}>{article.data.title}</a>
-          </h3>
-          <p class="article-excerpt">{article.data.description}</p>
-        </li>
-      ))}
-    </ul>
-  )}
+          {featured && <ArticleCard article={featured} featured={true} />}
+
+          <!-- Latest Articles -->
+          <div class="section-header">
+            <h2 class="section-title">最新ニュース</h2>
+          </div>
+
+          {rest.map((article) => (
+            <ArticleCard article={article} />
+          ))}
+        </>
+      )}
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar-col desktop-only">
+      <Sidebar showRate={true} showPopular={true} showCategories={true} showSafety={true} />
+    </div>
+
+  </div>
 </Base>

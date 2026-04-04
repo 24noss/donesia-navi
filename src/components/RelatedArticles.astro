@@ -35,24 +35,18 @@ const scored = allArticles
 ---
 
 {scored.length > 0 && (
-  <div class="related-articles">
-    <h3 style="font-size: 1rem; margin-bottom: 0.75rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--color-accent);">
-      関連記事
-    </h3>
-    <ul class="article-list" style="margin: 0; padding: 0;">
-      {scored.map(({ article }) => (
-        <li class="article-item" style="padding: 0.5rem 0;">
-          <div class="article-meta">
-            <span class={`badge badge-${article.data.category}`}>
-              {categories[article.data.category].name}
-            </span>
-            <time>{formatDate(article.data.pubDate)}</time>
-          </div>
-          <a href={`/articles/${article.id}/`} style="font-weight: 600; font-size: 0.9rem;">
-            {article.data.title}
-          </a>
-        </li>
-      ))}
-    </ul>
+  <div>
+    <div class="section-header">
+      <h3 class="section-title">関連記事</h3>
+    </div>
+    {scored.map(({ article }) => (
+      <div class="related-item">
+        <span class="related-cat">{categories[article.data.category].name}</span>
+        <a class="related-title" href={`/articles/${article.id}/`} style="display:block;">
+          {article.data.title}
+        </a>
+        <div class="related-date">{formatDate(article.data.pubDate)}</div>
+      </div>
+    ))}
   </div>
 )}

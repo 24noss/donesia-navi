@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import StructuredData from '../../components/StructuredData.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Sidebar from '../../components/Sidebar.astro';
 import { categories, formatDate } from '../../lib/categories';
 import type { CategorySlug } from '../../lib/categories';
 
@@ -17,39 +19,47 @@ const articles = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 <Base title={cat.seoTitle} description={cat.description}>
   <StructuredData slot="head" type="category" categorySlug={slug as CategorySlug} />
 
-  <!-- Breadcrumb navigation -->
-  <nav aria-label="パンくずリスト" style="font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 1rem;">
-    <a href="/">ホーム</a>
-    <span style="margin: 0 0.3rem;">&gt;</span>
-    <span>{cat.name}</span>
-  </nav>
+  <div class="container layout-2col">
 
-  <h2 style="font-size: 1.2rem; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--color-accent);">
-    <span class={`badge badge-${slug}`}>{cat.name}</span>
-  </h2>
-  <p style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.5rem;">
-    {cat.description}
-  </p>
+    <div class="main-col fade-in">
 
-  {articles.length === 0 ? (
-    <p style="color: var(--color-text-muted); padding: 2rem 0;">このカテゴリの記事はまだありません。</p>
-  ) : (
-    <ul class="article-list">
-      {articles.map((article) => (
-        <li class="article-item">
-          <div class="article-meta">
-            <time datetime={article.data.pubDate.toISOString()}>{formatDate(article.data.pubDate)}</time>
-          </div>
-          <h3 class="article-title">
-            <a href={`/articles/${article.id}/`}>{article.data.title}</a>
-          </h3>
-          <p class="article-excerpt">{article.data.description}</p>
-        </li>
-      ))}
-    </ul>
-  )}
+      <!-- Category Hero -->
+      <div class="cat-hero">
+        <div class="cat-hero-name">{cat.name}</div>
+        <div class="cat-hero-desc">{cat.description}</div>
+        <div class="cat-hero-count">{articles.length} 記事</div>
+      </div>
 
-  <div style="margin-top: 2rem;">
-    <a href="/">&larr; トップに戻る</a>
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <button class="filter-btn active">最新順</button>
+        <button class="filter-btn">人気順</button>
+      </div>
+
+      {articles.length === 0 ? (
+        <p style="color:var(--text-muted);padding:2rem 0;">このカテゴリの記事はまだありません。</p>
+      ) : (
+        articles.map((article) => (
+          <ArticleCard article={article} />
+        ))
+      )}
+
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar-col desktop-only">
+      <Sidebar showRate={false} showPopular={true} showCategories={true} showSafety={false} />
+    </div>
+
   </div>
+
+  <!-- Filter button JS -->
+  <script is:inline>
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        btn.parentElement.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+      });
+    });
+  </script>
 </Base>
