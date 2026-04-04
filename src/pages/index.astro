@@ -38,7 +38,7 @@ const todayStr = formatDate(new Date());
         <div class="digest-rate">
           <ExchangeRate variant="banner" />
         </div>
-        <div class="digest-weather">ジャカルタ --°C<br><span style="font-size:11px;opacity:.6">天気情報取得中</span></div>
+        <div class="digest-weather" id="weather-display">ジャカルタ --°C<br><span style="font-size:11px;opacity:.6">天気情報取得中</span></div>
       </div>
 
       {articles.length === 0 ? (
@@ -66,4 +66,33 @@ const todayStr = formatDate(new Date());
     </div>
 
   </div>
+  <script is:inline>
+    (function(){
+      var KEY = 'dn_weather';
+      var TTL = 30 * 60 * 1000; // 30 min cache
+      var el = document.getElementById('weather-display');
+      if (!el) return;
+
+      var cached = localStorage.getItem(KEY);
+      if (cached) {
+        try {
+          var d = JSON.parse(cached);
+          if (Date.now() - d.ts < TTL) { el.innerHTML = d.html; return; }
+        } catch(e) {}
+      }
+
+      fetch('https://api.open-meteo.com/v1/forecast?latitude=-6.2088&longitude=106.8456&current=temperature_2m,weathercode&timezone=Asia/Jakarta')
+        .then(r => r.json())
+        .then(data => {
+          var temp = Math.round(data.current.temperature_2m);
+          var code = data.current.weathercode;
+          var desc = code <= 3 ? '晴れ' : code <= 48 ? '曇り' : code <= 67 ? '雨' : code <= 77 ? '雪' : '雷雨';
+          var icon = code <= 3 ? '☀️' : code <= 48 ? '☁️' : code <= 67 ? '🌧️' : '⛈️';
+          var html = icon + ' ジャカルタ ' + temp + '°C<br><span style="font-size:11px;opacity:.6">' + desc + '</span>';
+          el.innerHTML = html;
+          localStorage.setItem(KEY, JSON.stringify({html: html, ts: Date.now()}));
+        })
+        .catch(function(){ el.innerHTML = 'ジャカルタ --°C'; });
+    })();
+  </script>
 </Base>
