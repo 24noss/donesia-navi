@@ -22,18 +22,79 @@ const { article, featured = false } = Astro.props;
 const cat = categories[article.data.category];
 const url = `/articles/${article.id}/`;
 
-// Category-specific default images from Pexels (Indonesia-themed, free, no attribution)
-const categoryImages: Record<string, string> = {
-  safety: 'https://images.pexels.com/photos/1739855/pexels-photo-1739855.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
-  society: 'https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
-  business: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
-  lifestyle: 'https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
-  travel: 'https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
-  visa: 'https://images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
-  regulation: 'https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1',
+// Multiple images per category — article ID hash selects unique image
+const categoryImagePool: Record<string, string[]> = {
+  safety: [
+    'https://images.pexels.com/photos/1739855/pexels-photo-1739855.jpeg',
+    'https://images.pexels.com/photos/1446076/pexels-photo-1446076.jpeg',
+    'https://images.pexels.com/photos/3618511/pexels-photo-3618511.jpeg',
+    'https://images.pexels.com/photos/1118153/pexels-photo-1118153.jpeg',
+    'https://images.pexels.com/photos/2034373/pexels-photo-2034373.jpeg',
+    'https://images.pexels.com/photos/1114690/pexels-photo-1114690.jpeg',
+  ],
+  society: [
+    'https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg',
+    'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg',
+    'https://images.pexels.com/photos/1427541/pexels-photo-1427541.jpeg',
+    'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg',
+    'https://images.pexels.com/photos/1550337/pexels-photo-1550337.jpeg',
+    'https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg',
+  ],
+  business: [
+    'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg',
+    'https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg',
+    'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg',
+    'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg',
+    'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg',
+    'https://images.pexels.com/photos/5716001/pexels-photo-5716001.jpeg',
+  ],
+  lifestyle: [
+    'https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg',
+    'https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg',
+    'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
+    'https://images.pexels.com/photos/1268101/pexels-photo-1268101.jpeg',
+    'https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg',
+    'https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg',
+  ],
+  travel: [
+    'https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg',
+    'https://images.pexels.com/photos/2187605/pexels-photo-2187605.jpeg',
+    'https://images.pexels.com/photos/1482193/pexels-photo-1482193.jpeg',
+    'https://images.pexels.com/photos/2440061/pexels-photo-2440061.jpeg',
+    'https://images.pexels.com/photos/2474689/pexels-photo-2474689.jpeg',
+    'https://images.pexels.com/photos/3225528/pexels-photo-3225528.jpeg',
+  ],
+  visa: [
+    'https://images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg',
+    'https://images.pexels.com/photos/2882552/pexels-photo-2882552.jpeg',
+    'https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg',
+    'https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg',
+    'https://images.pexels.com/photos/4427611/pexels-photo-4427611.jpeg',
+    'https://images.pexels.com/photos/4386373/pexels-photo-4386373.jpeg',
+  ],
+  regulation: [
+    'https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg',
+    'https://images.pexels.com/photos/5669619/pexels-photo-5669619.jpeg',
+    'https://images.pexels.com/photos/5668882/pexels-photo-5668882.jpeg',
+    'https://images.pexels.com/photos/4427430/pexels-photo-4427430.jpeg',
+    'https://images.pexels.com/photos/5669626/pexels-photo-5669626.jpeg',
+    'https://images.pexels.com/photos/6077123/pexels-photo-6077123.jpeg',
+  ],
 };
 
-const heroImage = article.data.heroImage || categoryImages[article.data.category] || categoryImages.society;
+// Hash article ID to pick a unique image from the pool
+function hashCode(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash);
+}
+
+const pool = categoryImagePool[article.data.category] || categoryImagePool.society;
+const imageIndex = hashCode(article.id) % pool.length;
+const heroImage = article.data.heroImage || pool[imageIndex] + '?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1';
 
 function relativeTime(date: Date): string {
   const now = new Date();
