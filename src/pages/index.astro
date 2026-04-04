@@ -49,9 +49,11 @@ const todayStr = formatDate(new Date());
             <h2 class="section-title">最新ニュース</h2>
           </div>
 
-          {rest.map((article) => (
-            <ArticleCard article={article} />
-          ))}
+          <div class="article-grid">
+            {rest.map((article) => (
+              <ArticleCard article={article} />
+            ))}
+          </div>
         </>
       )}
 

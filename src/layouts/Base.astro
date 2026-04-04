@@ -167,37 +167,92 @@ const currentPath = Astro.url.pathname;
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10"/></svg>
         <span>ホーム</span>
       </a>
-      <a href="/category/safety/" class="mobile-nav-item">
+      <button class={`mobile-nav-item${currentPath.startsWith('/category') ? ' active' : ''}`} id="category-nav-btn" aria-label="カテゴリを開く">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
         <span>カテゴリ</span>
-      </a>
+      </button>
       <a href="/search/" class={`mobile-nav-item${currentPath.startsWith('/search') ? ' active' : ''}`}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <span>検索</span>
       </a>
-      <a href="/category/business/" class="mobile-nav-item">
+      <button class="mobile-nav-item" id="fx-nav-btn" aria-label="為替レートを表示">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg>
         <span>為替</span>
-      </a>
+      </button>
       <a href="/about/" class={`mobile-nav-item${currentPath.startsWith('/about') ? ' active' : ''}`}>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-        <span>設定</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>マイページ</span>
       </a>
     </div>
   </nav>
 
-  <!-- Dark mode toggle JS -->
+  <!-- CATEGORY OVERLAY -->
+  <div class="category-overlay" id="category-overlay">
+    <div class="category-overlay-header">
+      <h2 class="category-overlay-title">カテゴリ</h2>
+      <button class="category-overlay-close" id="category-overlay-close" aria-label="閉じる">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="category-overlay-list">
+      {Object.entries(categories).map(([slug, cat]) => (
+        <a href={`/category/${slug}/`} class="category-overlay-item">
+          <span class={`cat-dot ${slug}`}></span>
+          <span class="category-overlay-name">{cat.name}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Dark mode toggle JS + Mobile nav JS -->
   <script is:inline>
     (function(){
+      // Dark mode toggle
       var toggle = document.getElementById('theme-toggle');
-      if (!toggle) return;
-      toggle.addEventListener('click', function(){
-        var html = document.documentElement;
-        var current = html.getAttribute('data-theme');
-        var next = current === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-      });
+      if (toggle) {
+        toggle.addEventListener('click', function(){
+          var html = document.documentElement;
+          var current = html.getAttribute('data-theme');
+          var next = current === 'dark' ? 'light' : 'dark';
+          html.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+        });
+      }
+
+      // Category overlay
+      var catBtn = document.getElementById('category-nav-btn');
+      var catOverlay = document.getElementById('category-overlay');
+      var catClose = document.getElementById('category-overlay-close');
+      if (catBtn && catOverlay && catClose) {
+        catBtn.addEventListener('click', function(){
+          catOverlay.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        });
+        catClose.addEventListener('click', function(){
+          catOverlay.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+        catOverlay.addEventListener('click', function(e){
+          if (e.target === catOverlay) {
+            catOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+
+      // Exchange rate scroll/navigate
+      var fxBtn = document.getElementById('fx-nav-btn');
+      if (fxBtn) {
+        fxBtn.addEventListener('click', function(){
+          var banner = document.querySelector('.digest-banner');
+          if (banner) {
+            banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else {
+            window.location.href = '/#exchange-rate';
+          }
+        });
+      }
     })();
   </script>
 

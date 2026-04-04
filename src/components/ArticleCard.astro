@@ -35,22 +35,22 @@ function relativeTime(date: Date): string {
 ---
 
 {featured ? (
-  <a href={url} class="featured">
-    <span class="featured-cat">{cat.name}</span>
-    <h3 class="featured-title">{article.data.title}</h3>
-    <p class="featured-excerpt">{article.data.description}</p>
-    <div class="featured-meta">
+  <a href={url} class="featured-hero">
+    <span class="featured-hero-badge">{cat.name}</span>
+    <h3 class="featured-hero-title">{article.data.title}</h3>
+    <p class="featured-hero-excerpt">{article.data.description}</p>
+    <div class="featured-hero-meta">
       {article.data.source && <span class="source">{article.data.source}</span>}
       <span>{relativeTime(article.data.pubDate)}</span>
     </div>
   </a>
 ) : (
-  <a href={url} class="article-item">
-    <span class={`cat-dot ${article.data.category}`}></span>
-    <div class="article-item-body">
-      <h4 class="article-item-title">{article.data.title}</h4>
-      <p class="article-item-excerpt">{article.data.description}</p>
-      <div class="article-item-meta">
+  <a href={url} class="article-card">
+    <div class="article-card-image"></div>
+    <div class="article-card-body">
+      <span class="article-card-badge">{cat.name}</span>
+      <h4 class="article-card-title">{article.data.title}</h4>
+      <div class="article-card-meta">
         {article.data.source && <span class="source">{article.data.source}</span>}
         <span>{relativeTime(article.data.pubDate)}</span>
       </div>
