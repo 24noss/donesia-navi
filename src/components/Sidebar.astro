@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { categories } from '../lib/categories';
+import ExchangeRate from './ExchangeRate.astro';
 
 interface Props {
   showRate?: boolean;
@@ -31,13 +32,7 @@ for (const article of allArticles) {
 <div class="sidebar-sticky">
 
   {showRate && (
-    <div class="widget">
-      <div class="widget-title"><span class="icon">&#9733;</span> 為替レート</div>
-      <div class="rate-big">--</div>
-      <div class="rate-pair">1 JPY = IDR</div>
-      <div class="rate-trend up">取得中...</div>
-      <a href="https://wise.com/invite/dic/shogon67" target="_blank" rel="noopener noreferrer" class="wise-link">Wise で送金 →<span class="pr">PR</span></a>
-    </div>
+    <ExchangeRate variant="sidebar" />
   )}
 
   {showPopular && popularArticles.length > 0 && (

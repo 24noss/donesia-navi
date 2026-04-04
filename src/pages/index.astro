@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import StructuredData from '../components/StructuredData.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import Sidebar from '../components/Sidebar.astro';
+import ExchangeRate from '../components/ExchangeRate.astro';
 import { formatDate } from '../lib/categories';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.draft);
@@ -28,8 +29,7 @@ const todayStr = formatDate(new Date());
           <div class="digest-date"><strong>今日のインドネシア</strong>{todayStr}</div>
         </div>
         <div class="digest-rate">
-          <span>1 JPY = -- IDR</span>
-          <small>| Wise レート</small>
+          <ExchangeRate variant="banner" />
         </div>
         <div class="digest-weather">ジャカルタ --°C<br><span style="font-size:11px;opacity:.6">天気情報取得中</span></div>
       </div>

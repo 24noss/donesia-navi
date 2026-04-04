@@ -1,0 +1,289 @@
+---
+/**
+ * ExchangeRate.astro — Client-side real-time IDR/JPY exchange rate widget
+ * Fetches from open.er-api.com, caches in localStorage (30min TTL)
+ * Shows: Rp 1,000,000 / 500,000 / 100,000 = JPY, plus 1 JPY = IDR reference
+ * 30-day trend via Frankfurter API
+ */
+interface Props {
+  variant?: 'sidebar' | 'banner';
+}
+const { variant = 'sidebar' } = Astro.props;
+---
+
+<div class={`fx-widget fx-widget--${variant}`} id="fx-widget">
+  {variant === 'sidebar' && (
+    <div class="widget-title"><span class="icon">&#128177;</span> 為替レート (IDR/JPY)</div>
+  )}
+
+  <!-- Loading state -->
+  <div class="fx-loading" id="fx-loading">
+    <div class="fx-shimmer" style="width:80%;height:32px;margin-bottom:8px"></div>
+    <div class="fx-shimmer" style="width:60%;height:16px;margin-bottom:6px"></div>
+    <div class="fx-shimmer" style="width:50%;height:14px"></div>
+  </div>
+
+  <!-- Loaded state (hidden until data arrives) -->
+  <div class="fx-content" id="fx-content" style="display:none">
+    <div class="fx-main" id="fx-main">Rp 1,000,000 = ...</div>
+    <div class="fx-change" id="fx-change"></div>
+    <div class="fx-sub" id="fx-sub-500k">Rp 500,000 = ...</div>
+    <div class="fx-sub" id="fx-sub-100k">Rp 100,000 = ...</div>
+    <div class="fx-ref" id="fx-ref">1円 = Rp ...</div>
+    <div class="fx-trend" id="fx-trend"></div>
+    <div class="fx-updated" id="fx-updated"></div>
+    <a href="https://wise.com/invite/dic/shogon67" target="_blank" rel="noopener noreferrer" class="fx-wise">
+      Wise で海外送金 <span class="fx-wise-arrow">&rarr;</span><span class="pr">PR</span>
+    </a>
+  </div>
+</div>
+
+<script is:inline>
+(function() {
+  const CACHE_KEY = 'donesia_fx_cache';
+  const HISTORY_KEY = 'donesia_fx_history';
+  const TTL = 30 * 60 * 1000; // 30 minutes
+  const HISTORY_TTL = 6 * 60 * 60 * 1000; // 6 hours for trend data
+
+  function formatJPY(n) {
+    return n.toLocaleString('ja-JP', { maximumFractionDigits: 0 });
+  }
+
+  function formatIDR(n) {
+    return n.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function getCachedRate() {
+    try {
+      var raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      var cached = JSON.parse(raw);
+      if (Date.now() - cached._ts < TTL) return cached;
+      return null;
+    } catch(e) { return null; }
+  }
+
+  function getLastCachedRate() {
+    try {
+      var raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch(e) { return null; }
+  }
+
+  function setCachedRate(data) {
+    data._ts = Date.now();
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify(data)); } catch(e) {}
+  }
+
+  function getCachedHistory() {
+    try {
+      var raw = localStorage.getItem(HISTORY_KEY);
+      if (!raw) return null;
+      var cached = JSON.parse(raw);
+      if (Date.now() - cached._ts < HISTORY_TTL) return cached.data;
+      return null;
+    } catch(e) { return null; }
+  }
+
+  function setCachedHistory(data) {
+    try {
+      localStorage.setItem(HISTORY_KEY, JSON.stringify({ data: data, _ts: Date.now() }));
+    } catch(e) {}
+  }
+
+  async function fetchRate() {
+    var cached = getCachedRate();
+    if (cached) return cached;
+
+    try {
+      var res = await fetch('https://open.er-api.com/v6/latest/JPY');
+      if (!res.ok) throw new Error('API error ' + res.status);
+      var data = await res.json();
+      if (!data.rates || !data.rates.IDR) throw new Error('No IDR rate');
+      var rateData = { idrPerJpy: data.rates.IDR, source: 'open.er-api', time: data.time_last_update_utc };
+      setCachedRate(rateData);
+      return rateData;
+    } catch(e) {
+      // Fallback to last cached (even if expired)
+      var fallback = getLastCachedRate();
+      if (fallback) { fallback._stale = true; return fallback; }
+      throw e;
+    }
+  }
+
+  async function fetchPrevDayRate() {
+    var yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    var dateStr = yesterday.toISOString().slice(0, 10);
+
+    try {
+      var res = await fetch('https://api.frankfurter.dev/v2/rates?date=' + dateStr + '&base=JPY&symbols=IDR');
+      if (!res.ok) throw new Error('Frankfurter error');
+      var data = await res.json();
+      // v2 format: data[dateStr].IDR
+      if (data.data && data.data[dateStr] && data.data[dateStr].IDR) {
+        return data.data[dateStr].IDR;
+      }
+      // fallback: try direct .rates
+      if (data.rates && data.rates.IDR) return data.rates.IDR;
+      return null;
+    } catch(e) { return null; }
+  }
+
+  async function fetchTrendHistory() {
+    var cached = getCachedHistory();
+    if (cached) return cached;
+
+    try {
+      var end = new Date();
+      var start = new Date();
+      start.setDate(start.getDate() - 30);
+      var startStr = start.toISOString().slice(0, 10);
+      var endStr = end.toISOString().slice(0, 10);
+
+      var res = await fetch('https://api.frankfurter.dev/v2/rates?start_date=' + startStr + '&end_date=' + endStr + '&base=JPY&symbols=IDR');
+      if (!res.ok) throw new Error('Frankfurter history error');
+      var data = await res.json();
+      var rates = [];
+      if (data.data) {
+        var dates = Object.keys(data.data).sort();
+        for (var i = 0; i < dates.length; i++) {
+          if (data.data[dates[i]] && data.data[dates[i]].IDR) {
+            rates.push(data.data[dates[i]].IDR);
+          }
+        }
+      }
+      if (rates.length > 0) {
+        setCachedHistory(rates);
+        return rates;
+      }
+      return null;
+    } catch(e) { return null; }
+  }
+
+  function buildSparkline(rates) {
+    if (!rates || rates.length < 2) return '';
+    var min = Math.min.apply(null, rates);
+    var max = Math.max.apply(null, rates);
+    var range = max - min || 1;
+    var w = 80, h = 24;
+    var step = w / (rates.length - 1);
+    var points = [];
+    for (var i = 0; i < rates.length; i++) {
+      var x = (i * step).toFixed(1);
+      var y = (h - ((rates[i] - min) / range) * h).toFixed(1);
+      points.push(x + ',' + y);
+    }
+    // Determine color: last vs first
+    var trendUp = rates[rates.length - 1] > rates[0]; // IDR per JPY up = JPY stronger
+    var color = trendUp ? '#16A34A' : '#CE3B3B';
+    return '<svg width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '" style="vertical-align:middle;margin-left:6px">' +
+      '<polyline fill="none" stroke="' + color + '" stroke-width="1.5" points="' + points.join(' ') + '"/></svg>';
+  }
+
+  function renderWidget(rate, prevRate, history) {
+    var idr = rate.idrPerJpy;
+    var jpyPerMillion = 1000000 / idr;
+    var jpyPer500k = 500000 / idr;
+    var jpyPer100k = 100000 / idr;
+
+    // Render main amount
+    var mainEls = document.querySelectorAll('#fx-main');
+    for (var i = 0; i < mainEls.length; i++) {
+      mainEls[i].textContent = 'Rp 1,000,000 = \u00A5' + formatJPY(Math.round(jpyPerMillion));
+    }
+
+    // Change display
+    var changeEls = document.querySelectorAll('#fx-change');
+    for (var i = 0; i < changeEls.length; i++) {
+      if (prevRate) {
+        var prevJpy = 1000000 / prevRate;
+        var diff = Math.round(jpyPerMillion) - Math.round(prevJpy);
+        var pct = ((jpyPerMillion - prevJpy) / prevJpy * 100).toFixed(2);
+        var sign = diff >= 0 ? '+' : '';
+        var cls = diff >= 0 ? 'fx-change-up' : 'fx-change-down';
+        changeEls[i].className = 'fx-change ' + cls;
+        changeEls[i].innerHTML = '\u524D\u65E5\u6BD4 ' + sign + '\u00A5' + formatJPY(Math.abs(diff)) + ' / ' + sign + pct + '%';
+      } else {
+        changeEls[i].style.display = 'none';
+      }
+    }
+
+    // Sub rates
+    var sub500k = document.querySelectorAll('#fx-sub-500k');
+    for (var i = 0; i < sub500k.length; i++) {
+      sub500k[i].textContent = 'Rp 500,000 = \u00A5' + formatJPY(Math.round(jpyPer500k));
+    }
+    var sub100k = document.querySelectorAll('#fx-sub-100k');
+    for (var i = 0; i < sub100k.length; i++) {
+      sub100k[i].textContent = 'Rp 100,000 = \u00A5' + formatJPY(Math.round(jpyPer100k));
+    }
+
+    // Reference line
+    var refEls = document.querySelectorAll('#fx-ref');
+    for (var i = 0; i < refEls.length; i++) {
+      refEls[i].textContent = '1\u5186 = Rp ' + formatIDR(idr);
+    }
+
+    // Trend sparkline
+    var trendEls = document.querySelectorAll('#fx-trend');
+    for (var i = 0; i < trendEls.length; i++) {
+      if (history && history.length >= 2) {
+        var sparkline = buildSparkline(history);
+        var first = 1000000 / history[0];
+        var last = 1000000 / history[history.length - 1];
+        var monthDiff = Math.round(last - first);
+        var arrow = monthDiff >= 0 ? '\u25B2' : '\u25BC';
+        var monthSign = monthDiff >= 0 ? '+' : '';
+        var monthColor = monthDiff >= 0 ? '#16A34A' : '#CE3B3B';
+        trendEls[i].innerHTML = '<span style="font-size:11px;color:var(--text-muted)">30\u65E5\u9593</span> ' +
+          sparkline +
+          ' <span style="font-size:11px;color:' + monthColor + '">' + arrow + ' ' + monthSign + '\u00A5' + formatJPY(Math.abs(monthDiff)) + '</span>';
+      }
+    }
+
+    // Updated time
+    var updEls = document.querySelectorAll('#fx-updated');
+    for (var i = 0; i < updEls.length; i++) {
+      var staleNote = rate._stale ? ' (\u30AD\u30E3\u30C3\u30B7\u30E5)' : '';
+      updEls[i].textContent = 'Source: ' + (rate.source || 'open.er-api') + staleNote;
+    }
+
+    // Show content, hide loading
+    var loadEls = document.querySelectorAll('#fx-loading');
+    for (var i = 0; i < loadEls.length; i++) loadEls[i].style.display = 'none';
+    var contentEls = document.querySelectorAll('#fx-content');
+    for (var i = 0; i < contentEls.length; i++) {
+      contentEls[i].style.display = 'block';
+      contentEls[i].classList.add('fx-fade-in');
+    }
+  }
+
+  async function init() {
+    try {
+      var ratePromise = fetchRate();
+      var prevPromise = fetchPrevDayRate();
+      var historyPromise = fetchTrendHistory();
+
+      var rate = await ratePromise;
+      var prevRate = await prevPromise;
+      var history = await historyPromise;
+
+      renderWidget(rate, prevRate, history);
+    } catch(e) {
+      console.error('[FX Widget]', e);
+      var loadEls = document.querySelectorAll('#fx-loading');
+      for (var i = 0; i < loadEls.length; i++) {
+        loadEls[i].innerHTML = '<div style="font-size:13px;color:var(--text-muted)">\u70BA\u66FF\u30EC\u30FC\u30C8\u306E\u53D6\u5F97\u306B\u5931\u6557\u3057\u307E\u3057\u305F</div>';
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
