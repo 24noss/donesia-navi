@@ -5,24 +5,99 @@ import { categories } from '../lib/categories';
 interface Props {
   title: string;
   description?: string;
+  /** OpenGraph type: "website" for home/category, "article" for articles */
+  ogType?: 'website' | 'article';
+  /** ISO date string for article:published_time */
+  publishedTime?: string;
+  /** ISO date string for article:modified_time */
+  modifiedTime?: string;
+  /** Article section (category name) */
+  articleSection?: string;
+  /** Article tags */
+  articleTags?: string[];
+  /** Whether to add noindex (for drafts, etc.) */
+  noindex?: boolean;
 }
 
-const { title, description = 'インドネシア在住日本人のための日本語ニュース・生活情報ポータル' } = Astro.props;
+const {
+  title,
+  description = 'インドネシア在住日本人のための日本語ニュース・生活情報ポータル',
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
+  articleSection,
+  articleTags = [],
+  noindex = false,
+} = Astro.props;
+
 const fullTitle = title === 'DonesiaNavi' ? title : `${title} | DonesiaNavi`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const siteUrl = Astro.site?.href ?? 'https://indonesia-navi.com';
+const ogImageUrl = `${siteUrl}og-default.png`;
 ---
 <!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-14DJYTRJTR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-14DJYTRJTR');
+  </script>
   <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
   <title>{fullTitle}</title>
-  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+
+  <!-- Canonical & hreflang -->
+  <link rel="canonical" href={canonicalUrl} />
+  <link rel="alternate" hreflang="ja" href={canonicalUrl} />
+  <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
+
+  <!-- Sitemap -->
+  <link rel="sitemap" href="/sitemap-index.xml" />
+
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="DonesiaNavi" href={`${siteUrl}rss.xml`} />
+
+  <!-- Open Graph -->
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={canonicalUrl} />
   <meta property="og:locale" content="ja_JP" />
-  <link rel="sitemap" href="/sitemap-index.xml" />
+  <meta property="og:site_name" content="DonesiaNavi" />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={fullTitle} />
+
+  <!-- Article-specific OGP -->
+  {ogType === 'article' && publishedTime && (
+    <meta property="article:published_time" content={publishedTime} />
+  )}
+  {ogType === 'article' && modifiedTime && (
+    <meta property="article:modified_time" content={modifiedTime} />
+  )}
+  {ogType === 'article' && articleSection && (
+    <meta property="article:section" content={articleSection} />
+  )}
+  {ogType === 'article' && articleTags.map((tag) => (
+    <meta property="article:tag" content={tag} />
+  ))}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageUrl} />
+
+  <!-- Structured data slot (injected by pages) -->
+  <slot name="head" />
 </head>
 <body>
   <header class="site-header">
@@ -35,6 +110,7 @@ const fullTitle = title === 'DonesiaNavi' ? title : `${title} | DonesiaNavi`;
         {Object.entries(categories).map(([slug, cat]) => (
           <a href={`/category/${slug}/`}>{cat.name}</a>
         ))}
+        <a href="/about/">このサイトについて</a>
       </nav>
     </div>
   </header>
@@ -46,6 +122,9 @@ const fullTitle = title === 'DonesiaNavi' ? title : `${title} | DonesiaNavi`;
   <footer class="site-footer">
     <div class="container">
       <p>&copy; {new Date().getFullYear()} DonesiaNavi. この記事はAIが生成し、人間の編集者がレビューしています。</p>
+      <p style="font-size: 0.75rem; margin-top: 0.25rem;">
+        <a href="/about/">このサイトについて</a>
+      </p>
     </div>
   </footer>
 </body>
