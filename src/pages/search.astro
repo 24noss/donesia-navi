@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="記事検索" description="DonesiaNavi の記事を検索できます。キーワードを入力してインドネシア関連の日本語ニュースを探しましょう。">
+  <div class="container search-page">
+    <h1 class="search-heading">記事検索</h1>
+    <div id="search"></div>
+  </div>
+
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" is:inline />
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', function () {
+      new PagefindUI({
+        element: '#search',
+        showSubResults: true,
+        showImages: false,
+        translations: {
+          placeholder: '検索キーワードを入力...',
+          zero_results: '「[SEARCH_TERM]」に一致する記事が見つかりませんでした',
+          many_results: '[COUNT]件の記事が見つかりました',
+          one_result: '1件の記事が見つかりました',
+          searching: '検索中...',
+        },
+      });
+      // Auto-focus the search input
+      var input = document.querySelector('.pagefind-ui__search-input');
+      if (input) input.focus();
+    });
+  </script>
+  <script src="/pagefind/pagefind-ui.js" is:inline></script>
+
+  <style>
+    .search-page {
+      padding-top: 32px;
+      padding-bottom: 80px;
+      min-height: 60vh;
+    }
+    .search-heading {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    /* Pagefind UI overrides for theme integration */
+    :global(.pagefind-ui__search-input) {
+      font-family: var(--sans) !important;
+      font-size: 16px !important;
+      border: 1px solid var(--border) !important;
+      border-radius: var(--radius) !important;
+      background: var(--bg-card) !important;
+      color: var(--text) !important;
+      padding: 12px 16px !important;
+      height: 48px !important;
+    }
+    :global(.pagefind-ui__search-input:focus) {
+      border-color: var(--teal) !important;
+      outline: none !important;
+      box-shadow: 0 0 0 3px rgba(58, 107, 140, 0.15) !important;
+    }
+    :global(.pagefind-ui__search-clear) {
+      color: var(--text-muted) !important;
+    }
+    :global(.pagefind-ui__result-link) {
+      font-family: var(--serif) !important;
+      font-weight: 600 !important;
+      color: var(--text) !important;
+    }
+    :global(.pagefind-ui__result-link:hover) {
+      color: var(--teal) !important;
+    }
+    :global(.pagefind-ui__result-excerpt) {
+      font-family: var(--sans) !important;
+      color: var(--text-muted) !important;
+    }
+    :global(.pagefind-ui__message) {
+      font-family: var(--sans) !important;
+      color: var(--text-muted) !important;
+    }
+    :global(.pagefind-ui__result) {
+      border-top: 1px solid var(--border) !important;
+      padding: 16px 0 !important;
+    }
+    :global(.pagefind-ui__result-tag) {
+      background: var(--gold-dim) !important;
+      color: var(--gold) !important;
+      border-radius: 4px !important;
+      font-size: 11px !important;
+      padding: 2px 8px !important;
+    }
+    /* Dark mode overrides */
+    :global([data-theme="dark"] .pagefind-ui__search-input) {
+      background: var(--bg-card) !important;
+      border-color: var(--border) !important;
+      color: var(--text) !important;
+    }
+    :global([data-theme="dark"] .pagefind-ui__search-input:focus) {
+      border-color: var(--teal) !important;
+      box-shadow: 0 0 0 3px rgba(125, 175, 207, 0.2) !important;
+    }
+    :global([data-theme="dark"] .pagefind-ui) {
+      --pagefind-ui-text: var(--text) !important;
+      --pagefind-ui-background: var(--bg) !important;
+      --pagefind-ui-border: var(--border) !important;
+    }
+    :global([data-theme="dark"] .pagefind-ui mark) {
+      background: rgba(201, 164, 74, 0.3) !important;
+      color: var(--text) !important;
+    }
+
+    @media (max-width: 768px) {
+      .search-page {
+        padding-top: 20px;
+        padding-bottom: 100px;
+      }
+      .search-heading {
+        font-size: 20px;
+      }
+    }
+  </style>
+</Base>

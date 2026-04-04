@@ -228,7 +228,6 @@ body{
 .cat-dot.travel{background:#8B6FBF}
 .cat-dot.visa{background:#D47B3E}
 .cat-dot.regulation{background:var(--navy-muted)}
-.cat-dot.daily{background:var(--gold)}
 
 .article-item-body{flex:1;min-width:0}
 .article-item-title{

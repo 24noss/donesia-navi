@@ -1,10 +1,4 @@
 export const categories = {
-  daily: {
-    name: '今日のインドネシア',
-    color: 'daily',
-    description: 'インドネシアの最新ニュースを毎日お届け。為替情報、天気、主要ニュースのダイジェストを日本語でまとめています。',
-    seoTitle: '今日のインドネシア | デイリーニュース',
-  },
   safety: {
     name: '安全・災害',
     color: 'safety',
