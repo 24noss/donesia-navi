@@ -7,14 +7,12 @@ interface Props {
 const { restaurants, height = '520px' } = Astro.props;
 ---
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
 <div class="restaurant-map-wrap">
   <div class="map-cuisine-filters" id="map-cuisine-filters"></div>
-  <div id="restaurant-map" style={`height:${height};width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);`}></div>
+  <div id="restaurant-map" style={`height:${height};width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);background:#e5e3df;`}></div>
 </div>
 
-<script is:inline define:vars={{ restaurants }}>
+<script is:inline define:vars={{ restaurants, height }}>
 (function() {
   var data = JSON.parse(restaurants);
 
@@ -30,7 +28,7 @@ const { restaurants, height = '520px' } = Astro.props;
 
   var priceLabels = { budget: '\u{00A5}', mid: '\u{00A5}\u{00A5}', high: '\u{00A5}\u{00A5}\u{00A5}', luxury: '\u{00A5}\u{00A5}\u{00A5}\u{00A5}' };
 
-  // Count cuisines in data
+  // Count cuisines
   var cuisineCounts = {};
   data.forEach(function(r) {
     cuisineCounts[r.cuisine] = (cuisineCounts[r.cuisine] || 0) + 1;
@@ -56,31 +54,92 @@ const { restaurants, height = '520px' } = Astro.props;
     });
   }
 
-  // Load Leaflet dynamically
-  var script = document.createElement('script');
-  script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-  script.onload = function() { initMap(); };
-  document.head.appendChild(script);
+  // Load Leaflet CSS first
+  if (!document.querySelector('link[href*="leaflet"]')) {
+    var css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
+    css.crossOrigin = '';
+    document.head.appendChild(css);
+  }
+
+  // Load Leaflet JS
+  function loadLeaflet(cb) {
+    if (window.L) { cb(); return; }
+    var script = document.createElement('script');
+    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+    script.crossOrigin = '';
+    script.onload = cb;
+    document.head.appendChild(script);
+  }
+
+  // Wait for CSS to load, then init map
+  function waitForCSS(cb) {
+    // Give CSS 500ms to load
+    setTimeout(cb, 500);
+  }
+
+  // Observe when the map container becomes visible (for tab switching)
+  function initWhenVisible() {
+    var mapEl = document.getElementById('restaurant-map');
+    if (!mapEl) return;
+
+    // If already visible, init immediately
+    if (mapEl.offsetParent !== null && mapEl.offsetWidth > 0) {
+      loadLeaflet(function() { waitForCSS(function() { initMap(); }); });
+      return;
+    }
+
+    // Otherwise observe for visibility changes (tab switch)
+    var visObserver = new MutationObserver(function() {
+      if (mapEl.offsetParent !== null && mapEl.offsetWidth > 0) {
+        visObserver.disconnect();
+        loadLeaflet(function() { waitForCSS(function() { initMap(); }); });
+      }
+    });
+    visObserver.observe(mapEl.parentElement.parentElement || document.body, {
+      attributes: true, childList: true, subtree: true
+    });
+
+    // Also try after a short delay (for direct page load on /map/)
+    setTimeout(function() {
+      if (mapEl.offsetParent !== null && mapEl.offsetWidth > 0) {
+        visObserver.disconnect();
+        loadLeaflet(function() { waitForCSS(function() { initMap(); }); });
+      }
+    }, 1000);
+  }
+
+  var mapInstance = null;
 
   function initMap() {
-    var L = window.L;
-    var map = L.map('restaurant-map').setView([-6.2088, 106.8456], 12);
+    if (mapInstance) return; // Already initialized
 
-    var lightTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors',
+    var mapEl = document.getElementById('restaurant-map');
+    if (!mapEl || !window.L) return;
+
+    var L = window.L;
+    var map = L.map('restaurant-map', { zoomControl: true }).setView([-6.2088, 106.8456], 12);
+    mapInstance = map;
+
+    var lightTiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>',
       maxZoom: 19,
     });
 
     var darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+      attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
       maxZoom: 19,
+      subdomains: 'abcd',
     });
 
     var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     if (isDark) { darkTiles.addTo(map); } else { lightTiles.addTo(map); }
 
-    // Watch theme changes
-    var observer = new MutationObserver(function(mutations) {
+    // Theme change observer
+    new MutationObserver(function(mutations) {
       mutations.forEach(function(m) {
         if (m.attributeName === 'data-theme') {
           var dark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -88,8 +147,7 @@ const { restaurants, height = '520px' } = Astro.props;
           else { map.removeLayer(darkTiles); lightTiles.addTo(map); }
         }
       });
-    });
-    observer.observe(document.documentElement, { attributes: true });
+    }).observe(document.documentElement, { attributes: true });
 
     // Create markers
     var markers = [];
@@ -97,25 +155,27 @@ const { restaurants, height = '520px' } = Astro.props;
       if (!r.lat || !r.lng) return;
       var cc = cuisineConfig[r.cuisine] || cuisineConfig.other;
       var marker = L.circleMarker([r.lat, r.lng], {
-        radius: 9,
+        radius: 10,
         fillColor: cc.color,
         color: '#fff',
-        weight: 2,
+        weight: 2.5,
         opacity: 1,
-        fillOpacity: 0.85,
+        fillOpacity: 0.9,
       });
 
       var gmapsUrl = 'https://www.google.com/maps/search/' + encodeURIComponent(r.googleMapsQuery);
-      var popupHtml = '<div style="font-family:sans-serif;min-width:180px;">'
-        + '<strong style="font-size:14px;">' + r.name + '</strong>'
-        + (r.nameEn ? ' <span style="color:#888;font-size:12px;">(' + r.nameEn + ')</span>' : '')
-        + '<br/>'
-        + '<span style="display:inline-block;background:' + cc.color + ';color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;margin:4px 2px 4px 0;">' + cc.icon + ' ' + cc.label + '</span>'
-        + '<span style="font-size:12px;color:#666;">' + (priceLabels[r.priceRange] || '') + '</span>'
-        + '<br/><span style="font-size:12px;">' + r.area + '</span>'
-        + '<br/><a href="' + gmapsUrl + '" target="_blank" rel="noopener" style="font-size:12px;color:#3A6B8C;">Google Mapで開く &rarr;</a>'
-        + (r.articleSlug ? '<br/><a href="/articles/' + r.articleSlug + '/" style="font-size:12px;color:#C9A44A;">記事を読む &rarr;</a>' : '')
-        + '</div>';
+      var popupHtml = '<div style="font-family:Noto Sans JP,sans-serif;min-width:200px;line-height:1.5;">'
+        + '<strong style="font-size:15px;color:#1B2D4F;">' + r.name + '</strong>'
+        + (r.nameEn ? '<br/><span style="color:#888;font-size:12px;">' + r.nameEn + '</span>' : '')
+        + '<div style="margin:6px 0 4px;">'
+        + '<span style="display:inline-block;background:' + cc.color + ';color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;margin-right:4px;">' + cc.icon + ' ' + cc.label + '</span>'
+        + '<span style="font-size:13px;color:#C9A44A;font-weight:bold;">' + (priceLabels[r.priceRange] || '') + '</span>'
+        + '</div>'
+        + '<div style="font-size:12px;color:#666;margin-bottom:6px;">📍 ' + r.area + '</div>'
+        + '<div style="display:flex;gap:8px;">'
+        + '<a href="' + gmapsUrl + '" target="_blank" rel="noopener" style="font-size:12px;color:#3A6B8C;text-decoration:none;">Google Map ↗</a>'
+        + (r.articleSlug ? '<a href="/articles/' + r.articleSlug + '/" style="font-size:12px;color:#C9A44A;text-decoration:none;">記事を読む →</a>' : '')
+        + '</div></div>';
 
       marker.bindPopup(popupHtml);
       marker.addTo(map);
@@ -123,11 +183,15 @@ const { restaurants, height = '520px' } = Astro.props;
       markers.push(marker);
     });
 
-    // Fit bounds if markers exist
+    // Fit bounds
     if (markers.length > 0) {
       var group = L.featureGroup(markers);
-      map.fitBounds(group.getBounds().pad(0.1));
+      map.fitBounds(group.getBounds().pad(0.15));
     }
+
+    // Force map resize after init (fixes tab visibility issue)
+    setTimeout(function() { map.invalidateSize(); }, 200);
+    setTimeout(function() { map.invalidateSize(); }, 1000);
 
     // Filter logic
     if (filtersEl) {
@@ -139,8 +203,8 @@ const { restaurants, height = '520px' } = Astro.props;
         var cuisine = btn.dataset.cuisine;
         markers.forEach(function(m) {
           if (cuisine === 'all' || m._cuisine === cuisine) {
-            m.setStyle({ opacity: 1, fillOpacity: 0.85 });
-            m.setRadius(9);
+            m.setStyle({ opacity: 1, fillOpacity: 0.9 });
+            m.setRadius(10);
           } else {
             m.setStyle({ opacity: 0.15, fillOpacity: 0.1 });
             m.setRadius(5);
@@ -148,6 +212,13 @@ const { restaurants, height = '520px' } = Astro.props;
         });
       });
     }
+  }
+
+  // Start initialization
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWhenVisible);
+  } else {
+    initWhenVisible();
   }
 })();
 </script>
