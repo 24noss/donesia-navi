@@ -5,6 +5,55 @@ category: "lifestyle"
 tags: ["グルメ", "レストラン", "日本食", "ジャカルタ", "新規オープン"]
 pubDate: 2026-04-06
 draft: false
+mapData:
+  - name: "焼肉ジャンボ"
+    nameEn: "Yakiniku Jumbo"
+    area: "セノパティ・グナワルマン"
+    cuisine: "japanese"
+    priceRange: "luxury"
+    googleMapsQuery: "Yakiniku Jumbo Senopati Jakarta"
+    lat: -6.2410
+    lng: 106.7980
+  - name: "Zuzu Ramen & Izakaya"
+    nameEn: "Zuzu Ramen"
+    area: "SCBD"
+    cuisine: "japanese"
+    priceRange: "mid"
+    googleMapsQuery: "Zuzu Ramen Izakaya SCBD Park Jakarta"
+    lat: -6.2270
+    lng: 106.8082
+  - name: "挽肉と米"
+    nameEn: "Hikiniku to Come"
+    area: "ポンドックインダ"
+    cuisine: "japanese"
+    priceRange: "mid"
+    googleMapsQuery: "Hikiniku to Come Pondok Indah Mall Jakarta"
+    lat: -6.2830
+    lng: 106.7840
+  - name: "Gokuniku"
+    nameEn: "Gokuniku"
+    area: "セノパティ・グナワルマン"
+    cuisine: "japanese"
+    priceRange: "high"
+    googleMapsQuery: "Gokuniku Senopati Jakarta"
+    lat: -6.2393
+    lng: 106.7995
+  - name: "むらさき居酒屋"
+    nameEn: "Murasaki Izakaya"
+    area: "メガクニンガン"
+    cuisine: "japanese"
+    priceRange: "mid"
+    googleMapsQuery: "Murasaki Izakaya Mega Kuningan Jakarta"
+    lat: -6.2340
+    lng: 106.8230
+  - name: "NIKUZEN 肉燃"
+    nameEn: "NIKUZEN"
+    area: "スディルマン"
+    cuisine: "japanese"
+    priceRange: "luxury"
+    googleMapsQuery: "NIKUZEN Mori Tower Sudirman Jakarta"
+    lat: -6.2240
+    lng: 106.8100
 ---
 
 ## ジャカルタの日本食シーン、2026年も新店ラッシュが止まらない

@@ -1,0 +1,153 @@
+---
+interface Props {
+  restaurants: string;
+  height?: string;
+}
+
+const { restaurants, height = '520px' } = Astro.props;
+---
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<div class="restaurant-map-wrap">
+  <div class="map-cuisine-filters" id="map-cuisine-filters"></div>
+  <div id="restaurant-map" style={`height:${height};width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);`}></div>
+</div>
+
+<script is:inline define:vars={{ restaurants }}>
+(function() {
+  var data = JSON.parse(restaurants);
+
+  var cuisineConfig = {
+    japanese:   { label: '日本食',           color: '#1B2D4F', icon: '\u{1F363}' },
+    korean:     { label: '韓国料理',         color: '#CE3B3B', icon: '\u{1F356}' },
+    chinese:    { label: '中華料理',         color: '#D97706', icon: '\u{1F95F}' },
+    indonesian: { label: 'インドネシア料理', color: '#C9A44A', icon: '\u{1F336}\u{FE0F}' },
+    european:   { label: '西洋料理',         color: '#3A6B8C', icon: '\u{1F377}' },
+    cafe:       { label: 'カフェ',           color: '#64748B', icon: '\u{2615}' },
+    other:      { label: 'その他',           color: '#7A8A9E', icon: '\u{1F37D}\u{FE0F}' },
+  };
+
+  var priceLabels = { budget: '\u{00A5}', mid: '\u{00A5}\u{00A5}', high: '\u{00A5}\u{00A5}\u{00A5}', luxury: '\u{00A5}\u{00A5}\u{00A5}\u{00A5}' };
+
+  // Count cuisines in data
+  var cuisineCounts = {};
+  data.forEach(function(r) {
+    cuisineCounts[r.cuisine] = (cuisineCounts[r.cuisine] || 0) + 1;
+  });
+
+  // Render filter buttons
+  var filtersEl = document.getElementById('map-cuisine-filters');
+  if (filtersEl) {
+    var allBtn = document.createElement('button');
+    allBtn.className = 'map-filter-btn active';
+    allBtn.dataset.cuisine = 'all';
+    allBtn.textContent = 'すべて (' + data.length + ')';
+    filtersEl.appendChild(allBtn);
+
+    Object.keys(cuisineConfig).forEach(function(key) {
+      if (!cuisineCounts[key]) return;
+      var btn = document.createElement('button');
+      btn.className = 'map-filter-btn';
+      btn.dataset.cuisine = key;
+      btn.innerHTML = cuisineConfig[key].icon + ' ' + cuisineConfig[key].label + ' (' + cuisineCounts[key] + ')';
+      btn.style.setProperty('--filter-color', cuisineConfig[key].color);
+      filtersEl.appendChild(btn);
+    });
+  }
+
+  // Load Leaflet dynamically
+  var script = document.createElement('script');
+  script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  script.onload = function() { initMap(); };
+  document.head.appendChild(script);
+
+  function initMap() {
+    var L = window.L;
+    var map = L.map('restaurant-map').setView([-6.2088, 106.8456], 12);
+
+    var lightTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+      maxZoom: 19,
+    });
+
+    var darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+      maxZoom: 19,
+    });
+
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (isDark) { darkTiles.addTo(map); } else { lightTiles.addTo(map); }
+
+    // Watch theme changes
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        if (m.attributeName === 'data-theme') {
+          var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+          if (dark) { map.removeLayer(lightTiles); darkTiles.addTo(map); }
+          else { map.removeLayer(darkTiles); lightTiles.addTo(map); }
+        }
+      });
+    });
+    observer.observe(document.documentElement, { attributes: true });
+
+    // Create markers
+    var markers = [];
+    data.forEach(function(r) {
+      if (!r.lat || !r.lng) return;
+      var cc = cuisineConfig[r.cuisine] || cuisineConfig.other;
+      var marker = L.circleMarker([r.lat, r.lng], {
+        radius: 9,
+        fillColor: cc.color,
+        color: '#fff',
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.85,
+      });
+
+      var gmapsUrl = 'https://www.google.com/maps/search/' + encodeURIComponent(r.googleMapsQuery);
+      var popupHtml = '<div style="font-family:sans-serif;min-width:180px;">'
+        + '<strong style="font-size:14px;">' + r.name + '</strong>'
+        + (r.nameEn ? ' <span style="color:#888;font-size:12px;">(' + r.nameEn + ')</span>' : '')
+        + '<br/>'
+        + '<span style="display:inline-block;background:' + cc.color + ';color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;margin:4px 2px 4px 0;">' + cc.icon + ' ' + cc.label + '</span>'
+        + '<span style="font-size:12px;color:#666;">' + (priceLabels[r.priceRange] || '') + '</span>'
+        + '<br/><span style="font-size:12px;">' + r.area + '</span>'
+        + '<br/><a href="' + gmapsUrl + '" target="_blank" rel="noopener" style="font-size:12px;color:#3A6B8C;">Google Mapで開く &rarr;</a>'
+        + (r.articleSlug ? '<br/><a href="/articles/' + r.articleSlug + '/" style="font-size:12px;color:#C9A44A;">記事を読む &rarr;</a>' : '')
+        + '</div>';
+
+      marker.bindPopup(popupHtml);
+      marker.addTo(map);
+      marker._cuisine = r.cuisine;
+      markers.push(marker);
+    });
+
+    // Fit bounds if markers exist
+    if (markers.length > 0) {
+      var group = L.featureGroup(markers);
+      map.fitBounds(group.getBounds().pad(0.1));
+    }
+
+    // Filter logic
+    if (filtersEl) {
+      filtersEl.addEventListener('click', function(e) {
+        var btn = e.target.closest('.map-filter-btn');
+        if (!btn) return;
+        filtersEl.querySelectorAll('.map-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var cuisine = btn.dataset.cuisine;
+        markers.forEach(function(m) {
+          if (cuisine === 'all' || m._cuisine === cuisine) {
+            m.setStyle({ opacity: 1, fillOpacity: 0.85 });
+            m.setRadius(9);
+          } else {
+            m.setStyle({ opacity: 0.15, fillOpacity: 0.1 });
+            m.setRadius(5);
+          }
+        });
+      });
+    }
+  }
+})();
+</script>

@@ -935,3 +935,62 @@ body{
   font-family:var(--serif);font-size:28px;font-weight:700;
   margin-bottom:32px;color:var(--text);
 }
+
+/* ===== RESTAURANT MAP ===== */
+.restaurant-map-wrap{margin-bottom:24px}
+.map-cuisine-filters{
+  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;
+}
+.map-filter-btn{
+  padding:5px 12px;border-radius:20px;font-size:12px;font-weight:500;
+  background:var(--bg-sidebar);color:var(--text-muted);
+  border:1px solid var(--border);cursor:pointer;transition:all .15s;
+  white-space:nowrap;
+}
+.map-filter-btn:hover{border-color:var(--text-muted)}
+.map-filter-btn.active{
+  background:var(--navy);color:#fff;border-color:var(--navy);
+}
+[data-theme="dark"] .map-filter-btn.active{background:var(--teal);border-color:var(--teal)}
+
+/* Map page */
+.map-page-header{margin-bottom:20px}
+.map-page-title{font-family:var(--serif);font-size:24px;font-weight:700;margin-bottom:4px}
+.map-page-stats{font-size:13px;color:var(--text-muted)}
+.map-page-stats strong{color:var(--text);font-weight:600}
+
+.map-area-list{margin-top:32px}
+.map-area-list-title{font-family:var(--serif);font-size:18px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.map-area-group{margin-bottom:20px}
+.map-area-name{font-size:15px;font-weight:600;margin-bottom:8px;color:var(--text)}
+.map-area-count{font-weight:400;color:var(--text-muted);font-size:13px}
+.map-area-items{display:flex;flex-direction:column;gap:6px}
+.map-area-item{
+  display:flex;align-items:center;gap:8px;padding:6px 10px;
+  background:var(--bg-card);border-radius:var(--radius);border:1px solid var(--border-light);
+  font-size:13px;
+}
+.map-area-cuisine-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.map-area-item-name{font-weight:600;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.map-area-item-cuisine{color:var(--text-muted);font-size:12px;white-space:nowrap}
+.map-area-item-price{color:var(--gold);font-size:12px;font-weight:600}
+.map-area-item-link{color:var(--teal);font-size:12px;white-space:nowrap}
+
+/* Category tab bar */
+.cat-tab-bar{
+  display:flex;gap:0;margin-bottom:16px;border-bottom:2px solid var(--border);
+}
+.cat-tab{
+  padding:10px 20px;font-size:14px;font-weight:500;
+  color:var(--text-muted);border-bottom:2px solid transparent;
+  margin-bottom:-2px;cursor:pointer;transition:all .15s;
+  background:none;border-top:none;border-left:none;border-right:none;
+}
+.cat-tab:hover{color:var(--text)}
+.cat-tab.active{color:var(--text);border-bottom-color:var(--gold);font-weight:600}
+
+@media(max-width:768px){
+  .map-cuisine-filters{gap:4px}
+  .map-filter-btn{padding:4px 10px;font-size:11px}
+  .map-area-item{flex-wrap:wrap}
+}

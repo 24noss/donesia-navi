@@ -4,8 +4,10 @@ import Base from '../../layouts/Base.astro';
 import StructuredData from '../../components/StructuredData.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import Sidebar from '../../components/Sidebar.astro';
+import RestaurantMap from '../../components/RestaurantMap.astro';
 import { categories } from '../../lib/categories';
 import type { CategorySlug } from '../../lib/categories';
+import { cuisineConfig } from '../../lib/cuisines';
 
 export function getStaticPaths() {
   return Object.keys(categories).map((slug) => ({ params: { slug } }));
@@ -15,6 +17,19 @@ const { slug } = Astro.params;
 const cat = categories[slug as CategorySlug];
 const allArticles = await getCollection('articles', ({ data }) => !data.draft && data.category === slug);
 const articles = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Collect mapData for lifestyle category
+const isLifestyle = slug === 'lifestyle';
+const mapRestaurants: Array<Record<string, any>> = [];
+if (isLifestyle) {
+  allArticles.forEach((article) => {
+    if (!article.data.mapData) return;
+    article.data.mapData.forEach((r) => {
+      if (r.isChain) return;
+      mapRestaurants.push({ ...r, articleSlug: article.id });
+    });
+  });
+}
 ---
 <Base title={cat.seoTitle} description={cat.description}>
   <StructuredData slot="head" type="category" categorySlug={slug as CategorySlug} />
@@ -30,18 +45,37 @@ const articles = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
         <div class="cat-hero-count">{articles.length} 記事</div>
       </div>
 
-      <!-- Filter Bar -->
-      <div class="filter-bar">
-        <button class="filter-btn active">最新順</button>
-        <button class="filter-btn">人気順</button>
+      <!-- Tab Bar (lifestyle only) -->
+      {isLifestyle && mapRestaurants.length > 0 && (
+        <div class="cat-tab-bar">
+          <button class="cat-tab active" data-tab="articles">記事一覧</button>
+          <button class="cat-tab" data-tab="map">レストランマップ</button>
+        </div>
+      )}
+
+      <!-- Articles Tab -->
+      <div id="tab-articles">
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <button class="filter-btn active">最新順</button>
+          <button class="filter-btn">人気順</button>
+        </div>
+
+        {articles.length === 0 ? (
+          <p style="color:var(--text-muted);padding:2rem 0;">このカテゴリの記事はまだありません。</p>
+        ) : (
+          articles.map((article) => (
+            <ArticleCard article={article} />
+          ))
+        )}
       </div>
 
-      {articles.length === 0 ? (
-        <p style="color:var(--text-muted);padding:2rem 0;">このカテゴリの記事はまだありません。</p>
-      ) : (
-        articles.map((article) => (
-          <ArticleCard article={article} />
-        ))
+      <!-- Map Tab (lifestyle only) -->
+      {isLifestyle && mapRestaurants.length > 0 && (
+        <div id="tab-map" style="display:none;">
+          <p style="color:var(--text-muted);font-size:13px;margin-bottom:12px;">記事で紹介した {mapRestaurants.length} 店舗を表示中</p>
+          <RestaurantMap restaurants={JSON.stringify(mapRestaurants)} height="480px" />
+        </div>
       )}
 
     </div>
@@ -53,12 +87,25 @@ const articles = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 
   </div>
 
-  <!-- Filter button JS -->
+  <!-- Filter button JS + Tab switching -->
   <script is:inline>
     document.querySelectorAll('.filter-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         btn.parentElement.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
+      });
+    });
+
+    // Tab switching for lifestyle category
+    document.querySelectorAll('.cat-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.cat-tab').forEach(function(t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        var target = tab.dataset.tab;
+        var articlesTab = document.getElementById('tab-articles');
+        var mapTab = document.getElementById('tab-map');
+        if (articlesTab) articlesTab.style.display = target === 'articles' ? '' : 'none';
+        if (mapTab) mapTab.style.display = target === 'map' ? '' : 'none';
       });
     });
   </script>

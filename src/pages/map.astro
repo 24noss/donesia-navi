@@ -1,0 +1,68 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import RestaurantMap from '../components/RestaurantMap.astro';
+import { cuisineConfig, priceLabels } from '../lib/cuisines';
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft && !!data.mapData);
+
+// Flatten all mapData and attach article slug, filter out chains
+const restaurants: Array<Record<string, any>> = [];
+allArticles.forEach((article) => {
+  if (!article.data.mapData) return;
+  article.data.mapData.forEach((r) => {
+    if (r.isChain) return;
+    restaurants.push({
+      ...r,
+      articleSlug: article.id,
+    });
+  });
+});
+
+// Group by area
+const byArea: Record<string, typeof restaurants> = {};
+restaurants.forEach((r) => {
+  if (!byArea[r.area]) byArea[r.area] = [];
+  byArea[r.area].push(r);
+});
+
+const areaNames = Object.keys(byArea).sort();
+const articleCount = allArticles.length;
+---
+<Base title="レストランマップ" description="ジャカルタの日本食・グルメレストランマップ。記事で紹介した店舗を地図上で確認できます。">
+  <div class="container" style="padding-top:24px;padding-bottom:60px;">
+
+    <div class="map-page-header">
+      <h1 class="map-page-title">レストランマップ</h1>
+      <p class="map-page-stats">全 <strong>{restaurants.length}</strong> 店舗 / <strong>{articleCount}</strong> 記事から</p>
+    </div>
+
+    <RestaurantMap restaurants={JSON.stringify(restaurants)} height="560px" />
+
+    {areaNames.length > 0 && (
+      <div class="map-area-list">
+        <h2 class="map-area-list-title">エリア別レストラン一覧</h2>
+        {areaNames.map((area) => (
+          <div class="map-area-group">
+            <h3 class="map-area-name">{area} <span class="map-area-count">({byArea[area].length})</span></h3>
+            <div class="map-area-items">
+              {byArea[area].map((r) => {
+                const cc = cuisineConfig[r.cuisine as keyof typeof cuisineConfig] || cuisineConfig.other;
+                return (
+                  <div class="map-area-item">
+                    <span class="map-area-cuisine-dot" style={`background:${cc.color};`}></span>
+                    <span class="map-area-item-name">{r.name}</span>
+                    <span class="map-area-item-cuisine">{cc.icon} {cc.label}</span>
+                    <span class="map-area-item-price">{priceLabels[r.priceRange] || ''}</span>
+                    <a href={`https://www.google.com/maps/search/${encodeURIComponent(r.googleMapsQuery)}`} target="_blank" rel="noopener" class="map-area-item-link">Map</a>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+
+  </div>
+</Base>
