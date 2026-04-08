@@ -5,28 +5,29 @@ interface Props {
 }
 
 const { restaurants, height = '520px' } = Astro.props;
+const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
 ---
 
 <div class="restaurant-map-wrap">
   <div class="map-cuisine-filters" id="map-cuisine-filters"></div>
-  <div id="restaurant-map" style={`height:${height};width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);background:#e5e3df;`}></div>
+  <div id="restaurant-map" style={`height:${height};width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);background:#e8e6e1;`}></div>
 </div>
 
-<script is:inline define:vars={{ restaurants, height }}>
+<script is:inline define:vars={{ restaurants, GMAP_KEY }}>
 (function() {
   var data = JSON.parse(restaurants);
 
   var cuisineConfig = {
-    japanese:   { label: '日本食',           color: '#1B2D4F', icon: '\u{1F363}' },
-    korean:     { label: '韓国料理',         color: '#CE3B3B', icon: '\u{1F356}' },
-    chinese:    { label: '中華料理',         color: '#D97706', icon: '\u{1F95F}' },
-    indonesian: { label: 'インドネシア料理', color: '#C9A44A', icon: '\u{1F336}\u{FE0F}' },
-    european:   { label: '西洋料理',         color: '#3A6B8C', icon: '\u{1F377}' },
-    cafe:       { label: 'カフェ',           color: '#64748B', icon: '\u{2615}' },
-    other:      { label: 'その他',           color: '#7A8A9E', icon: '\u{1F37D}\u{FE0F}' },
+    japanese:   { label: '日本食',           color: '#1B2D4F', icon: '🍣' },
+    korean:     { label: '韓国料理',         color: '#CE3B3B', icon: '🍖' },
+    chinese:    { label: '中華料理',         color: '#D97706', icon: '🥟' },
+    indonesian: { label: 'インドネシア料理', color: '#C9A44A', icon: '🌶️' },
+    european:   { label: '西洋料理',         color: '#3A6B8C', icon: '🍷' },
+    cafe:       { label: 'カフェ',           color: '#64748B', icon: '☕' },
+    other:      { label: 'その他',           color: '#7A8A9E', icon: '🍽️' },
   };
 
-  var priceLabels = { budget: '\u{00A5}', mid: '\u{00A5}\u{00A5}', high: '\u{00A5}\u{00A5}\u{00A5}', luxury: '\u{00A5}\u{00A5}\u{00A5}\u{00A5}' };
+  var priceLabels = { budget: '¥', mid: '¥¥', high: '¥¥¥', luxury: '¥¥¥¥' };
 
   // Count cuisines
   var cuisineCounts = {};
@@ -54,144 +55,140 @@ const { restaurants, height = '520px' } = Astro.props;
     });
   }
 
-  // Load Leaflet CSS first
-  if (!document.querySelector('link[href*="leaflet"]')) {
-    var css = document.createElement('link');
-    css.rel = 'stylesheet';
-    css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-    css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=';
-    css.crossOrigin = '';
-    document.head.appendChild(css);
+  // Load Google Maps
+  function loadGoogleMaps(cb) {
+    if (window.google && window.google.maps) { cb(); return; }
+    window._gmapCallback = cb;
+    var s = document.createElement('script');
+    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + GMAP_KEY + '&callback=_gmapCallback&v=weekly&language=ja';
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
   }
 
-  // Load Leaflet JS
-  function loadLeaflet(cb) {
-    if (window.L) { cb(); return; }
-    var script = document.createElement('script');
-    script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-    script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
-    script.crossOrigin = '';
-    script.onload = cb;
-    document.head.appendChild(script);
-  }
-
-  // Wait for CSS to load, then init map
-  function waitForCSS(cb) {
-    // Give CSS 500ms to load
-    setTimeout(cb, 500);
-  }
-
-  // Observe when the map container becomes visible (for tab switching)
   function initWhenVisible() {
     var mapEl = document.getElementById('restaurant-map');
     if (!mapEl) return;
 
-    // If already visible, init immediately
     if (mapEl.offsetParent !== null && mapEl.offsetWidth > 0) {
-      loadLeaflet(function() { waitForCSS(function() { initMap(); }); });
+      loadGoogleMaps(initMap);
       return;
     }
 
-    // Otherwise observe for visibility changes (tab switch)
-    var visObserver = new MutationObserver(function() {
+    // Observe for tab switching
+    var obs = new MutationObserver(function() {
       if (mapEl.offsetParent !== null && mapEl.offsetWidth > 0) {
-        visObserver.disconnect();
-        loadLeaflet(function() { waitForCSS(function() { initMap(); }); });
+        obs.disconnect();
+        loadGoogleMaps(initMap);
       }
     });
-    visObserver.observe(mapEl.parentElement.parentElement || document.body, {
-      attributes: true, childList: true, subtree: true
-    });
+    obs.observe(document.body, { attributes: true, childList: true, subtree: true });
 
-    // Also try after a short delay (for direct page load on /map/)
     setTimeout(function() {
       if (mapEl.offsetParent !== null && mapEl.offsetWidth > 0) {
-        visObserver.disconnect();
-        loadLeaflet(function() { waitForCSS(function() { initMap(); }); });
+        obs.disconnect();
+        loadGoogleMaps(initMap);
       }
     }, 1000);
   }
 
   var mapInstance = null;
+  var allMarkers = [];
 
   function initMap() {
-    if (mapInstance) return; // Already initialized
+    if (mapInstance) return;
 
     var mapEl = document.getElementById('restaurant-map');
-    if (!mapEl || !window.L) return;
-
-    var L = window.L;
-    var map = L.map('restaurant-map', { zoomControl: true }).setView([-6.2088, 106.8456], 12);
-    mapInstance = map;
-
-    var lightTiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>',
-      maxZoom: 19,
-    });
-
-    var darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
-      maxZoom: 19,
-      subdomains: 'abcd',
-    });
+    if (!mapEl || !window.google) return;
 
     var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (isDark) { darkTiles.addTo(map); } else { lightTiles.addTo(map); }
+
+    var darkStyle = [
+      { elementType: 'geometry', stylers: [{ color: '#1d2c4d' }] },
+      { elementType: 'labels.text.fill', stylers: [{ color: '#8ec3b9' }] },
+      { elementType: 'labels.text.stroke', stylers: [{ color: '#1a3646' }] },
+      { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#304a7d' }] },
+      { featureType: 'road', elementType: 'labels.text.fill', stylers: [{ color: '#98a5be' }] },
+      { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#0e1626' }] },
+      { featureType: 'poi', elementType: 'geometry', stylers: [{ color: '#283d6a' }] },
+      { featureType: 'transit', elementType: 'geometry', stylers: [{ color: '#2f3948' }] },
+    ];
+
+    var map = new google.maps.Map(mapEl, {
+      center: { lat: -6.2088, lng: 106.8456 },
+      zoom: 12,
+      styles: isDark ? darkStyle : [],
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: true,
+      zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_BOTTOM },
+    });
+    mapInstance = map;
 
     // Theme change observer
     new MutationObserver(function(mutations) {
       mutations.forEach(function(m) {
         if (m.attributeName === 'data-theme') {
           var dark = document.documentElement.getAttribute('data-theme') === 'dark';
-          if (dark) { map.removeLayer(lightTiles); darkTiles.addTo(map); }
-          else { map.removeLayer(darkTiles); lightTiles.addTo(map); }
+          map.setOptions({ styles: dark ? darkStyle : [] });
         }
       });
     }).observe(document.documentElement, { attributes: true });
 
     // Create markers
-    var markers = [];
+    var bounds = new google.maps.LatLngBounds();
+    var infoWindow = new google.maps.InfoWindow();
+
     data.forEach(function(r) {
       if (!r.lat || !r.lng) return;
       var cc = cuisineConfig[r.cuisine] || cuisineConfig.other;
-      var marker = L.circleMarker([r.lat, r.lng], {
-        radius: 10,
-        fillColor: cc.color,
-        color: '#fff',
-        weight: 2.5,
-        opacity: 1,
-        fillOpacity: 0.9,
+
+      var marker = new google.maps.Marker({
+        position: { lat: r.lat, lng: r.lng },
+        map: map,
+        title: r.name,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 12,
+          fillColor: cc.color,
+          fillOpacity: 0.9,
+          strokeColor: '#ffffff',
+          strokeWeight: 2.5,
+        },
+        label: {
+          text: cc.icon,
+          fontSize: '14px',
+        },
       });
 
       var gmapsUrl = 'https://www.google.com/maps/search/' + encodeURIComponent(r.googleMapsQuery);
-      var popupHtml = '<div style="font-family:Noto Sans JP,sans-serif;min-width:200px;line-height:1.5;">'
-        + '<strong style="font-size:15px;color:#1B2D4F;">' + r.name + '</strong>'
-        + (r.nameEn ? '<br/><span style="color:#888;font-size:12px;">' + r.nameEn + '</span>' : '')
-        + '<div style="margin:6px 0 4px;">'
-        + '<span style="display:inline-block;background:' + cc.color + ';color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;margin-right:4px;">' + cc.icon + ' ' + cc.label + '</span>'
-        + '<span style="font-size:13px;color:#C9A44A;font-weight:bold;">' + (priceLabels[r.priceRange] || '') + '</span>'
+
+      var content = '<div style="font-family:Noto Sans JP,sans-serif;min-width:220px;line-height:1.6;padding:4px;">'
+        + '<div style="font-size:16px;font-weight:700;color:#1B2D4F;margin-bottom:2px;">' + r.name + '</div>'
+        + (r.nameEn ? '<div style="font-size:12px;color:#888;">' + r.nameEn + '</div>' : '')
+        + '<div style="margin:8px 0 6px;">'
+        + '<span style="display:inline-block;background:' + cc.color + ';color:#fff;padding:2px 10px;border-radius:4px;font-size:11px;font-weight:600;">' + cc.icon + ' ' + cc.label + '</span> '
+        + '<span style="font-size:14px;color:#C9A44A;font-weight:700;margin-left:4px;">' + (priceLabels[r.priceRange] || '') + '</span>'
         + '</div>'
-        + '<div style="font-size:12px;color:#666;margin-bottom:6px;">📍 ' + r.area + '</div>'
-        + '<div style="display:flex;gap:8px;">'
-        + '<a href="' + gmapsUrl + '" target="_blank" rel="noopener" style="font-size:12px;color:#3A6B8C;text-decoration:none;">Google Map ↗</a>'
-        + (r.articleSlug ? '<a href="/articles/' + r.articleSlug + '/" style="font-size:12px;color:#C9A44A;text-decoration:none;">記事を読む →</a>' : '')
+        + '<div style="font-size:13px;color:#555;margin-bottom:8px;">📍 ' + r.area + '</div>'
+        + '<div style="display:flex;gap:12px;padding-top:8px;border-top:1px solid #eee;">'
+        + '<a href="' + gmapsUrl + '" target="_blank" rel="noopener" style="font-size:12px;color:#3A6B8C;text-decoration:none;font-weight:600;">Google Map ↗</a>'
+        + (r.articleSlug ? '<a href="/articles/' + r.articleSlug + '/" style="font-size:12px;color:#C9A44A;text-decoration:none;font-weight:600;">記事を読む →</a>' : '')
         + '</div></div>';
 
-      marker.bindPopup(popupHtml);
-      marker.addTo(map);
+      marker.addListener('click', function() {
+        infoWindow.setContent(content);
+        infoWindow.open(map, marker);
+      });
+
       marker._cuisine = r.cuisine;
-      markers.push(marker);
+      allMarkers.push(marker);
+      bounds.extend(marker.getPosition());
     });
 
-    // Fit bounds
-    if (markers.length > 0) {
-      var group = L.featureGroup(markers);
-      map.fitBounds(group.getBounds().pad(0.15));
+    if (allMarkers.length > 0) {
+      map.fitBounds(bounds, { top: 50, bottom: 50, left: 50, right: 50 });
     }
-
-    // Force map resize after init (fixes tab visibility issue)
-    setTimeout(function() { map.invalidateSize(); }, 200);
-    setTimeout(function() { map.invalidateSize(); }, 1000);
 
     // Filter logic
     if (filtersEl) {
@@ -201,20 +198,31 @@ const { restaurants, height = '520px' } = Astro.props;
         filtersEl.querySelectorAll('.map-filter-btn').forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
         var cuisine = btn.dataset.cuisine;
-        markers.forEach(function(m) {
+
+        allMarkers.forEach(function(m) {
           if (cuisine === 'all' || m._cuisine === cuisine) {
-            m.setStyle({ opacity: 1, fillOpacity: 0.9 });
-            m.setRadius(10);
+            m.setVisible(true);
+            m.setIcon(Object.assign({}, m.getIcon(), { fillOpacity: 0.9, scale: 12 }));
           } else {
-            m.setStyle({ opacity: 0.15, fillOpacity: 0.1 });
-            m.setRadius(5);
+            m.setVisible(false);
           }
         });
+
+        // Re-fit bounds to visible markers
+        if (cuisine !== 'all') {
+          var newBounds = new google.maps.LatLngBounds();
+          var count = 0;
+          allMarkers.forEach(function(m) {
+            if (m.getVisible()) { newBounds.extend(m.getPosition()); count++; }
+          });
+          if (count > 0) map.fitBounds(newBounds, { top: 50, bottom: 50, left: 50, right: 50 });
+        } else {
+          map.fitBounds(bounds, { top: 50, bottom: 50, left: 50, right: 50 });
+        }
       });
     }
   }
 
-  // Start initialization
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initWhenVisible);
   } else {
