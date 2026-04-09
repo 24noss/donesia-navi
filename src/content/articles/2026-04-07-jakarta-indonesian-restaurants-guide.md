@@ -58,12 +58,13 @@ mapData:
 
 ### 1. プラタラン・ダルマワンサ（Plataran Dharmawangsa）— 南ジャカルタ
 
-**エリア:** 南ジャカルタ、ダルマワンサ通り（Jl. Dharmawangsa Raya No.6, Kebayoran Baru）
-**ジャンル:** ジャワ宮廷料理・本格インドネシア料理
-**価格帯:** Rp300,000〜700,000（約2,800〜6,600円）
-**営業時間:** 11:00〜23:00（毎日）
-
-[Google Mapで見る](https://www.google.com/maps/search/Plataran+Dharmawangsa+Jakarta)
+| 項目 | 詳細 |
+|------|------|
+| エリア | 南ジャカルタ、ダルマワンサ通り（Jl. Dharmawangsa Raya No.6, Kebayoran Baru） |
+| ジャンル | ジャワ宮廷料理・本格インドネシア料理 |
+| 予算 | Rp300,000〜700,000（約2,800〜6,600円） |
+| 営業時間 | 11:00〜23:00（毎日） |
+| Google Map | [地図を見る](https://www.google.com/maps/search/Plataran+Dharmawangsa+Jakarta) |
 
 **💰 代表メニューの参考価格（税・サービス料別）:**
 | メニュー | 価格（IDR） | 参考JPY |
@@ -84,12 +85,13 @@ mapData:
 
 ### 2. スリブ・ラサ（Seribu Rasa）— メンテン
 
-**エリア:** 中央ジャカルタ、メンテン地区（Jl. H. Agus Salim No.128, Menteng）
-**ジャンル:** インドネシア各地方料理・シーフード
-**価格帯:** Rp200,000〜500,000（約1,900〜4,700円）
-**営業時間:** 10:00〜22:00（毎日）
-
-[Google Mapで見る](https://www.google.com/maps/search/Seribu+Rasa+Menteng+Jakarta)
+| 項目 | 詳細 |
+|------|------|
+| エリア | 中央ジャカルタ、メンテン地区（Jl. H. Agus Salim No.128, Menteng） |
+| ジャンル | インドネシア各地方料理・シーフード |
+| 予算 | Rp200,000〜500,000（約1,900〜4,700円） |
+| 営業時間 | 10:00〜22:00（毎日） |
+| Google Map | [地図を見る](https://www.google.com/maps/search/Seribu+Rasa+Menteng+Jakarta) |
 
 **💰 代表メニューの参考価格（税・サービス料別）:**
 | メニュー | 価格（IDR） | 参考JPY |
@@ -110,12 +112,13 @@ mapData:
 
 ### 3. ベベッ・ブンギル（Bebek Bengil）— メンテン
 
-**エリア:** 中央ジャカルタ、メンテン地区（Jl. H. Agus Salim No.132, Menteng）
-**ジャンル:** バリ風アヒル料理（ベベッ・ゴレン）
-**価格帯:** Rp150,000〜350,000（約1,400〜3,300円）
-**営業時間:** 11:00〜23:00（毎日）
-
-[Google Mapで見る](https://www.google.com/maps/search/Bebek+Bengil+Menteng+Jakarta)
+| 項目 | 詳細 |
+|------|------|
+| エリア | 中央ジャカルタ、メンテン地区（Jl. H. Agus Salim No.132, Menteng） |
+| ジャンル | バリ風アヒル料理（ベベッ・ゴレン） |
+| 予算 | Rp150,000〜350,000（約1,400〜3,300円） |
+| 営業時間 | 11:00〜23:00（毎日） |
+| Google Map | [地図を見る](https://www.google.com/maps/search/Bebek+Bengil+Menteng+Jakarta) |
 
 **💰 代表メニューの参考価格（税・サービス料別）:**
 | メニュー | 価格（IDR） | 参考JPY |
@@ -136,12 +139,13 @@ mapData:
 
 ### 4. クンバン・グラ（Kembang Goela）— スディルマン
 
-**エリア:** 中央ジャカルタ、スディルマン通りプラザ・セントラル内（Jl. Jend. Sudirman Kav.47-48, Karet Semanggi）
-**ジャンル:** ブタウィ料理・プラナカン料理
-**価格帯:** Rp150,000〜400,000（約1,400〜3,770円）
-**営業時間:** 11:00〜22:00（毎日）
-
-[Google Mapで見る](https://www.google.com/maps/search/Kembang+Goela+Sudirman+Jakarta)
+| 項目 | 詳細 |
+|------|------|
+| エリア | 中央ジャカルタ、スディルマン通りプラザ・セントラル内（Jl. Jend. Sudirman Kav.47-48, Karet Semanggi） |
+| ジャンル | ブタウィ料理・プラナカン料理 |
+| 予算 | Rp150,000〜400,000（約1,400〜3,770円） |
+| 営業時間 | 11:00〜22:00（毎日） |
+| Google Map | [地図を見る](https://www.google.com/maps/search/Kembang+Goela+Sudirman+Jakarta) |
 
 **💰 代表メニューの参考価格（税・サービス料別）:**
 | メニュー | 価格（IDR） | 参考JPY |
@@ -162,12 +166,13 @@ mapData:
 
 ### 5. ララ・ジョングラン（Lara Djonggrang）— メンテン
 
-**エリア:** 中央ジャカルタ、メンテン地区（Jl. Teuku Cik Ditiro No.4, Menteng）
-**ジャンル:** マジャパヒト王朝風インドネシア宮廷料理
-**価格帯:** Rp300,000〜600,000（約2,800〜5,660円）
-**営業時間:** 11:30〜23:00（毎日）
-
-[Google Mapで見る](https://www.google.com/maps/search/Lara+Djonggrang+Menteng+Jakarta)
+| 項目 | 詳細 |
+|------|------|
+| エリア | 中央ジャカルタ、メンテン地区（Jl. Teuku Cik Ditiro No.4, Menteng） |
+| ジャンル | マジャパヒト王朝風インドネシア宮廷料理 |
+| 予算 | Rp300,000〜600,000（約2,800〜5,660円） |
+| 営業時間 | 11:30〜23:00（毎日） |
+| Google Map | [地図を見る](https://www.google.com/maps/search/Lara+Djonggrang+Menteng+Jakarta) |
 
 **💰 代表メニューの参考価格（税・サービス料別）:**
 | メニュー | 価格（IDR） | 参考JPY |

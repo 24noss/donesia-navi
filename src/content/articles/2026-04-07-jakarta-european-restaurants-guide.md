@@ -58,10 +58,13 @@ mapData:
 
 ### 1. AMUZ Gourmet Restaurant — SCBD（フレンチ）
 
-**エリア:** 南ジャカルタ、SCBD The Energy Building 2階（Jl. Jend. Sudirman Kav. 52-53, Lot 11A）
-**ジャンル:** フランス料理（コース・アラカルト）
-**価格帯:** Rp700,000〜（約6,500円〜）/ ディナーコースはRp1,500,000〜（約14,000円〜）
-**予約:** 強く推奨
+| 項目 | 詳細 |
+|------|------|
+| エリア | 南ジャカルタ、SCBD The Energy Building 2階（Jl. Jend. Sudirman Kav. 52-53, Lot 11A） |
+| ジャンル | フランス料理（コース・アラカルト） |
+| 予算 | Rp700,000〜（約6,500円〜）/ ディナーコースはRp1,500,000〜（約14,000円〜） |
+| 予約 | 強く推奨 |
+| Google Map | [地図を見る](https://www.google.com/maps/search/AMUZ+Gourmet+Restaurant+SCBD+Jakarta) |
 
 **【代表メニューの価格（税サ別）】**
 | メニュー | 価格（IDR） | 参考価格（円） |
@@ -78,16 +81,17 @@ mapData:
 
 フォアグラ、ラム、シーフードなど季節ごとに替わるコースメニューが評判で、ウォークイン型のガラスワインセラーにはフランス産を中心に世界各国のワインが揃う。SCBD内のオフィスビルに位置するため、ビジネスディナーにも使いやすい。2名でスターター、メイン、デザート、ワイン1本で約Rp4,000,000（約37,000円）程度が目安だ。
 
-[Google Mapで見る](https://www.google.com/maps/search/AMUZ+Gourmet+Restaurant+SCBD+Jakarta)
-
 ---
 
 ### 2. Osteria GIA — プラザインドネシア（イタリアン）
 
-**エリア:** 中央ジャカルタ、プラザインドネシア内（Jl. M.H. Thamrin No.30, Menteng）
-**ジャンル:** イタリア料理（ピザ・パスタ・メイン）
-**価格帯:** Rp300,000〜500,000（約2,800〜4,600円）
-**予約:** 推奨（特に週末）
+| 項目 | 詳細 |
+|------|------|
+| エリア | 中央ジャカルタ、プラザインドネシア内（Jl. M.H. Thamrin No.30, Menteng） |
+| ジャンル | イタリア料理（ピザ・パスタ・メイン） |
+| 予算 | Rp300,000〜500,000（約2,800〜4,600円） |
+| 予約 | 推奨（特に週末） |
+| Google Map | [地図を見る](https://www.google.com/maps/search/Osteria+Gia+Plaza+Indonesia+Jakarta) |
 
 **【代表メニューの価格（税サ別）】**
 | メニュー | 価格（IDR） | 参考価格（円） |
@@ -105,16 +109,17 @@ Ismayaグループが手がけるモダンイタリアン「Osteria GIA（オス
 
 プラザインドネシア店のほか、パシフィックプレイス（SCBD）にも店舗があるが、タムリン通りの本店は天井が高く開放感があり、接待やデートに特におすすめ。MRTブンダランHI（Bundaran HI）駅から徒歩圏内というアクセスの良さも魅力だ。
 
-[Google Mapで見る](https://www.google.com/maps/search/Osteria+Gia+Plaza+Indonesia+Jakarta)
-
 ---
 
 ### 3. Le Quartier — グナワルマン（フレンチビストロ）
 
-**エリア:** 南ジャカルタ、グナワルマン通り（Jl. Gunawarman No. 34, Kebayoran Baru）
-**ジャンル:** フランス料理・ビストロ
-**価格帯:** Rp300,000〜600,000（約2,800〜5,500円）
-**予約:** 推奨（個室あり）
+| 項目 | 詳細 |
+|------|------|
+| エリア | 南ジャカルタ、グナワルマン通り（Jl. Gunawarman No. 34, Kebayoran Baru） |
+| ジャンル | フランス料理・ビストロ |
+| 予算 | Rp300,000〜600,000（約2,800〜5,500円） |
+| 予約 | 推奨（個室あり） |
+| Google Map | [地図を見る](https://www.google.com/maps/search/Le+Quartier+Gunawarman+Jakarta) |
 
 **【代表メニューの価格（税サ別）】**
 | メニュー | 価格（IDR） | 参考価格（円） |
@@ -133,16 +138,17 @@ Ismayaグループが手がけるモダンイタリアン「Osteria GIA（オス
 
 木のフロアにシャンデリアが映えるエレガントな内装ながら、気取りすぎない居心地の良さが特徴だ。窓際席、温度管理された中庭席、個室から選べるため、商談から家族の食事まで幅広いシーンに対応できる。グナワルマン通りはセノパティエリアからも近く、日本人在住者にとってなじみ深いエリアにある点も便利だろう。グラスワインの品揃えも充実しているとの評判だ。
 
-[Google Mapで見る](https://www.google.com/maps/search/Le+Quartier+Gunawarman+Jakarta)
-
 ---
 
 ### 4. Toscana — クマン（イタリアン）
 
-**エリア:** 南ジャカルタ、クマン通り（Jl. Kemang Raya No.120）
-**ジャンル:** イタリア料理（トラットリア）
-**価格帯:** Rp300,000〜700,000（約2,800〜6,500円）
-**予約:** 推奨（特に週末ディナー）
+| 項目 | 詳細 |
+|------|------|
+| エリア | 南ジャカルタ、クマン通り（Jl. Kemang Raya No.120） |
+| ジャンル | イタリア料理（トラットリア） |
+| 予算 | Rp300,000〜700,000（約2,800〜6,500円） |
+| 予約 | 推奨（特に週末ディナー） |
+| Google Map | [地図を見る](https://www.google.com/maps/search/Toscana+Italian+Restaurant+Kemang+Jakarta) |
 
 **【代表メニューの価格（税サ別）】**
 | メニュー | 価格（IDR） | 参考価格（円） |
@@ -159,16 +165,17 @@ Ismayaグループが手がけるモダンイタリアン「Osteria GIA（オス
 
 レンガ壁を基調としたクラシックな内装が落ち着いた雰囲気を醸し出し、本格パスタ、グリル肉、シーフード、そして創業以来の名物であるピザが楽しめる。オーナーのエリタ・スタントヨ（Ellyta Soetantyo）氏がイタリア料理への情熱を注ぎ続けてきた歴史ある店で、クマンに長く住んでいる在住者からの信頼も厚い。営業は平日16時〜22時、土日は11時30分〜22時。週末のランチ利用にも対応しているのが嬉しいポイントだ。
 
-[Google Mapで見る](https://www.google.com/maps/search/Toscana+Italian+Restaurant+Kemang+Jakarta)
-
 ---
 
 ### 5. SOLA Ristorante e Bisteccheria — メンテン（トスカン・イタリアン）
 
-**エリア:** 中央ジャカルタ、メンテン地区（Jl. Purworejo No.23, Menteng）
-**ジャンル:** トスカーナ料理・ステーキ
-**価格帯:** Rp400,000〜800,000（約3,700〜7,400円）
-**予約:** 推奨
+| 項目 | 詳細 |
+|------|------|
+| エリア | 中央ジャカルタ、メンテン地区（Jl. Purworejo No.23, Menteng） |
+| ジャンル | トスカーナ料理・ステーキ |
+| 予算 | Rp400,000〜800,000（約3,700〜7,400円） |
+| 予約 | 推奨 |
+| Google Map | [地図を見る](https://www.google.com/maps/search/SOLA+Ristorante+Bisteccheria+Menteng+Jakarta) |
 
 **【代表メニューの価格】**
 ※SOLAは2025年5月オープンの新店のため、メニュー価格の詳細はオンライン上で確認できませんでした。最新の価格は店舗に直接ご確認ください（TEL: +628174888823 / Instagram: @sola.jakarta）。
@@ -177,8 +184,6 @@ Ismayaグループが手がけるモダンイタリアン「Osteria GIA（オス
 2025年にオープンし、各メディアで話題を集めているSOLA（ソラ）は、「Less is More」をコンセプトに掲げるトスカーナ料理の新星だ。レザ・ギンティン（Reza Ginting）シェフとジョナサン・テック（Jonathan Tek）シェフのコンビが手がけるメニューは、薪焼きカラマリ、リボッリータ（Ribollita、トスカーナの伝統スープ）、ビーフチークリゾット、手打ちパスタなど、素材を活かしたシンプルかつ力強い料理が並ぶ。
 
 メンテンの閑静な住宅街に位置し、落ち着いた雰囲気の中で本格トスカーナ料理とワインを堪能できる。ビステッケリア（Bisteccheria）の名が示すとおりステーキも看板メニューの一つで、肉好きにはたまらない選択肢だろう。2026年に入っても予約が取りにくい状況が続いているとの情報もあり、来店前に電話またはSNSでの予約確認をおすすめする。
-
-[Google Mapで見る](https://www.google.com/maps/search/SOLA+Ristorante+Bisteccheria+Menteng+Jakarta)
 
 ---
 

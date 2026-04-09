@@ -644,6 +644,25 @@ body{
   .article-body{font-size:15px}
   .article-body h2{font-size:18px}
 
+  /* Mobile table styles */
+  .article-body table{
+    display:block;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    font-size:13px;
+  }
+  .article-body th,.article-body td{
+    padding:8px 10px;
+  }
+  /* Make info tables more compact on mobile */
+  .article-body table th:first-child,
+  .article-body table td:first-child{
+    width:80px;
+    white-space:nowrap;
+    font-weight:600;
+    color:var(--teal);
+  }
+
   .container{padding:0 16px}
 
   .mobile-share-bar{display:block}
