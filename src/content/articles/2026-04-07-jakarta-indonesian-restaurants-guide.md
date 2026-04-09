@@ -13,6 +13,8 @@ mapData:
     area: "ダルマワンサ（南ジャカルタ）"
     cuisine: "indonesian"
     priceRange: "high"
+    halal: "yes"
+    servesAlcohol: "yes"
     googleMapsQuery: "Plataran Dharmawangsa Jakarta"
     lat: -6.2612
     lng: 106.7988
@@ -21,6 +23,8 @@ mapData:
     area: "メンテン（中央ジャカルタ）"
     cuisine: "indonesian"
     priceRange: "high"
+    halal: "yes"
+    servesAlcohol: "yes"
     googleMapsQuery: "Seribu Rasa Menteng Jakarta"
     lat: -6.1928
     lng: 106.8327
@@ -29,6 +33,8 @@ mapData:
     area: "メンテン（中央ジャカルタ）"
     cuisine: "indonesian"
     priceRange: "mid"
+    halal: "yes"
+    servesAlcohol: "yes"
     googleMapsQuery: "Bebek Bengil Menteng Jakarta"
     lat: -6.1932
     lng: 106.8330
@@ -37,6 +43,8 @@ mapData:
     area: "スディルマン（中央ジャカルタ）"
     cuisine: "indonesian"
     priceRange: "mid"
+    halal: "yes"
+    servesAlcohol: "yes"
     googleMapsQuery: "Kembang Goela Sudirman Jakarta"
     lat: -6.2178
     lng: 106.8127
@@ -45,6 +53,8 @@ mapData:
     area: "メンテン（中央ジャカルタ）"
     cuisine: "indonesian"
     priceRange: "high"
+    halal: "unverified"
+    servesAlcohol: "yes"
     googleMapsQuery: "Lara Djonggrang Menteng Jakarta"
     lat: -6.1960
     lng: 106.8370
@@ -64,6 +74,8 @@ mapData:
 | ジャンル | ジャワ宮廷料理・本格インドネシア料理 |
 | 予算 | Rp300,000〜700,000（約2,800〜6,600円） |
 | 営業時間 | 11:00〜23:00（毎日） |
+| ハラル | ✅ ハラル認証あり |
+| アルコール | 🍺 あり（ワイン＆スピリッツメニュー完備） |
 | Google Map | [地図を見る](https://www.google.com/maps/search/Plataran+Dharmawangsa+Jakarta) |
 
 **💰 代表メニューの参考価格（税・サービス料別）:**
@@ -91,6 +103,8 @@ mapData:
 | ジャンル | インドネシア各地方料理・シーフード |
 | 予算 | Rp200,000〜500,000（約1,900〜4,700円） |
 | 営業時間 | 10:00〜22:00（毎日） |
+| ハラル | ✅ ハラル認証あり |
+| アルコール | 🍺 あり |
 | Google Map | [地図を見る](https://www.google.com/maps/search/Seribu+Rasa+Menteng+Jakarta) |
 
 **💰 代表メニューの参考価格（税・サービス料別）:**
@@ -118,6 +132,8 @@ mapData:
 | ジャンル | バリ風アヒル料理（ベベッ・ゴレン） |
 | 予算 | Rp150,000〜350,000（約1,400〜3,300円） |
 | 営業時間 | 11:00〜23:00（毎日） |
+| ハラル | ✅ ハラル認証あり |
+| アルコール | 🍺 あり |
 | Google Map | [地図を見る](https://www.google.com/maps/search/Bebek+Bengil+Menteng+Jakarta) |
 
 **💰 代表メニューの参考価格（税・サービス料別）:**
@@ -145,6 +161,8 @@ mapData:
 | ジャンル | ブタウィ料理・プラナカン料理 |
 | 予算 | Rp150,000〜400,000（約1,400〜3,770円） |
 | 営業時間 | 11:00〜22:00（毎日） |
+| ハラル | ✅ ハラル認証あり |
+| アルコール | 🍺 あり（ワインリスト完備） |
 | Google Map | [地図を見る](https://www.google.com/maps/search/Kembang+Goela+Sudirman+Jakarta) |
 
 **💰 代表メニューの参考価格（税・サービス料別）:**
@@ -172,6 +190,8 @@ mapData:
 | ジャンル | マジャパヒト王朝風インドネシア宮廷料理 |
 | 予算 | Rp300,000〜600,000（約2,800〜5,660円） |
 | 営業時間 | 11:30〜23:00（毎日） |
+| ハラル | ⚠️ 要確認 |
+| アルコール | 🍺 あり（La Bihzad Bar併設・ワインラウンジあり） |
 | Google Map | [地図を見る](https://www.google.com/maps/search/Lara+Djonggrang+Menteng+Jakarta) |
 
 **💰 代表メニューの参考価格（税・サービス料別）:**

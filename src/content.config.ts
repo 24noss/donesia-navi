@@ -26,6 +26,8 @@ const articles = defineCollection({
       lat: z.number().optional(),
       lng: z.number().optional(),
       isChain: z.boolean().default(false),
+      halal: z.enum(['yes', 'no', 'unverified']).default('unverified'),
+      servesAlcohol: z.enum(['yes', 'no', 'unverified']).default('unverified'),
     })).optional(),
   }),
 });

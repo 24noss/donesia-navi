@@ -13,6 +13,8 @@ mapData:
     area: "SCBD"
     cuisine: "european"
     priceRange: "luxury"
+    halal: "unverified"
+    servesAlcohol: "yes"
     googleMapsQuery: "AMUZ Gourmet Restaurant SCBD Jakarta"
     lat: -6.2258
     lng: 106.8065
@@ -21,6 +23,8 @@ mapData:
     area: "タムリン（Thamrin）"
     cuisine: "european"
     priceRange: "high"
+    halal: "no"
+    servesAlcohol: "yes"
     googleMapsQuery: "Osteria Gia Plaza Indonesia Jakarta"
     lat: -6.1939
     lng: 106.8226
@@ -29,6 +33,8 @@ mapData:
     area: "グナワルマン（Gunawarman）"
     cuisine: "european"
     priceRange: "high"
+    halal: "unverified"
+    servesAlcohol: "yes"
     googleMapsQuery: "Le Quartier Gunawarman Jakarta"
     lat: -6.2420
     lng: 106.7960
@@ -37,6 +43,8 @@ mapData:
     area: "クマン（Kemang）"
     cuisine: "european"
     priceRange: "high"
+    halal: "unverified"
+    servesAlcohol: "yes"
     googleMapsQuery: "Toscana Italian Restaurant Kemang Jakarta"
     lat: -6.2610
     lng: 106.8130
@@ -45,6 +53,8 @@ mapData:
     area: "メンテン（Menteng）"
     cuisine: "european"
     priceRange: "high"
+    halal: "unverified"
+    servesAlcohol: "yes"
     googleMapsQuery: "SOLA Ristorante Bisteccheria Menteng Jakarta"
     lat: -6.2010
     lng: 106.8370
@@ -63,6 +73,8 @@ mapData:
 | エリア | 南ジャカルタ、SCBD The Energy Building 2階（Jl. Jend. Sudirman Kav. 52-53, Lot 11A） |
 | ジャンル | フランス料理（コース・アラカルト） |
 | 予算 | Rp700,000〜（約6,500円〜）/ ディナーコースはRp1,500,000〜（約14,000円〜） |
+| ハラル | ⚠️ 要確認 |
+| アルコール | 🍺 あり（ワインセラー完備・フランスワイン中心） |
 | 予約 | 強く推奨 |
 | Google Map | [地図を見る](https://www.google.com/maps/search/AMUZ+Gourmet+Restaurant+SCBD+Jakarta) |
 
@@ -90,6 +102,8 @@ mapData:
 | エリア | 中央ジャカルタ、プラザインドネシア内（Jl. M.H. Thamrin No.30, Menteng） |
 | ジャンル | イタリア料理（ピザ・パスタ・メイン） |
 | 予算 | Rp300,000〜500,000（約2,800〜4,600円） |
+| ハラル | ❌ 非ハラル（豚肉メニューあり） |
+| アルコール | 🍺 あり（ワイン73銘柄・カクテル） |
 | 予約 | 推奨（特に週末） |
 | Google Map | [地図を見る](https://www.google.com/maps/search/Osteria+Gia+Plaza+Indonesia+Jakarta) |
 
@@ -118,6 +132,8 @@ Ismayaグループが手がけるモダンイタリアン「Osteria GIA（オス
 | エリア | 南ジャカルタ、グナワルマン通り（Jl. Gunawarman No. 34, Kebayoran Baru） |
 | ジャンル | フランス料理・ビストロ |
 | 予算 | Rp300,000〜600,000（約2,800〜5,500円） |
+| ハラル | ⚠️ 要確認 |
+| アルコール | 🍺 あり（ワイン・カクテル） |
 | 予約 | 推奨（個室あり） |
 | Google Map | [地図を見る](https://www.google.com/maps/search/Le+Quartier+Gunawarman+Jakarta) |
 
@@ -147,6 +163,8 @@ Ismayaグループが手がけるモダンイタリアン「Osteria GIA（オス
 | エリア | 南ジャカルタ、クマン通り（Jl. Kemang Raya No.120） |
 | ジャンル | イタリア料理（トラットリア） |
 | 予算 | Rp300,000〜700,000（約2,800〜6,500円） |
+| ハラル | ⚠️ 要確認 |
+| アルコール | 🍺 あり（ワインリスト充実） |
 | 予約 | 推奨（特に週末ディナー） |
 | Google Map | [地図を見る](https://www.google.com/maps/search/Toscana+Italian+Restaurant+Kemang+Jakarta) |
 
@@ -174,6 +192,8 @@ Ismayaグループが手がけるモダンイタリアン「Osteria GIA（オス
 | エリア | 中央ジャカルタ、メンテン地区（Jl. Purworejo No.23, Menteng） |
 | ジャンル | トスカーナ料理・ステーキ |
 | 予算 | Rp400,000〜800,000（約3,700〜7,400円） |
+| ハラル | ⚠️ 要確認 |
+| アルコール | 🍺 あり（ワインリスト完備） |
 | 予約 | 推奨 |
 | Google Map | [地図を見る](https://www.google.com/maps/search/SOLA+Ristorante+Bisteccheria+Menteng+Jakarta) |
 

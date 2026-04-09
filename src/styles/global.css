@@ -996,6 +996,9 @@ body{
   background:var(--navy);color:#fff;border-color:var(--navy);
 }
 [data-theme="dark"] .map-filter-btn.active{background:var(--teal);border-color:var(--teal)}
+.map-filter-alcohol{border-color:var(--gold) !important}
+.map-filter-alcohol.active{background:var(--gold);color:#fff;border-color:var(--gold) !important}
+[data-theme="dark"] .map-filter-alcohol.active{background:var(--gold);color:#fff;border-color:var(--gold) !important}
 
 /* Map page */
 .map-page-header{margin-bottom:20px}

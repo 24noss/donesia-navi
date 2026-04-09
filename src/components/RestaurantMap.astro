@@ -53,6 +53,17 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
       btn.style.setProperty('--filter-color', cuisineConfig[key].color);
       filtersEl.appendChild(btn);
     });
+
+    // Add alcohol filter toggle
+    var alcCount = data.filter(function(r) { return r.servesAlcohol === 'yes'; }).length;
+    if (alcCount > 0) {
+      var alcBtn = document.createElement('button');
+      alcBtn.className = 'map-filter-btn map-filter-alcohol';
+      alcBtn.dataset.filter = 'alcohol';
+      alcBtn.innerHTML = '🍺 お酒あり (' + alcCount + ')';
+      alcBtn.style.marginLeft = '8px';
+      filtersEl.appendChild(alcBtn);
+    }
   }
 
   // Load Google Maps
@@ -182,6 +193,7 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
       });
 
       marker._cuisine = r.cuisine;
+      marker._servesAlcohol = r.servesAlcohol || 'unverified';
       allMarkers.push(marker);
       bounds.extend(marker.getPosition());
     });
@@ -191,34 +203,52 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
     }
 
     // Filter logic
+    var alcoholFilterActive = false;
+    var activeCuisine = 'all';
+
+    function applyFilters() {
+      allMarkers.forEach(function(m) {
+        var cuisineMatch = (activeCuisine === 'all' || m._cuisine === activeCuisine);
+        var alcoholMatch = !alcoholFilterActive || m._servesAlcohol === 'yes';
+        if (cuisineMatch && alcoholMatch) {
+          m.setVisible(true);
+          m.setIcon(Object.assign({}, m.getIcon(), { fillOpacity: 0.9, scale: 12 }));
+        } else {
+          m.setVisible(false);
+        }
+      });
+
+      // Re-fit bounds to visible markers
+      var newBounds = new google.maps.LatLngBounds();
+      var count = 0;
+      allMarkers.forEach(function(m) {
+        if (m.getVisible()) { newBounds.extend(m.getPosition()); count++; }
+      });
+      if (count > 0) {
+        map.fitBounds(newBounds, { top: 50, bottom: 50, left: 50, right: 50 });
+      } else if (!alcoholFilterActive && activeCuisine === 'all') {
+        map.fitBounds(bounds, { top: 50, bottom: 50, left: 50, right: 50 });
+      }
+    }
+
     if (filtersEl) {
       filtersEl.addEventListener('click', function(e) {
         var btn = e.target.closest('.map-filter-btn');
         if (!btn) return;
-        filtersEl.querySelectorAll('.map-filter-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var cuisine = btn.dataset.cuisine;
 
-        allMarkers.forEach(function(m) {
-          if (cuisine === 'all' || m._cuisine === cuisine) {
-            m.setVisible(true);
-            m.setIcon(Object.assign({}, m.getIcon(), { fillOpacity: 0.9, scale: 12 }));
-          } else {
-            m.setVisible(false);
-          }
-        });
-
-        // Re-fit bounds to visible markers
-        if (cuisine !== 'all') {
-          var newBounds = new google.maps.LatLngBounds();
-          var count = 0;
-          allMarkers.forEach(function(m) {
-            if (m.getVisible()) { newBounds.extend(m.getPosition()); count++; }
-          });
-          if (count > 0) map.fitBounds(newBounds, { top: 50, bottom: 50, left: 50, right: 50 });
-        } else {
-          map.fitBounds(bounds, { top: 50, bottom: 50, left: 50, right: 50 });
+        // Handle alcohol toggle separately
+        if (btn.dataset.filter === 'alcohol') {
+          alcoholFilterActive = !alcoholFilterActive;
+          btn.classList.toggle('active', alcoholFilterActive);
+          applyFilters();
+          return;
         }
+
+        // Handle cuisine filters
+        filtersEl.querySelectorAll('.map-filter-btn:not(.map-filter-alcohol)').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        activeCuisine = btn.dataset.cuisine || 'all';
+        applyFilters();
       });
     }
   }
