@@ -54,7 +54,7 @@ const articleCount = allArticles.length;
                     <span class="map-area-item-name">{r.name}</span>
                     <span class="map-area-item-cuisine">{cc.icon} {cc.label}</span>
                     <span class="map-area-item-price">{priceLabels[r.priceRange] || ''}</span>
-                    <a href={`https://www.google.com/maps/search/${encodeURIComponent(r.googleMapsQuery)}`} target="_blank" rel="noopener" class="map-area-item-link">Map</a>
+                    <a href={`https://www.google.com/maps/search/${encodeURIComponent(r.googleMapsQuery)}`} target="_blank" rel="noopener noreferrer" class="map-area-item-link">Map</a>
                   </div>
                 );
               })}

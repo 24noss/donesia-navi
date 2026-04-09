@@ -112,11 +112,29 @@ function buildBreadcrumbs(type: string, article?: ArticleData, categorySlug?: Ca
   };
 }
 
+// --- Organization schema ---
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'DonesiaNavi',
+  alternateName: 'ドネシアナビ',
+  url: siteUrl,
+  description: 'インドネシア在住日本人のための日本語ニュース・生活情報ポータル',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    email: 'info@indonesia-navi.com',
+    contactType: 'customer service',
+    availableLanguage: ['Japanese', 'Indonesian'],
+  },
+  sameAs: [],
+};
+
 // Build schemas based on page type
 const schemas: object[] = [];
 
 if (type === 'home') {
   schemas.push(websiteSchema);
+  schemas.push(organizationSchema);
   schemas.push(buildBreadcrumbs('home'));
 }
 

@@ -12,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
     "@google-analytics/data": "^5.2.1",
     "@pagefind/default-ui": "^1.4.0",

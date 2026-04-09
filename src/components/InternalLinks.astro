@@ -1,0 +1,128 @@
+---
+/**
+ * Internal Links component for SEO.
+ * Shows "関連する記事" (scored by category + tags) and "同じカテゴリの記事".
+ */
+import { getCollection } from 'astro:content';
+import { categories, formatDate } from '../lib/categories';
+import type { CategorySlug } from '../lib/categories';
+
+interface Props {
+  currentId: string;
+  category: CategorySlug;
+  tags: string[];
+}
+
+const { currentId, category, tags } = Astro.props;
+const cat = categories[category];
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+
+// Score articles by relevance: same category (weight 2) + shared tags (weight 1 per tag)
+const scored = allArticles
+  .filter((a) => a.id !== currentId)
+  .map((a) => {
+    let score = 0;
+    if (a.data.category === category) score += 2;
+    for (const tag of a.data.tags) {
+      if (tags.includes(tag)) score += 1;
+    }
+    return { article: a, score };
+  })
+  .filter((s) => s.score > 0)
+  .sort((a, b) => b.score - a.score || b.article.data.pubDate.valueOf() - a.article.data.pubDate.valueOf());
+
+const relatedArticles = scored.slice(0, 5);
+
+// Same category articles (excluding those already in related)
+const relatedIds = new Set(relatedArticles.map((r) => r.article.id));
+const sameCategoryArticles = allArticles
+  .filter((a) => a.id !== currentId && a.data.category === category && !relatedIds.has(a.id))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+{relatedArticles.length > 0 && (
+  <section class="internal-links-section">
+    <h2 class="internal-links-heading">関連する記事</h2>
+    <div class="internal-links-grid">
+      {relatedArticles.map(({ article }) => (
+        <a href={`/articles/${article.id}/`} class="internal-link-card">
+          <span class={`internal-link-cat ${article.data.category}`}>{categories[article.data.category].name}</span>
+          <span class="internal-link-title">{article.data.title}</span>
+          <span class="internal-link-date">{formatDate(article.data.pubDate)}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+{sameCategoryArticles.length > 0 && (
+  <section class="internal-links-section">
+    <h2 class="internal-links-heading">{cat.name}の記事</h2>
+    <div class="internal-links-grid">
+      {sameCategoryArticles.map((article) => (
+        <a href={`/articles/${article.id}/`} class="internal-link-card">
+          <span class={`internal-link-cat ${article.data.category}`}>{categories[article.data.category].name}</span>
+          <span class="internal-link-title">{article.data.title}</span>
+          <span class="internal-link-date">{formatDate(article.data.pubDate)}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .internal-links-section {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+  .internal-links-heading {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .internal-links-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .internal-link-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .internal-link-card:hover {
+    border-color: var(--teal);
+    box-shadow: var(--shadow);
+  }
+  .internal-link-cat {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--teal);
+  }
+  .internal-link-title {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .internal-link-card:hover .internal-link-title {
+    color: var(--teal);
+  }
+  .internal-link-date {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+</style>

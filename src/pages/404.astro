@@ -1,0 +1,135 @@
+---
+import Base from '../layouts/Base.astro';
+import { categories } from '../lib/categories';
+---
+<Base title="ページが見つかりません" description="お探しのページは見つかりませんでした。" noindex={true}>
+  <div class="container not-found-page">
+
+    <div class="not-found-content">
+      <div class="not-found-code">404</div>
+      <h1 class="not-found-title">ページが見つかりません</h1>
+      <p class="not-found-message">お探しのページは移動または削除された可能性があります。URLをご確認いただくか、以下のリンクからお探しください。</p>
+
+      <div class="not-found-actions">
+        <a href="/" class="not-found-btn primary">トップページへ戻る</a>
+        <a href="/search/" class="not-found-btn secondary">記事を検索する</a>
+      </div>
+
+      <div class="not-found-categories">
+        <h2 class="not-found-sub">カテゴリから探す</h2>
+        <div class="not-found-cat-grid">
+          {Object.entries(categories).map(([slug, cat]) => (
+            <a href={`/category/${slug}/`} class="not-found-cat-link">
+              <span class={`cat-dot ${slug}`}></span>
+              {cat.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <style>
+    .not-found-page {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 16px 100px;
+    }
+    .not-found-content {
+      text-align: center;
+      max-width: 520px;
+    }
+    .not-found-code {
+      font-family: var(--serif);
+      font-size: 80px;
+      font-weight: 900;
+      color: var(--teal);
+      opacity: 0.25;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .not-found-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .not-found-message {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .not-found-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .not-found-btn {
+      display: inline-block;
+      padding: 10px 24px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.15s, color 0.15s;
+    }
+    .not-found-btn.primary {
+      background: var(--teal);
+      color: #fff;
+    }
+    .not-found-btn.primary:hover {
+      background: var(--teal-light);
+    }
+    .not-found-btn.secondary {
+      background: var(--bg-sidebar);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .not-found-btn.secondary:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .not-found-sub {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .not-found-cat-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .not-found-cat-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .not-found-cat-link:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    @media (max-width: 768px) {
+      .not-found-code { font-size: 60px; }
+      .not-found-title { font-size: 22px; }
+      .not-found-page { padding: 40px 16px 100px; }
+    }
+  </style>
+</Base>
