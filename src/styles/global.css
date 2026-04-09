@@ -431,17 +431,20 @@ body{
 
 .article-body table{
   width:100%;border-collapse:collapse;margin:20px 0;
-  font-size:14px;
+  font-size:14px;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--border);
 }
 .article-body th{
   background:var(--navy);color:#fff;
   padding:10px 14px;text-align:left;
-  font-weight:600;font-size:13px;
+  font-weight:600;font-size:12px;letter-spacing:.5px;
 }
 [data-theme="dark"] .article-body th{background:var(--navy-muted)}
 .article-body td{
   padding:10px 14px;border-bottom:1px solid var(--border);
 }
+.article-body tr:nth-child(even) td{background:rgba(58,107,140,.03)}
+[data-theme="dark"] .article-body tr:nth-child(even) td{background:rgba(255,255,255,.02)}
 
 /* In-article affiliate */
 .inline-affiliate{
@@ -644,23 +647,45 @@ body{
   .article-body{font-size:15px}
   .article-body h2{font-size:18px}
 
-  /* Mobile table styles */
+  /* Mobile table: horizontal scroll with sticky first column */
   .article-body table{
     display:block;
     overflow-x:auto;
     -webkit-overflow-scrolling:touch;
     font-size:13px;
+    border-radius:var(--radius);
+    border:1px solid var(--border);
   }
-  .article-body th,.article-body td{
-    padding:8px 10px;
+  .article-body table thead{display:table-header-group}
+  .article-body table tbody{display:table-row-group}
+  .article-body table tr{display:table-row}
+  .article-body table th,.article-body table td{
+    display:table-cell;
+    padding:8px 12px;
+    white-space:nowrap;
   }
-  /* Make info tables more compact on mobile */
+  /* Sticky first column */
   .article-body table th:first-child,
   .article-body table td:first-child{
-    width:80px;
-    white-space:nowrap;
+    position:sticky;
+    left:0;
+    z-index:1;
+    background:var(--bg-card);
     font-weight:600;
-    color:var(--teal);
+    color:var(--navy);
+    border-right:2px solid var(--gold);
+    white-space:nowrap;
+    min-width:90px;
+  }
+  [data-theme="dark"] .article-body table td:first-child{
+    background:var(--bg-card);
+    color:var(--text);
+  }
+  .article-body table th:first-child{
+    background:var(--navy);
+    color:#fff;
+    z-index:2;
+    border-right:2px solid var(--gold);
   }
 
   .container{padding:0 16px}
