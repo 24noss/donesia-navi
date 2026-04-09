@@ -7,7 +7,7 @@ tags: ["燃料補助金", "APBN", "国会", "財務大臣", "BBM"]
 pubDate: 2026-04-06
 source: "Kompas / Detik"
 sourceUrl: "https://nasional.kompas.com/read/2026/04/06/14035671/ketua-banggar-dpr-tolak-usulan-jk-minta-kurangi-subsidi-bbm"
-draft: true
+draft: false
 ---
 
 ## 燃料補助金カットを国会が拒否、財務大臣も「補助金燃料は値上げしない」

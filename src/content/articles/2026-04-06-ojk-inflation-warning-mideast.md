@@ -7,7 +7,7 @@ tags: ["インフレ", "OJK", "中東情勢", "物価", "金融"]
 pubDate: 2026-04-06
 source: "Detik"
 sourceUrl: "https://finance.detik.com/berita-ekonomi-bisnis/d-8431270/ojk-wanti-wanti-inflasi-meroket-dampak-perang-timur-tengah"
-draft: true
+draft: false
 ---
 
 ## OJKが中東紛争によるインフレ急騰を警告――在住者の生活コストへの影響は

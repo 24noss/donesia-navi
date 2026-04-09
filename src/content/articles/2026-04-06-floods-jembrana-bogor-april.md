@@ -7,7 +7,7 @@ tags: ["洪水", "バリ島", "ボゴール", "雨季", "防災"]
 pubDate: 2026-04-06
 source: "Kompas"
 sourceUrl: "https://nasional.kompas.com/read/2026/04/06/14270451/banjir-terjang-sejumlah-wilayah-sepekan-terakhir-dari-jembrana-hingga-bogor"
-draft: true
+draft: false
 ---
 
 ## バリ島ジュンブラナからボゴールまで各地で洪水――在住者は最新情報の確認を

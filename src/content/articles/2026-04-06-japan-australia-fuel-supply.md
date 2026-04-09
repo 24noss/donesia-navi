@@ -7,7 +7,7 @@ tags: ["エネルギー", "日豪関係", "燃料", "原油", "外交"]
 pubDate: 2026-04-06
 source: "Detik"
 sourceUrl: "https://news.detik.com/abc-australia/d-8431244/dunia-hari-ini-jepang-pastikan-pasokan-bbm-untuk-australia-normal"
-draft: true
+draft: false
 ---
 
 ## 日本がオーストラリアへの燃料供給を保証――中東不安の中でエネルギー外交が加速
