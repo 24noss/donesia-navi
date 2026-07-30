@@ -6,7 +6,7 @@ tags: ["スカルノハッタ空港", "治安", "薬物摘発", "事件"]
 pubDate: 2026-07-30
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8597773/pilot-asing-kurir-26-kg-ekstasi-di-soetta-jadi-tersangka-dan-ditahan"
-draft: true
+draft: false
 ---
 
 ## スカルノ・ハッタ空港で26kgの合成覚醒剤密輸事件、外国人パイロットが身柄拘束
