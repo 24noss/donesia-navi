@@ -6,7 +6,7 @@ tags: ["GIIAS2026", "自動車", "EV", "インドネシア経済"]
 pubDate: 2026-07-30
 source: "Antara"
 sourceUrl: "https://otomotif.antaranews.com/video/5673504/buka-giias-2026-menperin-target-lcev-rp212-triliun-harus-tercapai"
-draft: true
+draft: false
 ---
 
 ## インドネシア最大級のモーターショー「GIIAS 2026」が開幕
