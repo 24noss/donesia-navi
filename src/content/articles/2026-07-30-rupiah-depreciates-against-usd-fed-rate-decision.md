@@ -6,7 +6,7 @@ tags: ["ルピア", "為替", "インドネシア経済", "米ドル"]
 pubDate: 2026-07-30
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQMzdHRm40Y3MzWU5HdjdlM0xGOFlGY2pYNDROMEZZUmNwSGphcmVjZXNER1Ytd0FtN0xwRlBfcm4zYlc5NzhjYmN6ajNTendBOXo0YVB4WGhkQmx3VmxZTTUxa0tXZkFWeGRxQUxTZ19LVFNZRGdGZW44V016d2RSZnNYb0FOSzlNUXl0c1BnRnBVdkVpNGc0eUNLYUExSXNWZWhIX1hDY3FsWEtvM2FmSjJURlBaeVB4dVBmeEl5c3llazA?oc=5"
-draft: true
+draft: false
 ---
 
 ## 外交・経済要因によりルピア相場が一段と下落
