@@ -1,0 +1,76 @@
+name: Crawl & Draft Articles
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 07:00 WIB (UTC+7)
+    - cron: '0 4 * * *' # 11:00 WIB (UTC+7)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: crawl-articles
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Crawl sources and draft articles
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: npm run crawl
+
+      - name: Check for new draft articles
+        id: check
+        run: |
+          if git status --porcelain src/content/articles | grep -q '^??'; then
+            echo "has_new=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_new=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create pull request
+        if: steps.check.outputs.has_new == 'true'
+        id: cpr
+        uses: peter-evans/create-pull-request@v8
+        with:
+          add-paths: src/content/articles/*.md
+          commit-message: 'Add draft articles (auto-crawl)'
+          branch: auto/articles-${{ github.run_id }}
+          title: '自動ドラフト記事 (run ${{ github.run_id }})'
+          body: |
+            クロール自動生成によるドラフト記事です。すべて `draft: true` のため、マージしても本番サイトには表示されません。
+
+            レビューの上マージし、公開する記事は該当ファイルを `draft: false` に変更して別途pushしてください。
+
+      - name: Notify Slack
+        if: steps.check.outputs.has_new == 'true' && steps.cpr.outputs.pull-request-url != ''
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ vars.SLACK_CHANNEL_ID }}
+          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
+        run: |
+          LINES=$(jq -r '.[] | "• *\(.title)* (\(.category) / \(.source))"' .crawl-result.json)
+          BODY=$(jq -n \
+            --arg channel "$SLACK_CHANNEL_ID" \
+            --arg text "$(printf 'ドネシアナビ: 新しいドラフト記事が作成されました\n%s\n\nPR: %s' "$LINES" "$PR_URL")" \
+            '{channel: $channel, text: $text}')
+          curl -s -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer ${SLACK_BOT_TOKEN}" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "$BODY"
