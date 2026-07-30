@@ -136,6 +136,7 @@ async function publishPr({ env, repo, prNumber, responseUrl, clickedBy }) {
       responseUrl,
       `❌ 公開処理に失敗しました: ${err.message}\nPR #${prNumber} は手動で確認してください。`
     );
+    throw err; // TODO(temporary debug): デバッグのため呼び出し元にも伝播させる
   }
 }
 
@@ -184,15 +185,15 @@ async function handleRequest(context) {
   }
 
   const clickedBy = payload.user?.username || payload.user?.name || 'unknown';
-  context.waitUntil(
-    publishPr({
-      env,
-      repo: value.repo,
-      prNumber: value.pr,
-      responseUrl: payload.response_url,
-      clickedBy,
-    })
-  );
+  // TODO(temporary debug): 本来はcontext.waitUntil()で非同期にすべきだが、
+  // エラー原因特定のため一時的に同期awaitしてHTTPレスポンスに反映する
+  await publishPr({
+    env,
+    repo: value.repo,
+    prNumber: value.pr,
+    responseUrl: payload.response_url,
+    clickedBy,
+  });
 
   return new Response('', { status: 200 });
 }
