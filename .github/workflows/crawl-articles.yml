@@ -9,6 +9,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  checks: read
 
 concurrency:
   group: crawl-articles
@@ -58,19 +59,10 @@ jobs:
 
             レビューの上マージし、公開する記事は該当ファイルを `draft: false` に変更して別途pushしてください。
 
-      - name: Notify Slack
-        if: steps.check.outputs.has_new == 'true' && steps.cpr.outputs.pull-request-url != ''
+      - name: Notify Slack (draft article review + approve button)
+        if: steps.check.outputs.has_new == 'true' && steps.cpr.outputs.pull-request-number != ''
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_CHANNEL_ID: ${{ vars.SLACK_CHANNEL_ID }}
-          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
-        run: |
-          LINES=$(jq -r '.[] | "• *\(.title)* (\(.category) / \(.source))"' .crawl-result.json)
-          BODY=$(jq -n \
-            --arg channel "$SLACK_CHANNEL_ID" \
-            --arg text "$(printf 'ドネシアナビ: 新しいドラフト記事が作成されました\n%s\n\nPR: %s' "$LINES" "$PR_URL")" \
-            '{channel: $channel, text: $text}')
-          curl -s -X POST https://slack.com/api/chat.postMessage \
-            -H "Authorization: Bearer ${SLACK_BOT_TOKEN}" \
-            -H "Content-Type: application/json; charset=utf-8" \
-            -d "$BODY"
+        run: node scripts/notify-draft-pr.mjs --pr=${{ steps.cpr.outputs.pull-request-number }}

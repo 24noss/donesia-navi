@@ -7,9 +7,11 @@ import RelatedArticles from '../../components/RelatedArticles.astro';
 import InternalLinks from '../../components/InternalLinks.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import { categories, formatDate } from '../../lib/categories';
+import { shouldIncludeDrafts } from '../../lib/draftVisibility';
 
 export async function getStaticPaths() {
-  const articles = await getCollection('articles', ({ data }) => !data.draft);
+  const includeDrafts = shouldIncludeDrafts();
+  const articles = await getCollection('articles', ({ data }) => !data.draft || includeDrafts);
   return articles.map((article) => ({ params: { id: article.id }, props: { article } }));
 }
 
@@ -55,6 +57,12 @@ const popularArticles = [...allArticles]
   />
 
   <div class="container">
+
+    {article.data.draft && (
+      <div style="background:#fef3c7;border:1px solid #f59e0b;border-radius:8px;padding:12px 16px;margin:16px 0;font-size:14px;color:#92400e;">
+        ⚠️ これは未公開のドラフト記事です（プレビュー専用）。本番サイトには表示されません。
+      </div>
+    )}
 
     <!-- Breadcrumb -->
     <nav class="breadcrumb" aria-label="パンくずリスト">

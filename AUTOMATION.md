@@ -4,8 +4,7 @@
 
 ## 何が自動化されているか
 
-**自動:** クロール → 記事ドラフト作成 → GitHub PR作成 → Slack通知
-**手動（人間の判断が必要）:** PRレビュー・マージ → 公開（`draft: false`への変更・push）
+**自動:** クロール → 記事ドラフト作成 → GitHub PR作成 → Slackにプレビューリンク+承認ボタンつきで通知 → **ボタン一発で公開まで完了**
 
 ```
 GitHub Actions (毎日 07:00 / 11:00 WIB)
@@ -16,21 +15,35 @@ GitHub Actions (毎日 07:00 / 11:00 WIB)
          最大3件のニュースを選定・記事化（複数ソースがある場合は事実を突き合わせる）
          書き込み前に validateArticle() でスキーマ相当のチェックを実施
       4. src/content/articles/YYYY-MM-DD-{slug}.md を draft:true で生成
-         （書き込み前に content.config.ts のスキーマ相当のバリデーションを実施）
   → 新規ファイルがあれば peter-evans/create-pull-request でブランチ作成・commit・PR作成
-  → Slack (#02-donesia-navi) に chat.postMessage で通知
+  → scripts/notify-draft-pr.mjs が Cloudflare Pages のプレビュー完了を待って
+     Slack (#02-donesia-navi) に Block Kit メッセージを投稿
+     （タイトル・カテゴリ・実際のサイト見た目で確認できるプレビューリンク・「✅ 承認して公開」ボタン）
 
-人間: PRをレビューしてマージ（draft:trueのままなので本番サイトには一切表示されない）
-     → 公開したい記事だけ draft:false に変更して手動でpush（既存の運用と同じ）
+人間: Slackのプレビューリンクで実際の見た目を確認
+     → 問題なければ「✅ 承認して公開」ボタンを押す(確認ダイアログあり)
+        → functions/api/slack-interactivity.js (Cloudflare Pages Functions) が
+          draft:false に書き換えてPRをmerge、本番サイトに反映される
+     → 問題があれば何もしない(PRはdraft:trueのまま残るので本番には出ない)
 ```
+
+### Slack承認フローの補足
+
+- ドラフト記事は必ず**PRとして**作成する運用（Cloudflare Pagesのプレビューデプロイ・mergeの対象にするため）。レストランガイド等を手動で追加する場合も直接mainにcommitせずPRを作る
+- `src/pages/articles/[...id].astro` は `CF_PAGES_BRANCH` が `main` 以外（＝プレビュービルド）のときだけdraft記事のページも生成する（`src/lib/draftVisibility.ts`）。本番・ローカルビルドでは従来通りdraftは一切表示されない
+- 承認ボタンを押せるのはSlackワークスペース/チャンネルにアクセスできる人全員（Slack側でのユーザー単位の権限制御はしていない）
 
 ## ファイル構成
 
 | ファイル | 役割 |
 |---|---|
 | `.github/workflows/crawl-articles.yml` | cronトリガー（`0 0,4 * * *` = JKT 07:00/11:00）+ `workflow_dispatch`（手動実行用）。crawl実行→新規ファイル検知→PR作成→Slack通知 |
+| `.github/workflows/notify-draft-pr.yml` | `pull_request: opened`（`src/content/articles/**`変更時のみ）。手動で作成したPR（レストランガイド等）を検知しSlack通知する |
 | `scripts/crawl-and-draft.mjs` | 本体。候補取得〜Gemini API呼び出し〜Markdown書き込みまでを担う |
 | `scripts/lib/sources.mjs` | ソースアダプタ（Detik/Antara/BMKG/Kompas）。ソース追加時はここに1エントリ追加するだけでよい |
+| `scripts/notify-draft-pr.mjs` | PRのdraft記事を検知し、Cloudflare Pagesプレビュー完了を待ってSlackにBlock Kit通知（承認ボタンつき）を送る。`crawl-articles.yml`と`notify-draft-pr.yml`の両方から呼ばれる共通ロジック |
+| `functions/api/slack-interactivity.js` | Cloudflare Pages Functions。Slackの「承認して公開」ボタン押下Webhookを受信し、署名検証→draft:false化→PR merge |
+| `src/lib/draftVisibility.ts` | `CF_PAGES_BRANCH`を見てCloudflare Pagesのプレビュービルドかどうかを判定する1関数 |
 
 ## 必要な設定（初回のみ）
 
@@ -39,11 +52,23 @@ GitHub Actions (毎日 07:00 / 11:00 WIB)
 ```bash
 cd ~/Personal/donesia-navi
 gh secret set GEMINI_API_KEY      # 設定済み（ai-report-bizで使っているキーと共用、2026-07-30登録）
-gh secret set SLACK_BOT_TOKEN     # 既存のSlack Bot Token（chat:writeスコープが必要）※未設定
-gh variable set SLACK_CHANNEL_ID --body "C0AQFC6U8UE"   # #02-donesia-navi ※未設定
+gh secret set SLACK_BOT_TOKEN     # 設定済み（2026-07-30登録）
+gh variable set SLACK_CHANNEL_ID --body "C0AQFC6U8UE"   # 設定済み（2026-07-30登録、#02-donesia-navi）
 ```
 
 `GEMINI_API_KEY`は無料枠（`gemini-flash-latest`、ai-report-bizと共通のキー）。Google Cloudプロジェクト単位でクォータを共有するため、他プロジェクトでの利用状況次第でレート制限に達する可能性がある点に留意。
+
+### Slack承認ボタン用の追加設定（未設定・要対応）
+
+**Slack側**（[api.slack.com](https://api.slack.com/apps) のアプリ管理画面）:
+- 「Interactivity & Shortcuts」を有効化し、Request URLに `https://<本番ドメイン>/api/slack-interactivity` を設定
+- 「Basic Information」の「App Credentials」からSigning Secretを取得
+
+**Cloudflare Pages側**（ダッシュボード → プロジェクト → Settings → Environment variables）:
+- `SLACK_SIGNING_SECRET`（上記で取得したもの）
+- `GITHUB_TOKEN`: このリポジトリのみに絞ったfine-grained PAT（`contents:write`, `pull-requests:write`）を [github.com/settings/personal-access-tokens](https://github.com/settings/personal-access-tokens) で新規発行
+
+いずれもこのセッションでは未設定（Cloudflareダッシュボード・Slackアプリ管理画面へのアクセス権がこちらにはないため、ユーザー側での対応が必要）。
 
 ## 手動での動作確認方法
 

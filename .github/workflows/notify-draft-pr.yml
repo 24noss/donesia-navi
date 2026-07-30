@@ -1,0 +1,35 @@
+name: Notify Draft PR
+
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'src/content/articles/**'
+
+permissions:
+  contents: read
+  pull-requests: read
+  checks: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Notify Slack (draft article review)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ vars.SLACK_CHANNEL_ID }}
+        run: node scripts/notify-draft-pr.mjs --pr=${{ github.event.pull_request.number }}
