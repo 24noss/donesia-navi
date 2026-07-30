@@ -1,0 +1,30 @@
+---
+title: "2026年8月1日からの電気料金体系が決定、政府・PLN公表"
+description: "インドネシア政府は2026年8月1日から適用される電気料金価格（Tarif Listrik）を発表した。家庭用や事業用を含む各区分における料金体系が提示され、生活コストへの影響が注目される。"
+category: "lifestyle"
+tags: ["電気料金", "PLN", "生活コスト", "ジャカルタ生活", "インフラ"]
+pubDate: 2026-07-29
+source: "Kompas"
+sourceUrl: "https://news.google.com/rss/articles/CBMivwFBVV95cUxQLVgzcXBuR0hDcmR1UWx6andzVDg5eWpCamtxWHJnV2JrT3pUei1qZXlvRzBlX1B0REUtUXZyb0oyWG5NcHE1Vld3WWdybkU1M0ZtM0CDQlNxdXVld0dvSGFJako4U1BmTjJBNF9jOVN0cWQxYTU1bUVhMF9ZVnNadjVsUjlVRXo5MjFjRENSRTRRaTktSW9tTDNIeFFjNi1nUmhsSDcxSlV0SmxYaE9xd2FjNzhQbWZfd25lYkRrNNIBvwFBVV95cUxQNHE0VC1JMVRKQV82dEtMOGstYmV0d1BqaUJzNzlGcmx3Vk9ndmh3Wld6LVF4cmN6TTVKZVNwcldudHZrVGpZc2c1WDBXa2taZTltT3NObTJhQktuc0NtaEpUMldEa2FvLTBtenBXdDRuTjIxSVBPcnRscW05LTQ0Y0hndlFuMmtUOXp6c1hONmF0TElWQUpFUnRMUENaTFJHNEJyUEFjb3dtdHF5VENWQ2hSbWhRYkFYbFVQVWw0Yw?oc=5"
+draft: true
+---
+
+## 2026年8月適用開始の電気料金が提示、在住邦人の月々の光熱費管理に注視が必要
+
+**要点:**
+- 2026年8月1日適用開始の新電気料金体系が決定・公表される
+- 非補助対象の一般家庭（R-1, R-2, R-3等）や事業者向けの適用単価を確認
+- 月々の生活費やオフィスの光熱費管理に影響する重要指標
+
+インドネシア政府および国有電力会社（PLN）は、2026年8月1日より適用される電気料金（Tarif Listrik）の決定内容を公表した。Kompasの報道によると、今回の適用料金は為替レートやインフレ率などのマクロ経済指標を踏まえて決定されたものである。
+
+対象となる電気料金区分には、低所得者層向けの補助金適用区分だけでなく、在留外国人が多く利用する補助金対象外の一般家庭用（R-1/900VA超、R-1/1,300VA、R-2/3,500VA〜5,500VA、R-3/6,600VA以上）や商業・事業用が含まれている。適用単価の推移は毎月の生活費や事業運営費に直結する。
+
+ジャカルタなどの都市部に在住する日本人世帯や日系企業オフィスにおいても、エアコン稼働が増える乾季の真っ只中であることから、8月以降の電気料金請求額を注視し、効率的な節電対策を行うことが推奨される。
+
+---
+**情報ソース:** [Kompas](https://news.google.com/rss/articles/CBMivwFBVV95cUxQLVgzcXBuR0hDcmR1UWx6andzVDg5eWpCamtxWHJnV2JrT3pUei1qZXlvRzBlX1B0REUtUXZyb0oyWG5NcHE1Vld3WWdybkU1M0ZtM0CDQlNxdXVld0dvSGFJako4U1BmTjJBNF9jOVN0cWQxYTU1bUVhMF9ZVnNadjVsUjlVRXo5MjFjRENSRTRRaTktSW9tTDNIeFFjNi1nUmhsSDcxSlV0SmxYaE9xd2FjNzhQbWZfd25lYkRrNNIBvwFBVV95cUxQNHE0VC1JMVRKQV82dEtMOGstYmV0d1BqaUJzNzlGcmx3Vk9ndmh3Wld6LVF4cmN6TTVKZVNwcldudHZrVGpZc2c1WDBXa2taZTltT3NObTJhQktuc0NtaEpUMldEa2FvLTBtenBXdDRuTjIxSVBPcnRscW05LTQ0Y0hndlFuMmtUOXp6c1hONmF0TElWQUpFUnRMUENaTFJHNEJyUEFjb3dtdHF5VENWQ2hSbWhRYkFYbFVQVWw0Yw?oc=5)
+**カテゴリ:** 生活・グルメ
+**タグ:** 電気料金, PLN, 生活コスト, ジャカルタ生活, インフラ
+
+*この記事はAIが生成し、公開前に人間の編集者がレビューします。*
