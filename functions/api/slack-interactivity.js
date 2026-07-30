@@ -140,6 +140,16 @@ async function publishPr({ env, repo, prNumber, responseUrl, clickedBy }) {
 }
 
 export async function onRequestPost(context) {
+  try {
+    return await handleRequest(context);
+  } catch (err) {
+    // TODO(temporary debug): Cloudflareダッシュボードのログにアクセスできないため、
+    // 実際のエラー内容を一時的にレスポンスに含めて原因特定する。原因判明後に削除すること。
+    return new Response(`DEBUG ERROR: ${err.stack || err}`, { status: 500 });
+  }
+}
+
+async function handleRequest(context) {
   const { request, env } = context;
   const rawBody = await request.text();
 
