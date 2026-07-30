@@ -83,14 +83,20 @@ async function updateSlackMessage(responseUrl, text) {
 }
 
 async function publishPr({ env, repo, prNumber, responseUrl, clickedBy }) {
+  // TODO(temporary debug): 各段階の状況を返す診断情報
+  const debug = { branch: null, filesCount: null, articleFilenames: [], perFile: [] };
   try {
     const pr = await githubApi(env, `/repos/${repo}/pulls/${prNumber}`);
     const branch = pr.head.ref;
+    debug.branch = branch;
 
     const files = await githubApi(env, `/repos/${repo}/pulls/${prNumber}/files?per_page=100`);
+    debug.filesCount = files.length;
+    debug.allFilenames = files.map((f) => f.filename + ':' + f.status);
     const articleFiles = files.filter(
       (f) => f.filename.startsWith('src/content/articles/') && f.filename.endsWith('.md') && f.status !== 'removed'
     );
+    debug.articleFilenames = articleFiles.map((f) => f.filename);
 
     let publishedCount = 0;
     for (const f of articleFiles) {
@@ -100,13 +106,20 @@ async function publishPr({ env, repo, prNumber, responseUrl, clickedBy }) {
       // 本文中に偶然"draft: true"という文字列が現れても誤爆しないよう、
       // frontmatterブロック(先頭の---〜次の---)だけを置換対象にする。
       const fmMatch = raw.match(/^(---\n[\s\S]*?\n---)/);
-      if (!fmMatch) continue;
+      if (!fmMatch) {
+        debug.perFile.push({ file: f.filename, result: 'no-frontmatter-match' });
+        continue;
+      }
       const frontmatter = fmMatch[1];
       const draftMatches = frontmatter.match(/draft:\s*true/g) || [];
-      if (draftMatches.length === 0) continue;
+      if (draftMatches.length === 0) {
+        debug.perFile.push({ file: f.filename, result: 'no-draft-true-found', frontmatterSnippet: frontmatter.slice(0, 300) });
+        continue;
+      }
       if (draftMatches.length > 1) {
         throw new Error(`${f.filename}: frontmatter内に draft:true が複数箇所見つかりました(想定外のためスキップ)`);
       }
+      debug.perFile.push({ file: f.filename, result: 'will-update' });
 
       const updatedFrontmatter = frontmatter.replace(/draft:\s*true/, 'draft: false');
       const updated = updatedFrontmatter + raw.slice(frontmatter.length);
@@ -131,12 +144,17 @@ async function publishPr({ env, repo, prNumber, responseUrl, clickedBy }) {
       responseUrl,
       `✅ *${clickedBy}* さんが承認し、PR #${prNumber} を公開しました(${publishedCount}件の記事がdraft:falseになりmergeされました)。`
     );
+    debug.publishedCount = publishedCount;
+    debug.ok = true;
+    return debug; // TODO(temporary debug)
   } catch (err) {
+    debug.ok = false;
+    debug.error = String(err.stack || err);
     await updateSlackMessage(
       responseUrl,
       `❌ 公開処理に失敗しました: ${err.message}\nPR #${prNumber} は手動で確認してください。`
     );
-    throw err; // TODO(temporary debug): デバッグのため呼び出し元にも伝播させる
+    return debug; // TODO(temporary debug)
   }
 }
 
@@ -187,7 +205,7 @@ async function handleRequest(context) {
   const clickedBy = payload.user?.username || payload.user?.name || 'unknown';
   // TODO(temporary debug): 本来はcontext.waitUntil()で非同期にすべきだが、
   // エラー原因特定のため一時的に同期awaitしてHTTPレスポンスに反映する
-  await publishPr({
+  const debug = await publishPr({
     env,
     repo: value.repo,
     prNumber: value.pr,
@@ -195,5 +213,5 @@ async function handleRequest(context) {
     clickedBy,
   });
 
-  return new Response('', { status: 200 });
+  return new Response(JSON.stringify(debug, null, 2), { status: 200 }); // TODO(temporary debug)
 }
