@@ -1,7 +1,7 @@
 // Cloudflare Pages Function: Slackの「承認して公開」ボタン押下を受け取るWebhook。
 // ルート: POST /api/slack-interactivity
 //
-// 必要な環境変数(Cloudflare Pagesダッシュボードで設定):
+// 必要な環境変数(Cloudflare Pagesダッシュボードの donesia-navi プロジェクト、Production環境):
 //   SLACK_SIGNING_SECRET - Slack App の Basic Information ページで取得
 //   GITHUB_TOKEN         - このリポジトリのみに絞ったfine-grained PAT(contents:write, pull-requests:write)
 
@@ -65,6 +65,7 @@ async function githubApi(env, path, opts = {}) {
       Accept: 'application/vnd.github+json',
       'X-GitHub-Api-Version': '2022-11-28',
       'Content-Type': 'application/json',
+      // GitHub APIはUser-Agent必須(未指定だと403 "Request forbidden by administrative rules")
       'User-Agent': 'donesia-navi-slack-interactivity',
       ...opts.headers,
     },
@@ -75,6 +76,8 @@ async function githubApi(env, path, opts = {}) {
   return res.json();
 }
 
+// ファイル更新直後はGitHub側のmergeable判定がまだ非同期に計算中で、
+// 405 "Pull Request is not mergeable" が一時的に返ることがあるためリトライする。
 async function mergeWithRetry(env, repo, prNumber, { retries = 5, intervalMs = 2000 } = {}) {
   for (let i = 0; i < retries; i += 1) {
     try {
@@ -100,20 +103,14 @@ async function updateSlackMessage(responseUrl, text) {
 }
 
 async function publishPr({ env, repo, prNumber, responseUrl, clickedBy }) {
-  // TODO(temporary debug): 各段階の状況を返す診断情報
-  const debug = { branch: null, filesCount: null, articleFilenames: [], perFile: [] };
   try {
     const pr = await githubApi(env, `/repos/${repo}/pulls/${prNumber}`);
     const branch = pr.head.ref;
-    debug.branch = branch;
 
     const files = await githubApi(env, `/repos/${repo}/pulls/${prNumber}/files?per_page=100`);
-    debug.filesCount = files.length;
-    debug.allFilenames = files.map((f) => f.filename + ':' + f.status);
     const articleFiles = files.filter(
       (f) => f.filename.startsWith('src/content/articles/') && f.filename.endsWith('.md') && f.status !== 'removed'
     );
-    debug.articleFilenames = articleFiles.map((f) => f.filename);
 
     let publishedCount = 0;
     for (const f of articleFiles) {
@@ -123,20 +120,13 @@ async function publishPr({ env, repo, prNumber, responseUrl, clickedBy }) {
       // 本文中に偶然"draft: true"という文字列が現れても誤爆しないよう、
       // frontmatterブロック(先頭の---〜次の---)だけを置換対象にする。
       const fmMatch = raw.match(/^(---\n[\s\S]*?\n---)/);
-      if (!fmMatch) {
-        debug.perFile.push({ file: f.filename, result: 'no-frontmatter-match' });
-        continue;
-      }
+      if (!fmMatch) continue;
       const frontmatter = fmMatch[1];
       const draftMatches = frontmatter.match(/draft:\s*true/g) || [];
-      if (draftMatches.length === 0) {
-        debug.perFile.push({ file: f.filename, result: 'no-draft-true-found', frontmatterSnippet: frontmatter.slice(0, 300) });
-        continue;
-      }
+      if (draftMatches.length === 0) continue;
       if (draftMatches.length > 1) {
         throw new Error(`${f.filename}: frontmatter内に draft:true が複数箇所見つかりました(想定外のためスキップ)`);
       }
-      debug.perFile.push({ file: f.filename, result: 'will-update' });
 
       const updatedFrontmatter = frontmatter.replace(/draft:\s*true/, 'draft: false');
       const updated = updatedFrontmatter + raw.slice(frontmatter.length);
@@ -152,40 +142,22 @@ async function publishPr({ env, repo, prNumber, responseUrl, clickedBy }) {
       publishedCount += 1;
     }
 
-    // ファイル更新直後はGitHub側のmergeable判定がまだ非同期に計算中で
-    // 405 "Pull Request is not mergeable" が一時的に返ることがあるため、
-    // 短い間隔で数回リトライする。
     await mergeWithRetry(env, repo, prNumber);
 
     await updateSlackMessage(
       responseUrl,
       `✅ *${clickedBy}* さんが承認し、PR #${prNumber} を公開しました(${publishedCount}件の記事がdraft:falseになりmergeされました)。`
     );
-    debug.publishedCount = publishedCount;
-    debug.ok = true;
-    return debug; // TODO(temporary debug)
   } catch (err) {
-    debug.ok = false;
-    debug.error = String(err.stack || err);
+    console.error('publishPr failed:', err);
     await updateSlackMessage(
       responseUrl,
       `❌ 公開処理に失敗しました: ${err.message}\nPR #${prNumber} は手動で確認してください。`
     );
-    return debug; // TODO(temporary debug)
   }
 }
 
 export async function onRequestPost(context) {
-  try {
-    return await handleRequest(context);
-  } catch (err) {
-    // TODO(temporary debug): Cloudflareダッシュボードのログにアクセスできないため、
-    // 実際のエラー内容を一時的にレスポンスに含めて原因特定する。原因判明後に削除すること。
-    return new Response(`DEBUG ERROR: ${err.stack || err}`, { status: 500 });
-  }
-}
-
-async function handleRequest(context) {
   const { request, env } = context;
   const rawBody = await request.text();
 
@@ -220,15 +192,15 @@ async function handleRequest(context) {
   }
 
   const clickedBy = payload.user?.username || payload.user?.name || 'unknown';
-  // TODO(temporary debug): 本来はcontext.waitUntil()で非同期にすべきだが、
-  // エラー原因特定のため一時的に同期awaitしてHTTPレスポンスに反映する
-  const debug = await publishPr({
-    env,
-    repo: value.repo,
-    prNumber: value.pr,
-    responseUrl: payload.response_url,
-    clickedBy,
-  });
+  context.waitUntil(
+    publishPr({
+      env,
+      repo: value.repo,
+      prNumber: value.pr,
+      responseUrl: payload.response_url,
+      clickedBy,
+    })
+  );
 
-  return new Response(JSON.stringify(debug, null, 2), { status: 200 }); // TODO(temporary debug)
+  return new Response('', { status: 200 });
 }
