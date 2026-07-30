@@ -75,6 +75,22 @@ async function githubApi(env, path, opts = {}) {
   return res.json();
 }
 
+async function mergeWithRetry(env, repo, prNumber, { retries = 5, intervalMs = 2000 } = {}) {
+  for (let i = 0; i < retries; i += 1) {
+    try {
+      await githubApi(env, `/repos/${repo}/pulls/${prNumber}/merge`, {
+        method: 'PUT',
+        body: JSON.stringify({}),
+      });
+      return;
+    } catch (err) {
+      const isLastAttempt = i === retries - 1;
+      if (isLastAttempt || !String(err.message).includes('405')) throw err;
+      await new Promise((resolve) => setTimeout(resolve, intervalMs));
+    }
+  }
+}
+
 async function updateSlackMessage(responseUrl, text) {
   await fetch(responseUrl, {
     method: 'POST',
@@ -136,10 +152,10 @@ async function publishPr({ env, repo, prNumber, responseUrl, clickedBy }) {
       publishedCount += 1;
     }
 
-    await githubApi(env, `/repos/${repo}/pulls/${prNumber}/merge`, {
-      method: 'PUT',
-      body: JSON.stringify({}),
-    });
+    // ファイル更新直後はGitHub側のmergeable判定がまだ非同期に計算中で
+    // 405 "Pull Request is not mergeable" が一時的に返ることがあるため、
+    // 短い間隔で数回リトライする。
+    await mergeWithRetry(env, repo, prNumber);
 
     await updateSlackMessage(
       responseUrl,
