@@ -1,8 +1,40 @@
 # 記事自動ドラフト生成パイプライン
 
-> 各カテゴリの情報源・更新方式の一覧は [`CONTENT-SOURCES.md`](./CONTENT-SOURCES.md) を参照してください。このドキュメントはセットアップ手順・運用コマンドが中心です。
+> 各カテゴリの情報源・更新方式の一覧は [`CONTENT-SOURCES.md`](./CONTENT-SOURCES.md) を参照してください。このドキュメントはセットアップ手順・運用コマンドが中心です。生成エンジンの内部仕様は [`docs/news-pipeline.md`](./docs/news-pipeline.md)、カテゴリごとの情報源・品質チューニング箇所は [`docs/categories/`](./docs/categories/) の各ファイル（後述の「カテゴリ別詳細ドキュメント」節）を参照してください。
 
 2026年4月に存在した「複数メディアをクロール→事実確認しながら記事化→Slackで承認」という運用（当時は`CLAUDE.md`/`soul.md`という人間向け運用指示書＋手動Claude Codeセッションで回していた）を、正式なアプリケーションコードとして再実装したもの。
+
+## カテゴリ別詳細ドキュメント
+
+「このカテゴリはどう更新されているか」「記事の質を変えたいのでどこを触ればいいか」を、カテゴリ単位でまとめた詳細ドキュメント。エンジン共通の内部仕様は [`docs/news-pipeline.md`](./docs/news-pipeline.md) に切り出してある。
+
+### 安全・災害（`safety`）
+
+Detik/Antara + **BMKG地震API**（2エンドポイント・リンク一意化ハック）+ Kompasクエリ①（`society`と共用）で自動生成。地震まわりの候補生成ロジックの詳細あり。 詳細: [`docs/categories/safety.md`](./docs/categories/safety.md)
+
+### 社会・政治（`society`）
+
+Detik/Antaraの一般ニュース + Kompasクエリ①（`safety`と共用）で自動生成。**専用Kompasクエリが無い**事実と、候補を増やしたいときの対処を記載。 詳細: [`docs/categories/society.md`](./docs/categories/society.md)
+
+### 経済・ビジネス（`business`）
+
+Detik/Antara + Kompasクエリ③（`bbm subsidi ekonomi`）で自動生成。為替など本文の数値が陳腐化しうる点の注意あり。 詳細: [`docs/categories/business.md`](./docs/categories/business.md)
+
+### 旅行・お出かけ（`travel`）
+
+Detik/Antara + Kompasクエリ④（`wisata liburan destinasi`、2026-07-31追加）で自動生成。 詳細: [`docs/categories/travel.md`](./docs/categories/travel.md)
+
+### ビザ・手続き（`visa`）
+
+Detik/Antara + Kompasクエリ②（`kitas visa wna jepang`）で自動生成。`regulation`との境界の曖昧さに注意。 詳細: [`docs/categories/visa.md`](./docs/categories/visa.md)
+
+### 規制・法務（`regulation`）
+
+Detik/Antara + Kompasクエリ⑤（`aturan kebijakan pajak izin`、2026-07-31追加）で自動生成。 詳細: [`docs/categories/regulation.md`](./docs/categories/regulation.md)
+
+### 生活・グルメ（`lifestyle`）
+
+ニュースエンジンとは別系統。(A)飲食店ガイド=半自動（Places APIで発見→Claude Codeで人手リサーチ執筆）、(B)飲食店以外（学校・病院等）=完全手動。`mapData`スキーマと地図表示の関係も記載。 詳細: [`docs/categories/lifestyle.md`](./docs/categories/lifestyle.md)
 
 ## 何が自動化されているか
 

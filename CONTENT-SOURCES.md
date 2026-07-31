@@ -13,14 +13,14 @@
 
 | カテゴリ(日本語/slug) | 情報源 | 更新方式 | 頻度 | 人手の介在ポイント |
 |---|---|---|---|---|
-| 安全・災害 / `safety` | Detik・Antara(一般ニュースRSS) + BMKG地震API + Kompas(クエリ①、societyと共用) | 自動 | 1日2回(07:00・11:00 WIB) | Slack「✅承認して公開」ボタン(内容修正はしない、公開可否のみ) |
-| 社会・政治 / `society` | Detik・Antara(一般ニュースRSS、専用Kompasクエリなし) + Kompas(クエリ①、safetyと共用) | 自動 | 1日2回 | 同上 |
-| 経済・ビジネス / `business` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ③) | 自動 | 1日2回 | 同上 |
-| 生活・グルメ(飲食店ガイド) / `lifestyle` | Google Places API (New)で候補発見 + Claude CodeセッションでのWeb調査・執筆 | 半自動 | 不定期(オーナーが`discover-restaurants`を実行した時のみ) | 発見コマンドの実行判断、WebSearchでの裏取り、執筆、Slack承認 |
-| 生活・グルメ(飲食店以外: 学校・病院等) / `lifestyle` | 都度の手動調査(自動化なし) | 手動 | 不定期 | 発見〜執筆〜PR作成まで全工程 |
-| 旅行・お出かけ / `travel` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ④、2026-07-31追加) | 自動 | 1日2回 | Slack承認 |
-| ビザ・手続き / `visa` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ②) | 自動 | 1日2回 | Slack承認 |
-| 規制・法務 / `regulation` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ⑤、2026-07-31追加) | 自動 | 1日2回 | Slack承認 |
+| [安全・災害](./docs/categories/safety.md) / `safety` | Detik・Antara(一般ニュースRSS) + BMKG地震API + Kompas(クエリ①、societyと共用) | 自動 | 1日2回(07:00・11:00 WIB) | Slack「✅承認して公開」ボタン(内容修正はしない、公開可否のみ) |
+| [社会・政治](./docs/categories/society.md) / `society` | Detik・Antara(一般ニュースRSS、専用Kompasクエリなし) + Kompas(クエリ①、safetyと共用) | 自動 | 1日2回 | 同上 |
+| [経済・ビジネス](./docs/categories/business.md) / `business` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ③) | 自動 | 1日2回 | 同上 |
+| [生活・グルメ(飲食店ガイド)](./docs/categories/lifestyle.md) / `lifestyle` | Google Places API (New)で候補発見 + Claude CodeセッションでのWeb調査・執筆 | 半自動 | 不定期(オーナーが`discover-restaurants`を実行した時のみ) | 発見コマンドの実行判断、WebSearchでの裏取り、執筆、Slack承認 |
+| [生活・グルメ(飲食店以外: 学校・病院等)](./docs/categories/lifestyle.md) / `lifestyle` | 都度の手動調査(自動化なし) | 手動 | 不定期 | 発見〜執筆〜PR作成まで全工程 |
+| [旅行・お出かけ](./docs/categories/travel.md) / `travel` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ④、2026-07-31追加) | 自動 | 1日2回 | Slack承認 |
+| [ビザ・手続き](./docs/categories/visa.md) / `visa` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ②) | 自動 | 1日2回 | Slack承認 |
+| [規制・法務](./docs/categories/regulation.md) / `regulation` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ⑤、2026-07-31追加) | 自動 | 1日2回 | Slack承認 |
 
 **注意**: 上表の「対応するKompasクエリ」は候補ニュースが集まりやすいキーワードであるに過ぎません。実際にどのカテゴリに分類するかは、記事ごとにGemini(LLM)が本文内容を見て最終判断します(`scripts/crawl-and-draft.mjs`のプロンプトが7種のslugから1つ選ばせる方式で、ルールベースの振り分けは存在しません)。そのためDetik/Antaraの一般ニュースも実質的に全カテゴリの候補になり得ます。
 
