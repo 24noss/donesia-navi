@@ -6,7 +6,7 @@ tags: ["独立記念日", "国旗掲揚", "インドネシア政府", "ジャカ
 pubDate: 2026-07-31
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8598348/sambut-hut-ke-81-ri-pasang-bendera-merah-putih-mulai-tanggal-berapa"
-draft: true
+draft: false
 ---
 
 ## 8月1日からインドネシア独立記念月間が開始、オフィスや住宅に赤白旗の掲揚要請
