@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "大気汚染", "健康管理", "AQI"]
 pubDate: 2026-07-31
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5673671/udara-jakarta-terburuk-keempat-di-dunia-pada-jumat-pagi"
-draft: true
+draft: false
 ---
 
 ## ジャカルタの大気汚染が世界最悪レベルに悪化　屋外活動時のマスク着用を推奨
