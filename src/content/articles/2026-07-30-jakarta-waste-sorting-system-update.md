@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "ゴミ分別", "環境対策", "生活情報"]
 pubDate: 2026-07-30
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMixgFBVV95cUxOYnhpVXRzV0FPRm9LTlZzVlBsMUExakhFZ1pwWEVFMnVVSERfeXdHaWIyenUyMWtiWE5FM09jX3FfMmM0aEwzQkVpUkE5RVY4dUt0ZVY2YVJ0S3ptZnFncGJvX0tsWW9iVnd4dEk2eXBHcUJIT0F2czBmUzVQZW91NGhMbHczcDR5RHVISFlTcFVWY0JLb3NfREN2d2pHTEZZcnE1MmVyZE5nUjZyRWJNZ1J4RU5iM05XcTZ6U0ZTUXI3Q004Q3c?oc=5"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ特別州でゴミ収集方法が改定　各家庭での分別が義務化へ
