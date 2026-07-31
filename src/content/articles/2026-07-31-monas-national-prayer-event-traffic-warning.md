@@ -6,7 +6,7 @@ tags: ["モナス", "ジャカルタ", "交通規制", "建国記念", "イベ�
 pubDate: 2026-07-31
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5674028/kemenag-perkirakan-100-ribu-orang-akan-hadiri-zikir-dan-doa-kebangsaan"
-draft: true
+draft: false
 ---
 
 ## 8月1日にモナスで10万人規模の建国祈祷イベント開催、ジャカルタ中心部の交通混雑に警戒
