@@ -13,6 +13,8 @@ permissions:
 
 jobs:
   notify:
+    # auto/articles-* はcrawl-articles.yml側で既にSlack通知済みのため、二重送信を防ぐためスキップする
+    if: ${{ !startsWith(github.head_ref, 'auto/articles-') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

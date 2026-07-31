@@ -60,7 +60,13 @@ function googleNewsSiteSearchUrl(domain, keyword) {
 
 // Kompasは直接RSSが見つからないため、Google Newsのsite内検索RSSで代替する。
 // 制約: item.link はGoogleのJSリダイレクト経由の仲介URLで、実記事URLには直接解決できない。
-const KOMPAS_QUERIES = ['jakarta banjir gempa demo', 'kitas visa wna jepang', 'bbm subsidi ekonomi'];
+const KOMPAS_QUERIES = [
+  'jakarta banjir gempa demo',
+  'kitas visa wna jepang',
+  'bbm subsidi ekonomi',
+  'wisata liburan destinasi',
+  'aturan kebijakan pajak izin',
+];
 
 async function fetchKompasViaGoogleNews() {
   const results = await Promise.allSettled(
