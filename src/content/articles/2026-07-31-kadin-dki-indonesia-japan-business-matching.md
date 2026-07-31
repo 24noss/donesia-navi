@@ -6,7 +6,7 @@ tags: ["KADIN", "ジャカルタ", "日印ビジネス", "ビジネスマッチ�
 pubDate: 2026-07-31
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5673964/kadin-dki-perkuat-jejaring-bisnis-indonesia-jepang-melalui-business-matching"
-draft: true
+draft: false
 ---
 
 ## KADIN DKIが日本企業とのネットワーク強化へビジネスマッチングを実施
