@@ -6,7 +6,7 @@ tags: ["運転免許証", "SIM更新", "DigitalKorlantas", "手続き指南"]
 pubDate: 2026-07-30
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5673636/cara-perpanjang-sim-online-2026-syarat-biaya-dan-panduan-lengkap-lewat-digital-korlantas"
-draft: true
+draft: false
 ---
 
 ## インドネシア運転免許証のオンライン更新　アプリ手続きの要点と注意点
