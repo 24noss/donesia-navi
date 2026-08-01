@@ -10,7 +10,7 @@ draft: false
 mapData:
   - name: "プラタラン・ダルマワンサ"
     nameEn: "Plataran Dharmawangsa"
-    area: "ダルマワンサ（南ジャカルタ）"
+    area: "ダルマワンサ"
     cuisine: "indonesian"
     priceRange: "high"
     halal: "yes"
@@ -20,7 +20,7 @@ mapData:
     lng: 106.7988
   - name: "スリブ・ラサ"
     nameEn: "Seribu Rasa Menteng"
-    area: "メンテン（中央ジャカルタ）"
+    area: "メンテン"
     cuisine: "indonesian"
     priceRange: "high"
     halal: "yes"
@@ -30,7 +30,7 @@ mapData:
     lng: 106.8327
   - name: "ベベッ・ブンギル"
     nameEn: "Bebek Bengil Menteng"
-    area: "メンテン（中央ジャカルタ）"
+    area: "メンテン"
     cuisine: "indonesian"
     priceRange: "mid"
     halal: "yes"
@@ -40,7 +40,7 @@ mapData:
     lng: 106.8330
   - name: "クンバン・グラ"
     nameEn: "Kembang Goela"
-    area: "スディルマン（中央ジャカルタ）"
+    area: "スディルマン"
     cuisine: "indonesian"
     priceRange: "mid"
     halal: "yes"
@@ -50,7 +50,7 @@ mapData:
     lng: 106.8127
   - name: "ララ・ジョングラン"
     nameEn: "Lara Djonggrang"
-    area: "メンテン（中央ジャカルタ）"
+    area: "メンテン"
     cuisine: "indonesian"
     priceRange: "high"
     halal: "unverified"

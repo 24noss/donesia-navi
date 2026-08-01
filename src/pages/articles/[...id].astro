@@ -3,7 +3,6 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import StructuredData from '../../components/StructuredData.astro';
 import ShareButtons from '../../components/ShareButtons.astro';
-import RelatedArticles from '../../components/RelatedArticles.astro';
 import InternalLinks from '../../components/InternalLinks.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import { categories, formatDate } from '../../lib/categories';
@@ -36,7 +35,7 @@ const related = allArticles
   .sort((a, b) => b.score - a.score || b.article.data.pubDate.valueOf() - a.article.data.pubDate.valueOf())
   .slice(0, 4);
 
-const popularArticles = [...allArticles]
+const newArticles = [...allArticles]
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 5);
 ---
@@ -188,9 +187,9 @@ const popularArticles = [...allArticles]
 
           <!-- Popular -->
           <div class="widget">
-            <div class="widget-title"><span class="icon">&#128293;</span> 人気記事</div>
+            <div class="widget-title"><span class="icon">&#127381;</span> 新着記事</div>
             <div class="popular-list">
-              {popularArticles.map((a, i) => (
+              {newArticles.map((a, i) => (
                 <div class="popular-item">
                   <span class="popular-num">{i + 1}</span>
                   <a class="popular-title" href={`/articles/${a.id}/`}>{a.data.title}</a>

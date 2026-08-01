@@ -40,7 +40,7 @@ mapData:
     lng: 106.8244
   - name: "Wong Fu Kie"
     nameEn: "Wong Fu Kie Hakka"
-    area: "グロドック（中華街）"
+    area: "グロドック"
     cuisine: "chinese"
     priceRange: "budget"
     halal: "no"

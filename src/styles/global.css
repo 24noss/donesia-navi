@@ -550,19 +550,6 @@ body{
 .cat-hero-desc{font-size:14px;opacity:.8;margin-bottom:12px}
 .cat-hero-count{font-size:12px;opacity:.6}
 
-.filter-bar{
-  display:flex;gap:8px;margin-bottom:20px;
-}
-.filter-btn{
-  padding:6px 16px;border-radius:20px;
-  font-size:12px;font-weight:500;
-  border:1px solid var(--border);
-  color:var(--text-muted);
-  transition:all .15s;
-}
-.filter-btn:hover{border-color:var(--gold);color:var(--gold)}
-.filter-btn.active{background:var(--gold);color:#fff;border-color:var(--gold)}
-
 /* ===== ABOUT PAGE ===== */
 .about-section{margin-bottom:40px}
 .about-section h2{

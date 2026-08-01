@@ -137,6 +137,7 @@ const currentPath = Astro.url.pathname;
       {Object.entries(categories).map(([slug, cat]) => (
         <a href={`/category/${slug}/`} class={`subnav-link${currentPath.startsWith(`/category/${slug}`) ? ' active' : ''}`}>{cat.name}</a>
       ))}
+      <a href="/map/" class={`subnav-link${currentPath.startsWith('/map') ? ' active' : ''}`}>マップ</a>
       <a href="/about/" class={`subnav-link${currentPath.startsWith('/about') ? ' active' : ''}`}>このサイトについて</a>
     </div>
   </nav>
@@ -156,6 +157,7 @@ const currentPath = Astro.url.pathname;
         {Object.entries(categories).map(([slug, cat]) => (
           <a href={`/category/${slug}/`}>{cat.name}</a>
         ))}
+        <a href="/map/">マップ</a>
       </div>
     </div>
   </footer>
@@ -181,7 +183,7 @@ const currentPath = Astro.url.pathname;
       </button>
       <a href="/about/" class={`mobile-nav-item${currentPath.startsWith('/about') ? ' active' : ''}`}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span>マイページ</span>
+        <span>サイト情報</span>
       </a>
     </div>
   </nav>
@@ -202,6 +204,10 @@ const currentPath = Astro.url.pathname;
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </a>
       ))}
+      <a href="/map/" class="category-overlay-item">
+        <span class="category-overlay-name">🗺 レストランマップ</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
     </div>
   </div>
 

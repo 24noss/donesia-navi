@@ -10,6 +10,15 @@ import Base from '../layouts/Base.astro';
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css" is:inline />
   <script is:inline>
     window.addEventListener('DOMContentLoaded', function () {
+      var searchEl = document.querySelector('#search');
+      // pagefind-ui.js is generated only at build time (`npm run build`), so in
+      // dev or if the asset failed to load, PagefindUI will be undefined here.
+      if (typeof PagefindUI === 'undefined') {
+        if (searchEl) {
+          searchEl.innerHTML = '<p class="search-fallback-message">検索インデックスを読み込めませんでした。時間をおいて再度お試しください。</p>';
+        }
+        return;
+      }
       new PagefindUI({
         element: '#search',
         showSubResults: true,
@@ -41,6 +50,14 @@ import Base from '../layouts/Base.astro';
       font-weight: 700;
       margin-bottom: 24px;
       color: var(--text);
+    }
+    .search-fallback-message {
+      font-family: var(--sans);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-card);
+      padding: 16px;
     }
 
     /* Pagefind UI overrides for theme integration */

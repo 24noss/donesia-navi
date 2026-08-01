@@ -41,7 +41,7 @@ const { variant = 'sidebar' } = Astro.props;
 <script is:inline>
 (function() {
   const CACHE_KEY = 'donesia_fx_cache';
-  const HISTORY_KEY = 'donesia_fx_history';
+  const HISTORY_KEY = 'donesia_fx_history-v2';
   const TTL = 30 * 60 * 1000; // 30 minutes
   const HISTORY_TTL = 6 * 60 * 60 * 1000; // 6 hours for trend data
 
@@ -118,14 +118,9 @@ const { variant = 'sidebar' } = Astro.props;
     var dateStr = yesterday.toISOString().slice(0, 10);
 
     try {
-      var res = await fetch('https://api.frankfurter.dev/v2/rates?date=' + dateStr + '&base=JPY&symbols=IDR');
+      var res = await fetch('https://api.frankfurter.dev/v1/' + dateStr + '?base=JPY&symbols=IDR');
       if (!res.ok) throw new Error('Frankfurter error');
       var data = await res.json();
-      // v2 format: data[dateStr].IDR
-      if (data.data && data.data[dateStr] && data.data[dateStr].IDR) {
-        return data.data[dateStr].IDR;
-      }
-      // fallback: try direct .rates
       if (data.rates && data.rates.IDR) return data.rates.IDR;
       return null;
     } catch(e) { return null; }
@@ -142,15 +137,15 @@ const { variant = 'sidebar' } = Astro.props;
       var startStr = start.toISOString().slice(0, 10);
       var endStr = end.toISOString().slice(0, 10);
 
-      var res = await fetch('https://api.frankfurter.dev/v2/rates?start_date=' + startStr + '&end_date=' + endStr + '&base=JPY&symbols=IDR');
+      var res = await fetch('https://api.frankfurter.dev/v1/' + startStr + '..' + endStr + '?base=JPY&symbols=IDR');
       if (!res.ok) throw new Error('Frankfurter history error');
       var data = await res.json();
       var rates = [];
-      if (data.data) {
-        var dates = Object.keys(data.data).sort();
+      if (data.rates) {
+        var dates = Object.keys(data.rates).sort();
         for (var i = 0; i < dates.length; i++) {
-          if (data.data[dates[i]] && data.data[dates[i]].IDR) {
-            rates.push(data.data[dates[i]].IDR);
+          if (data.rates[dates[i]] && data.rates[dates[i]].IDR) {
+            rates.push(data.rates[dates[i]].IDR);
           }
         }
       }

@@ -55,12 +55,6 @@ if (isLifestyle) {
 
       <!-- Articles Tab -->
       <div id="tab-articles">
-        <!-- Filter Bar -->
-        <div class="filter-bar">
-          <button class="filter-btn active">最新順</button>
-          <button class="filter-btn">人気順</button>
-        </div>
-
         {articles.length === 0 ? (
           <p style="color:var(--text-muted);padding:2rem 0;">このカテゴリの記事はまだありません。</p>
         ) : (
@@ -87,15 +81,8 @@ if (isLifestyle) {
 
   </div>
 
-  <!-- Filter button JS + Tab switching -->
+  <!-- Tab switching -->
   <script is:inline>
-    document.querySelectorAll('.filter-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        btn.parentElement.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-      });
-    });
-
     // Tab switching for lifestyle category
     document.querySelectorAll('.cat-tab').forEach(function(tab) {
       tab.addEventListener('click', function() {

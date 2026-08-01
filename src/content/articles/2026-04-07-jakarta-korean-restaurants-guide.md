@@ -10,7 +10,7 @@ draft: false
 mapData:
   - name: "Chung Gi Wa"
     nameEn: "Chung Gi Wa"
-    area: "ウィジャヤ・クバヨランバル"
+    area: "ウィジャヤ"
     cuisine: "korean"
     priceRange: "mid"
     halal: "no"
@@ -20,7 +20,7 @@ mapData:
     lng: 106.7960
   - name: "Bornga"
     nameEn: "Bornga Korean Restaurant"
-    area: "ウォルターモンギンシディ・クバヨランバル"
+    area: "ウォルターモンギンシディ"
     cuisine: "korean"
     priceRange: "mid"
     halal: "no"
@@ -50,7 +50,7 @@ mapData:
     lng: 106.8080
   - name: "Haemaru"
     nameEn: "Haemaru Korean Sashimi & Grill"
-    area: "パングリマポリム・クバヨランバル"
+    area: "パングリマポリム"
     cuisine: "korean"
     priceRange: "high"
     halal: "no"

@@ -8,7 +8,7 @@ draft: false
 mapData:
   - name: "焼肉ジャンボ"
     nameEn: "Yakiniku Jumbo"
-    area: "セノパティ・グナワルマン"
+    area: "セノパティ"
     cuisine: "japanese"
     priceRange: "luxury"
     halal: "unverified"
@@ -38,7 +38,7 @@ mapData:
     lng: 106.7840
   - name: "Gokuniku"
     nameEn: "Gokuniku"
-    area: "セノパティ・グナワルマン"
+    area: "セノパティ"
     cuisine: "japanese"
     priceRange: "high"
     halal: "unverified"

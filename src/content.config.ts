@@ -15,7 +15,6 @@ const articles = defineCollection({
     heroImage: z.string().optional(),
     draft: z.boolean().default(false),
     hasAffiliate: z.boolean().default(false),
-    affiliatePrograms: z.array(z.string()).default([]),
     mapData: z.array(z.object({
       name: z.string(),
       nameEn: z.string().optional(),

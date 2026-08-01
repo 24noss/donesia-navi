@@ -10,7 +10,7 @@ draft: true
 mapData:
   - name: "Yuki Japanese Restaurant"
     nameEn: "Yuki Japanese Restaurant, Bar & Karaoke"
-    area: "メラワイ・クバヨランバル"
+    area: "メラワイ"
     cuisine: "japanese"
     priceRange: "high"
     halal: "unverified"
@@ -20,7 +20,7 @@ mapData:
     lng: 106.7986618
   - name: "Sushi Hiro"
     nameEn: "Sushi Hiro Senopati"
-    area: "セノパティ・クバヨランバル"
+    area: "セノパティ"
     cuisine: "japanese"
     priceRange: "high"
     halal: "no"
@@ -30,7 +30,7 @@ mapData:
     lng: 106.8132502
   - name: "Kintaro Sushi"
     nameEn: "Kintaro Sushi Senopati"
-    area: "セノパティ・クバヨランバル"
+    area: "セノパティ"
     cuisine: "japanese"
     priceRange: "mid"
     halal: "unverified"
@@ -40,7 +40,7 @@ mapData:
     lng: 106.8130352
   - name: "Sushi Tengoku"
     nameEn: "Sushi Tengoku"
-    area: "ラジオダラム・クバヨランバル"
+    area: "ラジオダラム"
     cuisine: "japanese"
     priceRange: "mid"
     halal: "unverified"
@@ -50,7 +50,7 @@ mapData:
     lng: 106.7903055
   - name: "Obihiro Nikudon"
     nameEn: "Obihiro Nikudon - Blok M"
-    area: "ブロックM・クバヨランバル"
+    area: "ブロックM"
     cuisine: "japanese"
     priceRange: "budget"
     halal: "yes"

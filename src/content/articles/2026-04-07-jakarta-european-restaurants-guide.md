@@ -20,7 +20,7 @@ mapData:
     lng: 106.8065
   - name: "Osteria GIA"
     nameEn: "Osteria GIA Plaza Indonesia"
-    area: "タムリン（Thamrin）"
+    area: "タムリン"
     cuisine: "european"
     priceRange: "high"
     halal: "no"
@@ -30,7 +30,7 @@ mapData:
     lng: 106.8226
   - name: "Le Quartier"
     nameEn: "Le Quartier Restaurant"
-    area: "グナワルマン（Gunawarman）"
+    area: "グナワルマン"
     cuisine: "european"
     priceRange: "high"
     halal: "unverified"
@@ -40,7 +40,7 @@ mapData:
     lng: 106.7960
   - name: "Toscana"
     nameEn: "Toscana Italian Restaurant"
-    area: "クマン（Kemang）"
+    area: "クマン"
     cuisine: "european"
     priceRange: "high"
     halal: "unverified"
@@ -50,7 +50,7 @@ mapData:
     lng: 106.8130
   - name: "SOLA Ristorante"
     nameEn: "SOLA Ristorante e Bisteccheria"
-    area: "メンテン（Menteng）"
+    area: "メンテン"
     cuisine: "european"
     priceRange: "high"
     halal: "unverified"

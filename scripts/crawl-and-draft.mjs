@@ -26,6 +26,11 @@ const ARTICLE_SCHEMA_DESCRIPTION = `
 - title: 記事タイトル（日本語）
 - description: 80〜120文字程度の要約
 - category: 次の7種類のいずれか1つ（英語のslugのまま）: ${Object.keys(CATEGORY_NAMES).join(', ')}
+  - safety: 災害・事故・治安に加え、交通規制/渋滞/デモ等の注意喚起（例: 大規模イベントに伴う交通混雑への注意）
+  - society: 政治・行政・社会制度のニュース
+  - business: 経済・企業・市場・物価などマクロな動き
+  - lifestyle: 飲食店・買い物・学校・病院など在住者の日常生活情報（注意喚起ニュースはsafety）
+  - travel/visa/regulation: 旅行・ビザ手続き・法制度の情報（制度の「改正」はregulation、手続きの「案内」はvisa）
 - tags: 3〜5個の日本語タグの配列
 - pubDate: "YYYY-MM-DD"形式の文字列
 - source: 候補の"source"フィールドをそのまま使う
