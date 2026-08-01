@@ -6,7 +6,7 @@ tags: ["交通", "スカルノハッタ空港", "ブロックM", "バス", "イ�
 pubDate: 2026-08-01
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMixgFBVV95cUxPWE9RZVE1clpHYVRJOGVPc01oSWVPcnM3N3ZBbDgyczJ2N2J5bHhMb2o2RzJPbmQ0amJ4aFNPam1GMHZOeWtlY0tDZFJOOUJneXgxbjJlTHhLeUJJNGd5NkhReGpsSGRfckJDejlfR29KaVV6elV6b3pvWkJjcjN4OHNkVlVJTG5RMnYtMlNSUlNMWjNGVGZkckFTSV9UaTNCREQ2dThyRGlFQ1pHTGtsRzR6VHJPNzVzNWZKWjQ2RVY3MFhKSUE?oc=5"
-draft: true
+draft: false
 ---
 
 ## ブロックM発スカルノ・ハッタ空港行きの路線バス、9月より運賃改定へ
