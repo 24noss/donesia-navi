@@ -6,7 +6,7 @@ tags: ["プルタミナ", "ガソリン価格", "ペルタマックス", "生活
 pubDate: 2026-07-31
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMiugFBVV95cUxNT1ZnZEUwbkpadW1nLTJsUTBDNWsza3VjYnUzaEZ2OHN3cnVJS21EdzlXLWlYNnAtdGNDQU8wSXlwVDFLLTVRSmlLQUpuQWVFYk5rcWw5RFlyOEd4dXRiZDhZd2VxVWJLQzYzc0djbDB0T2FMdGZoeUlRYjFuUURwRElfUzllVXE4SzFLS1RNOHZYOWRlaVNwSWtycVZYRWFPWVdsaHNucmx2djV6a2tvY1VrNU5KZWZ2ZVE?oc=5"
-draft: true
+draft: false
 ---
 
 ## 国営石油プルタミナが8月1日より一部燃料価格を引き下げ
