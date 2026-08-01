@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "デモ", "治安情報", "警察", "安全対策"]
 pubDate: 2026-07-31
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMixAFBVV95cUxPWm5TS3QyRWlJZWFLZlk4RXZYaFJlTUtTRFJkcDF4c3l2b1B4UzluZFVxbk1VeUVBMnA2ZGh3SnU1ZTk0S3FzXzktcnh2VUVwRk1Md0tNbDJ6UXQ4NHpUR0Z1eDJJMmI2aDBrWTI4RFBJZGI5TzVaRlcyYTE0MjIzUUJ2V2xfWXhjbDh1U21zWXBBNGJJdVcyR1RIOWNVdUd2ZjQ0d0VDTkltdmtnTzg5em1VaW5wbXVZbmZpbEIza1RZZWJF?oc=5"
-draft: true
+draft: false
 ---
 
 ## 8月の大規模デモに関するSNS上の噂に対しジャカルタ警視庁が説明
