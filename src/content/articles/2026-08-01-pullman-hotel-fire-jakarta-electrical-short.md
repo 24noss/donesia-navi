@@ -6,7 +6,7 @@ tags: ["火災", "プルマンホテル", "西ジャカルタ", "安全情報", 
 pubDate: 2026-08-01
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8599697/kebakaran-di-hotel-pullman-padam-diduga-dipicu-korsleting"
-draft: true
+draft: false
 ---
 
 ## 西ジャカルタのプルマンホテルで火災、消防隊員75名が出動し無事鎮火
