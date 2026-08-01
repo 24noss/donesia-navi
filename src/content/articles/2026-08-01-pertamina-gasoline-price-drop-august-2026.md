@@ -6,7 +6,7 @@ tags: ["ガソリン", "プルタミナ", "物価", "生活情報", "ジャカ�
 pubDate: 2026-08-01
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMiwwFBVV95cUxONXN4a01KVzdacWUyOHhQTHB2S0dBaFFWa2VCeEhzNk5nNU8yMk9RT2dYMld2N084S08xWk85T0H3dkxldUoybWN5RU1jR3kyNUdKTXJCTkxUREEteE56ZlZqNHlkQmFJX0dHdHVUekhCSDBEeXEtOHFaUWcwV2dydFpTWG9NTzNzTnRHSzJxbzFhTW8wcVliUzZBWmFrT0hmMzZqT1JabjBVMFE5ZVdkLXhZbGMxZEctbWl4c0EwQmdUX1k?oc=5"
-draft: true
+draft: false
 ---
 
 ## プルタミナが8月1日からガソリン価格を値下げ、民間スタンドでも調整の動き
