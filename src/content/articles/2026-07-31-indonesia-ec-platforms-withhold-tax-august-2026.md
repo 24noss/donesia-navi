@@ -6,7 +6,7 @@ tags: ["ECサイト", "税制改正", "Shopee", "Tokopedia", "ビジネス"]
 pubDate: 2026-07-31
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMixgFBVV95cUxOdHNkbHpZNHdoVTliVFptaENCQWRfT18tOWk5UWc3MDNVRThaRy13bVVac2d6X1ZyYXJaQ0tBOVZiOTY0LTBXWXhBNzlfNHJTelRzTEs0dWpYTU55dHBveVl3Rk54cWJxakQ3X0NjS3ZVbmlocTBLQjFhUEl5dWF3MWdJQ09kOGJLTlYtUnB4dk95YkZVYnhSTk9waWxtOFNMQ2l4OF9GNWRMdGlwSktDYmlJZ2U5MUVVVkVydzFRNTV6MmZmWmc?oc=5"
-draft: true
+draft: false
 ---
 
 ## 主要ECプラットフォームで出品者への0.5%源泉徴収が開始
