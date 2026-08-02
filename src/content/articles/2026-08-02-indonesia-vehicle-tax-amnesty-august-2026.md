@@ -6,7 +6,7 @@ tags: ["車両税", "Pemutihan", "インドネシア生活", "名義変更", "�
 pubDate: 2026-08-02
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPV2x4S2xEVnVwNUhnVXFua09iaGpESFA5RldDRVJGOUEyZ0RwTjFjaEVqeGNXSFp6QUkyQlhqbjZ5aGpEVkgxeGs2LURaQWowU0RZUF9hRndkTm5NeUVBZFhBWnRKeGc0Q0sxSUZ2MllXczVDX29HOFY5S19tMTRYT3dUcnVEeC1UZUZfV2VYVTVIWEVRMGlzNHFYbGVrRXZqeV9oWmNldEd5ZjdQTVpPU3Vwc1BhVDNCYmQ4OU52V3ZYRGUxOG5IWNIByAFBVV95cUxOLUg1REd2NDZBODBLUVFXdUc5N1A5MEpJR2N0ZTJaQzdDQ2NhM0xjcVNNOGtCb2ZPbGZwZndBdkhQWkdzUjk0SlJaZm5lX3BFZFgwaFFIRGlyeGh0OXzecnpuOExxOEIxdTFCZk9felFTTXFaQnNseFE0VFczQXdmclczTnA2a0dmZjJ6RkZLWlVHWndjc3RxS3RWa0RsSTJIaF81NVNsR0RsZVB5amp2S1oxam1kV2tvMUdwVFowQ2hqb3gtWFVoUA?oc=5"
-draft: true
+draft: false
 ---
 
 ## 8月より全国16州で車両税の特例免除措置が順次スタート
