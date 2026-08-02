@@ -93,24 +93,22 @@
 
 ### `mapData` スキーマを変えるときの影響範囲
 
-スキーマ（`src/content.config.ts`）はサイトの地図表示と直結している。特に注意すべきは、**cuisine の設定（ラベル/色/アイコン）と価格記号が2箇所に重複定義されている**こと（`grep` で確認済み）:
+スキーマ（`src/content.config.ts`）はサイトの地図表示と直結している。**cuisine の設定（ラベル/色/アイコン）と価格記号は `src/lib/cuisines.ts` の `cuisineConfig` / `priceLabels` を唯一の定義元に統一済み**（旧: `src/components/RestaurantMap.astro` の inline script 内にハードコードされた別コピーが存在し二重定義になっていたが解消済み）:
 
-- `src/lib/cuisines.ts` の `cuisineConfig` / `priceLabels` … **サーバー描画側**。`/map` ページのエリア別一覧パネル（`src/pages/map.astro`）が import して使う
-- `src/components/RestaurantMap.astro` の inline script 内の `var cuisineConfig` / `var priceLabels` … **地図本体側**（ピンと絞り込みボタン）。これは `cuisines.ts` を **import せず独立にハードコードした別コピー**で、`cuisineConfig[r.cuisine] || cuisineConfig.other` のフォールバックもこの内部コピーを指す
+- `src/lib/cuisines.ts` の `cuisineConfig` / `priceLabels` … **唯一の定義元**。`/map` ページのエリア別一覧パネル（`src/pages/map.astro`）が直接 import して使うほか、`src/components/RestaurantMap.astro` の Astro frontmatter（サーバー側）でも import し、`<script is:inline define:vars={{ ..., cuisineConfig, priceLabels }}>` でクライアントJSにそのまま渡している（地図本体のピン・絞り込みボタンもこの値を参照。`cuisineConfig[r.cuisine] || cuisineConfig.other` のフォールバックも同じオブジェクトを指す）
 
 したがって:
 
 - **cuisine enum に値を追加**する場合、揃える必要があるのは:
   1. `src/content.config.ts`（`mapData` の `cuisine` enum）… 必須。未追加の値を使うと Astro のコンテンツ collection のスキーマ検証（zod enum）でビルドが失敗する
-  2. `src/lib/cuisines.ts` の `cuisineConfig`（`label`/`color`/`icon`）… `/map` のエリア別一覧パネルに反映
-  3. `src/components/RestaurantMap.astro` の内部 `var cuisineConfig`（同じフィールド）… **地図のピンと絞り込みボタンに反映。ここを忘れると地図側だけ `other`（その他）表示にフォールバックする**
-  4. 発見でも拾いたいなら `src/lib/places.mjs` の `CUISINE_QUERIES`
-- **priceRange enum を変える**場合 → `src/lib/cuisines.ts` の `priceLabels` と `src/components/RestaurantMap.astro` 内部の `priceLabels`（`budget`→`¥` … `luxury`→`¥¥¥¥`）の**両方**を揃える
+  2. `src/lib/cuisines.ts` の `cuisineConfig`（`label`/`color`/`icon`）… `/map` のエリア別一覧パネルと `RestaurantMap.astro`（地図のピン・絞り込みボタン）の**両方に自動で反映される**（`RestaurantMap.astro` 側の個別更新は不要）
+  3. 発見でも拾いたいなら `src/lib/places.mjs` の `CUISINE_QUERIES`
+- **priceRange enum を変える**場合 → `src/lib/cuisines.ts` の `priceLabels` を更新すれば `/map` と `RestaurantMap.astro` の両方に反映される
 - **`mapData` のフィールドを削除/改名**する場合、地図が壊れる箇所:
   - `src/pages/map.astro` … `!data.draft && !!data.mapData` の記事を集め、`isChain` を除外して `area` でグループ化（全店舗マップ `/map`）
-  - `src/pages/category/[slug].astro` … `lifestyle` カテゴリページで `mapData` を集約（`isChain` 除外）し `RestaurantMap` に渡す
-  - `src/components/RestaurantMap.astro` … `cuisine`（絞り込み・内部 `cuisineConfig` 参照）/ `servesAlcohol`（酒類フィルタ、`'yes'` 判定）/ `priceRange`（内部 `priceLabels`）/ `googleMapsQuery`（マップリンク）/ `nameEn` / `area` / `name` を直接参照
-- 要するに **cuisine enum追加は「`content.config.ts` + `cuisines.ts` + `RestaurantMap.astro` の内部コピー（+ 必要なら `places.mjs`）」**。cuisine・価格の設定は2箇所にコピーがある点を忘れない。フィールド改名は上記3コンポーネントの参照名を同時に直す。
+  - `src/pages/category/[slug]/[...page].astro` … `lifestyle` カテゴリページで `mapData` を集約（`isChain` 除外）し `RestaurantMap` に渡す
+  - `src/components/RestaurantMap.astro` … `cuisine`（絞り込み・`cuisineConfig` 参照）/ `area`（エリアフィルタ）/ `servesAlcohol`（酒類フィルタ、`'yes'` 判定）/ `halal`（ハラールフィルタ、`'yes'` 判定。`unverified` は対象外）/ `priceRange`（`priceLabels`）/ `googleMapsQuery`（マップリンク）/ `nameEn` / `name` を直接参照
+- 要するに **cuisine enum追加は「`content.config.ts` + `cuisines.ts`（+ 必要なら `places.mjs`）」の更新だけで済む**。`RestaurantMap.astro` は `cuisines.ts` を import しているだけなので個別に直す必要はない。フィールド改名時は `RestaurantMap.astro` 側の参照箇所（上記）を直す。
 
 ### 執筆方針を変える
 
@@ -120,7 +118,7 @@
 
 - **Places APIキーはIP制限付きでローカル専用**: 発見ステップは CI では動かない（`../../AUTOMATION.md`）
 - **重複判定は粗いフィルタ**: 名前正規化一致 or 座標60m以内で「既知」とみなすだけで、完璧な同定は狙っていない（`existing-mapdata.mjs` のコメント）
-- **`isChain: true` は地図に出ない**: `map.astro` / `category/[slug].astro` の両方で除外される
+- **`isChain: true` は地図に出ない**: `map.astro` / `category/[slug]/[...page].astro` の両方で除外される
 - **(B) 飲食店以外は完全手動**: 自動化の予定はスコープ外
 
 ## 関連リンク

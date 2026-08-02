@@ -12,7 +12,6 @@ const articles = defineCollection({
     updatedDate: z.coerce.date().optional(),
     source: z.string().optional(),
     sourceUrl: z.string().url().optional(),
-    heroImage: z.string().optional(),
     draft: z.boolean().default(false),
     hasAffiliate: z.boolean().default(false),
     mapData: z.array(z.object({

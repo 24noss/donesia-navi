@@ -2,7 +2,7 @@
 title: "BYD M6 vs ダイハツ・セニア、維持費はどちらがお得？EV vs ガソリン車を比較"
 description: "インドネシアで人気のEV・BYD M6とガソリン車ダイハツ・セニアの運用コストを比較。日常使いでの差額はどれくらいか。"
 category: "business"
-tags: ["EV", "電気自動車", "BYD", "ダイハツ", "維持費比較", "インドネシア自動車"]
+tags: ["EV", "BYD", "ダイハツ", "維持費比較", "インドネシア自動車"]
 pubDate: 2026-04-04
 source: "Kompas"
 sourceUrl: "https://otomotif.kompas.com/read/2026/04/04/132200715/biaya-operasional-byd-m6-vs-daihatsu-xenia--mana-yang-lebih-irit-"

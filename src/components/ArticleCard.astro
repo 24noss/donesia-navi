@@ -12,7 +12,6 @@ interface Props {
       pubDate: Date;
       source?: string;
       tags: string[];
-      heroImage?: string;
     };
   };
   featured?: boolean;
@@ -21,80 +20,6 @@ interface Props {
 const { article, featured = false } = Astro.props;
 const cat = categories[article.data.category];
 const url = `/articles/${article.id}/`;
-
-// Multiple images per category — article ID hash selects unique image
-const categoryImagePool: Record<string, string[]> = {
-  safety: [
-    'https://images.pexels.com/photos/1739855/pexels-photo-1739855.jpeg',
-    'https://images.pexels.com/photos/1446076/pexels-photo-1446076.jpeg',
-    'https://images.pexels.com/photos/3618511/pexels-photo-3618511.jpeg',
-    'https://images.pexels.com/photos/1118153/pexels-photo-1118153.jpeg',
-    'https://images.pexels.com/photos/2034373/pexels-photo-2034373.jpeg',
-    'https://images.pexels.com/photos/1114690/pexels-photo-1114690.jpeg',
-  ],
-  society: [
-    'https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg',
-    'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg',
-    'https://images.pexels.com/photos/1427541/pexels-photo-1427541.jpeg',
-    'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg',
-    'https://images.pexels.com/photos/1550337/pexels-photo-1550337.jpeg',
-    'https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg',
-  ],
-  business: [
-    'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg',
-    'https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg',
-    'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg',
-    'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg',
-    'https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg',
-    'https://images.pexels.com/photos/5716001/pexels-photo-5716001.jpeg',
-  ],
-  lifestyle: [
-    'https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg',
-    'https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg',
-    'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
-    'https://images.pexels.com/photos/1268101/pexels-photo-1268101.jpeg',
-    'https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg',
-    'https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg',
-  ],
-  travel: [
-    'https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg',
-    'https://images.pexels.com/photos/2187605/pexels-photo-2187605.jpeg',
-    'https://images.pexels.com/photos/1482193/pexels-photo-1482193.jpeg',
-    'https://images.pexels.com/photos/2440061/pexels-photo-2440061.jpeg',
-    'https://images.pexels.com/photos/2474689/pexels-photo-2474689.jpeg',
-    'https://images.pexels.com/photos/3225528/pexels-photo-3225528.jpeg',
-  ],
-  visa: [
-    'https://images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg',
-    'https://images.pexels.com/photos/2882552/pexels-photo-2882552.jpeg',
-    'https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg',
-    'https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg',
-    'https://images.pexels.com/photos/4427611/pexels-photo-4427611.jpeg',
-    'https://images.pexels.com/photos/4386373/pexels-photo-4386373.jpeg',
-  ],
-  regulation: [
-    'https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg',
-    'https://images.pexels.com/photos/5669619/pexels-photo-5669619.jpeg',
-    'https://images.pexels.com/photos/5668882/pexels-photo-5668882.jpeg',
-    'https://images.pexels.com/photos/4427430/pexels-photo-4427430.jpeg',
-    'https://images.pexels.com/photos/5669626/pexels-photo-5669626.jpeg',
-    'https://images.pexels.com/photos/6077123/pexels-photo-6077123.jpeg',
-  ],
-};
-
-// Hash article ID to pick a unique image from the pool
-function hashCode(str: string): number {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = ((hash << 5) - hash) + str.charCodeAt(i);
-    hash |= 0;
-  }
-  return Math.abs(hash);
-}
-
-const pool = categoryImagePool[article.data.category] || categoryImagePool.society;
-const imageIndex = hashCode(article.id) % pool.length;
-const heroImage = article.data.heroImage || pool[imageIndex] + '?auto=compress&cs=tinysrgb&w=800&h=450&dpr=1';
 
 function relativeTime(date: Date): string {
   const now = new Date();
@@ -109,25 +34,174 @@ function relativeTime(date: Date): string {
 ---
 
 {featured ? (
-  <a href={url} class="featured-hero" style={`background-image:linear-gradient(180deg, rgba(27,45,79,0.05) 0%, rgba(27,45,79,0.6) 40%, rgba(27,45,79,0.95) 100%), url('${heroImage}');background-size:cover;background-position:center;`}>
-    <span class="featured-hero-badge">{cat.name}</span>
-    <h3 class="featured-hero-title">{article.data.title}</h3>
-    <p class="featured-hero-excerpt">{article.data.description}</p>
-    <div class="featured-hero-meta">
+  <a href={url} class={`front-hero cat-${cat.color}`}>
+    <span class="front-hero-cat">{cat.name}</span>
+    <h3 class="front-hero-title">{article.data.title}</h3>
+    <p class="front-hero-desc">{article.data.description}</p>
+    <div class="front-hero-meta">
       {article.data.source && <span class="source">{article.data.source}</span>}
       <span>{relativeTime(article.data.pubDate)}</span>
     </div>
   </a>
 ) : (
-  <a href={url} class="article-card">
-    <div class="article-card-image" style={`background-image:url('${heroImage}');`}></div>
-    <div class="article-card-body">
-      <span class="article-card-badge">{cat.name}</span>
-      <h4 class="article-card-title">{article.data.title}</h4>
-      <div class="article-card-meta">
-        {article.data.source && <span class="source">{article.data.source}</span>}
-        <span>{relativeTime(article.data.pubDate)}</span>
-      </div>
+  <a href={url} class={`news-card cat-${cat.color}`}>
+    <span class="news-card-cat">{cat.name}</span>
+    <h4 class="news-card-title">{article.data.title}</h4>
+    <p class="news-card-desc">{article.data.description}</p>
+    <div class="news-card-meta">
+      {article.data.source && <span class="source">{article.data.source}</span>}
+      <span>{relativeTime(article.data.pubDate)}</span>
     </div>
   </a>
 )}
+
+<style>
+  /* ===== Standard news card: typography-first, no imagery ===== */
+  .news-card {
+    --accent: var(--teal);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 18px 18px 16px;
+    transition: border-color 0.15s ease;
+  }
+  .news-card:hover {
+    border-color: var(--accent);
+  }
+  .news-card-cat {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .news-card-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.2s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .news-card:hover .news-card-title {
+    text-decoration-color: var(--accent);
+  }
+  .news-card-desc {
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .news-card-meta {
+    margin-top: auto;
+    padding-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .news-card-meta .source {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ===== Featured hero: front-page style, no photography ===== */
+  .front-hero {
+    --accent: var(--teal);
+    display: block;
+    background: var(--bg);
+    border: 1px solid var(--border-light);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius-lg);
+    padding: 32px 36px;
+    transition: border-color 0.15s ease;
+  }
+  :global([data-theme="dark"]) .front-hero {
+    background: var(--bg-card);
+  }
+  .front-hero:hover {
+    border-color: var(--accent);
+  }
+  .front-hero-cat {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .front-hero-title {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    line-height: 1.35;
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 5px;
+    transition: text-decoration-color 0.2s ease;
+  }
+  .front-hero:hover .front-hero-title {
+    text-decoration-color: var(--accent);
+  }
+  .front-hero-desc {
+    margin-top: 16px;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    max-width: 62ch;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .front-hero-meta {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .front-hero-meta .source {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  @media (max-width: 480px) {
+    .news-card { padding: 14px 14px 12px; }
+    .front-hero { padding: 24px 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .news-card, .front-hero, .news-card-title, .front-hero-title {
+      transition: none;
+    }
+  }
+
+  /* ===== Category accent colors (mirrors global.css .cat-dot palette) =====
+     Kept after the base rules so equal-specificity --accent fallbacks don't win. */
+  .cat-safety { --accent: var(--red); }
+  .cat-society { --accent: var(--teal); }
+  .cat-business { --accent: var(--gold); }
+  .cat-lifestyle { --accent: #5BA88E; }
+  .cat-travel { --accent: #8B6FBF; }
+  .cat-visa { --accent: #D47B3E; }
+  .cat-regulation { --accent: var(--navy-muted); }
+</style>

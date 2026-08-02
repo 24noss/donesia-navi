@@ -5,8 +5,10 @@ import StructuredData from '../../components/StructuredData.astro';
 import ShareButtons from '../../components/ShareButtons.astro';
 import InternalLinks from '../../components/InternalLinks.astro';
 import Sidebar from '../../components/Sidebar.astro';
+import RestaurantMap from '../../components/RestaurantMap.astro';
 import { categories, formatDate } from '../../lib/categories';
 import { shouldIncludeDrafts } from '../../lib/draftVisibility';
+import { getRelatedArticles } from '../../lib/related';
 
 export async function getStaticPaths() {
   const includeDrafts = shouldIncludeDrafts();
@@ -19,25 +21,18 @@ const { Content } = await render(article);
 const cat = categories[article.data.category];
 const articleUrl = new URL(`/articles/${article.id}/`, Astro.site).href;
 
-// Get related articles for sidebar
+// Get related articles for sidebar (shared scoring logic: category +2 / tag +1)
 const allArticles = await getCollection('articles', ({ data }) => !data.draft);
-const related = allArticles
-  .filter((a) => a.id !== article.id)
-  .map((a) => {
-    let score = 0;
-    if (a.data.category === article.data.category) score += 1;
-    for (const tag of a.data.tags) {
-      if (article.data.tags.includes(tag)) score += 2;
-    }
-    return { article: a, score };
-  })
-  .filter((s) => s.score > 0)
-  .sort((a, b) => b.score - a.score || b.article.data.pubDate.valueOf() - a.article.data.pubDate.valueOf())
-  .slice(0, 4);
+const related = getRelatedArticles(article, allArticles, 4);
 
 const newArticles = [...allArticles]
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 5);
+
+// Freshness signals (B-3): show "最終更新" when present, and a periodic-review
+// note for evergreen guide articles whose id has no date prefix.
+const isGuideArticle = !/^\d{4}-\d{2}-\d{2}-/.test(article.id);
+const lastReviewed = article.data.updatedDate ?? article.data.pubDate;
 ---
 <Base
   title={article.data.title}
@@ -47,6 +42,7 @@ const newArticles = [...allArticles]
   modifiedTime={(article.data.updatedDate ?? article.data.pubDate).toISOString()}
   articleSection={cat.name}
   articleTags={article.data.tags}
+  ogImagePath={`/og/${article.id}.png`}
 >
   <StructuredData
     slot="head"
@@ -75,11 +71,17 @@ const newArticles = [...allArticles]
     <!-- Article Header -->
     <div class="article-header">
       <span class="article-cat-pill">{cat.name}</span>
-      <h1 class="article-page-title">{article.data.title}</h1>
+      <h1 class="article-page-title" data-pagefind-body>{article.data.title}</h1>
       <div class="article-meta-row">
         <span>著者: DonesiaNavi編集部</span>
         <span class="divider">|</span>
         <span>{formatDate(article.data.pubDate)}</span>
+        {article.data.updatedDate && (
+          <>
+            <span class="divider">|</span>
+            <span>最終更新: {formatDate(article.data.updatedDate)}</span>
+          </>
+        )}
         {article.data.source && (
           <>
             <span class="divider">|</span>
@@ -87,7 +89,9 @@ const newArticles = [...allArticles]
           </>
         )}
       </div>
-      <ShareButtons url={articleUrl} title={article.data.title} direction="horizontal" />
+      {isGuideArticle && (
+        <p class="freshness-note">この記事は定期的に内容を見直しています（最終確認: {formatDate(lastReviewed)}）</p>
+      )}
     </div>
 
     <div class="layout-2col-article">
@@ -113,7 +117,7 @@ const newArticles = [...allArticles]
         )}
 
         <!-- Body -->
-        <div class="article-body" id="article-content">
+        <div class="article-body" id="article-content" data-pagefind-body>
           <Content />
         </div>
 
@@ -129,6 +133,14 @@ const newArticles = [...allArticles]
         <div class="ai-disclosure">
           最新情報は公式ソースをご確認ください。
         </div>
+
+        <!-- Restaurant map (only for articles with mapData) -->
+        {article.data.mapData && article.data.mapData.length > 0 && (
+          <section class="article-map-section">
+            <h2 class="article-map-heading">この記事のお店マップ</h2>
+            <RestaurantMap restaurants={JSON.stringify(article.data.mapData)} height="420px" />
+          </section>
+        )}
 
         <!-- Bottom share buttons -->
         <div style="margin-top:24px;">
@@ -157,12 +169,6 @@ const newArticles = [...allArticles]
       <div class="sidebar-col desktop-only">
         <div class="sidebar-sticky">
 
-          <!-- Share vertical -->
-          <div class="widget">
-            <div class="widget-title">この記事を共有</div>
-            <ShareButtons url={articleUrl} title={article.data.title} direction="vertical" />
-          </div>
-
           <!-- Affiliate Card -->
           <div class="affiliate-card">
             <span class="pr-badge">PR</span>
@@ -175,7 +181,7 @@ const newArticles = [...allArticles]
           {related.length > 0 && (
             <div class="widget">
               <div class="widget-title">関連記事</div>
-              {related.map(({ article: rel }) => (
+              {related.map((rel) => (
                 <div class="related-item">
                   <span class="related-cat">{categories[rel.data.category].name}</span>
                   <a class="related-title" href={`/articles/${rel.id}/`}>{rel.data.title}</a>
@@ -243,3 +249,31 @@ const newArticles = [...allArticles]
     })();
   </script>
 </Base>
+
+<style>
+  /* Freshness note for evergreen guide articles (B-3) */
+  .freshness-note {
+    margin-top: 12px;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    padding: 8px 12px;
+    background: var(--bg-sidebar);
+    border-radius: var(--radius);
+    width: fit-content;
+  }
+
+  /* Restaurant map embed for articles with mapData (B-3) */
+  .article-map-section {
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-light);
+  }
+  .article-map-heading {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+</style>

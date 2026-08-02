@@ -1,6 +1,5 @@
 ---
 title: "バリ島ジュンブラナからボゴールまで各地で洪水、数百世帯が被害"
-heroImage: "https://images.pexels.com/photos/29215726/pexels-photo-29215726.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200?auto=compress&cs=tinysrgb&w=1200&h=630&dpr=1"
 description: "この1週間でバリ島西部ジュンブラナから西ジャワのボゴールまで広範囲で洪水が発生。在住者向け注意情報をまとめました。"
 category: "safety"
 tags: ["洪水", "バリ島", "ボゴール", "雨季", "防災"]

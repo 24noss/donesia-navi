@@ -11,6 +11,7 @@ interface Props {
   articleSection?: string;
   articleTags?: string[];
   noindex?: boolean;
+  ogImagePath?: string;
 }
 
 const {
@@ -22,13 +23,16 @@ const {
   articleSection,
   articleTags = [],
   noindex = false,
+  ogImagePath,
 } = Astro.props;
 
 const isHome = title.startsWith('DonesiaNavi');
 const fullTitle = isHome ? title : `${title} | DonesiaNavi（ドネシアナビ）`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
 const siteUrl = Astro.site?.href ?? 'https://indonesia-navi.com';
-const ogImageUrl = `${siteUrl}og-default.png`;
+// Articles pass their build-time-generated OG image path (see src/pages/og/[...id].png.ts);
+// every other page keeps the site-wide default.
+const ogImageUrl = ogImagePath ? new URL(ogImagePath, Astro.site).href : `${siteUrl}og-default.png`;
 
 const currentPath = Astro.url.pathname;
 ---
@@ -43,13 +47,18 @@ const currentPath = Astro.url.pathname;
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700;900&family=Noto+Sans+JP:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@600;700;900&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
 
-  <!-- Google Analytics (GA4) -->
+  <!-- Google Analytics (GA4) with Consent Mode v2 -->
   <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-VB1WN7G9N2"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    var storedConsent;
+    try { storedConsent = localStorage.getItem('cookie_consent'); } catch (e) {}
+    gtag('consent', 'default', {
+      'analytics_storage': storedConsent === 'granted' ? 'granted' : 'denied'
+    });
     gtag('js', new Date());
     gtag('config', 'G-VB1WN7G9N2');
   </script>
@@ -100,11 +109,15 @@ const currentPath = Astro.url.pathname;
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImageUrl} />
 
-  <!-- Dark mode: restore preference before paint -->
+  <!-- Dark mode: restore preference before paint (falls back to OS preference
+       when the visitor has never made an explicit choice) -->
   <script is:inline>
     (function(){
       var t = localStorage.getItem('theme');
-      if (t === 'dark') document.documentElement.setAttribute('data-theme','dark');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (t === 'dark' || (!t && prefersDark)) {
+        document.documentElement.setAttribute('data-theme','dark');
+      }
     })();
   </script>
 
@@ -112,6 +125,8 @@ const currentPath = Astro.url.pathname;
   <slot name="head" />
 </head>
 <body>
+
+  <a href="#main" class="skip-link">本文へスキップ</a>
 
   <!-- HEADER -->
   <header class="header">
@@ -133,17 +148,17 @@ const currentPath = Astro.url.pathname;
   <!-- SUB NAV -->
   <nav class="subnav">
     <div class="subnav-inner">
-      <a href="/" class={`subnav-link${currentPath === '/' ? ' active' : ''}`}>トップ</a>
+      <a href="/" class={`subnav-link${currentPath === '/' ? ' active' : ''}`} aria-current={currentPath === '/' ? 'page' : undefined}>トップ</a>
       {Object.entries(categories).map(([slug, cat]) => (
-        <a href={`/category/${slug}/`} class={`subnav-link${currentPath.startsWith(`/category/${slug}`) ? ' active' : ''}`}>{cat.name}</a>
+        <a href={`/category/${slug}/`} class={`subnav-link${currentPath.startsWith(`/category/${slug}`) ? ' active' : ''}`} aria-current={currentPath.startsWith(`/category/${slug}`) ? 'page' : undefined}>{cat.name}</a>
       ))}
-      <a href="/map/" class={`subnav-link${currentPath.startsWith('/map') ? ' active' : ''}`}>マップ</a>
-      <a href="/about/" class={`subnav-link${currentPath.startsWith('/about') ? ' active' : ''}`}>このサイトについて</a>
+      <a href="/map/" class={`subnav-link${currentPath.startsWith('/map') ? ' active' : ''}`} aria-current={currentPath.startsWith('/map') ? 'page' : undefined}>マップ</a>
+      <a href="/about/" class={`subnav-link${currentPath.startsWith('/about') ? ' active' : ''}`} aria-current={currentPath.startsWith('/about') ? 'page' : undefined}>このサイトについて</a>
     </div>
   </nav>
 
   <!-- MAIN CONTENT -->
-  <main>
+  <main id="main">
     <slot />
   </main>
 
@@ -165,7 +180,7 @@ const currentPath = Astro.url.pathname;
   <!-- MOBILE BOTTOM NAV -->
   <nav class="mobile-nav">
     <div class="mobile-nav-inner">
-      <a href="/" class={`mobile-nav-item${currentPath === '/' ? ' active' : ''}`}>
+      <a href="/" class={`mobile-nav-item${currentPath === '/' ? ' active' : ''}`} aria-current={currentPath === '/' ? 'page' : undefined}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l9-9 9 9"/><path d="M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10"/></svg>
         <span>ホーム</span>
       </a>
@@ -173,15 +188,15 @@ const currentPath = Astro.url.pathname;
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
         <span>カテゴリ</span>
       </button>
-      <a href="/search/" class={`mobile-nav-item${currentPath.startsWith('/search') ? ' active' : ''}`}>
+      <a href="/search/" class={`mobile-nav-item${currentPath.startsWith('/search') ? ' active' : ''}`} aria-current={currentPath.startsWith('/search') ? 'page' : undefined}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <span>検索</span>
       </a>
-      <button class="mobile-nav-item" id="fx-nav-btn" aria-label="為替レートを表示">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg>
-        <span>為替</span>
-      </button>
-      <a href="/about/" class={`mobile-nav-item${currentPath.startsWith('/about') ? ' active' : ''}`}>
+      <a href="/map/" class={`mobile-nav-item${currentPath.startsWith('/map') ? ' active' : ''}`} aria-current={currentPath.startsWith('/map') ? 'page' : undefined}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>マップ</span>
+      </a>
+      <a href="/about/" class={`mobile-nav-item${currentPath.startsWith('/about') ? ' active' : ''}`} aria-current={currentPath.startsWith('/about') ? 'page' : undefined}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <span>サイト情報</span>
       </a>
@@ -208,6 +223,15 @@ const currentPath = Astro.url.pathname;
         <span class="category-overlay-name">🗺 レストランマップ</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
       </a>
+    </div>
+  </div>
+
+  <!-- COOKIE CONSENT BANNER -->
+  <div class="consent-banner" id="consent-banner" role="region" aria-label="Cookie使用に関する同意">
+    <p class="consent-text">当サイトはアクセス解析のためCookieを使用します。詳しくは<a href="/policy/">ポリシー</a>をご確認ください。</p>
+    <div class="consent-actions">
+      <button type="button" class="consent-btn consent-decline" id="consent-decline">拒否</button>
+      <button type="button" class="consent-btn consent-accept" id="consent-accept">同意する</button>
     </div>
   </div>
 
@@ -247,17 +271,31 @@ const currentPath = Astro.url.pathname;
         });
       }
 
-      // Exchange rate scroll/navigate
-      var fxBtn = document.getElementById('fx-nav-btn');
-      if (fxBtn) {
-        fxBtn.addEventListener('click', function(){
-          var banner = document.querySelector('.digest-banner');
-          if (banner) {
-            banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          } else {
-            window.location.href = '/#exchange-rate';
-          }
-        });
+      // Cookie consent banner
+      var consentBanner = document.getElementById('consent-banner');
+      var consentAccept = document.getElementById('consent-accept');
+      var consentDecline = document.getElementById('consent-decline');
+      if (consentBanner) {
+        var consentChoice;
+        try { consentChoice = localStorage.getItem('cookie_consent'); } catch (e) {}
+        if (!consentChoice) {
+          consentBanner.classList.add('show');
+        }
+        if (consentAccept) {
+          consentAccept.addEventListener('click', function(){
+            try { localStorage.setItem('cookie_consent', 'granted'); } catch (e) {}
+            if (typeof gtag === 'function') {
+              gtag('consent', 'update', { analytics_storage: 'granted' });
+            }
+            consentBanner.classList.remove('show');
+          });
+        }
+        if (consentDecline) {
+          consentDecline.addEventListener('click', function(){
+            try { localStorage.setItem('cookie_consent', 'denied'); } catch (e) {}
+            consentBanner.classList.remove('show');
+          });
+        }
       }
     })();
   </script>

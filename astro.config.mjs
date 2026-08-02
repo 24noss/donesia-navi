@@ -12,13 +12,15 @@ export default defineConfig({
     sitemap({
       changefreq: 'daily',
       priority: 0.7,
-      lastmod: new Date(),
       filter: (page) => !page.includes('/draft'),
     }),
   ],
   markdown: {
     shikiConfig: {
-      theme: 'github-light',
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
     },
   },
 });

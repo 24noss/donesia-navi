@@ -2,7 +2,7 @@
 title: "インドネシア入国管理局、観光査証免除（BVK）の運用厳格化を表明"
 description: "インドネシア入国管理局は、質の高い外国人旅行者の受け入れを目的として、観光査証免除制度の運用を厳格化する方針を発表した。不法滞在防止のため選別的審査を徹底する。"
 category: "visa"
-tags: ["インドネシアビザ", "入国管理局", "観光査証免除", "在留邦人", "ジャカルタ"]
+tags: ["インドネシアビザ", "入管", "観光査証免除", "在留邦人", "ジャカルタ"]
 pubDate: 2026-07-30
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8596779/imigrasi-ri-tegaskan-bebas-visa-kunjungan-diperketat-demi-turis-wna-berkualitas"

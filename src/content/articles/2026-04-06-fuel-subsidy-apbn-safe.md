@@ -1,6 +1,5 @@
 ---
 title: "燃料補助金カットを国会が拒否、財務大臣「APBNは年内安泰」と明言"
-heroImage: "https://images.pexels.com/photos/36286022/pexels-photo-36286022.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200?auto=compress&cs=tinysrgb&w=1200&h=630&dpr=1"
 description: "JK元副大統領の燃料補助金削減提案を国会予算委が拒否。財務大臣もAPBNの安全と補助金燃料の価格維持を表明しました。"
 category: "society"
 tags: ["燃料補助金", "APBN", "国会", "財務大臣", "BBM"]

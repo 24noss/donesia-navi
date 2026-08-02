@@ -1,6 +1,5 @@
 ---
 title: "日本がオーストラリアへの燃料供給を保証、エネルギー安全保障で連携強化"
-heroImage: "https://images.pexels.com/photos/11324960/pexels-photo-11324960.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200?auto=compress&cs=tinysrgb&w=1200&h=630&dpr=1"
 description: "中東情勢が緊迫する中、日本がオーストラリアへの燃料供給継続を確約。日本のエネルギー外交の動きをまとめました。"
 category: "business"
 tags: ["エネルギー", "日豪関係", "燃料", "原油", "外交"]

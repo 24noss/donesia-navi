@@ -1,0 +1,187 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import type { GetStaticPathsOptions, Page } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import StructuredData from '../../../components/StructuredData.astro';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import Sidebar from '../../../components/Sidebar.astro';
+import RestaurantMap from '../../../components/RestaurantMap.astro';
+import { categories } from '../../../lib/categories';
+import type { CategorySlug } from '../../../lib/categories';
+import { cuisineConfig } from '../../../lib/cuisines';
+
+interface Props {
+  page: Page<CollectionEntry<'articles'>>;
+}
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  // Kept inside getStaticPaths: Astro extracts this function into an
+  // isolated module for route generation, so it can't close over top-level
+  // frontmatter consts declared elsewhere in the file.
+  const PAGE_SIZE = 20;
+  const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+
+  return Object.keys(categories).flatMap((slug) => {
+    const categoryArticles = allArticles
+      .filter((article) => article.data.category === slug)
+      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+    return paginate(categoryArticles, {
+      params: { slug },
+      pageSize: PAGE_SIZE,
+    });
+  });
+}
+
+const { slug } = Astro.params;
+const { page } = Astro.props;
+const cat = categories[slug as CategorySlug];
+const articles = page.data;
+
+// Collect mapData for lifestyle category — computed from the FULL category
+// article set (not just the current page's slice), since the map tab is a
+// persistent per-category feature independent of article-list pagination.
+const isLifestyle = slug === 'lifestyle';
+const mapRestaurants: Array<Record<string, any>> = [];
+if (isLifestyle) {
+  const allCategoryArticles = await getCollection('articles', ({ data }) => !data.draft && data.category === slug);
+  allCategoryArticles.forEach((article) => {
+    if (!article.data.mapData) return;
+    article.data.mapData.forEach((r) => {
+      if (r.isChain) return;
+      mapRestaurants.push({ ...r, articleSlug: article.id });
+    });
+  });
+}
+
+const pageTitle = page.currentPage > 1 ? `${cat.seoTitle}（${page.currentPage}ページ目）` : cat.seoTitle;
+
+function pageUrl(n: number): string {
+  return n === 1 ? `/category/${slug}/` : `/category/${slug}/${n}/`;
+}
+---
+<Base title={pageTitle} description={cat.description}>
+  <StructuredData slot="head" type="category" categorySlug={slug as CategorySlug} />
+
+  <div class="container layout-2col">
+
+    <div class="main-col fade-in">
+
+      <!-- Category Hero -->
+      <div class="cat-hero">
+        <h1 class="cat-hero-name">{cat.name}</h1>
+        <div class="cat-hero-desc">{cat.description}</div>
+        <div class="cat-hero-count">{page.total} 記事</div>
+      </div>
+
+      <!-- Tab Bar (lifestyle only) -->
+      {isLifestyle && mapRestaurants.length > 0 && (
+        <div class="cat-tab-bar">
+          <button class="cat-tab active" data-tab="articles">記事一覧</button>
+          <button class="cat-tab" data-tab="map">レストランマップ</button>
+        </div>
+      )}
+
+      <!-- Articles Tab -->
+      <div id="tab-articles">
+        {articles.length === 0 ? (
+          <p style="color:var(--text-muted);padding:2rem 0;">このカテゴリの記事はまだありません。</p>
+        ) : (
+          articles.map((article) => (
+            <ArticleCard article={article} />
+          ))
+        )}
+
+        <!-- Pagination -->
+        {page.lastPage > 1 && (
+          <nav class="cat-pager" aria-label="ページナビゲーション">
+            {page.url.prev ? (
+              <a class="cat-pager-nav" href={pageUrl(page.currentPage - 1)}>&larr; 前へ</a>
+            ) : (
+              <span class="cat-pager-nav is-disabled" aria-disabled="true">&larr; 前へ</span>
+            )}
+
+            <div class="cat-pager-numbers">
+              {Array.from({ length: page.lastPage }, (_, i) => i + 1).map((n) => (
+                n === page.currentPage ? (
+                  <span class="cat-pager-num is-current" aria-current="page">{n}</span>
+                ) : (
+                  <a class="cat-pager-num" href={pageUrl(n)}>{n}</a>
+                )
+              ))}
+            </div>
+
+            {page.url.next ? (
+              <a class="cat-pager-nav" href={pageUrl(page.currentPage + 1)}>次へ &rarr;</a>
+            ) : (
+              <span class="cat-pager-nav is-disabled" aria-disabled="true">次へ &rarr;</span>
+            )}
+          </nav>
+        )}
+      </div>
+
+      <!-- Map Tab (lifestyle only) -->
+      {isLifestyle && mapRestaurants.length > 0 && (
+        <div id="tab-map" style="display:none;">
+          <p style="color:var(--text-muted);font-size:13px;margin-bottom:12px;">記事で紹介した {mapRestaurants.length} 店舗を表示中</p>
+          <RestaurantMap restaurants={JSON.stringify(mapRestaurants)} height="480px" />
+        </div>
+      )}
+
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar-col desktop-only">
+      <Sidebar showRate={false} showPopular={true} showCategories={true} showSafety={false} />
+    </div>
+
+  </div>
+
+  <!-- Tab switching -->
+  <script is:inline>
+    // Tab switching for lifestyle category
+    document.querySelectorAll('.cat-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.cat-tab').forEach(function(t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        var target = tab.dataset.tab;
+        var articlesTab = document.getElementById('tab-articles');
+        var mapTab = document.getElementById('tab-map');
+        if (articlesTab) articlesTab.style.display = target === 'articles' ? '' : 'none';
+        if (mapTab) mapTab.style.display = target === 'map' ? '' : 'none';
+      });
+    });
+  </script>
+
+  <style>
+    /* Category pagination — restrained, paper-like: hairline rule, navy
+       current-page pill, gold-tinted hover background. No gradients or glow. */
+    .cat-pager{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:16px;flex-wrap:wrap;
+      margin-top:32px;padding-top:20px;
+      border-top:1px solid var(--border);
+    }
+    .cat-pager-nav{
+      font-size:13px;font-weight:600;color:var(--teal);
+      padding:6px 4px;
+    }
+    .cat-pager-nav:hover{color:var(--text)}
+    .cat-pager-nav.is-disabled{color:var(--text-light);pointer-events:none}
+    .cat-pager-numbers{display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:center}
+    .cat-pager-num{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-width:28px;height:28px;
+      font-family:var(--serif);font-size:13px;font-weight:600;
+      color:var(--text-muted);
+      border-radius:4px;
+    }
+    .cat-pager-num:hover{color:var(--text);background:var(--gold-dim)}
+    .cat-pager-num.is-current{color:#fff;background:var(--navy)}
+
+    @media(max-width:480px){
+      .cat-pager{justify-content:center;text-align:center}
+    }
+  </style>
+</Base>

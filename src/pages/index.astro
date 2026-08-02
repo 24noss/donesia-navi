@@ -5,7 +5,7 @@ import StructuredData from '../components/StructuredData.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import Sidebar from '../components/Sidebar.astro';
 import ExchangeRate from '../components/ExchangeRate.astro';
-import { formatDate } from '../lib/categories';
+import { categories, formatDate } from '../lib/categories';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.draft);
 const articles = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -13,10 +13,27 @@ const articles = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 const featured = articles[0];
 const rest = articles.slice(1);
 
+// "最新ニュース" は直近12件のみ表示（全件表示はやめ、定番ガイド等に画面を譲る）
+const LATEST_NEWS_COUNT = 12;
+const latestNews = rest.slice(0, LATEST_NEWS_COUNT);
+
+// "定番ガイド": id が日付プレフィックス(YYYY-MM-DD-)で始まらない記事＝随時更新の定番リファレンス記事
+const DATE_PREFIX = /^\d{4}-\d{2}-\d{2}-/;
+const evergreenGuides = articles
+  .filter((article) => !DATE_PREFIX.test(article.id))
+  .sort((a, b) => a.id.localeCompare(b.id));
+
+// "グルメ・マップ": mapData を持つ記事から最新3件
+const gourmetArticles = articles
+  .filter((article) => !!article.data.mapData && article.data.mapData.length > 0)
+  .slice(0, 3);
+
 const todayStr = formatDate(new Date());
 ---
 <Base title="DonesiaNavi（ドネシアナビ） | インドネシア在住日本人向けニュース・生活情報" description="インドネシア在住日本人のための日本語ニュース・生活情報ポータル。安全情報、ビザ、経済、生活、旅行などの最新ニュースを毎日お届け。">
   <StructuredData slot="head" type="home" />
+
+  <h1 class="sr-only">DonesiaNavi — インドネシア在住日本人のためのニュース・生活情報</h1>
 
   <!-- FULL-WIDTH HERO (G3 style - outside 2-column layout) -->
   {featured && (
@@ -51,10 +68,63 @@ const todayStr = formatDate(new Date());
           </div>
 
           <div class="article-grid">
-            {rest.map((article) => (
+            {latestNews.map((article) => (
               <ArticleCard article={article} />
             ))}
           </div>
+
+          <div class="section-footer-nav">
+            <span class="section-footer-label">カテゴリから探す</span>
+            <div class="section-footer-cats">
+              {Object.entries(categories).map(([slug, cat], i) => (
+                <>
+                  {i > 0 && <span class="section-footer-sep" aria-hidden="true">・</span>}
+                  <a href={`/category/${slug}/`}>{cat.name}</a>
+                </>
+              ))}
+            </div>
+          </div>
+
+          <!-- Evergreen Guides -->
+          {evergreenGuides.length > 0 && (
+            <section class="guide-section" aria-labelledby="guide-section-title">
+              <div class="section-header">
+                <h2 class="section-title" id="guide-section-title">定番ガイド</h2>
+              </div>
+              <ul class="guide-list">
+                {evergreenGuides.map((article) => (
+                  <li class="guide-item">
+                    <a href={`/articles/${article.id}/`} class="guide-item-link">
+                      <span class="guide-item-rule" aria-hidden="true"></span>
+                      <span class="guide-item-body">
+                        <span class="guide-item-title">{article.data.title}</span>
+                        <span class="guide-item-desc">{article.data.description}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          <!-- Gourmet & Map -->
+          {gourmetArticles.length > 0 && (
+            <section class="gourmet-section" aria-labelledby="gourmet-section-title">
+              <div class="section-header">
+                <h2 class="section-title" id="gourmet-section-title">グルメ・マップ</h2>
+              </div>
+              <div class="article-grid">
+                {gourmetArticles.map((article) => (
+                  <ArticleCard article={article} />
+                ))}
+                <a href="/map/" class="gourmet-cta">
+                  <span class="gourmet-cta-label">レストランマップ</span>
+                  <span class="gourmet-cta-text">全店舗を地図で見る</span>
+                  <span class="gourmet-cta-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </section>
+          )}
         </>
       )}
 
@@ -95,4 +165,96 @@ const todayStr = formatDate(new Date());
         .catch(function(){ el.innerHTML = 'ジャカルタ --°C'; });
     })();
   </script>
+
+  <style>
+    /* Screen-reader only heading (no visual-design impact) */
+    .sr-only{
+      position:absolute;
+      width:1px;height:1px;
+      padding:0;margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+
+    /* "カテゴリから探す" — modest end-of-section wayfinding */
+    .section-footer-nav{
+      display:flex;flex-wrap:wrap;align-items:baseline;
+      gap:6px 4px;
+      padding-top:16px;margin:4px 0 40px;
+      border-top:1px solid var(--border-light);
+      font-size:12px;
+    }
+    .section-footer-label{color:var(--text-muted);font-weight:600;margin-right:6px}
+    .section-footer-cats{display:flex;flex-wrap:wrap;align-items:baseline}
+    .section-footer-cats a{color:var(--teal);padding:2px 2px}
+    .section-footer-cats a:hover{color:var(--text)}
+    .section-footer-sep{color:var(--text-light);margin:0 2px}
+
+    /* "定番ガイド" — hairline box + gold rule list, distinct from news cards */
+    .guide-section{margin-top:8px;margin-bottom:40px}
+    .guide-list{
+      border:1px solid var(--border);
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+    }
+    .guide-item{border-bottom:1px solid var(--border-light)}
+    .guide-item:last-child{border-bottom:none}
+    .guide-item-link{
+      display:flex;align-items:stretch;gap:16px;
+      padding:20px 24px;
+      transition:background .15s;
+    }
+    .guide-item-link:hover{background:var(--gold-dim)}
+    .guide-item-rule{
+      flex-shrink:0;width:3px;
+      background:var(--gold);border-radius:2px;
+    }
+    .guide-item-body{flex:1;min-width:0;align-self:center}
+    .guide-item-title{
+      display:block;
+      font-family:var(--serif);font-size:16px;font-weight:700;
+      color:var(--text);line-height:1.5;margin-bottom:4px;
+    }
+    .guide-item-desc{
+      display:block;
+      font-size:13px;color:var(--text-muted);line-height:1.65;
+    }
+
+    /* "グルメ・マップ" — reuse .article-grid layout; CTA tile is a standalone
+       scoped element (not coupled to ArticleCard's internal skin, which is
+       being redesigned separately) but echoes its geometry: hairline border,
+       accent top rule, generous padding, no imagery. */
+    .gourmet-section{margin-top:8px;margin-bottom:8px}
+    .gourmet-cta{
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      height:100%;
+      text-align:center;
+      padding:18px 16px;
+      background:var(--bg-sidebar);
+      border:1px solid var(--border-light);
+      border-top:3px solid var(--gold);
+      border-radius:var(--radius);
+      transition:border-color .15s, background .15s;
+    }
+    .gourmet-cta:hover{
+      border-color:var(--gold);
+      background:var(--gold-dim);
+    }
+    .gourmet-cta-label{
+      font-size:11px;font-weight:600;color:var(--teal);
+      text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;
+    }
+    .gourmet-cta-text{
+      font-family:var(--serif);font-size:15px;font-weight:700;
+      color:var(--text);margin-bottom:10px;
+    }
+    .gourmet-cta-arrow{font-size:13px;color:var(--teal);font-weight:600}
+
+    @media(max-width:480px){
+      .guide-item-link{padding:16px}
+      .section-footer-nav{gap:6px 8px}
+    }
+  </style>
 </Base>

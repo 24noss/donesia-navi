@@ -1,4 +1,6 @@
 ---
+import { cuisineConfig, priceLabels } from '../lib/cuisines';
+
 interface Props {
   restaurants: string;
   height?: string;
@@ -10,24 +12,68 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
 
 <div class="restaurant-map-wrap">
   <div class="map-cuisine-filters" id="map-cuisine-filters"></div>
+  <div class="map-cuisine-filters" id="map-area-filters"></div>
+  <div class="map-toolbar">
+    <button type="button" id="map-geolocate-btn" class="map-geolocate-btn">📍 現在地から探す</button>
+  </div>
   <div id="restaurant-map" style={`height:${height};width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);background:#e8e6e1;`}></div>
 </div>
 
-<script is:inline define:vars={{ restaurants, GMAP_KEY }}>
+<style>
+  /* Statically rendered elements: Astro's scoped-style attribute applies normally. */
+  .map-toolbar {
+    margin-bottom: 10px;
+  }
+  .map-geolocate-btn {
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: var(--bg-sidebar);
+    color: var(--text);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .map-geolocate-btn:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+  .map-geolocate-btn:disabled {
+    opacity: .6;
+    cursor: default;
+  }
+
+  /* The rules below target elements created dynamically by the inline script below
+     (halal toggle + its caption). Dynamically created nodes never receive Astro's
+     scoping attribute, so :global() is required for these selectors to take effect. */
+  :global(.map-filter-halal) {
+    border-color: #3f7d5c !important;
+  }
+  :global(.map-filter-halal.active) {
+    background: #3f7d5c;
+    color: #fff;
+    border-color: #3f7d5c !important;
+  }
+  :global([data-theme="dark"] .map-filter-halal.active) {
+    background: #4c9770;
+    border-color: #4c9770 !important;
+  }
+  :global(.map-filter-note) {
+    font-size: 11px;
+    color: var(--text-muted);
+    align-self: center;
+    margin-left: 4px;
+  }
+</style>
+
+<script is:inline define:vars={{ restaurants, GMAP_KEY, cuisineConfig, priceLabels }}>
 (function() {
   var data = JSON.parse(restaurants);
 
-  var cuisineConfig = {
-    japanese:   { label: '日本食',           color: '#1B2D4F', icon: '🍣' },
-    korean:     { label: '韓国料理',         color: '#CE3B3B', icon: '🍖' },
-    chinese:    { label: '中華料理',         color: '#D97706', icon: '🥟' },
-    indonesian: { label: 'インドネシア料理', color: '#C9A44A', icon: '🌶️' },
-    european:   { label: '西洋料理',         color: '#3A6B8C', icon: '🍷' },
-    cafe:       { label: 'カフェ',           color: '#64748B', icon: '☕' },
-    other:      { label: 'その他',           color: '#7A8A9E', icon: '🍽️' },
-  };
-
-  var priceLabels = { budget: '¥', mid: '¥¥', high: '¥¥¥', luxury: '¥¥¥¥' };
+  // cuisineConfig and priceLabels are injected above via define:vars from
+  // src/lib/cuisines.ts — the single source of truth for cuisine label/color/icon
+  // and price symbols. Do not redeclare them locally in this script.
 
   // Count cuisines
   var cuisineCounts = {};
@@ -35,7 +81,15 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
     cuisineCounts[r.cuisine] = (cuisineCounts[r.cuisine] || 0) + 1;
   });
 
-  // Render filter buttons
+  // Count areas (area values are freeform strings from mapData, not an enum)
+  var areaCounts = {};
+  data.forEach(function(r) {
+    if (!r.area) return;
+    areaCounts[r.area] = (areaCounts[r.area] || 0) + 1;
+  });
+  var areaNames = Object.keys(areaCounts).sort();
+
+  // Render cuisine filter buttons + alcohol/halal toggles
   var filtersEl = document.getElementById('map-cuisine-filters');
   if (filtersEl) {
     var allBtn = document.createElement('button');
@@ -54,7 +108,7 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
       filtersEl.appendChild(btn);
     });
 
-    // Add alcohol filter toggle
+    // Alcohol filter toggle (hidden when no match, matches pre-existing behavior)
     var alcCount = data.filter(function(r) { return r.servesAlcohol === 'yes'; }).length;
     if (alcCount > 0) {
       var alcBtn = document.createElement('button');
@@ -64,6 +118,39 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
       alcBtn.style.marginLeft = '8px';
       filtersEl.appendChild(alcBtn);
     }
+
+    // Halal filter toggle — always rendered (even at 0 matches) since absence of
+    // verified halal data is itself useful information to the user.
+    var halalCount = data.filter(function(r) { return r.halal === 'yes'; }).length;
+    var halalBtn = document.createElement('button');
+    halalBtn.className = 'map-filter-btn map-filter-halal';
+    halalBtn.dataset.filter = 'halal';
+    halalBtn.innerHTML = '🕌 ハラール対応 (' + halalCount + ')';
+    halalBtn.style.marginLeft = alcCount > 0 ? '4px' : '8px';
+    filtersEl.appendChild(halalBtn);
+
+    var halalNote = document.createElement('span');
+    halalNote.className = 'map-filter-note';
+    halalNote.textContent = '※確認済みの店舗のみ';
+    filtersEl.appendChild(halalNote);
+  }
+
+  // Render area filter buttons
+  var areaFiltersEl = document.getElementById('map-area-filters');
+  if (areaFiltersEl && areaNames.length > 0) {
+    var allAreaBtn = document.createElement('button');
+    allAreaBtn.className = 'map-filter-btn active';
+    allAreaBtn.dataset.area = 'all';
+    allAreaBtn.textContent = 'すべてのエリア (' + data.length + ')';
+    areaFiltersEl.appendChild(allAreaBtn);
+
+    areaNames.forEach(function(area) {
+      var btn = document.createElement('button');
+      btn.className = 'map-filter-btn';
+      btn.dataset.area = area;
+      btn.textContent = area + ' (' + areaCounts[area] + ')';
+      areaFiltersEl.appendChild(btn);
+    });
   }
 
   // Load Google Maps
@@ -105,6 +192,7 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
 
   var mapInstance = null;
   var allMarkers = [];
+  var userLocationMarker = null;
 
   function initMap() {
     if (mapInstance) return;
@@ -179,12 +267,12 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
         + (r.nameEn ? '<div style="font-size:12px;color:#888;">' + r.nameEn + '</div>' : '')
         + '<div style="margin:8px 0 6px;">'
         + '<span style="display:inline-block;background:' + cc.color + ';color:#fff;padding:2px 10px;border-radius:4px;font-size:11px;font-weight:600;">' + cc.icon + ' ' + cc.label + '</span> '
-        + '<span style="font-size:14px;color:#C9A44A;font-weight:700;margin-left:4px;">' + (priceLabels[r.priceRange] || '') + '</span>'
+        + '<span style="font-size:14px;color:#1B2D4F;font-weight:700;margin-left:4px;">' + (priceLabels[r.priceRange] || '') + '</span>'
         + '</div>'
         + '<div style="font-size:13px;color:#555;margin-bottom:8px;">📍 ' + r.area + '</div>'
         + '<div style="display:flex;gap:12px;padding-top:8px;border-top:1px solid #eee;">'
         + '<a href="' + gmapsUrl + '" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#3A6B8C;text-decoration:none;font-weight:600;">Google Map ↗</a>'
-        + (r.articleSlug ? '<a href="/articles/' + r.articleSlug + '/" style="font-size:12px;color:#C9A44A;text-decoration:none;font-weight:600;">記事を読む →</a>' : '')
+        + (r.articleSlug ? '<a href="/articles/' + r.articleSlug + '/" style="font-size:12px;color:#3A6B8C;text-decoration:none;font-weight:600;">記事を読む →</a>' : '')
         + '</div></div>';
 
       marker.addListener('click', function() {
@@ -193,7 +281,9 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
       });
 
       marker._cuisine = r.cuisine;
+      marker._area = r.area;
       marker._servesAlcohol = r.servesAlcohol || 'unverified';
+      marker._halal = r.halal || 'unverified';
       allMarkers.push(marker);
       bounds.extend(marker.getPosition());
     });
@@ -202,15 +292,19 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
       map.fitBounds(bounds, { top: 50, bottom: 50, left: 50, right: 50 });
     }
 
-    // Filter logic
+    // Filter logic (cuisine / area / alcohol / halal all combine with AND)
     var alcoholFilterActive = false;
+    var halalFilterActive = false;
     var activeCuisine = 'all';
+    var activeArea = 'all';
 
     function applyFilters() {
       allMarkers.forEach(function(m) {
         var cuisineMatch = (activeCuisine === 'all' || m._cuisine === activeCuisine);
+        var areaMatch = (activeArea === 'all' || m._area === activeArea);
         var alcoholMatch = !alcoholFilterActive || m._servesAlcohol === 'yes';
-        if (cuisineMatch && alcoholMatch) {
+        var halalMatch = !halalFilterActive || m._halal === 'yes';
+        if (cuisineMatch && areaMatch && alcoholMatch && halalMatch) {
           m.setVisible(true);
           m.setIcon(Object.assign({}, m.getIcon(), { fillOpacity: 0.9, scale: 12 }));
         } else {
@@ -226,7 +320,7 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
       });
       if (count > 0) {
         map.fitBounds(newBounds, { top: 50, bottom: 50, left: 50, right: 50 });
-      } else if (!alcoholFilterActive && activeCuisine === 'all') {
+      } else if (!alcoholFilterActive && !halalFilterActive && activeCuisine === 'all' && activeArea === 'all') {
         map.fitBounds(bounds, { top: 50, bottom: 50, left: 50, right: 50 });
       }
     }
@@ -244,13 +338,77 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
           return;
         }
 
-        // Handle cuisine filters
-        filtersEl.querySelectorAll('.map-filter-btn:not(.map-filter-alcohol)').forEach(function(b) { b.classList.remove('active'); });
+        // Handle halal toggle separately
+        if (btn.dataset.filter === 'halal') {
+          halalFilterActive = !halalFilterActive;
+          btn.classList.toggle('active', halalFilterActive);
+          applyFilters();
+          return;
+        }
+
+        // Handle cuisine filters (exclude the alcohol/halal toggle buttons from the reset)
+        filtersEl.querySelectorAll('.map-filter-btn:not(.map-filter-alcohol):not(.map-filter-halal)').forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
         activeCuisine = btn.dataset.cuisine || 'all';
         applyFilters();
       });
     }
+
+    if (areaFiltersEl) {
+      areaFiltersEl.addEventListener('click', function(e) {
+        var btn = e.target.closest('.map-filter-btn');
+        if (!btn) return;
+        areaFiltersEl.querySelectorAll('.map-filter-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        activeArea = btn.dataset.area || 'all';
+        applyFilters();
+      });
+    }
+  }
+
+  // "Current location" button — Geolocation API requires a secure context (HTTPS);
+  // on plain HTTP other than localhost, getCurrentPosition is unavailable/will fail.
+  var geoBtn = document.getElementById('map-geolocate-btn');
+  if (geoBtn) {
+    var geoBtnDefaultLabel = geoBtn.textContent;
+    geoBtn.addEventListener('click', function() {
+      if (!navigator.geolocation || !mapInstance || !window.google) return;
+      geoBtn.disabled = true;
+      function handleError() {
+        // Permission denied or unavailable: fail silently (no alert), just relabel briefly.
+        geoBtn.disabled = false;
+        geoBtn.textContent = '取得できませんでした';
+        setTimeout(function() { geoBtn.textContent = geoBtnDefaultLabel; }, 2500);
+      }
+      try {
+        navigator.geolocation.getCurrentPosition(function(pos) {
+          var latlng = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+          if (userLocationMarker) userLocationMarker.setMap(null);
+          userLocationMarker = new google.maps.Marker({
+            position: latlng,
+            map: mapInstance,
+            title: '現在地',
+            zIndex: 999,
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: 7,
+              fillColor: '#4285F4',
+              fillOpacity: 0.9,
+              strokeColor: '#ffffff',
+              strokeWeight: 2,
+            },
+          });
+          mapInstance.panTo(latlng);
+          if (mapInstance.getZoom() < 14) mapInstance.setZoom(14);
+          geoBtn.disabled = false;
+          geoBtn.textContent = geoBtnDefaultLabel;
+        }, handleError, { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 });
+      } catch (err) {
+        // Some browsers/permission-policy contexts throw synchronously instead of
+        // invoking the error callback; treat that the same as a failed lookup.
+        handleError();
+      }
+    });
   }
 
   if (document.readyState === 'loading') {

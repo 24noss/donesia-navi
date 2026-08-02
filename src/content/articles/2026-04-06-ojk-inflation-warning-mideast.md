@@ -1,6 +1,5 @@
 ---
 title: "OJKが中東紛争によるインフレ加速を警告、在住者の家計への影響は"
-heroImage: "https://images.pexels.com/photos/35202792/pexels-photo-35202792.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200?auto=compress&cs=tinysrgb&w=1200&h=630&dpr=1"
 description: "金融庁（OJK）が中東紛争の影響でインフレが加速する可能性を警告。インドネシア在住者の生活コストへの影響を解説します。"
 category: "business"
 tags: ["インフレ", "OJK", "中東情勢", "物価", "金融"]
