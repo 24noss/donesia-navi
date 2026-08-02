@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "ショッピングモール", "治安", "プラモノ
 pubDate: 2026-08-01
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8599798/pramono-bakal-tertibkan-pagar-tinggi-di-mal-jakarta-jangan-bikin-image-tak-aman"
-draft: true
+draft: false
 ---
 
 ## 商業施設の過度なフェンス設置に州知事が難色、撤去・指導へ
