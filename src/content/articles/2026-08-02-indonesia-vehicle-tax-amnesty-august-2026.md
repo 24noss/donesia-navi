@@ -1,0 +1,30 @@
+---
+title: "インドネシア16州で「車両税特例免除」が8月開始 延滞金免除や名義変更手数料が無料に"
+description: "インドネシア全国16州で2026年8月より車両税（PKB）の特例免除措置（Pemutihan）が順次開始される。延滞利息の免除や名義変更手数料の無料化が行われ、車やバイクを所有する在住者や企業にとって確認すべき機会となる。"
+category: "regulation"
+tags: ["車両税", "Pemutihan", "インドネシア生活", "名義変更", "節税"]
+pubDate: 2026-08-02
+source: "Kompas"
+sourceUrl: "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPV2x4S2xEVnVwNUhnVXFua09iaGpESFA5RldDRVJGOUEyZ0RwTjFjaEVqeGNXSFp6QUkyQlhqbjZ5aGpEVkgxeGs2LURaQWowU0RZUF9hRndkTm5NeUVBZFhBWnRKeGc0Q0sxSUZ2MllXczVDX29HOFY5S19tMTRYT3dUcnVEeC1UZUZfV2VYVTVIWEVRMGlzNHFYbGVrRXZqeV9oWmNldEd5ZjdQTVpPU3Vwc1BhVDNCYmQ4OU52V3ZYRGUxOG5IWNIByAFBVV95cUxOLUg1REd2NDZBODBLUVFXdUc5N1A5MEpJR2N0ZTJaQzdDQ2NhM0xjcVNNOGtCb2ZPbGZwZndBdkhQWkdzUjk0SlJaZm5lX3BFZFgwaFFIRGlyeGh0OXzecnpuOExxOEIxdTFCZk9felFTTXFaQnNseFE0VFczQXdmclczTnA2a0dmZjJ6RkZLWlVHWndjc3RxS3RWa0RsSTJIaF81NVNsR0RsZVB5amp2S1oxam1kV2tvMUdwVFowQ2hqb3gtWFVoUA?oc=5"
+draft: false
+---
+
+## 8月より全国16州で車両税の特例免除措置が順次スタート
+
+**要点:**
+- 2026年8月より全国16州で車両税（PKB）の特例免除プログラムが開始
+- 過去の税金延滞利息の免除や、中古車購入時の名義変更手数料（BBNKB II）が無料に
+- 対象期間や適用条件は州ごとに異なるため、各自治体のSAMSAT等で確認が必要
+
+Kompas紙の報道によると、インドネシアの16州において2026年8月より車両税（PKB）の特例免除プログラム「Pemutihan Pajak Kendaraan」が順次スタートする。この措置は市民の納税意識向上と未納税金の解消を目的としたもので、実施期間中は過去の延滞利息の免除や減額、名義変更手数料の無料化などが適用される。
+
+今回の特例措置では、車両所有者変更に伴う名義変更（BBNKB II）の費用免除や、長年の滞納に対する罰金の免除などが盛り込まれている。インドネシアで自家用車やバイクを所有している在住日本人や、社用車を管理する企業にとっても、納税手続きや名義変更をお得に行う機会となる。
+
+実施主体は各地方自治体であり、免除の条件や受付期間は州によって異なっている。自身の居住地や車両登録地域のSAMSAT（行政窓口）または公式アプリ「Signal」などを通じて、詳細なスケジュールと必要書類を事前に確認することが推奨されている。
+
+---
+**情報ソース:** [Kompas](https://news.google.com/rss/articles/CBMiyAFBVV95cUxPV2x4S2xEVnVwNUhnVXFua09iaGpESFA5RldDRVJGOUEyZ0RwTjFjaEVqeGNXSFp6QUkyQlhqbjZ5aGpEVkgxeGs2LURaQWowU0RZUF9hRndkTm5NeUVBZFhBWnRKeGc0Q0sxSUZ2MllXczVDX29HOFY5S19tMTRYT3dUcnVEeC1UZUZfV2VYVTVIWEVRMGlzNHFYbGVrRXZqeV9oWmNldEd5ZjdQTVpPU3Vwc1BhVDNCYmQ4OU52V3ZYRGUxOG5IWNIByAFBVV95cUxOLUg1REd2NDZBODBLUVFXdUc5N1A5MEpJR2N0ZTJaQzdDQ2NhM0xjcVNNOGtCb2ZPbGZwZndBdkhQWkdzUjk0SlJaZm5lX3BFZFgwaFFIRGlyeGh0OXzecnpuOExxOEIxdTFCZk9felFTTXFaQnNseFE0VFczQXdmclczTnA2a0dmZjJ6RkZLWlVHWndjc3RxS3RWa0RsSTJIaF81NVNsR0RsZVB5amp2S1oxam1kV2tvMUdwVFowQ2hqb3gtWFVoUA?oc=5)
+**カテゴリ:** 規制・法務
+**タグ:** 車両税, Pemutihan, インドネシア生活, 名義変更, 節税
+
+*この記事はAIが生成し、公開前に人間の編集者がレビューします。*
