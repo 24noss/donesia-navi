@@ -6,7 +6,7 @@ tags: ["インドネシア株式", "BEI", "資産運用", "株式投資", "金�
 pubDate: 2026-08-02
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMitwFBVV95cUxNOW5UNTlncVVFN1NGbHB6MEdvNFRvd1JfcTVSMURfekpob0cyUjJ4TnVWdnIycjc4M2Z0elNjUXVwTjRhbnk2TDRqaTFMQ3JiOXV2UkxiWWZhR2JlWVJXSUdTanpPMzZZMGJkSE5hc0VWOFVmS21FWnRhdUI1bUI3ckVaXzNLMmlTWmhzYjdNanNmazEzSmRYWVI3a2Y3YXZXUEZnTTRacEJ1RTVCaTJ5V3QtRzNWeTg?oc=5"
-draft: true
+draft: false
 ---
 
 ## 8月3日より上場株式の銘柄コードに新しい特別表記が適用
