@@ -6,7 +6,7 @@ tags: ["交通規制", "ジャカルタ", "首脳会談", "タイ首相", "渋�
 pubDate: 2026-08-03
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8601535/pm-thailand-kunjungan-ke-ri-3-4-agustus-sejumlah-ruas-jalan-direkayasa"
-draft: true
+draft: false
 ---
 
 ## タイ首相の来印に伴いジャカルタ主要道路で交通規制・通行止めを実施
