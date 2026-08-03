@@ -6,7 +6,7 @@ tags: ["インフレ率", "BPS", "物価", "インドネシア経済", "デフ�
 pubDate: 2026-08-03
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5677247/bps-indonesia-catat-deflasi-bulanan-014-persen-pada-juli-2026"
-draft: true
+draft: false
 ---
 
 ## 7月の月間物価指数は前月比0.14%のデフレ、一部品目では値上がりも
