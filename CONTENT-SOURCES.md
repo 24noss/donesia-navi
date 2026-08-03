@@ -14,7 +14,7 @@
 | カテゴリ(日本語/slug) | 情報源 | 更新方式 | 頻度 | 人手の介在ポイント |
 |---|---|---|---|---|
 | [安全・災害](./docs/categories/safety.md) / `safety` | Detik・Antara(一般ニュースRSS) + BMKG地震API + Kompas(クエリ①、societyと共用) | 自動 | 1日2回(07:00・11:00 WIB) | Slack「✅承認して公開」ボタン(内容修正はしない、公開可否のみ) |
-| [社会・政治](./docs/categories/society.md) / `society` | Detik・Antara(一般ニュースRSS、専用Kompasクエリなし) + Kompas(クエリ①、safetyと共用) | 自動 | 1日2回 | 同上 |
+| [社会・政治](./docs/categories/society.md) / `society` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ①共用+専用クエリ⑥) | 自動 | 1日2回 | 同上 |
 | [経済・ビジネス](./docs/categories/business.md) / `business` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ③) | 自動 | 1日2回 | 同上 |
 | [生活・グルメ(飲食店ガイド)](./docs/categories/lifestyle.md) / `lifestyle` | Google Places API (New)で候補発見 + Claude CodeセッションでのWeb調査・執筆 | 半自動 | 不定期(オーナーが`discover-restaurants`を実行した時のみ) | 発見コマンドの実行判断、WebSearchでの裏取り、執筆、Slack承認 |
 | [生活・グルメ(飲食店以外: 学校・病院等)](./docs/categories/lifestyle.md) / `lifestyle` | 都度の手動調査(自動化なし) | 手動 | 不定期 | 発見〜執筆〜PR作成まで全工程 |
@@ -93,8 +93,8 @@
 
 - **既存記事の本文**: 一度公開した記事は自動では書き換わりません。誤りの訂正や数値の更新は手動でPRを作る必要があります
 - **`lifestyle`のうち飲食店ガイド以外**(学校・病院など): 発見の仕組みも半自動パイプラインも存在せず、完全手動でのリサーチ・執筆・PR作成が必要です
-- **`society`専用のKompasクエリ**: 存在しません。Detik/Antaraの一般ニュース経由でのみ実質的にカバーされます(クエリ①はsafety寄りの内容と共用)
-- **Kompasの実記事URL**: Google Newsの仲介リンクのままで、直リンクへの解決は行われません
+- ~~`society`専用のKompasクエリなし~~ → 2026-08-03にクエリ⑥`pemprov jakarta kebijakan warga`を追加済み
+- **Kompasの実記事URL**: 取得時に直リンクへ解決されます(2026-08-03〜、解決率約99%。失敗時のみ仲介URLのまま)
 - ニュースポータル路線以外の事業転換(生活DB化など): 本パイプラインのスコープ外です(`AUTOMATION.md`「既知の制約」節)
 
 ---

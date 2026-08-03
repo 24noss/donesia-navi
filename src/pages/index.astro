@@ -23,9 +23,12 @@ const evergreenGuides = articles
   .filter((article) => !DATE_PREFIX.test(article.id))
   .sort((a, b) => a.id.localeCompare(b.id));
 
-// "グルメ・マップ": mapData を持つ記事から最新3件
+// "グルメ・マップ": placesが紐づく(=紹介記事として参照されている)記事から最新3件
+const allPlaces = await getCollection('places');
+const placedArticleIds = new Set<string>();
+allPlaces.forEach((place) => place.data.sourceArticles.forEach((id) => placedArticleIds.add(id)));
 const gourmetArticles = articles
-  .filter((article) => !!article.data.mapData && article.data.mapData.length > 0)
+  .filter((article) => placedArticleIds.has(article.id))
   .slice(0, 3);
 
 const todayStr = formatDate(new Date());

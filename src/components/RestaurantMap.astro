@@ -81,7 +81,8 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
     cuisineCounts[r.cuisine] = (cuisineCounts[r.cuisine] || 0) + 1;
   });
 
-  // Count areas (area values are freeform strings from mapData, not an enum)
+  // Count areas (this component takes area as a plain string prop; the places
+  // collection constrains it to an enum upstream, but that's not this component's concern)
   var areaCounts = {};
   data.forEach(function(r) {
     if (!r.area) return;
@@ -261,9 +262,14 @@ const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
       });
 
       var gmapsUrl = 'https://www.google.com/maps/search/' + encodeURIComponent(r.googleMapsQuery);
+      // 店舗詳細ページ(/places/[slug]/)へのリンク。placesコレクション由来のデータには
+      // 常にidが入るが、他の呼び出し元との後方互換のため無い場合はプレーンテキストにフォールバックする。
+      var nameHtml = r.id
+        ? '<a href="/places/' + r.id + '/" style="color:#1B2D4F;text-decoration:none;">' + r.name + '</a>'
+        : r.name;
 
       var content = '<div style="font-family:Noto Sans JP,sans-serif;min-width:220px;line-height:1.6;padding:4px;">'
-        + '<div style="font-size:16px;font-weight:700;color:#1B2D4F;margin-bottom:2px;">' + r.name + '</div>'
+        + '<div style="font-size:16px;font-weight:700;color:#1B2D4F;margin-bottom:2px;">' + nameHtml + '</div>'
         + (r.nameEn ? '<div style="font-size:12px;color:#888;">' + r.nameEn + '</div>' : '')
         + '<div style="margin:8px 0 6px;">'
         + '<span style="display:inline-block;background:' + cc.color + ';color:#fff;padding:2px 10px;border-radius:4px;font-size:11px;font-weight:600;">' + cc.icon + ' ' + cc.label + '</span> '

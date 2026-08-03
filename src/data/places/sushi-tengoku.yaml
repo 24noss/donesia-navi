@@ -1,0 +1,16 @@
+name: Sushi Tengoku
+nameEn: Sushi Tengoku
+category: restaurant
+area: ラジオダラム
+cuisine: japanese
+priceRange: mid
+halal: unverified
+servesAlcohol: yes
+lat: -6.255147300000001
+lng: 106.79030549999999
+googleMapsQuery: Sushi Tengoku Kebayoran Baru Jakarta
+placeId: ChIJe-S5lgvxaS4RfOKdXeCfkBQ
+status: open
+verifiedAt: 2026-08-03
+sourceArticles:
+  - 2026-07-30-jakarta-japanese-restaurants-kebayoran-senopati

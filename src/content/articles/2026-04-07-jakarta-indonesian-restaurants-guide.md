@@ -7,57 +7,6 @@ pubDate: 2026-04-07
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
 draft: false
-mapData:
-  - name: "プラタラン・ダルマワンサ"
-    nameEn: "Plataran Dharmawangsa"
-    area: "ダルマワンサ"
-    cuisine: "indonesian"
-    priceRange: "high"
-    halal: "yes"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Plataran Dharmawangsa Jakarta"
-    lat: -6.2612
-    lng: 106.7988
-  - name: "スリブ・ラサ"
-    nameEn: "Seribu Rasa Menteng"
-    area: "メンテン"
-    cuisine: "indonesian"
-    priceRange: "high"
-    halal: "yes"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Seribu Rasa Menteng Jakarta"
-    lat: -6.1928
-    lng: 106.8327
-  - name: "ベベッ・ブンギル"
-    nameEn: "Bebek Bengil Menteng"
-    area: "メンテン"
-    cuisine: "indonesian"
-    priceRange: "mid"
-    halal: "yes"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Bebek Bengil Menteng Jakarta"
-    lat: -6.1932
-    lng: 106.8330
-  - name: "クンバン・グラ"
-    nameEn: "Kembang Goela"
-    area: "スディルマン"
-    cuisine: "indonesian"
-    priceRange: "mid"
-    halal: "yes"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Kembang Goela Sudirman Jakarta"
-    lat: -6.2178
-    lng: 106.8127
-  - name: "ララ・ジョングラン"
-    nameEn: "Lara Djonggrang"
-    area: "メンテン"
-    cuisine: "indonesian"
-    priceRange: "high"
-    halal: "unverified"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Lara Djonggrang Menteng Jakarta"
-    lat: -6.1960
-    lng: 106.8370
 ---
 
 ## インドネシア料理、もっと楽しんでいますか？

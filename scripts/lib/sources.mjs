@@ -59,20 +59,145 @@ function googleNewsSiteSearchUrl(domain, keyword) {
 }
 
 // Kompasは直接RSSが見つからないため、Google Newsのsite内検索RSSで代替する。
-// 制約: item.link はGoogleのJSリダイレクト経由の仲介URLで、実記事URLには直接解決できない。
+// item.link はGoogleの仲介URL（news.google.com/rss/articles/...）だが、
+// fetchKompasViaGoogleNews() が resolveDirectLink() で実記事URLへの解決を試みる（D-4、fail-open）。
 const KOMPAS_QUERIES = [
   'jakarta banjir gempa demo',
   'kitas visa wna jepang',
   'bbm subsidi ekonomi',
   'wisata liburan destinasi',
   'aturan kebijakan pajak izin',
+  'pemprov jakarta kebijakan warga', // society専用（D-1、2026-08-03追加。実測57件/日のユニーク候補を確認済み）
 ];
+
+const LINK_RESOLVE_TIMEOUT_MS = 5000;
+const LINK_RESOLVE_CONCURRENCY = 5;
+
+async function fetchWithTimeout(url, opts, timeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, {
+      ...opts,
+      headers: { 'User-Agent': USER_AGENT, ...(opts?.headers || {}) },
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// news.google.com/rss/articles/<id> または /rss/read/<id> 形式のURLから
+// Google News内部の記事IDを取り出す。google.com以外やパス形状が違う場合はnullを返す。
+export function extractGoogleNewsId(link) {
+  let u;
+  try {
+    u = new URL(link);
+  } catch {
+    return null;
+  }
+  if (!/(^|\.)google\.com$/.test(u.hostname)) return null;
+  const parts = u.pathname.split('/');
+  const idx = parts.findIndex((p) => p === 'articles' || p === 'read');
+  if (idx === -1 || !parts[idx + 1]) return null;
+  return parts[idx + 1];
+}
+
+// Google News内部API（batchexecute）のレスポンス本文（")]}'\n\n[[...]]" 形式）から
+// 実記事URLを取り出す。想定外の形状なら例外を投げる（呼び出し側でfail-openさせる）。
+export function parseBatchExecuteResponse(text) {
+  const jsonText = text.replace(/^\)\]\}'/, '').trim();
+  const outer = JSON.parse(jsonText);
+  const wrbLine = Array.isArray(outer) && outer.find((row) => Array.isArray(row) && row[0] === 'wrb.fr');
+  if (!wrbLine) throw new Error('wrb.fr行が見つかりません');
+  const inner = JSON.parse(wrbLine[2]);
+  if (inner[0] !== 'garturlres' || !inner[1]) throw new Error('想定外のレスポンス形状です');
+  return inner[1];
+}
+
+// Google Newsの仲介リンクをKompasの実記事URLに解決する。
+// (a) 通常のHTTPリダイレクト追跡（fetch redirect:'follow' の res.url）
+// (b) それでもgoogle.comドメインのままなら、Google News内部APIのデコードを試行
+// (c) いずれも失敗したら元のURLのまま返す（fail-open。呼び出し側は例外を意識しなくてよい）
+export async function resolveDirectLink(link, timeoutMs = LINK_RESOLVE_TIMEOUT_MS) {
+  try {
+    const res = await fetchWithTimeout(link, { redirect: 'follow' }, timeoutMs);
+    const finalHost = new URL(res.url).hostname;
+    if (!/(^|\.)google\.com$/.test(finalHost)) {
+      return res.url;
+    }
+
+    const base64Str = extractGoogleNewsId(link);
+    if (!base64Str) return link;
+
+    const html = await res.text();
+    const sgMatch = html.match(/data-n-a-sg="([^"]+)"/);
+    const tsMatch = html.match(/data-n-a-ts="([^"]+)"/);
+    if (!sgMatch || !tsMatch) return link;
+
+    const innerArgs = JSON.stringify([
+      'garturlreq',
+      [
+        ['X', 'X', ['X', 'X'], null, null, 1, 1, 'US:en', null, 1, null, null, null, null, null, 0, 1],
+        'X',
+        'X',
+        1,
+        [1, 1, 1],
+        1,
+        1,
+        null,
+        0,
+        0,
+        null,
+        0,
+      ],
+      base64Str,
+      Number(tsMatch[1]),
+      sgMatch[1],
+    ]);
+    const freq = JSON.stringify([[['Fbv4je', innerArgs, null, 'generic']]]);
+
+    const batchRes = await fetchWithTimeout(
+      `https://news.google.com/_/DotsSplashUi/data/batchexecute?rpcids=Fbv4je&source-path=/rss/articles/${base64Str}&hl=en-US&gl=US`,
+      {
+        method: 'POST',
+        headers: { 'content-type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body: `f.req=${encodeURIComponent(freq)}`,
+      },
+      timeoutMs
+    );
+    const text = await batchRes.text();
+    return parseBatchExecuteResponse(text);
+  } catch {
+    return link;
+  }
+}
+
+// items を並行数を limit 件に絞って fn に渡し、結果配列を返す（順序は入力と同じ）。
+export async function mapWithConcurrency(items, limit, fn) {
+  const results = new Array(items.length);
+  let idx = 0;
+  async function worker() {
+    while (idx < items.length) {
+      const cur = idx++;
+      results[cur] = await fn(items[cur], cur);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.max(1, Math.min(limit, items.length)) }, worker));
+  return results;
+}
 
 async function fetchKompasViaGoogleNews() {
   const results = await Promise.allSettled(
     KOMPAS_QUERIES.map((keyword) => fetchRssSource(googleNewsSiteSearchUrl('kompas.com', keyword), { fallbackSourceLabel: 'Kompas' }))
   );
-  return results.filter((r) => r.status === 'fulfilled').flatMap((r) => r.value);
+  const items = results.filter((r) => r.status === 'fulfilled').flatMap((r) => r.value);
+
+  // Google Newsの仲介リンクを実記事URLへ解決する（D-4）。解決できない項目は元のリンクのまま返す（fail-open）。
+  return mapWithConcurrency(items, LINK_RESOLVE_CONCURRENCY, async (item) => ({
+    ...item,
+    link: await resolveDirectLink(item.link),
+  }));
 }
 
 async function fetchBmkgEarthquakes() {

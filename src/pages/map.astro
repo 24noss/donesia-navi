@@ -2,22 +2,18 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import RestaurantMap from '../components/RestaurantMap.astro';
+import HospitalMap from '../components/HospitalMap.astro';
+import EarthquakeMap from '../components/EarthquakeMap.astro';
 import { cuisineConfig, priceLabels } from '../lib/cuisines';
+import { getVisiblePlaces, placeToMapPoint, placeToSimpleMapPoint } from '../lib/places';
 
-const allArticles = await getCollection('articles', ({ data }) => !data.draft && !!data.mapData);
+const allPlaces = await getCollection('places');
+const allArticles = await getCollection('articles');
+const visibleAll = getVisiblePlaces(allPlaces, allArticles);
 
-// Flatten all mapData and attach article slug, filter out chains
-const restaurants: Array<Record<string, any>> = [];
-allArticles.forEach((article) => {
-  if (!article.data.mapData) return;
-  article.data.mapData.forEach((r) => {
-    if (r.isChain) return;
-    restaurants.push({
-      ...r,
-      articleSlug: article.id,
-    });
-  });
-});
+// isChainは従来通り地図から除外(チェーン店は個別ピンにする価値が薄いため)。
+const visiblePlaces = visibleAll.filter((p) => p.data.category === 'restaurant' && !p.data.isChain);
+const restaurants = visiblePlaces.map(placeToMapPoint);
 
 // Group by area
 const byArea: Record<string, typeof restaurants> = {};
@@ -27,42 +23,129 @@ restaurants.forEach((r) => {
 });
 
 const areaNames = Object.keys(byArea).sort();
-const articleCount = allArticles.length;
+
+// 「M記事から」の実数 = 表示中の店舗が紐づく記事idの重複除去数(placeごとのsourceArticles全件を見る)
+const contributingArticleIds = new Set<string>();
+visiblePlaces.forEach((p) => p.data.sourceArticles.forEach((id) => contributingArticleIds.add(id)));
+const articleCount = contributingArticleIds.size;
+
+// 医療レイヤ(C-1タスク2)
+const visibleHospitals = visibleAll.filter((p) => p.data.category === 'hospital');
+const hospitals = visibleHospitals.map(placeToSimpleMapPoint);
+
+const byAreaHospital: Record<string, typeof hospitals> = {};
+hospitals.forEach((h) => {
+  if (!byAreaHospital[h.area]) byAreaHospital[h.area] = [];
+  byAreaHospital[h.area].push(h);
+});
+const hospitalAreaNames = Object.keys(byAreaHospital).sort();
 ---
-<Base title="レストランマップ" description="ジャカルタの日本食・グルメレストランマップ。記事で紹介した店舗を地図上で確認できます。">
+<Base title="ジャカルタ生活マップ" description="ジャカルタのレストラン・医療機関を地図上で確認できる生活マップ。地震情報レイヤも搭載。">
   <div class="container" style="padding-top:24px;padding-bottom:60px;">
 
     <div class="map-page-header">
-      <h1 class="map-page-title">レストランマップ</h1>
-      <p class="map-page-stats">全 <strong>{restaurants.length}</strong> 店舗 / <strong>{articleCount}</strong> 記事から</p>
+      <h1 class="map-page-title">ジャカルタ生活マップ</h1>
+      <p class="map-page-stats">レイヤを切り替えて、レストラン・医療機関・地震情報を確認できます</p>
     </div>
 
-    <RestaurantMap restaurants={JSON.stringify(restaurants)} height="560px" />
+    <div class="map-cuisine-filters" id="map-layer-switch" role="tablist" aria-label="マップレイヤ切替">
+      <button type="button" class="map-filter-btn active" data-layer="restaurant" role="tab" aria-selected="true">🍽 レストラン</button>
+      <button type="button" class="map-filter-btn" data-layer="hospital" role="tab" aria-selected="false">🏥 医療</button>
+      <button type="button" class="map-filter-btn" data-layer="quake" role="tab" aria-selected="false">🌋 防災（地震）</button>
+    </div>
 
-    {areaNames.length > 0 && (
-      <div class="map-area-list">
-        <h2 class="map-area-list-title">エリア別レストラン一覧</h2>
-        {areaNames.map((area) => (
-          <div class="map-area-group">
-            <h3 class="map-area-name">{area} <span class="map-area-count">({byArea[area].length})</span></h3>
-            <div class="map-area-items">
-              {byArea[area].map((r) => {
-                const cc = cuisineConfig[r.cuisine as keyof typeof cuisineConfig] || cuisineConfig.other;
-                return (
-                  <div class="map-area-item">
-                    <span class="map-area-cuisine-dot" style={`background:${cc.color};`}></span>
-                    <span class="map-area-item-name">{r.name}</span>
-                    <span class="map-area-item-cuisine">{cc.icon} {cc.label}</span>
-                    <span class="map-area-item-price">{priceLabels[r.priceRange] || ''}</span>
-                    <a href={`https://www.google.com/maps/search/${encodeURIComponent(r.googleMapsQuery)}`} target="_blank" rel="noopener noreferrer" class="map-area-item-link">Map</a>
-                  </div>
-                );
-              })}
+    <!-- レストランレイヤ(既定表示) -->
+    <div id="map-layer-restaurant">
+      <p class="map-page-stats" style="margin-bottom:12px;">全 <strong>{restaurants.length}</strong> 店舗 / <strong>{articleCount}</strong> 記事から</p>
+
+      <RestaurantMap restaurants={JSON.stringify(restaurants)} height="560px" />
+
+      {areaNames.length > 0 && (
+        <div class="map-area-list">
+          <h2 class="map-area-list-title">エリア別レストラン一覧</h2>
+          {areaNames.map((area) => (
+            <div class="map-area-group">
+              <h3 class="map-area-name">{area} <span class="map-area-count">({byArea[area].length})</span></h3>
+              <div class="map-area-items">
+                {byArea[area].map((r) => {
+                  const cc = cuisineConfig[r.cuisine as keyof typeof cuisineConfig] || cuisineConfig.other;
+                  return (
+                    <div class="map-area-item">
+                      <span class="map-area-cuisine-dot" style={`background:${cc.color};`}></span>
+                      <a href={`/places/${r.id}/`} class="map-area-item-name">{r.name}</a>
+                      <span class="map-area-item-cuisine">{cc.icon} {cc.label}</span>
+                      <span class="map-area-item-price">{priceLabels[r.priceRange as string] || ''}</span>
+                      <a href={`https://www.google.com/maps/search/${encodeURIComponent(r.googleMapsQuery)}`} target="_blank" rel="noopener noreferrer" class="map-area-item-link">Map</a>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    )}
+          ))}
+        </div>
+      )}
+    </div>
+
+    <!-- 医療レイヤ -->
+    <div id="map-layer-hospital" style="display:none;">
+      <p class="map-page-stats" style="margin-bottom:12px;">全 <strong>{hospitals.length}</strong> 医療機関(日本語対応)</p>
+
+      <HospitalMap hospitals={JSON.stringify(hospitals)} height="560px" />
+
+      {hospitalAreaNames.length > 0 && (
+        <div class="map-area-list">
+          <h2 class="map-area-list-title">エリア別医療機関一覧</h2>
+          {hospitalAreaNames.map((area) => (
+            <div class="map-area-group">
+              <h3 class="map-area-name">{area} <span class="map-area-count">({byAreaHospital[area].length})</span></h3>
+              <div class="map-area-items">
+                {byAreaHospital[area].map((h) => (
+                  <div class="map-area-item">
+                    <span class="map-area-cuisine-dot" style="background:#CE3B3B;"></span>
+                    <a href={`/places/${h.id}/`} class="map-area-item-name">{h.name}</a>
+                    <a href={`https://www.google.com/maps/search/${encodeURIComponent(h.googleMapsQuery)}`} target="_blank" rel="noopener noreferrer" class="map-area-item-link">Map</a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <!-- 防災(地震)レイヤ -->
+    <div id="map-layer-quake" style="display:none;">
+      <EarthquakeMap height="560px" />
+    </div>
 
   </div>
+
+  <script is:inline>
+    // マップレイヤ切替(C-1タスク2)。レストラン/医療/防災の3レイヤをdisplay切替で
+    // 表示し、各レイヤのコンポーネントは自身のvisibility監視で地図を遅延初期化する
+    // (category/[slug]ページのlifestyleタブと同じ考え方)。
+    (function() {
+      var switchEl = document.getElementById('map-layer-switch');
+      if (!switchEl) return;
+      var panels = {
+        restaurant: document.getElementById('map-layer-restaurant'),
+        hospital: document.getElementById('map-layer-hospital'),
+        quake: document.getElementById('map-layer-quake'),
+      };
+      switchEl.addEventListener('click', function(e) {
+        var btn = e.target.closest('.map-filter-btn');
+        if (!btn) return;
+        switchEl.querySelectorAll('.map-filter-btn').forEach(function(b) {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        var layer = btn.dataset.layer;
+        Object.keys(panels).forEach(function(key) {
+          if (panels[key]) panels[key].style.display = key === layer ? '' : 'none';
+        });
+      });
+    })();
+  </script>
 </Base>

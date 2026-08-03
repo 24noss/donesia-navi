@@ -1,0 +1,15 @@
+name: SOLA Ristorante
+nameEn: SOLA Ristorante e Bisteccheria
+category: restaurant
+area: メンテン
+cuisine: european
+priceRange: high
+halal: unverified
+servesAlcohol: yes
+lat: -6.201
+lng: 106.837
+googleMapsQuery: Sola Ristorante Bisteccheria Jl Purworejo No.23 Menteng Jakarta
+status: open
+verifiedAt: 2026-04-07
+sourceArticles:
+  - 2026-04-07-jakarta-european-restaurants-guide

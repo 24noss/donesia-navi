@@ -9,6 +9,7 @@ import RestaurantMap from '../../components/RestaurantMap.astro';
 import { categories, formatDate } from '../../lib/categories';
 import { shouldIncludeDrafts } from '../../lib/draftVisibility';
 import { getRelatedArticles } from '../../lib/related';
+import { getVisiblePlaces, placeToMapPoint } from '../../lib/places';
 
 export async function getStaticPaths() {
   const includeDrafts = shouldIncludeDrafts();
@@ -33,6 +34,18 @@ const newArticles = [...allArticles]
 // note for evergreen guide articles whose id has no date prefix.
 const isGuideArticle = !/^\d{4}-\d{2}-\d{2}-/.test(article.id);
 const lastReviewed = article.data.updatedDate ?? article.data.pubDate;
+
+// This article's own store map (places whose sourceArticles include this article's id).
+// getVisiblePlaces needs the FULL article set (including drafts) to resolve sourceArticles
+// against draft status correctly — reusing the already-filtered `allArticles` above would
+// make a draft article's own places invisible while previewing that same draft.
+const allPlaces = await getCollection('places');
+const allArticlesIncludingDrafts = await getCollection('articles');
+// category: 'restaurant' 限定(C-1タスク2で病院等の非レストランplaceが追加されたため、
+// この記事内ミニマップは従来通りレストラン専用のまま保つ)。
+const articlePlaces = getVisiblePlaces(allPlaces, allArticlesIncludingDrafts)
+  .filter((place) => place.data.category === 'restaurant' && place.data.sourceArticles.includes(article.id))
+  .map(placeToMapPoint);
 ---
 <Base
   title={article.data.title}
@@ -134,11 +147,11 @@ const lastReviewed = article.data.updatedDate ?? article.data.pubDate;
           最新情報は公式ソースをご確認ください。
         </div>
 
-        <!-- Restaurant map (only for articles with mapData) -->
-        {article.data.mapData && article.data.mapData.length > 0 && (
+        <!-- Restaurant map (only for articles with linked places) -->
+        {articlePlaces.length > 0 && (
           <section class="article-map-section">
             <h2 class="article-map-heading">この記事のお店マップ</h2>
-            <RestaurantMap restaurants={JSON.stringify(article.data.mapData)} height="420px" />
+            <RestaurantMap restaurants={JSON.stringify(articlePlaces)} height="420px" />
           </section>
         )}
 
@@ -263,7 +276,7 @@ const lastReviewed = article.data.updatedDate ?? article.data.pubDate;
     width: fit-content;
   }
 
-  /* Restaurant map embed for articles with mapData (B-3) */
+  /* Restaurant map embed for articles with linked places (B-3) */
   .article-map-section {
     margin-top: 32px;
     padding-top: 28px;

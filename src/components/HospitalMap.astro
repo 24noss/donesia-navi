@@ -1,0 +1,177 @@
+---
+// 医療レイヤ用マップ(C-1タスク2)。RestaurantMap.astroは記事内ミニマップ・
+// lifestyleタブ・place詳細ページの既存利用箇所を壊さないため変更禁止のため、
+// /mapページの医療レイヤ専用に独立コンポーネントとして新設した。
+// レストランレイヤ(RestaurantMap)と同じGoogle Maps JS APIを使うが、同一ページ内で
+// 二重に<script src=".../maps/api/js">を読み込むと後勝ちのcallbackが前者を潰して
+// しまうため、このコンポーネントは「既に読み込み済みならそれを使う/読み込み中なら
+// ポーリングで待つ」方式にし、RestaurantMap側の window._gmapCallback は一切触らない。
+interface Props {
+  hospitals: string;
+  height?: string;
+}
+
+const { hospitals, height = '520px' } = Astro.props;
+const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
+const MARKER_RED = '#CE3B3B';
+---
+
+<div class="hospital-map-wrap">
+  <div id="hospital-map" style={`height:${height};width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);background:#e8e6e1;`}></div>
+</div>
+
+<script is:inline define:vars={{ hospitals, GMAP_KEY, MARKER_RED }}>
+(function() {
+  var data = JSON.parse(hospitals);
+
+  // Google Maps JS APIの共有ローダー。既に読み込み済み/読み込み中の場合は
+  // 新しい<script>タグを追加せず、window.google.mapsが使えるようになるまで
+  // 軽くポーリングする(RestaurantMap.astro側のロード処理と競合させないため)。
+  function loadGoogleMapsShared(cb) {
+    if (window.google && window.google.maps) { cb(); return; }
+
+    var existingScript = document.querySelector('script[src*="maps.googleapis.com/maps/api/js"]');
+    if (existingScript) {
+      var tries = 0;
+      var poll = setInterval(function() {
+        tries++;
+        if (window.google && window.google.maps) {
+          clearInterval(poll);
+          cb();
+        } else if (tries > 50) {
+          clearInterval(poll);
+          // 5秒待っても読み込めない場合は諦める(他コンポーネントの読み込みが
+          // 失敗している可能性。ここで独自にscriptを足すとさらに競合するため何もしない)。
+        }
+      }, 100);
+      return;
+    }
+
+    window._gmapCallbackHospital = cb;
+    var s = document.createElement('script');
+    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + GMAP_KEY + '&callback=_gmapCallbackHospital&v=weekly&language=ja';
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+
+  function initWhenVisible() {
+    var mapEl = document.getElementById('hospital-map');
+    if (!mapEl) return;
+
+    if (mapEl.offsetParent !== null && mapEl.offsetWidth > 0) {
+      loadGoogleMapsShared(initMap);
+      return;
+    }
+
+    var obs = new MutationObserver(function() {
+      if (mapEl.offsetParent !== null && mapEl.offsetWidth > 0) {
+        obs.disconnect();
+        loadGoogleMapsShared(initMap);
+      }
+    });
+    obs.observe(document.body, { attributes: true, childList: true, subtree: true });
+
+    setTimeout(function() {
+      if (mapEl.offsetParent !== null && mapEl.offsetWidth > 0) {
+        obs.disconnect();
+        loadGoogleMapsShared(initMap);
+      }
+    }, 1000);
+  }
+
+  var mapInstance = null;
+
+  function initMap() {
+    if (mapInstance) return;
+    var mapEl = document.getElementById('hospital-map');
+    if (!mapEl || !window.google) return;
+
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    var darkStyle = [
+      { elementType: 'geometry', stylers: [{ color: '#1d2c4d' }] },
+      { elementType: 'labels.text.fill', stylers: [{ color: '#8ec3b9' }] },
+      { elementType: 'labels.text.stroke', stylers: [{ color: '#1a3646' }] },
+      { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#304a7d' }] },
+      { featureType: 'road', elementType: 'labels.text.fill', stylers: [{ color: '#98a5be' }] },
+      { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#0e1626' }] },
+      { featureType: 'poi', elementType: 'geometry', stylers: [{ color: '#283d6a' }] },
+      { featureType: 'transit', elementType: 'geometry', stylers: [{ color: '#2f3948' }] },
+    ];
+
+    var map = new google.maps.Map(mapEl, {
+      center: { lat: -6.2088, lng: 106.8456 },
+      zoom: 12,
+      styles: isDark ? darkStyle : [],
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: true,
+      zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_BOTTOM },
+    });
+    mapInstance = map;
+
+    new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        if (m.attributeName === 'data-theme') {
+          var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+          map.setOptions({ styles: dark ? darkStyle : [] });
+        }
+      });
+    }).observe(document.documentElement, { attributes: true });
+
+    var bounds = new google.maps.LatLngBounds();
+    var infoWindow = new google.maps.InfoWindow();
+
+    data.forEach(function(h) {
+      if (!h.lat || !h.lng) return;
+
+      var marker = new google.maps.Marker({
+        position: { lat: h.lat, lng: h.lng },
+        map: map,
+        title: h.name,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 12,
+          fillColor: MARKER_RED,
+          fillOpacity: 0.9,
+          strokeColor: '#ffffff',
+          strokeWeight: 2.5,
+        },
+        label: { text: '➕', fontSize: '13px' },
+      });
+
+      var gmapsUrl = 'https://www.google.com/maps/search/' + encodeURIComponent(h.googleMapsQuery);
+      var nameHtml = h.id
+        ? '<a href="/places/' + h.id + '/" style="color:#1B2D4F;text-decoration:none;">' + h.name + '</a>'
+        : h.name;
+
+      var content = '<div style="font-family:Noto Sans JP,sans-serif;min-width:220px;line-height:1.6;padding:4px;">'
+        + '<div style="font-size:16px;font-weight:700;color:#1B2D4F;margin-bottom:2px;">' + nameHtml + '</div>'
+        + (h.nameEn ? '<div style="font-size:12px;color:#888;">' + h.nameEn + '</div>' : '')
+        + '<div style="font-size:13px;color:#555;margin:8px 0 6px;">📍 ' + h.area + '</div>'
+        + (h.description ? '<div style="font-size:13px;color:#333;margin-bottom:8px;">' + h.description + '</div>' : '')
+        + '<div style="display:flex;gap:12px;padding-top:8px;border-top:1px solid #eee;">'
+        + '<a href="' + gmapsUrl + '" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#3A6B8C;text-decoration:none;font-weight:600;">Google Map ↗</a>'
+        + (h.id ? '<a href="/places/' + h.id + '/" style="font-size:12px;color:#3A6B8C;text-decoration:none;font-weight:600;">詳細ページ →</a>' : '')
+        + '</div></div>';
+
+      marker.addListener('click', function() {
+        infoWindow.setContent(content);
+        infoWindow.open(map, marker);
+      });
+
+      bounds.extend(marker.getPosition());
+    });
+
+    if (data.length > 0) {
+      map.fitBounds(bounds, { top: 50, bottom: 50, left: 50, right: 50 });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWhenVisible);
+  } else {
+    initWhenVisible();
+  }
+})();
+</script>

@@ -7,57 +7,6 @@ pubDate: 2026-04-07
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
 draft: false
-mapData:
-  - name: "Chung Gi Wa"
-    nameEn: "Chung Gi Wa"
-    area: "ウィジャヤ"
-    cuisine: "korean"
-    priceRange: "mid"
-    halal: "no"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Chung Gi Wa Wijaya Jakarta"
-    lat: -6.2440
-    lng: 106.7960
-  - name: "Bornga"
-    nameEn: "Bornga Korean Restaurant"
-    area: "ウォルターモンギンシディ"
-    cuisine: "korean"
-    priceRange: "mid"
-    halal: "no"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Bornga Korean Restaurant Wolter Monginsidi Jakarta"
-    lat: -6.2415
-    lng: 106.7935
-  - name: "Cheongdam Garden"
-    nameEn: "Cheongdam Garden Senopati"
-    area: "セノパティ"
-    cuisine: "korean"
-    priceRange: "high"
-    halal: "no"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Cheongdam Garden Senopati Jakarta"
-    lat: -6.2350
-    lng: 106.7985
-  - name: "Gahyo"
-    nameEn: "Gahyo Korean BBQ"
-    area: "SCBD"
-    cuisine: "korean"
-    priceRange: "mid"
-    halal: "unverified"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Gahyo Korean BBQ SCBD Jakarta"
-    lat: -6.2275
-    lng: 106.8080
-  - name: "Haemaru"
-    nameEn: "Haemaru Korean Sashimi & Grill"
-    area: "パングリマポリム"
-    cuisine: "korean"
-    priceRange: "high"
-    halal: "no"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Haemaru Korean Sashimi Grill Panglima Polim Jakarta"
-    lat: -6.2445
-    lng: 106.7920
 ---
 
 ## ジャカルタの韓国料理事情、実はかなり充実している

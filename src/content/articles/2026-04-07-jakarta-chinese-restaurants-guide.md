@@ -7,57 +7,6 @@ pubDate: 2026-04-07
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
 draft: false
-mapData:
-  - name: "Li Feng"
-    nameEn: "Li Feng Mandarin Oriental"
-    area: "タムリン"
-    cuisine: "chinese"
-    priceRange: "luxury"
-    halal: "no"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Li Feng Mandarin Oriental Jakarta"
-    lat: -6.1946
-    lng: 106.8228
-  - name: "Table8"
-    nameEn: "Table8 Hotel Mulia Senayan"
-    area: "スナヤン"
-    cuisine: "chinese"
-    priceRange: "luxury"
-    halal: "no"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Table8 Hotel Mulia Senayan Jakarta"
-    lat: -6.2175
-    lng: 106.8015
-  - name: "Twelve Chinese Dining"
-    nameEn: "Twelve Chinese Dining"
-    area: "メンテン"
-    cuisine: "chinese"
-    priceRange: "high"
-    halal: "yes"
-    servesAlcohol: "unverified"
-    googleMapsQuery: "Twelve Chinese Dining Menteng Jakarta"
-    lat: -6.1981
-    lng: 106.8244
-  - name: "Wong Fu Kie"
-    nameEn: "Wong Fu Kie Hakka"
-    area: "グロドック"
-    cuisine: "chinese"
-    priceRange: "budget"
-    halal: "no"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Wong Fu Kie Hakka Glodok Jakarta"
-    lat: -6.1488
-    lng: 106.8126
-  - name: "Chao Chao"
-    nameEn: "Chao Chao Alila SCBD"
-    area: "SCBD"
-    cuisine: "chinese"
-    priceRange: "luxury"
-    halal: "unverified"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Chao Chao Alila SCBD Jakarta"
-    lat: -6.2270
-    lng: 106.8082
 ---
 
 ## ジャカルタの中華料理、実は在住者にとって最高の選択肢

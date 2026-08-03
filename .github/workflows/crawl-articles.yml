@@ -34,6 +34,8 @@ jobs:
       - name: Crawl sources and draft articles
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: npm run crawl
 
       - name: Check for new draft articles

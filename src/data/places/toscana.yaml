@@ -1,0 +1,15 @@
+name: Toscana
+nameEn: Toscana Italian Restaurant
+category: restaurant
+area: クマン
+cuisine: european
+priceRange: high
+halal: unverified
+servesAlcohol: yes
+lat: -6.261
+lng: 106.813
+googleMapsQuery: Toscana Jl Kemang Raya No.120 Jakarta Selatan
+status: open
+verifiedAt: 2026-04-07
+sourceArticles:
+  - 2026-04-07-jakarta-european-restaurants-guide

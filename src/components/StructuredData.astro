@@ -5,6 +5,7 @@
  */
 import { categories } from '../lib/categories';
 import type { CategorySlug } from '../lib/categories';
+import { cuisineConfig, priceLabels } from '../lib/cuisines';
 
 interface ArticleData {
   title: string;
@@ -17,15 +18,28 @@ interface ArticleData {
   sourceUrl?: string;
 }
 
+interface PlaceData {
+  name: string;
+  nameEn?: string;
+  category: string;
+  cuisine?: string;
+  priceRange?: string;
+  lat: number;
+  lng: number;
+  area: string;
+}
+
 interface Props {
-  /** "home" | "article" | "category" */
-  type: 'home' | 'article' | 'category';
+  /** "home" | "article" | "category" | "place" */
+  type: 'home' | 'article' | 'category' | 'place';
   article?: ArticleData;
   articleUrl?: string;
   categorySlug?: CategorySlug;
+  place?: PlaceData;
+  placeUrl?: string;
 }
 
-const { type, article, articleUrl, categorySlug } = Astro.props;
+const { type, article, articleUrl, categorySlug, place, placeUrl } = Astro.props;
 const siteUrl = Astro.site?.href ?? 'https://indonesia-navi.com';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 
@@ -112,6 +126,31 @@ function buildBreadcrumbs(type: string, article?: ArticleData, categorySlug?: Ca
   };
 }
 
+// --- Restaurant / LocalBusiness schema (place detail pages) ---
+function buildPlaceSchema(data: PlaceData, url: string) {
+  const cc = data.cuisine ? cuisineConfig[data.cuisine as keyof typeof cuisineConfig] : undefined;
+  return {
+    '@context': 'https://schema.org',
+    '@type': data.category === 'restaurant' ? 'Restaurant' : 'LocalBusiness',
+    name: data.name,
+    ...(data.nameEn ? { alternateName: data.nameEn } : {}),
+    url,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Jakarta',
+      addressRegion: data.area,
+      addressCountry: 'ID',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: data.lat,
+      longitude: data.lng,
+    },
+    ...(cc ? { servesCuisine: cc.label } : {}),
+    ...(data.priceRange && priceLabels[data.priceRange] ? { priceRange: priceLabels[data.priceRange] } : {}),
+  };
+}
+
 // --- Organization schema ---
 const organizationSchema = {
   '@context': 'https://schema.org',
@@ -145,6 +184,10 @@ if (type === 'article' && article && articleUrl) {
 
 if (type === 'category' && categorySlug) {
   schemas.push(buildBreadcrumbs('category', undefined, categorySlug));
+}
+
+if (type === 'place' && place && placeUrl) {
+  schemas.push(buildPlaceSchema(place, placeUrl));
 }
 ---
 

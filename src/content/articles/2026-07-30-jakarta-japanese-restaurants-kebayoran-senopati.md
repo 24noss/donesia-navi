@@ -7,57 +7,6 @@ pubDate: 2026-07-30
 source: "Google Places API + WebSearch"
 sourceUrl: "https://www.google.com/maps"
 draft: true
-mapData:
-  - name: "Yuki Japanese Restaurant"
-    nameEn: "Yuki Japanese Restaurant, Bar & Karaoke"
-    area: "メラワイ"
-    cuisine: "japanese"
-    priceRange: "high"
-    halal: "unverified"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Yuki Japanese Restaurant, Bar & Karaoke Kebayoran Baru Jakarta"
-    lat: -6.2445583
-    lng: 106.7986618
-  - name: "Sushi Hiro"
-    nameEn: "Sushi Hiro Senopati"
-    area: "セノパティ"
-    cuisine: "japanese"
-    priceRange: "high"
-    halal: "no"
-    servesAlcohol: "unverified"
-    googleMapsQuery: "Sushi Hiro Senopati Kebayoran Baru Jakarta"
-    lat: -6.2351435
-    lng: 106.8132502
-  - name: "Kintaro Sushi"
-    nameEn: "Kintaro Sushi Senopati"
-    area: "セノパティ"
-    cuisine: "japanese"
-    priceRange: "mid"
-    halal: "unverified"
-    servesAlcohol: "no"
-    googleMapsQuery: "Kintaro Sushi Senopati Kebayoran Baru Jakarta"
-    lat: -6.2346549
-    lng: 106.8130352
-  - name: "Sushi Tengoku"
-    nameEn: "Sushi Tengoku"
-    area: "ラジオダラム"
-    cuisine: "japanese"
-    priceRange: "mid"
-    halal: "unverified"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Sushi Tengoku Kebayoran Baru Jakarta"
-    lat: -6.2551473
-    lng: 106.7903055
-  - name: "Obihiro Nikudon"
-    nameEn: "Obihiro Nikudon - Blok M"
-    area: "ブロックM"
-    cuisine: "japanese"
-    priceRange: "budget"
-    halal: "yes"
-    servesAlcohol: "no"
-    googleMapsQuery: "Obihiro Nikudon - Blok M Kebayoran Baru Jakarta"
-    lat: -6.2450845
-    lng: 106.7997454
 ---
 
 ## クバヨランバル・セノパティは日本食の激戦区

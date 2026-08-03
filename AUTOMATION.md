@@ -111,12 +111,12 @@ gh variable set SLACK_CHANNEL_ID --body "C0AQFC6U8UE"   # 設定済み（2026-07
 
 ## 既知の制約
 
-- **Kompasの`sourceUrl`はGoogle Newsの仲介リンクになる**: Kompasには直接RSSが見つからなかったため、Google Newsのsite内検索RSSを使っている。ブラウザでは実記事に遷移するが、`megapolitan.kompas.com/read/...`のような直リンクではない
+- **Kompasの`sourceUrl`は直リンクに解決される(2026-08-03〜)**: Google Newsのsite内検索RSSを使うのは従来通りだが、取得時に`resolveDirectLink()`(リダイレクト追跡→Google News内部APIデコード→fail-open)で`kompas.com`の実URLへ解決する。解決率は実測約99%(失敗時は仲介URLのまま保存)
 - **本文はRSSの見出し・要約文をもとに生成**: 全文スクレイピングは行わない（ペイウォール・利用規約リスクを避けるため）。事実確認の深さは旧記事と同等〜やや浅めになりうる
-- **未マージのPRがある間、同じニュースが次のcron実行で再度ドラフトされうる**: 重複判定は`main`ブランチ上の既存記事のみを見ており、オープンPRの中身までは見ていない。実害はPRが余分に積まれる程度
+- **オープンPRも重複排除の対象(2026-08-03〜)**: `GITHUB_TOKEN`/`GITHUB_REPOSITORY`があるとき、オープンPRで追加予定の記事のsourceUrl/タイトルも重複判定に含める(`fetchOpenPrDedupeData()`、APIエラー時はfail-openで従来動作)
 - 生活DB化（2026年7月の事業転換提案）は本パイプラインのスコープ外。ニュースポータル路線を前提にしている
 - **飲食店ガイド（ハラール・酒類・エリア等のmapDataつき）は本パイプラインの対象外**: 既存のレストランガイド記事群（`content.config.ts`の`mapData`フィールド、料理別ガイド）はニュースではなく常時更新型のディレクトリコンテンツであり、ニュースRSSクロールでは生成できない。別途Google Places API等を使った専用の仕組みが必要。実装済み（後述の「レストラン・ディレクトリ自動更新パイプライン」節を参照）
-- Gemini APIの構造化出力機能（responseSchema）は使わず、プロンプトでJSON配列を指示してテキストから抽出する方式を採用（`ai-report-biz/pipeline/enrich.py`の実績あるパターンを踏襲）。書き込み前の`validateArticle()`が実質的なスキーマガード
+- Gemini APIは構造化出力（responseSchema + responseMimeType: application/json）を使用（2026-08-03〜）。パースは素のJSON.parse→失敗時に旧来のフェンス抽出/正規表現へフォールバックする多段構成。書き込み前の`validateArticle()`のスキーマガードも従来通り維持
 
 ## コスト
 

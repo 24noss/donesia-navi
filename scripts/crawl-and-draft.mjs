@@ -41,6 +41,66 @@ const ARTICLE_SCHEMA_DESCRIPTION = `
 - body: 2〜3段落の本文プレーンテキスト（見出しや箇条書き記号は含めない）
 `.trim();
 
+// Gemini APIの responseSchema（OpenAPI 3.0のサブセット）。ARTICLE_SCHEMA_DESCRIPTION のフィールドと整合させる。
+// トップレベルを配列にできる（type: 'ARRAY' + items: {type: 'OBJECT', ...}）。type値は大文字の列挙値
+// （STRING/NUMBER/INTEGER/BOOLEAN/ARRAY/OBJECT）を使う。参考: https://ai.google.dev/api/generate-content の Schema定義。
+const ARTICLE_FIELD_ORDER = [
+  'title',
+  'description',
+  'category',
+  'tags',
+  'pubDate',
+  'source',
+  'sourceUrl',
+  'slug',
+  'heading',
+  'keyPoints',
+  'body',
+];
+
+const ARTICLE_RESPONSE_SCHEMA = {
+  type: 'ARRAY',
+  items: {
+    type: 'OBJECT',
+    properties: {
+      title: { type: 'STRING' },
+      description: { type: 'STRING' },
+      category: { type: 'STRING', enum: Object.keys(CATEGORY_NAMES) },
+      tags: { type: 'ARRAY', items: { type: 'STRING' } },
+      pubDate: { type: 'STRING' },
+      source: { type: 'STRING' },
+      sourceUrl: { type: 'STRING' },
+      slug: { type: 'STRING' },
+      heading: { type: 'STRING' },
+      keyPoints: { type: 'ARRAY', items: { type: 'STRING' } },
+      body: { type: 'STRING' },
+    },
+    required: ARTICLE_FIELD_ORDER,
+    propertyOrdering: ARTICLE_FIELD_ORDER,
+  },
+};
+
+// Gemini応答テキストからarticle配列を取り出す。
+// 1. responseMimeType: 'application/json' 指定時に想定される経路（素のJSON.parse）を先に試す。
+// 2. 失敗、またはJSON.parseできても配列でない場合は、既存の```json フェンス抽出→正規表現フォールバックを試す
+//    （モデルがフェンス付きで返した場合や、responseSchemaが効かなかった場合の保険。挙動は変えず維持）。
+export function parseGeminiArticlesResponse(text) {
+  try {
+    const direct = JSON.parse(text);
+    if (Array.isArray(direct)) return direct;
+  } catch {
+    // フォールバックへ
+  }
+
+  const fenced = text.match(/```json\s*([\s\S]*?)```/i);
+  const jsonText = fenced ? fenced[1] : (text.match(/\[[\s\S]*\]/) || [])[0];
+  if (!jsonText) throw new Error(`モデル応答からJSON配列を抽出できませんでした: ${text.slice(0, 500)}`);
+
+  const parsed = JSON.parse(jsonText);
+  if (!Array.isArray(parsed)) throw new Error('モデル応答が配列ではありません');
+  return parsed;
+}
+
 export function escapeYaml(value) {
   return String(value).replace(/\\/g, '\\\\').replace(/"/g, '\\"');
 }
@@ -89,6 +149,24 @@ export function slugify(input) {
   return slug || 'article';
 }
 
+// frontmatterブロック（---〜---の中身）から sourceUrl / title を正規表現で取り出す。
+// loadExistingArticles() と fetchOpenPrDedupeData()（D-6）の両方から使う共通ロジック。
+export function parseFrontmatterBlock(content) {
+  const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!fmMatch) return null;
+  const block = fmMatch[1];
+
+  const sourceUrlMatch = block.match(/^sourceUrl:\s*"?(.*?)"?\s*$/m);
+  const titleMatch = block.match(/^title:\s*"?(.*?)"?\s*$/m);
+  const pubDateMatch = block.match(/^pubDate:\s*(.*?)\s*$/m);
+
+  return {
+    sourceUrl: sourceUrlMatch?.[1]?.trim() || null,
+    title: titleMatch?.[1]?.trim() || null,
+    pubDate: pubDateMatch?.[1]?.trim() || null,
+  };
+}
+
 async function loadExistingArticles() {
   let files = [];
   try {
@@ -104,24 +182,91 @@ async function loadExistingArticles() {
   for (const file of files) {
     if (!file.endsWith('.md')) continue;
     const content = await readFile(path.join(ARTICLES_DIR, file), 'utf-8');
-    const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
-    if (!fmMatch) continue;
-    const block = fmMatch[1];
+    const fm = parseFrontmatterBlock(content);
+    if (!fm) continue;
 
-    const sourceUrlMatch = block.match(/^sourceUrl:\s*"?(.*?)"?\s*$/m);
-    if (sourceUrlMatch?.[1]) sourceUrls.add(sourceUrlMatch[1].trim());
+    if (fm.sourceUrl) sourceUrls.add(fm.sourceUrl);
 
-    const titleMatch = block.match(/^title:\s*"?(.*?)"?\s*$/m);
-    const pubDateMatch = block.match(/^pubDate:\s*(.*?)\s*$/m);
-    if (titleMatch?.[1] && pubDateMatch?.[1]) {
-      const pubDate = new Date(pubDateMatch[1].trim());
+    if (fm.title && fm.pubDate) {
+      const pubDate = new Date(fm.pubDate);
       if (!Number.isNaN(pubDate.getTime()) && pubDate.getTime() >= cutoff) {
-        recentTitles.push(titleMatch[1].trim());
+        recentTitles.push(fm.title);
       }
     }
   }
 
   return { sourceUrls, recentTitles, files };
+}
+
+const GITHUB_API_BASE = 'https://api.github.com';
+
+async function githubApi(apiPath, token) {
+  const res = await fetch(`${GITHUB_API_BASE}${apiPath}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+  });
+  if (!res.ok) {
+    throw new Error(`GitHub API ${apiPath} error ${res.status}: ${await res.text()}`);
+  }
+  return res.json();
+}
+
+// オープンPR内で新規追加された src/content/articles/*.md のfrontmatterから
+// sourceUrl / title を集め、重複排除セットに合流させる（D-6）。
+// GITHUB_TOKEN / GITHUB_REPOSITORY が無ければ何もせず空を返す（ローカル実行時はネットワークアクセスなしでスキップ）。
+// GitHub APIが失敗しても警告を出すだけで処理は継続する（fail-open。main側のクロール自体は止めない）。
+export async function fetchOpenPrDedupeData({
+  token = process.env.GITHUB_TOKEN,
+  repo = process.env.GITHUB_REPOSITORY,
+} = {}) {
+  const sourceUrls = new Set();
+  const titles = [];
+
+  if (!token || !repo) {
+    return { sourceUrls, titles };
+  }
+
+  let prs;
+  try {
+    prs = await githubApi(`/repos/${repo}/pulls?state=open&per_page=100`, token);
+    if (!Array.isArray(prs)) throw new Error('オープンPR一覧のレスポンス形式が想定外です（配列ではありません）');
+  } catch (err) {
+    console.warn('オープンPR一覧の取得に失敗しました。既存記事のみで重複排除します:', err.message);
+    return { sourceUrls, titles };
+  }
+
+  for (const pr of prs) {
+    let files;
+    try {
+      files = await githubApi(`/repos/${repo}/pulls/${pr.number}/files?per_page=100`, token);
+      if (!Array.isArray(files)) throw new Error('ファイル一覧のレスポンス形式が想定外です（配列ではありません）');
+    } catch (err) {
+      console.warn(`オープンPR #${pr.number} のファイル一覧取得に失敗しました（続行）:`, err.message);
+      continue;
+    }
+
+    const articleFiles = files.filter(
+      (f) => f?.filename?.startsWith('src/content/articles/') && f.filename.endsWith('.md') && f.status === 'added'
+    );
+
+    for (const f of articleFiles) {
+      try {
+        const contentRes = await githubApi(`/repos/${repo}/contents/${encodeURIComponent(f.filename)}?ref=${pr.head.sha}`, token);
+        const raw = Buffer.from(contentRes.content, 'base64').toString('utf-8');
+        const fm = parseFrontmatterBlock(raw);
+        if (!fm) continue;
+        if (fm.sourceUrl) sourceUrls.add(fm.sourceUrl);
+        if (fm.title) titles.push(fm.title);
+      } catch (err) {
+        console.warn(`オープンPR #${pr.number} のファイル ${f.filename} 取得に失敗しました（続行）:`, err.message);
+      }
+    }
+  }
+
+  return { sourceUrls, titles };
 }
 
 function filterCandidates(items, existingSourceUrls) {
@@ -168,6 +313,10 @@ ${JSON.stringify(trimmed, null, 2)}`;
     },
     body: JSON.stringify({
       contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: {
+        responseMimeType: 'application/json',
+        responseSchema: ARTICLE_RESPONSE_SCHEMA,
+      },
     }),
   });
 
@@ -177,13 +326,7 @@ ${JSON.stringify(trimmed, null, 2)}`;
 
   const data = await res.json();
   const text = data.candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('') || '';
-  const fenced = text.match(/```json\s*([\s\S]*?)```/i);
-  const jsonText = fenced ? fenced[1] : (text.match(/\[[\s\S]*\]/) || [])[0];
-  if (!jsonText) throw new Error(`モデル応答からJSON配列を抽出できませんでした: ${text.slice(0, 500)}`);
-
-  const parsed = JSON.parse(jsonText);
-  if (!Array.isArray(parsed)) throw new Error('モデル応答が配列ではありません');
-  return parsed;
+  return parseGeminiArticlesResponse(text);
 }
 
 export function buildMarkdown(article, pubDateStr) {
@@ -239,13 +382,23 @@ async function main() {
 
   console.log('候補ニュースを取得中...');
   const { sourceUrls, recentTitles, files: existingFiles } = await loadExistingArticles();
+
+  // オープンPR（未マージのドラフト記事）も重複排除対象に含める（D-6）。
+  // GITHUB_TOKEN/GITHUB_REPOSITORY が無ければ何もせずスキップする。
+  const openPrDedupe = await fetchOpenPrDedupeData();
+  if (openPrDedupe.sourceUrls.size > 0 || openPrDedupe.titles.length > 0) {
+    console.log(`オープンPR由来の重複排除データ: sourceUrl ${openPrDedupe.sourceUrls.size}件 / title ${openPrDedupe.titles.length}件`);
+  }
+  openPrDedupe.sourceUrls.forEach((url) => sourceUrls.add(url));
+  const combinedRecentTitles = [...recentTitles, ...openPrDedupe.titles];
+
   const { items, failures } = await fetchAllCandidates();
   if (failures.length) {
     console.warn('一部ソースの取得に失敗しました:', failures);
   }
 
   const candidates = filterCandidates(items, sourceUrls);
-  console.log(`候補 ${items.length}件 → 既存記事との重複除外後 ${candidates.length}件`);
+  console.log(`候補 ${items.length}件 → 既存記事・オープンPRとの重複除外後 ${candidates.length}件`);
 
   if (candidates.length === 0) {
     console.log('新規候補がありません。終了します。');
@@ -253,7 +406,7 @@ async function main() {
     return;
   }
 
-  const drafted = await draftArticles(candidates, recentTitles);
+  const drafted = await draftArticles(candidates, combinedRecentTitles);
   const capped = drafted.slice(0, MAX_ARTICLES);
   console.log(`${capped.length}件の記事をドラフト生成します。`);
 

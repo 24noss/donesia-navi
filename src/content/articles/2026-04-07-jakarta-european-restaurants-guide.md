@@ -7,57 +7,6 @@ pubDate: 2026-04-07
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
 draft: false
-mapData:
-  - name: "AMUZ Gourmet Restaurant"
-    nameEn: "AMUZ Gourmet Restaurant"
-    area: "SCBD"
-    cuisine: "european"
-    priceRange: "luxury"
-    halal: "unverified"
-    servesAlcohol: "yes"
-    googleMapsQuery: "AMUZ Gourmet Restaurant SCBD Jakarta"
-    lat: -6.2258
-    lng: 106.8065
-  - name: "Osteria GIA"
-    nameEn: "Osteria GIA Plaza Indonesia"
-    area: "タムリン"
-    cuisine: "european"
-    priceRange: "high"
-    halal: "no"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Osteria Gia Plaza Indonesia Jakarta"
-    lat: -6.1939
-    lng: 106.8226
-  - name: "Le Quartier"
-    nameEn: "Le Quartier Restaurant"
-    area: "グナワルマン"
-    cuisine: "european"
-    priceRange: "high"
-    halal: "unverified"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Le Quartier Gunawarman Jakarta"
-    lat: -6.2420
-    lng: 106.7960
-  - name: "Toscana"
-    nameEn: "Toscana Italian Restaurant"
-    area: "クマン"
-    cuisine: "european"
-    priceRange: "high"
-    halal: "unverified"
-    servesAlcohol: "yes"
-    googleMapsQuery: "Toscana Italian Restaurant Kemang Jakarta"
-    lat: -6.2610
-    lng: 106.8130
-  - name: "SOLA Ristorante"
-    nameEn: "SOLA Ristorante e Bisteccheria"
-    area: "メンテン"
-    cuisine: "european"
-    priceRange: "high"
-    halal: "unverified"
-    servesAlcohol: "yes"
-    googleMapsQuery: "SOLA Ristorante Bisteccheria Menteng Jakarta"
-    lat: -6.2010
-    lng: 106.8370
 ---
 
 ## 接待にもデートにも。ジャカルタで本格ヨーロッパ料理を楽しめる5店

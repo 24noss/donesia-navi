@@ -10,6 +10,7 @@ import RestaurantMap from '../../../components/RestaurantMap.astro';
 import { categories } from '../../../lib/categories';
 import type { CategorySlug } from '../../../lib/categories';
 import { cuisineConfig } from '../../../lib/cuisines';
+import { getVisiblePlaces, placeToMapPoint } from '../../../lib/places';
 
 interface Props {
   page: Page<CollectionEntry<'articles'>>;
@@ -39,20 +40,26 @@ const { page } = Astro.props;
 const cat = categories[slug as CategorySlug];
 const articles = page.data;
 
-// Collect mapData for lifestyle category — computed from the FULL category
+// Collect places for lifestyle category — computed from the FULL category
 // article set (not just the current page's slice), since the map tab is a
 // persistent per-category feature independent of article-list pagination.
+// A place belongs to this tab when at least one of its sourceArticles is a
+// lifestyle-category article (mirrors the pre-places-collection behavior,
+// where restaurant frontmatter data only ever lived on lifestyle restaurant-guide articles).
 const isLifestyle = slug === 'lifestyle';
-const mapRestaurants: Array<Record<string, any>> = [];
+let mapRestaurants: ReturnType<typeof placeToMapPoint>[] = [];
 if (isLifestyle) {
-  const allCategoryArticles = await getCollection('articles', ({ data }) => !data.draft && data.category === slug);
-  allCategoryArticles.forEach((article) => {
-    if (!article.data.mapData) return;
-    article.data.mapData.forEach((r) => {
-      if (r.isChain) return;
-      mapRestaurants.push({ ...r, articleSlug: article.id });
-    });
-  });
+  const allPlaces = await getCollection('places');
+  const allArticles = await getCollection('articles');
+  const categoryArticleIds = new Set(
+    allArticles.filter((article) => article.data.category === slug).map((article) => article.id)
+  );
+  // category: 'restaurant' 限定(C-1タスク2で病院等の非レストランplaceが追加されたため、
+  // このタブは従来通りレストランマップ専用のまま保つ)。
+  const visiblePlaces = getVisiblePlaces(allPlaces, allArticles).filter(
+    (place) => place.data.category === 'restaurant' && !place.data.isChain && place.data.sourceArticles.some((id) => categoryArticleIds.has(id))
+  );
+  mapRestaurants = visiblePlaces.map(placeToMapPoint);
 }
 
 const pageTitle = page.currentPage > 1 ? `${cat.seoTitle}（${page.currentPage}ページ目）` : cat.seoTitle;

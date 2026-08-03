@@ -1,0 +1,16 @@
+name: AMUZ Gourmet Restaurant
+nameEn: AMUZ Gourmet Restaurant
+category: restaurant
+area: SCBD
+cuisine: european
+priceRange: luxury
+halal: unverified
+servesAlcohol: yes
+lat: -6.2258989
+lng: 106.8066798
+googleMapsQuery: AMUZ Gourmet Restaurant SCBD Jakarta
+placeId: ChIJdd3B8VDxaS4Rp9xaR-L7Ops
+status: open
+verifiedAt: 2026-08-03
+sourceArticles:
+  - 2026-04-07-jakarta-european-restaurants-guide

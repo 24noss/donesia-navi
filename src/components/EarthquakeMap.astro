@@ -1,0 +1,211 @@
+---
+// 防災(地震)レイヤ用マップ(C-1タスク2)。BMKG(インドネシア気象気候地球物理庁)の
+// 「直近の地震」フィードをクライアント側でfetchし、マグニチュード比例の円マーカーで
+// 表示する。RestaurantMap.astroとは独立したコンポーネントとして新設(理由は
+// HospitalMap.astro冒頭コメント参照。Google Maps JS APIの二重ロード対策も同様)。
+interface Props {
+  height?: string;
+}
+
+const { height = '520px' } = Astro.props;
+const GMAP_KEY = 'AIzaSyCU3hYfihH03MjQAxVSHjh49JCK2tOMzdQ';
+const BMKG_URL = 'https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json';
+const QUAKE_COLOR = '#C9A44A';
+---
+
+<div class="quake-map-wrap">
+  <div id="quake-map" style={`height:${height};width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);background:#e8e6e1;`}></div>
+  <p id="quake-fetch-error" class="quake-note" style="display:none;">地震情報を取得できませんでした</p>
+  <p class="quake-source">出典: BMKG（インドネシア気象気候地球物理庁）</p>
+</div>
+
+<style>
+  .quake-note {
+    margin-top:10px;font-size:13px;color:var(--text-muted);
+  }
+  .quake-source {
+    margin-top:10px;font-size:12px;color:var(--text-muted);
+  }
+</style>
+
+<script is:inline define:vars={{ GMAP_KEY, BMKG_URL, QUAKE_COLOR }}>
+(function() {
+  // Google Maps JS APIの共有ローダー(HospitalMap.astroと同じ方式。
+  // 既に読み込み済み/読み込み中ならそれを使い、独自の<script>タグは足さない)。
+  function loadGoogleMapsShared(cb) {
+    if (window.google && window.google.maps) { cb(); return; }
+
+    var existingScript = document.querySelector('script[src*="maps.googleapis.com/maps/api/js"]');
+    if (existingScript) {
+      var tries = 0;
+      var poll = setInterval(function() {
+        tries++;
+        if (window.google && window.google.maps) {
+          clearInterval(poll);
+          cb();
+        } else if (tries > 50) {
+          clearInterval(poll);
+        }
+      }, 100);
+      return;
+    }
+
+    window._gmapCallbackQuake = cb;
+    var s = document.createElement('script');
+    s.src = 'https://maps.googleapis.com/maps/api/js?key=' + GMAP_KEY + '&callback=_gmapCallbackQuake&v=weekly&language=ja';
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+
+  function initWhenVisible() {
+    var mapEl = document.getElementById('quake-map');
+    if (!mapEl) return;
+
+    if (mapEl.offsetParent !== null && mapEl.offsetWidth > 0) {
+      loadGoogleMapsShared(initMap);
+      return;
+    }
+
+    var obs = new MutationObserver(function() {
+      if (mapEl.offsetParent !== null && mapEl.offsetWidth > 0) {
+        obs.disconnect();
+        loadGoogleMapsShared(initMap);
+      }
+    });
+    obs.observe(document.body, { attributes: true, childList: true, subtree: true });
+
+    setTimeout(function() {
+      if (mapEl.offsetParent !== null && mapEl.offsetWidth > 0) {
+        obs.disconnect();
+        loadGoogleMapsShared(initMap);
+      }
+    }, 1000);
+  }
+
+  var mapInstance = null;
+  var loaded = false;
+
+  function initMap() {
+    if (mapInstance) return;
+    var mapEl = document.getElementById('quake-map');
+    if (!mapEl || !window.google) return;
+
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    var darkStyle = [
+      { elementType: 'geometry', stylers: [{ color: '#1d2c4d' }] },
+      { elementType: 'labels.text.fill', stylers: [{ color: '#8ec3b9' }] },
+      { elementType: 'labels.text.stroke', stylers: [{ color: '#1a3646' }] },
+      { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#304a7d' }] },
+      { featureType: 'road', elementType: 'labels.text.fill', stylers: [{ color: '#98a5be' }] },
+      { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#0e1626' }] },
+      { featureType: 'poi', elementType: 'geometry', stylers: [{ color: '#283d6a' }] },
+      { featureType: 'transit', elementType: 'geometry', stylers: [{ color: '#2f3948' }] },
+    ];
+
+    var map = new google.maps.Map(mapEl, {
+      center: { lat: -2.5, lng: 118 }, // インドネシア全域を初期表示(震源はジャワ島外が多いため)
+      zoom: 4,
+      styles: isDark ? darkStyle : [],
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: true,
+      zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_BOTTOM },
+    });
+    mapInstance = map;
+
+    new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        if (m.attributeName === 'data-theme') {
+          var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+          map.setOptions({ styles: dark ? darkStyle : [] });
+        }
+      });
+    }).observe(document.documentElement, { attributes: true });
+
+    if (loaded) return;
+    loaded = true;
+    fetchQuakes(map);
+  }
+
+  function showError() {
+    var el = document.getElementById('quake-fetch-error');
+    if (el) el.style.display = '';
+  }
+
+  async function fetchQuakes(map) {
+    var errorEl = document.getElementById('quake-fetch-error');
+    try {
+      var res = await fetch(BMKG_URL);
+      if (!res.ok) throw new Error('BMKG API error ' + res.status);
+      var data = await res.json();
+      var list = (data && data.Infogempa && Array.isArray(data.Infogempa.gempa)) ? data.Infogempa.gempa : [];
+      if (list.length === 0) {
+        showError();
+        return;
+      }
+      if (errorEl) errorEl.style.display = 'none';
+      renderQuakes(map, list);
+    } catch (err) {
+      showError();
+    }
+  }
+
+  // マグニチュードに比例した円の半径(m)。実際の揺れの到達範囲を表すものではなく、
+  // 地図上でマグニチュードの大小を視覚的に区別するための相対表現。
+  function radiusForMagnitude(magnitude) {
+    return Math.pow(Math.max(magnitude, 0), 3) * 700;
+  }
+
+  function renderQuakes(map, list) {
+    var bounds = new google.maps.LatLngBounds();
+    var infoWindow = new google.maps.InfoWindow();
+    var any = false;
+
+    list.forEach(function(q) {
+      var coords = String(q.Coordinates || '').split(',');
+      var lat = parseFloat(coords[0]);
+      var lng = parseFloat(coords[1]);
+      var magnitude = parseFloat(q.Magnitude);
+      if (!isFinite(lat) || !isFinite(lng) || !isFinite(magnitude)) return;
+
+      var circle = new google.maps.Circle({
+        strokeColor: QUAKE_COLOR,
+        strokeOpacity: 0.8,
+        strokeWeight: 1.5,
+        fillColor: QUAKE_COLOR,
+        fillOpacity: 0.3,
+        map: map,
+        center: { lat: lat, lng: lng },
+        radius: radiusForMagnitude(magnitude),
+      });
+
+      var content = '<div style="font-family:Noto Sans JP,sans-serif;min-width:200px;line-height:1.7;padding:4px;">'
+        + '<div style="font-size:15px;font-weight:700;color:#1B2D4F;margin-bottom:4px;">M ' + (q.Magnitude || '?') + '</div>'
+        + '<div style="font-size:13px;color:#333;">🕐 ' + (q.Tanggal || '') + ' ' + (q.Jam || '') + '</div>'
+        + '<div style="font-size:13px;color:#333;">📏 深さ ' + (q.Kedalaman || '不明') + '</div>'
+        + '<div style="font-size:13px;color:#333;">📍 ' + (q.Wilayah || '不明') + '</div>'
+        + '</div>';
+
+      circle.addListener('click', function() {
+        infoWindow.setPosition({ lat: lat, lng: lng });
+        infoWindow.setContent(content);
+        infoWindow.open(map);
+      });
+
+      bounds.union(circle.getBounds());
+      any = true;
+    });
+
+    if (any) {
+      map.fitBounds(bounds, { top: 40, bottom: 40, left: 40, right: 40 });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWhenVisible);
+  } else {
+    initWhenVisible();
+  }
+})();
+</script>

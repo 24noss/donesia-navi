@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "crawl": "node scripts/crawl-and-draft.mjs",
-    "discover-restaurants": "node scripts/discover-restaurants.mjs"
+    "discover-restaurants": "node scripts/discover-restaurants.mjs",
+    "test": "node --test 'scripts/**/*.test.mjs'"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
