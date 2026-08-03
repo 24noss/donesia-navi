@@ -6,7 +6,7 @@ tags: ["ジャカルタ南部", "停電", "PLN", "インフラ", "南タンゲ�
 pubDate: 2026-08-03
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8601614/pln-ungkap-penyebab-jaksel-tangsel-mati-listrik-kini-mulai-kembali-normal"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ南部および南タンゲランの広範囲で大規模停電が発生
