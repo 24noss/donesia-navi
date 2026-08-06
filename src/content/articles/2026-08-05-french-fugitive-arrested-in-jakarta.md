@@ -6,7 +6,7 @@ tags: ["治安", "ジャカルタ", "警察", "国際指名手配", "安全"]
 pubDate: 2026-08-05
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8604749/adrien-schneider-buron-high-profile-asal-prancis-ditangkap-di-jakarta"
-draft: true
+draft: false
 ---
 
 ## 潜伏中の国際手配犯をジャカルタで身柄確保、治安当局が警戒強める
