@@ -6,7 +6,7 @@ tags: ["BMKG", "乾季", "少雨", "気象情報", "水不足"]
 pubDate: 2026-08-04
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5678936/bmkg-juli-2026-menjadi-juli-terkering-sejak-1991"
-draft: true
+draft: false
 ---
 
 ## 1991年以降で最も乾燥した7月に、気象庁が渇水や火災への注意を促す
