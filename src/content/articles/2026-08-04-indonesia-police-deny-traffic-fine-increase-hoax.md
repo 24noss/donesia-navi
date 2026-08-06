@@ -6,7 +6,7 @@ tags: ["交通ルール", "罰金", "デマ注意", "インドネシア警察", 
 pubDate: 2026-08-04
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8604393/kakorlantas-kenaikan-denda-tilang-dan-pemberlakuan-tilang-manual-menyeluruh-hoaks"
-draft: true
+draft: false
 ---
 
 ## 「罰金150%増額」「手動取り締まり全面再開」の拡散情報に対し警察がデマと発表
