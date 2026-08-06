@@ -6,7 +6,7 @@ tags: ["LRTジャカルタ", "クラパガディン", "マンガライ", "交通
 pubDate: 2026-08-05
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/05/22191281/lrt-jakarta-kelapa-gading-manggarai-diproyeksikan-angkut-80000-penumpang"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ東部・北部と主要ターミナル駅を結ぶ交通利便性向上へ
