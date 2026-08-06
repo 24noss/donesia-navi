@@ -6,7 +6,7 @@ tags: ["トランスヌサ", "航空便", "ジャカルタ", "バリ島", "タ�
 pubDate: 2026-08-04
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/04/171508127/transnusa-terbang-langsung-dari-jakarta-dan-bali-ke-thailand"
-draft: true
+draft: false
 ---
 
 ## 東南アジア路線を拡充、渡航選択肢の増加でビジネス・旅行がより便利に
