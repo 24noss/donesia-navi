@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "歩道橋", "インフラ整備", "クニンガン", 
 pubDate: 2026-08-05
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/05/09015241/tak-lagi-bikin-bingung-dua-jpo-di-rasuna-said-jaksel-akan-disambungkan"
-draft: true
+draft: false
 ---
 
 ## 高低差75センチの壁を解消へ、利用者の利便性と安全性を向上
