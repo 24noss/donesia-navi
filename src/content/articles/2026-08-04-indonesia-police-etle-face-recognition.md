@@ -6,7 +6,7 @@ tags: ["ETLE", "交通取り締まり", "顔認証", "ジャカルタ交通", "�
 pubDate: 2026-08-04
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8604374/korlantas-pakai-sistem-face-recognition-16-ribu-pelanggaran-pelat-nomor-terekam-etle"
-draft: true
+draft: false
 ---
 
 ## ETLEカメラに顔認証機能を統合、車両所有者と運転者を合致させて不正摘発強化
