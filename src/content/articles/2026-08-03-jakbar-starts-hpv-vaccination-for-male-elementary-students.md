@@ -6,7 +6,7 @@ tags: ["西ジャカルタ", "HPVワクチン", "医療健康", "学校保健", 
 pubDate: 2026-08-03
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/03/10484901/perdana-siswa-laki-laki-sd-di-jakbar-jalani-vaksin-hpv-cegah-kanker"
-draft: true
+draft: false
 ---
 
 ## 西ジャカルタの小学校で男子児童へのHPVワクチン無料接種事業がスタート
