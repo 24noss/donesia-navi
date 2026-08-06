@@ -6,7 +6,7 @@ tags: ["トランスジャカルタ", "オープンダイニング", "ジャカ�
 pubDate: 2026-08-03
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/03/181200827/10-fakta-open-dining-transjakarta-layanan-makan-mewah-di-atas-bus"
-draft: true
+draft: false
 ---
 
 ## 走るバス車内で洗練された食事体験　トランスジャカルタの新サービス
