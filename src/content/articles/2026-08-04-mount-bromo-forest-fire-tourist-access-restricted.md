@@ -6,7 +6,7 @@ tags: ["ブロモ山", "東ジャワ", "山火事", "観光規制", "注意喚�
 pubDate: 2026-08-04
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/04/122315827/gunung-bromo-kebakaran-akses-wisata-dibatasi-sementara"
-draft: true
+draft: false
 ---
 
 ## 東ジャワ州ブロモ山で火災発生、安全確保のため一部観光エリアのアクセスが制限
