@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "JAKI", "行政サービス", "CCTV", "アプリ"]
 pubDate: 2026-08-03
 source: "Kompas"
 sourceUrl: "https://kilasdaerah.kompas.com/dki-jakarta/read/2026/08/03/11212621/jakarta.perkuat.ekosistem.digital.jaki.hadirkan.integrasi.cctv.dan.siapkan.jaki.pay"
-draft: true
+draft: false
 ---
 
 ## 行政アプリJAKIの機能拡充で市内の状況把握や決済がより便利に
