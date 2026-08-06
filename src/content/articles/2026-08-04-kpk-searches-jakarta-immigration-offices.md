@@ -6,7 +6,7 @@ tags: ["イミグレーション", "KPK", "出入国管理局", "滞在許可", 
 pubDate: 2026-08-04
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8604547/kpk-geledah-kantor-imigrasi-jaksel-terkait-kasus-eks-wamen-silmy-karim"
-draft: true
+draft: false
 ---
 
 ## 元政務次官が関与する外国人の滞在許可恐喝・汚職疑惑でKPKが捜査を拡大
