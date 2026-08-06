@@ -6,7 +6,7 @@ tags: ["スカルノ・ハッタ空港", "エミレーツ航空", "A380", "ジ�
 pubDate: 2026-08-04
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5678928/airbus-a380-800-emirates-akan-mendarat-perdana-di-bandara-soetta"
-draft: true
+draft: false
 ---
 
 ## エミレーツ航空の超大型機「A380」がスカルノ・ハッタ国際空港に初飛来へ
