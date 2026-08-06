@@ -6,7 +6,7 @@ tags: ["コモド島", "パダール島", "観光船", "運休", "渡航注意"]
 pubDate: 2026-08-05
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/05/182245327/pelayaran-ke-pulau-komodo-dan-pulau-padar-ditutup-hingga-8-agustus"
-draft: true
+draft: false
 ---
 
 ## 高波など海況悪化を受け安全確保のため渡航禁止措置を実施
