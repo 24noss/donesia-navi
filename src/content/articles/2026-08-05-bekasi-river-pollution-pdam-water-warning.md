@@ -6,7 +6,7 @@ tags: ["ブカシ", "水質汚染", "水道水", "生活情報", "注意喚起"]
 pubDate: 2026-08-05
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/05/18114921/kali-bekasi-menghitam-dan-berbau-warga-diminta-tak-gunakan-air-pdam-untuk"
-draft: true
+draft: false
 ---
 
 ## 乾季の影響で汚染濃度が上昇、PDAM水は飲用や調理に使用しないよう注意
