@@ -6,7 +6,7 @@ tags: ["デモ情報", "ジャカルタ治安", "労働組合", "KSPI", "交通�
 pubDate: 2026-08-06
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/06/14321881/partai-buruh-dan-kspi-pastikan-tak-akan-demo-agustus-september-2026"
-draft: true
+draft: false
 ---
 
 ## 8月から9月にかけて大規模デモが懸念されていた問題で、労働組合組織がデモの実施を否定しました。
