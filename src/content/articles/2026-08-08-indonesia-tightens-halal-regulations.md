@@ -6,7 +6,7 @@ tags: ["ハラール認証", "食品規制", "輸入食品", "インドネシア
 pubDate: 2026-08-08
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/08/202000826/indonesia-perketat-aturan-halal-eksportir-makanan-thailand-bersiap"
-draft: true
+draft: false
 ---
 
 ## インドネシアでのハラール認証義務化拡大に伴い海外食品企業が対応を加速
