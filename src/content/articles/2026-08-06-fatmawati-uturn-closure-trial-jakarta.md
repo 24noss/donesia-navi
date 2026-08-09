@@ -6,7 +6,7 @@ tags: ["交通規制", "ファトマワティ", "ジャカルタ交通", "渋滞
 pubDate: 2026-08-06
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5682252/dishub-dki-uji-coba-penutupan-perputaran-arah-di-rs-fatmawati-raya"
-draft: true
+draft: false
 ---
 
 ## ファトマワティ通りでUターン閉鎖の試験運用が開始、周辺交通に影響も
