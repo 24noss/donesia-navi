@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "高潮", "防災", "注意喚起"]
 pubDate: 2026-08-07
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/07/13121101/bpbd-dki-ingatkan-potensi-banjir-rob-di-pesisir-utara-jakarta-hingga-13"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ北部沿岸部で8月13日まで高潮（Banjir Rob）に警戒を
