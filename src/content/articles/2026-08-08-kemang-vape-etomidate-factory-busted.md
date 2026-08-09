@@ -6,7 +6,7 @@ tags: ["クマン", "南ジャカルタ", "治安", "薬物摘発", "警察"]
 pubDate: 2026-08-08
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8610310/bareskrim-bongkar-pabrik-vape-etomidate-di-kamar-kos-kemang"
-draft: true
+draft: false
 ---
 
 ## 人気居住エリアのクマンで危険薬物Vapeの不法製造拠点を摘発
