@@ -6,7 +6,7 @@ tags: ["ジャカルタ治安", "南ジャカルタ", "銃器押収", "事件", 
 pubDate: 2026-08-06
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/06/18140221/kronologi-995-senjata-api-ditemukan-di-sekolah-swasta-jaksel"
-draft: true
+draft: false
 ---
 
 ## 南ジャカルタの私立学校施設で大量の銃器や違法薬物が見つかり、治安当局が押収して詳しい経緯を調べています。
