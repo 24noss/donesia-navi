@@ -6,7 +6,7 @@ tags: ["中央ジャカルタ", "冠水対策", "排水路", "都市インフラ
 pubDate: 2026-08-06
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/06/12391961/atasi-masalah-genangan-95-bangunan-di-atas-saluran-phb-di-jakpus"
-draft: true
+draft: false
 ---
 
 ## 中央ジャカルタ行政区が水害・冠水対策として排水路を塞ぐ不法建築95棟を解体
