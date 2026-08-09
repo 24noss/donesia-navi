@@ -6,7 +6,7 @@ tags: ["交通規制", "ジャカルタ交通", "デモ情報", "JakLingko", "�
 pubDate: 2026-08-06
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/06/17444941/sopir-angkot-m44-ultimatum-pemprov-dki-demo-lagi-jika-seminggu-tak-ada"
-draft: true
+draft: false
 ---
 
 ## 南ジャカルタの乗合バスM44の運転手らがジャカルタ州庁舎前でデモを行い、路線見直しを求めています。
