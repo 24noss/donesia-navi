@@ -6,7 +6,7 @@ tags: ["ゲデ・パングランゴ山", "山火事", "登山閉鎖", "西ジャ
 pubDate: 2026-08-08
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5685452/kemenhut-tangani-kebakaran-di-gunung-gede-pangrango-tutup-pendakian"
-draft: true
+draft: false
 ---
 
 ## ゲデ・パングランゴ山で火災発生、環境林業省が消火活動を進め登山道を全面閉鎖
