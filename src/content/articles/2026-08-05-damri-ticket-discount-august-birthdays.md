@@ -6,7 +6,7 @@ tags: ["DAMRI", "バス", "割引キャンペーン", "独立記念日", "生活
 pubDate: 2026-08-05
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/05/143827527/ada-diskon-tiket-damri-45-persen-khusus-yang-lahir-bulan-agustus"
-draft: true
+draft: false
 ---
 
 ## 8月生まれ限定！国営バスDAMRIが運賃45％オフの記念プロモーション
