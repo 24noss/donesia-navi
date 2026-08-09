@@ -6,7 +6,7 @@ tags: ["GBK", "交通規制", "サッカー", "ジャカルタ警視庁", "イ�
 pubDate: 2026-08-08
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8609868/polda-metro-kerahkan-1-200-personel-amankan-laga-chelsea-vs-milan-di-gbk"
-draft: true
+draft: false
 ---
 
 ## GBK周辺で大規模交通規制と警備強化、来場・周辺通行の際は注意を
