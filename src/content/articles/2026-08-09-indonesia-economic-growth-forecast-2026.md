@@ -6,7 +6,7 @@ tags: ["インドネシア経済", "GDP成長率", "経済予測", "ビジネス
 pubDate: 2026-08-09
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/09/072600626/kenapa-ekonom-masih-ramal-ekonomi-indonesia-2026-hanya-sekitar-5-persen-"
-draft: true
+draft: false
 ---
 
 ## 2026年のインドネシア経済成長率は約5％で推移と専門家が分析
