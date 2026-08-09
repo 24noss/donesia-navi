@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "火災", "交通規制", "注意喚起"]
 pubDate: 2026-08-08
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5685257/jalan-abdul-muis-ditutup-hingga-pemadaman-api-selesai"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ州歳入庁ビルで大規模火災が発生し周辺道路が一時封鎖
