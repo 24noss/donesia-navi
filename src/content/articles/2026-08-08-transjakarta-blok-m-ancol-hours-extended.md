@@ -6,7 +6,7 @@ tags: ["トランスジャカルタ", "ブロックM", "アンコール", "交�
 pubDate: 2026-08-08
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5685365/jam-operasional-transjakarta-blok-m-ancol-diperpanpang-pekan-ini"
-draft: true
+draft: false
 ---
 
 ## ブロックM〜アンコール路線（1W）の営業時間を延長、週末の移動がより便利に
