@@ -6,7 +6,7 @@ tags: ["トランスジャカルタ", "交通情報", "ジャカルタ生活", "
 pubDate: 2026-08-05
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/05/19520081/rute-transjakarta-6u-blok-mpasar-minggu-berubah-mulai-8-agustus-cek"
-draft: true
+draft: false
 ---
 
 ## トランスジャカルタ6U路線が8月8日よりルート変更、事前確認を呼びかけ
