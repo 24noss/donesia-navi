@@ -6,7 +6,7 @@ tags: ["バンドン", "フセインサストラネガラ空港", "ジャワ島"
 pubDate: 2026-08-07
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/foto/5683695/persiapan-bandara-husein-sastranegara-bandung-jelang-pengoperasian-14-agustus-mendatang"
-draft: true
+draft: false
 ---
 
 ## 8月14日の運航再開に向けバンドン・フセインサストラネガラ空港で準備が本格化
