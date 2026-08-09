@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "クラパガディン", "公園整備", "生活環境
 pubDate: 2026-08-09
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5686313/pemkot-jakut-bangun-ruang-hijau-13-hektare-di-kelapa-gading"
-draft: true
+draft: false
 ---
 
 ## 北ジャカルタのクラパガディン地区で1.3ヘクタールの新公園「ブキット・ガディン公園」が開園へ
