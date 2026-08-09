@@ -6,7 +6,7 @@ tags: ["アンコール", "Dufan", "プロモーション", "ジャカルタ生�
 pubDate: 2026-08-06
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/06/194500427/daftar-promo-8.8-di-ancol-beli-1-gratis-1-tiket-dufan?page=all"
-draft: true
+draft: false
 ---
 
 ## 8月8日限定でアンコールのDufanチケットが「1枚買うと1枚無料」のプロモを実施
