@@ -6,7 +6,7 @@ tags: ["OJK", "金ETF", "金融", "資産運用", "インドネシア経済"]
 pubDate: 2026-08-10
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5687168/ojk-dan-sro-resmi-luncurkan-instrumen-investasi-etf-emas"
-draft: true
+draft: false
 ---
 
 ## 金金融商品に新たな選択肢　OJKが「金ETF」を正式提供
