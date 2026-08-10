@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "公共交通機関", "MRT", "トランスジャカル
 pubDate: 2026-08-10
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/10/081110427/promo-17-agustus-2026-naik-mrt-lrt-dan-transjakarta-cuma-rp-1"
-draft: true
+draft: false
 ---
 
 ## 8月17日のインドネシア独立記念日に合わせ、ジャカルタ州政府は市内の主要公共交通機関の運賃をわずか1ルピアとする特別プロモーションを実施する。
