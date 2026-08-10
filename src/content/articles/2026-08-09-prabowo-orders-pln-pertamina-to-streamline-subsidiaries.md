@@ -6,7 +6,7 @@ tags: ["プラボウォ大統領", "プルタミナ", "PLN", "国営企業", "BU
 pubDate: 2026-08-09
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5687000/prabowo-perintahkan-pln-dan-pertamina-segera-pangkas-anak-cucu-perusahaan"
-draft: true
+draft: false
 ---
 
 ## プラボウォ大統領は国営電力会社PLNおよび国営石油会社プルタミナに対し、肥大化した子会社・孫会社の削減と効率化を緊急に実施するよう指示した。
