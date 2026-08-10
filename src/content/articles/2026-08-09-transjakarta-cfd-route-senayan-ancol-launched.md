@@ -6,7 +6,7 @@ tags: ["トランスジャカルタ", "CFD", "スナヤン", "アンコール", 
 pubDate: 2026-08-09
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/09/13174441/transjakarta-khusus-cfd-rute-senayan-ancol-resmi-beroperasi-tarif-rp-3500"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ州政府とトランスジャカルタは、毎週日曜日のカーフリーデー（CFD）限定でスナヤンとアンコールを結ぶ特別バス路線の運行を開始した。
