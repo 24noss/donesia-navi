@@ -6,7 +6,7 @@ tags: ["リンジャニ山", "ロンボク", "山火事", "観光注意", "防�
 pubDate: 2026-08-10
 source: "Kompas"
 sourceUrl: "https://regional.kompas.com/read/2026/08/10/065325278/kebakaran-di-rinjani-padam-tim-gabungan-sisir-30-hektare-terdampak-cegah"
-draft: true
+draft: false
 ---
 
 ## リンジャニ山の山火事が鎮火　再発防止のため現場監視が継続
