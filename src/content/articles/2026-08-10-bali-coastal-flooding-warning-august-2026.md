@@ -6,7 +6,7 @@ tags: ["バリ", "高潮", "注意報", "災害情報", "BMKG"]
 pubDate: 2026-08-10
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5687096/bbmkg-waspada-potensi-rob-di-enam-pesisir-bali-pada-1117-agustus"
-draft: true
+draft: false
 ---
 
 ## バリ島沿岸で高潮の可能性　8月11〜17日の満潮時に警戒を
