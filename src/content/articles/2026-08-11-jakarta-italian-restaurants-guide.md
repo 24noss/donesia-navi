@@ -6,7 +6,7 @@ tags: ["イタリアン", "レストラン", "ジャカルタ", "グルメ", "�
 pubDate: 2026-08-11
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
-draft: true
+draft: false
 ---
 
 ## ジャカルタで本格イタリアンを楽しむ、在住日本人向け5店
