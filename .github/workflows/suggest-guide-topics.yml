@@ -1,0 +1,31 @@
+name: Suggest Guide Topics
+
+on:
+  schedule:
+    - cron: '0 1 * * 1' # 月曜 08:00 WIB (UTC+7)
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  suggest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Suggest guide topics
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ vars.SLACK_CHANNEL_ID }}
+        run: node scripts/suggest-guide-topics.mjs

@@ -11,7 +11,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "crawl": "node scripts/crawl-and-draft.mjs",
+    "crawl:food": "node scripts/crawl-and-draft.mjs --lane=food",
     "discover-restaurants": "node scripts/discover-restaurants.mjs",
+    "suggest-guides": "node scripts/suggest-guide-topics.mjs",
     "test": "node --test 'scripts/**/*.test.mjs'"
   },
   "dependencies": {

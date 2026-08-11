@@ -5,15 +5,32 @@ import { fetchAllCandidates } from './lib/sources.mjs';
 const ARTICLES_DIR = path.join(process.cwd(), 'src/content/articles');
 const MAX_ARTICLES = Number(process.env.CRAWL_MAX_ARTICLES || 3);
 const RECENT_DEDUPE_DAYS = 14;
+const VALID_LANES = new Set(['news', 'food']);
+
+// レーン決定の優先順位: CLI引数 --lane=food > 環境変数 CRAWL_LANE > デフォルト'news'。
+// 純関数（argv/envを引数で受け取り、process.*を直接参照しない）なのでテストしやすい。
+export function resolveLane(argv = [], env = {}) {
+  const laneArgEntry = argv.find((a) => a.startsWith('--lane='));
+  const laneArg = laneArgEntry ? laneArgEntry.slice('--lane='.length) : null;
+  if (VALID_LANES.has(laneArg)) return laneArg;
+  if (VALID_LANES.has(env.CRAWL_LANE)) return env.CRAWL_LANE;
+  return 'news';
+}
+
+// --dry-run フラグの有無を判定する純関数。
+export function isDryRun(argv = []) {
+  return argv.includes('--dry-run');
+}
 
 const CATEGORY_NAMES = {
   safety: '安全・災害',
   society: '社会・政治',
   business: '経済・ビジネス',
-  lifestyle: '生活・グルメ',
+  lifestyle: '生活情報',
   travel: '旅行・お出かけ',
   visa: 'ビザ・手続き',
   regulation: '規制・法務',
+  gourmet: 'グルメ・レストラン',
 };
 const CATEGORY_SET = new Set(Object.keys(CATEGORY_NAMES));
 
@@ -25,11 +42,12 @@ const ARTICLE_SCHEMA_DESCRIPTION = `
 各記事オブジェクトのフィールド:
 - title: 記事タイトル（日本語）
 - description: 80〜120文字程度の要約
-- category: 次の7種類のいずれか1つ（英語のslugのまま）: ${Object.keys(CATEGORY_NAMES).join(', ')}
+- category: 次の8種類のいずれか1つ（英語のslugのまま）: ${Object.keys(CATEGORY_NAMES).join(', ')}
   - safety: 災害・事故・治安に加え、交通規制/渋滞/デモ等の注意喚起（例: 大規模イベントに伴う交通混雑への注意）
   - society: 政治・行政・社会制度のニュース
   - business: 経済・企業・市場・物価などマクロな動き
-  - lifestyle: 飲食店・買い物・学校・病院など在住者の日常生活情報（注意喚起ニュースはsafety）
+  - lifestyle: 買い物・学校・病院など在住者の日常生活情報（注意喚起ニュースはsafety）
+  - gourmet: 飲食店・カフェ・グルメイベント・食に関する情報
   - travel/visa/regulation: 旅行・ビザ手続き・法制度の情報（制度の「改正」はregulation、手続きの「案内」はvisa）
 - tags: 3〜5個の日本語タグの配列
 - pubDate: "YYYY-MM-DD"形式の文字列
@@ -39,6 +57,7 @@ const ARTICLE_SCHEMA_DESCRIPTION = `
 - heading: 本文冒頭の見出し文（##は含めない）
 - keyPoints: 要点の箇条書き（3点程度）の配列
 - body: 2〜3段落の本文プレーンテキスト（見出しや箇条書き記号は含めない）
+- placeCandidates: （gourmetカテゴリの記事のみ、任意）記事で紹介した店舗ごとの{name, area, cuisine}オブジェクトの配列。該当店舗が無い場合や他カテゴリでは省略してよい
 `.trim();
 
 // Gemini APIの responseSchema（OpenAPI 3.0のサブセット）。ARTICLE_SCHEMA_DESCRIPTION のフィールドと整合させる。
@@ -58,6 +77,10 @@ const ARTICLE_FIELD_ORDER = [
   'body',
 ];
 
+// placeCandidatesはfoodレーン（gourmetカテゴリ）専用のoptionalフィールド。
+// requiredには含めない（news/food両レーン共通のスキーマとして安全に共存させるため）。
+const PLACE_CANDIDATE_FIELD_ORDER = ['name', 'area', 'cuisine'];
+
 const ARTICLE_RESPONSE_SCHEMA = {
   type: 'ARRAY',
   items: {
@@ -74,9 +97,22 @@ const ARTICLE_RESPONSE_SCHEMA = {
       heading: { type: 'STRING' },
       keyPoints: { type: 'ARRAY', items: { type: 'STRING' } },
       body: { type: 'STRING' },
+      placeCandidates: {
+        type: 'ARRAY',
+        items: {
+          type: 'OBJECT',
+          properties: {
+            name: { type: 'STRING' },
+            area: { type: 'STRING' },
+            cuisine: { type: 'STRING' },
+          },
+          required: PLACE_CANDIDATE_FIELD_ORDER,
+          propertyOrdering: PLACE_CANDIDATE_FIELD_ORDER,
+        },
+      },
     },
     required: ARTICLE_FIELD_ORDER,
-    propertyOrdering: ARTICLE_FIELD_ORDER,
+    propertyOrdering: [...ARTICLE_FIELD_ORDER, 'placeCandidates'],
   },
 };
 
@@ -280,16 +316,8 @@ function filterCandidates(items, existingSourceUrls) {
   });
 }
 
-async function draftArticles(candidates, recentTitles) {
-  const trimmed = candidates.map((c) => ({
-    title: c.title,
-    snippet: (c.snippet || '').slice(0, 300),
-    source: c.source,
-    link: c.link,
-    pubDate: c.pubDate,
-  }));
-
-  const prompt = `あなたはドネシアナビ（インドネシア・ジャカルタ在住日本人向けニュースサイト）の記者です。
+function buildNewsPrompt(trimmed, recentTitles) {
+  return `あなたはドネシアナビ（インドネシア・ジャカルタ在住日本人向けニュースサイト）の記者です。
 以下の候補ニュース一覧から、在住日本人にとって重要度の高いものを最大${MAX_ARTICLES}件選び、日本語記事として執筆してください。
 
 # ルール
@@ -304,6 +332,41 @@ ${ARTICLE_SCHEMA_DESCRIPTION}
 
 候補ニュース一覧（${trimmed.length}件）:
 ${JSON.stringify(trimmed, null, 2)}`;
+}
+
+function buildFoodPrompt(trimmed, recentTitles) {
+  return `あなたはドネシアナビ（インドネシア・ジャカルタ在住日本人向けニュースサイト）のグルメ担当記者です。
+以下の候補ニュース一覧から、ジャカルタ首都圏在住の日本人にとって有用度の高いグルメ情報を最大${MAX_ARTICLES}件選び、日本語記事として執筆してください。
+
+# ルール
+- 対象は次のいずれかに該当するものに限る: 新規オープン、閉店・移転、話題の飲食店、フードフェス・グルメイベント、季節限定情報
+- ジャカルタ首都圏在住の日本人にとって有用な情報を優先すること（日本食、接待・会食向き、家族向き、話題の新店など）
+- 店名・住所・価格・営業時間などの事実情報は、候補ニュース一覧（title/snippet）に実際に書かれている内容のみを使用すること。書かれていない情報を推測・創作してはならない
+- category は原則 "gourmet" を選ぶこと
+- 直近${RECENT_DEDUPE_DAYS}日以内に既に扱った以下のトピックと重複する内容は選ばない: ${recentTitles.length ? recentTitles.join(' / ') : '(なし)'}
+- 在住日本人にとって十分に有用な候補がなければ無理に選ばず、0件を返してもよい
+
+# 出力フォーマット
+${ARTICLE_SCHEMA_DESCRIPTION}
+
+記事で紹介した店舗があれば、placeCandidates配列にその店舗のname（現地表記のまま）・area（記事に書かれたエリア名）・cuisine（料理ジャンル）を含めること。店名・エリア・料理ジャンルのいずれも候補ニュースに書かれていない情報を創作しないこと。該当する店舗が無い場合は placeCandidates を省略するか空配列でよい。
+
+出力は上記フィールドを持つオブジェクトの配列を、\`\`\`json で始まるコードブロック内のJSON配列のみで返すこと。前後に説明文を付けないこと。該当なしの場合は \`\`\`json\n[]\n\`\`\` を返すこと。
+
+候補ニュース一覧（${trimmed.length}件）:
+${JSON.stringify(trimmed, null, 2)}`;
+}
+
+async function draftArticles(candidates, recentTitles, lane = 'news') {
+  const trimmed = candidates.map((c) => ({
+    title: c.title,
+    snippet: (c.snippet || '').slice(0, 300),
+    source: c.source,
+    link: c.link,
+    pubDate: c.pubDate,
+  }));
+
+  const prompt = lane === 'food' ? buildFoodPrompt(trimmed, recentTitles) : buildNewsPrompt(trimmed, recentTitles);
 
   const res = await fetch(GEMINI_API_URL, {
     method: 'POST',
@@ -375,12 +438,17 @@ async function uniqueFilename(existingFiles, dateStr, slug) {
 }
 
 async function main() {
-  if (!process.env.GEMINI_API_KEY) {
+  const argv = process.argv.slice(2);
+  const lane = resolveLane(argv, process.env);
+  const dryRun = isDryRun(argv);
+
+  // dry-run時はGemini呼び出し・ファイル書き込みを行わないため、GEMINI_API_KEY未設定でも動作させる。
+  if (!dryRun && !process.env.GEMINI_API_KEY) {
     console.error('GEMINI_API_KEY が未設定です。`gh secret set GEMINI_API_KEY` (CI) または `export GEMINI_API_KEY=...` (ローカル) を実行してください。');
     process.exit(1);
   }
 
-  console.log('候補ニュースを取得中...');
+  console.log(`候補ニュースを取得中...（レーン: ${lane}${dryRun ? ' / dry-run' : ''}）`);
   const { sourceUrls, recentTitles, files: existingFiles } = await loadExistingArticles();
 
   // オープンPR（未マージのドラフト記事）も重複排除対象に含める（D-6）。
@@ -392,7 +460,7 @@ async function main() {
   openPrDedupe.sourceUrls.forEach((url) => sourceUrls.add(url));
   const combinedRecentTitles = [...recentTitles, ...openPrDedupe.titles];
 
-  const { items, failures } = await fetchAllCandidates();
+  const { items, failures } = await fetchAllCandidates(lane);
   if (failures.length) {
     console.warn('一部ソースの取得に失敗しました:', failures);
   }
@@ -400,13 +468,20 @@ async function main() {
   const candidates = filterCandidates(items, sourceUrls);
   console.log(`候補 ${items.length}件 → 既存記事・オープンPRとの重複除外後 ${candidates.length}件`);
 
+  if (dryRun) {
+    console.log('--dry-run のため、Gemini呼び出し・ファイル書き込みをスキップして終了します。');
+    console.log('候補タイトル（最大5件）:');
+    candidates.slice(0, 5).forEach((c, i) => console.log(`  ${i + 1}. [${c.source}] ${c.title}`));
+    return;
+  }
+
   if (candidates.length === 0) {
     console.log('新規候補がありません。終了します。');
     await writeFile(path.join(process.cwd(), '.crawl-result.json'), '[]');
     return;
   }
 
-  const drafted = await draftArticles(candidates, combinedRecentTitles);
+  const drafted = await draftArticles(candidates, combinedRecentTitles, lane);
   const capped = drafted.slice(0, MAX_ARTICLES);
   console.log(`${capped.length}件の記事をドラフト生成します。`);
 
@@ -429,8 +504,20 @@ async function main() {
 
     const markdown = buildMarkdown(article, pubDateStr);
     await writeFile(path.join(ARTICLES_DIR, filename), markdown, 'utf-8');
-    created.push({ filename, title: article.title, category: article.category, source: article.source, sourceUrl: article.sourceUrl });
+
+    const hasPlaceCandidates = Array.isArray(article.placeCandidates) && article.placeCandidates.length > 0;
+    created.push({
+      filename,
+      title: article.title,
+      category: article.category,
+      source: article.source,
+      sourceUrl: article.sourceUrl,
+      ...(hasPlaceCandidates ? { placeCandidates: article.placeCandidates } : {}),
+    });
     console.log(`作成: ${filename}`);
+    if (hasPlaceCandidates) {
+      console.log(`  places YAML追加候補: ${JSON.stringify(article.placeCandidates)}`);
+    }
   }
 
   await writeFile(path.join(process.cwd(), '.crawl-result.json'), JSON.stringify(created, null, 2));

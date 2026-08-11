@@ -212,6 +212,7 @@ body{
 .cat-dot.safety{background:var(--red)}
 .cat-dot.business{background:var(--gold)}
 .cat-dot.society{background:var(--teal)}
+.cat-dot.gourmet{background:#C1502B}
 .cat-dot.lifestyle{background:#5BA88E}
 .cat-dot.travel{background:#8B6FBF}
 .cat-dot.visa{background:#D47B3E}

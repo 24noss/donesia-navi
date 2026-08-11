@@ -40,15 +40,17 @@ const { page } = Astro.props;
 const cat = categories[slug as CategorySlug];
 const articles = page.data;
 
-// Collect places for lifestyle category — computed from the FULL category
+// Collect places for gourmet category — computed from the FULL category
 // article set (not just the current page's slice), since the map tab is a
 // persistent per-category feature independent of article-list pagination.
 // A place belongs to this tab when at least one of its sourceArticles is a
-// lifestyle-category article (mirrors the pre-places-collection behavior,
-// where restaurant frontmatter data only ever lived on lifestyle restaurant-guide articles).
-const isLifestyle = slug === 'lifestyle';
+// gourmet-category article (mirrors the pre-gourmet-split behavior, where
+// restaurant guide articles — and the places their sourceArticles pointed
+// to — lived under the lifestyle category; the split (2026-08) moved the
+// guide articles to gourmet, so this tab moved with them).
+const isGourmet = slug === 'gourmet';
 let mapRestaurants: ReturnType<typeof placeToMapPoint>[] = [];
-if (isLifestyle) {
+if (isGourmet) {
   const allPlaces = await getCollection('places');
   const allArticles = await getCollection('articles');
   const categoryArticleIds = new Set(
@@ -82,8 +84,8 @@ function pageUrl(n: number): string {
         <div class="cat-hero-count">{page.total} 記事</div>
       </div>
 
-      <!-- Tab Bar (lifestyle only) -->
-      {isLifestyle && mapRestaurants.length > 0 && (
+      <!-- Tab Bar (gourmet only) -->
+      {isGourmet && mapRestaurants.length > 0 && (
         <div class="cat-tab-bar">
           <button class="cat-tab active" data-tab="articles">記事一覧</button>
           <button class="cat-tab" data-tab="map">レストランマップ</button>
@@ -128,8 +130,8 @@ function pageUrl(n: number): string {
         )}
       </div>
 
-      <!-- Map Tab (lifestyle only) -->
-      {isLifestyle && mapRestaurants.length > 0 && (
+      <!-- Map Tab (gourmet only) -->
+      {isGourmet && mapRestaurants.length > 0 && (
         <div id="tab-map" style="display:none;">
           <p style="color:var(--text-muted);font-size:13px;margin-bottom:12px;">記事で紹介した {mapRestaurants.length} 店舗を表示中</p>
           <RestaurantMap restaurants={JSON.stringify(mapRestaurants)} height="480px" />
@@ -147,7 +149,7 @@ function pageUrl(n: number): string {
 
   <!-- Tab switching -->
   <script is:inline>
-    // Tab switching for lifestyle category
+    // Tab switching for gourmet category
     document.querySelectorAll('.cat-tab').forEach(function(tab) {
       tab.addEventListener('click', function() {
         document.querySelectorAll('.cat-tab').forEach(function(t) { t.classList.remove('active'); });

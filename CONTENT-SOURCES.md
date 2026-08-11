@@ -9,20 +9,21 @@
 
 ## 1. カテゴリ別サマリー
 
-7カテゴリの定義は `src/lib/categories.ts` 参照。
+8カテゴリの定義は `src/lib/categories.ts` 参照。
 
 | カテゴリ(日本語/slug) | 情報源 | 更新方式 | 頻度 | 人手の介在ポイント |
 |---|---|---|---|---|
 | [安全・災害](./docs/categories/safety.md) / `safety` | Detik・Antara(一般ニュースRSS) + BMKG地震API + Kompas(クエリ①、societyと共用) | 自動 | 1日2回(07:00・11:00 WIB) | Slack「✅承認して公開」ボタン(内容修正はしない、公開可否のみ) |
 | [社会・政治](./docs/categories/society.md) / `society` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ①共用+専用クエリ⑥) | 自動 | 1日2回 | 同上 |
 | [経済・ビジネス](./docs/categories/business.md) / `business` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ③) | 自動 | 1日2回 | 同上 |
-| [生活・グルメ(飲食店ガイド)](./docs/categories/lifestyle.md) / `lifestyle` | Google Places API (New)で候補発見 + Claude CodeセッションでのWeb調査・執筆 | 半自動 | 不定期(オーナーが`discover-restaurants`を実行した時のみ) | 発見コマンドの実行判断、WebSearchでの裏取り、執筆、Slack承認 |
-| [生活・グルメ(飲食店以外: 学校・病院等)](./docs/categories/lifestyle.md) / `lifestyle` | 都度の手動調査(自動化なし) | 手動 | 不定期 | 発見〜執筆〜PR作成まで全工程 |
+| [グルメ・レストラン(新着ニュース)](./docs/categories/gourmet.md) / `gourmet` | detikFood RSS + Google Newsグルメ検索RSS(foodレーン、2026-08-11追加) | 自動 | 週2回(月・木 07:30 WIB) | Slack承認。承認後、記事内の店舗をplaces YAMLへ手動追加(ローカルenrich) |
+| [グルメ・レストラン(飲食店ガイド)](./docs/categories/gourmet.md) / `gourmet` | Google Places API (New)で候補発見 + Claude CodeセッションでのWeb調査・執筆。書くべきトピックは週次のガイド提案ボット(`scripts/suggest-guide-topics.mjs`、月曜08:00 WIB)がSlackに提案 | 半自動 | ガイド提案は週1、執筆は不定期 | 提案の採否判断、発見コマンドの実行判断、WebSearchでの裏取り、執筆、Slack承認 |
+| [生活情報(学校・病院等)](./docs/categories/lifestyle.md) / `lifestyle` | 都度の手動調査(自動化なし)。2026-08-11にグルメ要素を`gourmet`へ分離 | 手動 | 不定期 | 発見〜執筆〜PR作成まで全工程 |
 | [旅行・お出かけ](./docs/categories/travel.md) / `travel` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ④、2026-07-31追加) | 自動 | 1日2回 | Slack承認 |
 | [ビザ・手続き](./docs/categories/visa.md) / `visa` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ②) | 自動 | 1日2回 | Slack承認 |
 | [規制・法務](./docs/categories/regulation.md) / `regulation` | Detik・Antara(一般ニュースRSS) + Kompas(クエリ⑤、2026-07-31追加) | 自動 | 1日2回 | Slack承認 |
 
-**注意**: 上表の「対応するKompasクエリ」は候補ニュースが集まりやすいキーワードであるに過ぎません。実際にどのカテゴリに分類するかは、記事ごとにGemini(LLM)が本文内容を見て最終判断します(`scripts/crawl-and-draft.mjs`のプロンプトが7種のslugから1つ選ばせる方式で、ルールベースの振り分けは存在しません)。そのためDetik/Antaraの一般ニュースも実質的に全カテゴリの候補になり得ます。
+**注意**: 上表の「対応するKompasクエリ」は候補ニュースが集まりやすいキーワードであるに過ぎません。実際にどのカテゴリに分類するかは、記事ごとにGemini(LLM)が本文内容を見て最終判断します(`scripts/crawl-and-draft.mjs`のプロンプトが8種のslugから1つ選ばせる方式で、ルールベースの振り分けは存在しません)。そのためDetik/Antaraの一般ニュースも実質的に全カテゴリの候補になり得ます。
 
 ## 2. 情報源の詳細
 
@@ -32,10 +33,12 @@
 | Antara | `https://www.antaranews.com/rss/terkini.xml` を取得。同じく一般ニュース | `scripts/lib/sources.mjs` (`id: 'antara'`) |
 | BMKG | インドネシア気象・地球物理庁の地震API。`autogempa.json`(最新1件)+`gempaterkini.json`(直近リスト)を取得し、`safety`カテゴリに直結する候補を生成 | `scripts/lib/sources.mjs` の `fetchBmkgEarthquakes()` |
 | Kompas(Google News RSS経由) | Kompasには直接RSSが存在しないため、`site:kompas.com <キーワード> when:1d` のGoogle Newsサイト内検索RSSで代替 | `scripts/lib/sources.mjs` の `fetchKompasViaGoogleNews()` |
+| detikFood | `https://food.detik.com/rss` を取得。グルメ専門ニュース(foodレーン専用) | `scripts/lib/sources.mjs` (`foodSources`) |
+| Google Newsグルメ検索RSS | `restoran baru jakarta when:7d` 等のサイト非限定検索RSS(foodレーン専用。仲介URLは実記事URLへ解決) | `scripts/lib/sources.mjs` (`foodSources`) |
 | Google Places API (New) | Text Searchでレストラン候補を発見(エリア6×料理6=36クエリ) | `scripts/lib/places.mjs` |
 | Gemini API | `gemini-flash-latest`(無料枠)。候補ニュースの選定・カテゴリ判定・日本語記事執筆を担当 | `scripts/crawl-and-draft.mjs` の `GEMINI_API_URL` |
 
-### Kompasクエリ5本とカテゴリ対応(`KOMPAS_QUERIES`, `scripts/lib/sources.mjs`)
+### Kompasクエリ6本とカテゴリ対応(`KOMPAS_QUERIES`, `scripts/lib/sources.mjs`)
 
 | # | クエリ | 主対応カテゴリ | 備考 |
 |---|---|---|---|
@@ -44,8 +47,9 @@
 | ③ | `bbm subsidi ekonomi` | business | 燃料補助金・経済政策系 |
 | ④ | `wisata liburan destinasi` | travel | 2026-07-31追加。当日実測34件/日 |
 | ⑤ | `aturan kebijakan pajak izin` | regulation | 2026-07-31追加。当日実測65件/日 |
+| ⑥ | `pemprov jakarta kebijakan warga` | society | 2026-08-03追加。当日実測57件/日 |
 
-**既知の制約**: Kompas候補の`link`はGoogleのJSリダイレクト経由の仲介URLで、実記事URLに直接解決できない(`scripts/lib/sources.mjs`のコメント、`AUTOMATION.md`の「既知の制約」節にも記載)。
+**補足**: Google News経由の`link`は仲介URLだが、取得時に`resolveDirectLink()`で実記事URLへ解決される(2026-08-03〜、解決率約99%。失敗時のみ仲介URLのまま。foodレーンのGoogle News検索RSSも同じ仕組み)。
 
 ## 3. 更新フローの詳細
 
@@ -59,6 +63,16 @@
 6. 同じワークフロー内で`scripts/notify-draft-pr.mjs`を呼び出し、Cloudflare PagesのプレビューデプロイをGitHub Checks APIでポーリング(最大12回×10秒間隔)してプレビューURLを取得し、Slackに記事タイトル・概要・カテゴリと「✅承認して公開」ボタン付きのBlock Kitメッセージを投稿
 7. オーナーがSlackのプレビューリンクで実際の見た目を確認し、問題なければボタンを押す(確認ダイアログあり)。問題があれば何もしなければPRは`draft: true`のまま残り本番には出ない
 
+### 3-1b. グルメ自動経路(gourmet、foodレーン。2026-08-11追加)
+
+流れは3-1と同じワークフロー・同じSlack承認だが、以下が異なります(`docs/news-pipeline.md`第16章参照)。
+
+- 起動: 月・木 07:30 WIB(cron `30 0 * * 1,4`)。`workflow_dispatch`では`lane`入力(news/food)で手動起動可
+- ソース: detikFood RSS + Google Newsグルメ検索RSS(newsレーンのソースは使わない)
+- 選定基準: 新規オープン・閉店移転・話題の飲食店・フードイベント。店名・住所・価格はソース記事の事実のみ使用
+- PRタイトルに【グルメ】が付く。生成記事のカテゴリは原則`gourmet`
+- 記事内で紹介した店舗は`placeCandidates`として`.crawl-result.json`とログに出力される。承認・マージ後、places YAML(`src/data/places/*.yaml`)への追加とplaceId付与(`enrich-places`)は**ローカルで手動**(Places APIキーがIP制限のため)
+
 ### 3-2. 手動作成PRの通知経路(レストランガイド等)
 
 `.github/workflows/notify-draft-pr.yml`は`pull_request: opened`(`src/content/articles/**`変更時)で発火しますが、ブランチ名が`auto/articles-`で始まるPRはスキップします(3-1の手順6で既にSlack通知済みのため二重送信防止)。つまりこの経路で通知が飛ぶのは、レストランガイドなど**crawlパイプライン以外の方法で作成したPR**だけです。
@@ -71,8 +85,9 @@
 - PRをmerge。GitHub側のmergeable判定が非同期で遅れて出る405エラーは5回・2秒間隔でリトライ
 - 結果(成功/失敗)をSlackメッセージに`response_url`経由で反映
 
-### 3-4. レストランガイド半自動経路(lifestyleの一部)
+### 3-4. レストランガイド半自動経路(gourmet。旧lifestyleから2026-08-11に分離)
 
+0. **[トピック提案]** 毎週月曜08:00 WIBに`scripts/suggest-guide-topics.mjs`(`.github/workflows/suggest-guide-topics.yml`)が、GSC由来のターゲットトピック(エリア×料理ジャンル)と既存記事を突き合わせ、未カバー上位3件を候補店舗数つきでSlackに提案する。オーナーが採用を判断(詳細: `AUTOMATION.md`のガイド提案ボット節)
 1. **[発見]** オーナーが`npm run discover-restaurants`をローカルPCで手動実行(Places APIキーがIP制限付きのためGitHub Actionsでは動かせない)。既存記事の`mapData`を集約したうえで、エリア6(Kebayoran Baru/Senopati/SCBD/Kemang/Menteng/PIK)×料理6(japanese/korean/chinese/indonesian/european/cafe)=36クエリでPlaces API (New) Text Searchを実行し、既知店舗(placeId一致、または名前・座標一致)を除いた新規候補を`data/restaurant-candidates.json`に出力(`scripts/discover-restaurants.mjs`, `scripts/lib/places.mjs`)
 2. **[リサーチ・執筆]** Claude Codeセッションで候補を渡し、WebSearchで営業時間・ハラール・酒類・電話番号・メニュー価格等を裏取りしながら日本語で執筆。確認できない項目は「要確認」等と明示する方針(`halal: "unverified"`と同じ規約)。`draft: true`でPRを作成
 3. 以降は3-1の6〜7、3-3と共通(プレビュー確認 → 承認ボタン → `draft: false` → merge)
@@ -92,11 +107,11 @@
 ## 5. 更新されないもの(自動化の対象外)
 
 - **既存記事の本文**: 一度公開した記事は自動では書き換わりません。誤りの訂正や数値の更新は手動でPRを作る必要があります
-- **`lifestyle`のうち飲食店ガイド以外**(学校・病院など): 発見の仕組みも半自動パイプラインも存在せず、完全手動でのリサーチ・執筆・PR作成が必要です
+- **`lifestyle`(学校・病院など。2026-08-11のグルメ分離後の残り)**: 発見の仕組みも半自動パイプラインも存在せず、完全手動でのリサーチ・執筆・PR作成が必要です
 - ~~`society`専用のKompasクエリなし~~ → 2026-08-03にクエリ⑥`pemprov jakarta kebijakan warga`を追加済み
 - **Kompasの実記事URL**: 取得時に直リンクへ解決されます(2026-08-03〜、解決率約99%。失敗時のみ仲介URLのまま)
 - ニュースポータル路線以外の事業転換(生活DB化など): 本パイプラインのスコープ外です(`AUTOMATION.md`「既知の制約」節)
 
 ---
 
-最終更新: 2026-07-31
+最終更新: 2026-08-11(gourmetカテゴリ新設・foodレーン・ガイド提案ボット追加)

@@ -32,16 +32,20 @@ Detik/Antara + Kompasクエリ②（`kitas visa wna jepang`）で自動生成。
 
 Detik/Antara + Kompasクエリ⑤（`aturan kebijakan pajak izin`、2026-07-31追加）で自動生成。 詳細: [`docs/categories/regulation.md`](./docs/categories/regulation.md)
 
-### 生活・グルメ（`lifestyle`）
+### グルメ・レストラン（`gourmet`）
 
-ニュースエンジンとは別系統。(A)飲食店ガイド=半自動（Places APIで発見→Claude Codeで人手リサーチ執筆）、(B)飲食店以外（学校・病院等）=完全手動。`mapData`スキーマと地図表示の関係も記載。 詳細: [`docs/categories/lifestyle.md`](./docs/categories/lifestyle.md)
+(A)新着グルメニュース=自動（foodレーン、週2回 月・木 07:30 WIB。detikFood RSS + Google Newsグルメ検索RSS）、(B)飲食店ガイド（5選記事等）=半自動（Places APIで発見→Claude Codeで人手リサーチ執筆。書くべきトピックは週次のガイド提案ボットがSlackに提案）。 詳細: [`docs/categories/gourmet.md`](./docs/categories/gourmet.md)
+
+### 生活情報（`lifestyle`）
+
+ニュースエンジン対象だが専用ソースなし（学校・病院等のガイド記事は完全手動）。2026-08-11にグルメ要素を`gourmet`へ分離。 詳細: [`docs/categories/lifestyle.md`](./docs/categories/lifestyle.md)
 
 ## 何が自動化されているか
 
 **自動:** クロール → 記事ドラフト作成 → GitHub PR作成 → Slackにプレビューリンク+承認ボタンつきで通知 → **ボタン一発で公開まで完了**
 
 ```
-GitHub Actions (毎日 07:00 / 11:00 WIB)
+GitHub Actions (毎日 07:00 / 11:00 WIB = newsレーン、月・木 07:30 WIB = foodレーン)
   → scripts/crawl-and-draft.mjs
       1. Detik RSS / Antara RSS / BMKG地震API / Kompas(Google News経由) から候補ニュースを取得
       2. 既存記事の sourceUrl と突き合わせて重複候補を除外
@@ -189,3 +193,91 @@ npm run discover-restaurants
 ```
 
 出力された`data/restaurant-candidates.json`をClaude Codeに渡し、「この候補を調査してレストランガイド記事のdraftを作って」と依頼する。
+
+---
+
+# ガイド記事ギャップ提案ボット
+
+上記2つのパイプライン（ニュース自動生成／レストラン・ディレクトリ更新）とは別に、「次にどのガイド記事を書くべきか」を毎週提案するボット。記事の自動生成は行わず、Slackへの提案止まり。
+
+## 目的
+
+Search Console(GSC)の流入クエリは「ジャカルタ 中華」「ジャカルタ イタリアン」「ジャカルタ 韓国料理」のような、エリア×料理ジャンルのガイド型検索が主力。既存のレストランガイド記事（中華5選・韓国5選など）がこれを一部カバーしているが、未対応の組み合わせ（イタリアン単体・カフェ・焼肉など）も多い。人手でGSCを毎回確認する代わりに、あらかじめ定義したターゲットトピック一覧と既存記事・掲載店舗データを突き合わせて未カバートピックを算出し、優先度順にSlackで提案する。
+
+## 実行頻度
+
+毎週月曜 08:00 WIB（cron `0 1 * * 1`）+ `workflow_dispatch`（手動実行用）。
+
+## 動作
+
+```
+scripts/suggest-guide-topics.mjs
+  1. スクリプト内定数 TARGET_TOPICS（GSCクエリ由来、15〜20件程度）を評価
+  2. src/content/articles/*.md のfrontmatter(title/tags/category/draft)を読み、
+     category が gourmet または lifestyle の記事に絞った上で、
+     トピックのkeywordsが title に含まれていれば「カバー済み」と判定
+     （2026-08-11〜: tagsのみの一致はカバー済みにしない。中華5選・韓国5選のような
+       専用記事とは違い、複数ジャンルを1本で扱う「洋食・ヨーロッパ料理」ガイドの
+       tagsに「イタリアン」「フレンチ」が混在しているだけで専用記事扱いされてしまう
+       誤判定があったため。tagsのみで一致した記事は「関連記事あり(部分カバー)」として
+       出力に参考表示するが、未カバー扱いは維持する。category限定も、レストランと無関係な
+       交通ニュース記事のtitleにエリア名が含まれることによる誤判定を防ぐために追加した）
+     （draft:trueの記事のみでtitleが一致した場合は「(draft)」付きの執筆済み扱い）
+  3. src/data/places/*.yaml を集計し、各未カバートピックについて
+     cuisine一致（areaトピックならarea一致）かつstatus!=closedの店舗数を
+     「既知の掲載候補」としてカウント。5件未満なら「要ディスカバリー」と付記
+  4. 未カバートピックを優先度(high→mid→low)順に並べ、上位3件をSlackへ投稿
+     （全件カバー済みなら投稿をスキップ）
+```
+
+## トピックリストのメンテ方法
+
+`scripts/suggest-guide-topics.mjs`内の`TARGET_TOPICS`配列を直接編集する。1件は`{id, label, keywords, area, cuisine, priority, rationale}`のオブジェクト。
+
+- `keywords`: 記事のtitleとの一致判定に使う語（表記ゆれがあれば複数指定。例: `寿司`/`すし`）。tagsは判定に使わない(2026-08-11〜)ため、専用記事のtitleに実際に入る語を選ぶこと
+- `cuisine`/`area`: `src/content.config.ts`のplacesスキーマのenum値と一致させること（一致しないと候補店舗数が常に0になる）
+- `priority`: `high`/`mid`/`low`。Slack提案は上位3件のみのため、優先度の並びが提案結果に直結する
+
+GSCの実クエリは変動するため、**四半期ごとに見直す**（Search Consoleの検索パフォーマンスレポートを確認し、クリック・表示回数の多いクエリで未カバーのものを追加/優先度調整する）。
+
+## 提案後のフロー
+
+```
+Slackに提案が投稿される（優先度・理由・既知の掲載候補数つき）
+  → 人間が内容を確認し、書く価値があると判断したトピックを選ぶ
+  → Claude Codeセッションで対話的に実行
+      候補店舗数が少ない（要ディスカバリー付記あり）場合は
+      先に npm run discover-restaurants で店舗候補を発見
+      → 各店舗をWebSearchで調査（既存レストランガイド記事と同じ規約:
+        ハラール/酒類は確認できなければ「要確認」、価格・営業時間つき）
+      → 既存ガイドと同じ構成で draft:true のMarkdownを作成
+      → 人間がレビューし、通常のPRフロー（Slack承認ボタン、または手動merge）で公開
+```
+
+## ファイル構成
+
+| ファイル | 役割 |
+|---|---|
+| `.github/workflows/suggest-guide-topics.yml` | cronトリガー（月曜08:00 WIB）+ `workflow_dispatch` |
+| `scripts/suggest-guide-topics.mjs` | 本体。トピック定義・カバレッジ判定・候補店舗数算出・Slack投稿 |
+| `scripts/lib/slack.mjs` | Slack `chat.postMessage`の共通ラッパー（`postSlackMessage({ token, channel, text, blocks })`） |
+
+## 動作確認方法
+
+```bash
+# Slack投稿なし・ネットワーク/環境変数不要。未カバートピック一覧をコンソールに出力
+node scripts/suggest-guide-topics.mjs --dry-run
+
+# Slackに実際に投稿（SLACK_BOT_TOKEN / SLACK_CHANNEL_ID が必要）
+SLACK_BOT_TOKEN=xxx SLACK_CHANNEL_ID=xxx node scripts/suggest-guide-topics.mjs
+```
+
+## 既知の制約
+
+- **（2026-08-11時点で修正済み）カバレッジ判定は当初、記事の`category`を見ずtitle/tagsの単純なキーワード一致のみで行っていたため、`italian`・`french`（既存の洋食・ヨーロッパ料理ガイド記事のtagsに`イタリアン`・`フレンチ`が別ジャンルの一部として含まれていた）や`blok-m`（レストランガイドと無関係な交通ニュース記事`2026-08-01-transjabodetabek-blokm-airport-fare-change.md`のtitleに`ブロックM`が含まれていた）が「カバー済み」と誤判定され、ボットの主目的である未カバートピック検出が機能しない問題があった。現在は下記の仕様に変更してこれを解消している:**
+  - 判定対象記事を`category`が`gourmet`または`lifestyle`のものに限定（交通ニュース等の誤判定を排除）
+  - キーワード一致は**title のみ**で判定（tagsのみの一致は「カバー済み」にせず、`関連記事あり(部分カバー)`として出力に参考表示するに留める）
+  - この変更により、上記3トピックはいずれも未カバーへ戻り、`italian`はSlack提案の上位に再び表示されるようになった（実データで確認済み。中華・韓国・インドネシア料理などの専用ガイドがあるトピックは引き続き正しくカバー済み判定される）
+  - 残存リスク: gourmet/lifestyle以外のcategoryで書かれたガイド記事があれば拾えない、専用記事のtitleにトピックの語が含まれない言い回し（例:「本場の味」のような婉曲表現のみ）だと未カバー扱いのままになる、といったエッジケースは残る。`TARGET_TOPICS`のkeywords選定時は実際の記事titleの言い回しを意識すること
+- 候補店舗数はcuisine/areaの一致のみで算出しており、料理ジャンル内の細分類（例:「イタリアン」トピックに対して`cuisine: european`の店舗を全てカウント。フレンチ店も含まれる）までは区別していない
+

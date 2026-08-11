@@ -1,11 +1,11 @@
 # ニュース自動生成エンジン 詳細（共通深掘り）
 
-ニュース系6カテゴリ（`safety` / `society` / `business` / `travel` / `visa` / `regulation`）の記事を作る共通エンジンの内部仕様を、コード（ファイル+関数/定数名）ベースでまとめたものです。「この記事はどうやって出来ているのか」「生成の質を変えたい」ときの一次資料として使います。
+ニュース系6カテゴリ（`safety` / `society` / `business` / `travel` / `visa` / `regulation`）とグルメ（`gourmet`、foodレーン。第16章）の記事を作る共通エンジンの内部仕様を、コード（ファイル+関数/定数名）ベースでまとめたものです。「この記事はどうやって出来ているのか」「生成の質を変えたい」ときの一次資料として使います。
 
 - セットアップ手順・運用コマンド・コスト・既知の制約は [`../AUTOMATION.md`](../AUTOMATION.md) を参照
 - 情報源・更新方式の一覧（俯瞰）は [`../CONTENT-SOURCES.md`](../CONTENT-SOURCES.md) を参照
 - カテゴリ固有の情報源・チューニングは [`categories/`](./categories/) の各ファイルを参照
-- 飲食店ガイド（`lifestyle`）は別エンジンです。[`categories/lifestyle.md`](./categories/lifestyle.md) を参照
+- 飲食店ガイド（`gourmet`の5選記事等）は別エンジンです。[`categories/gourmet.md`](./categories/gourmet.md) を参照（経緯は[`categories/lifestyle.md`](./categories/lifestyle.md)冒頭も参照）
 
 このドキュメントは上記と内容を重複させず、エンジン内部の挙動に絞っています。
 
@@ -65,13 +65,19 @@ functions/api/slack-interactivity.js（Cloudflare Pages Functions）
 
 | 関数/定数 | 責務 |
 |---|---|
-| `sources`（配列） | ソースアダプタの登録簿。`{ id, label, fetch }` を並べるだけ。現在は `detik` / `antara` / `bmkg` / `kompas` の4つ。ソース追加はここに1エントリ足すのみ |
-| `fetchAllCandidates()` | `sources` 全件を `Promise.allSettled()` で並行取得。**成功分は `items` に集約、失敗分は握り潰さず `failures`（`{ source: id, error }`）に記録して両方返す**。1ソースが落ちても他は生きる設計 |
+| `sources`（配列） | newsレーン用ソースアダプタの登録簿。`{ id, label, fetch }` を並べるだけ。現在は `detik` / `antara` / `bmkg` / `kompas` の4つ。ソース追加はここに1エントリ足すのみ |
+| `foodSources`（配列） | foodレーン用ソースアダプタの登録簿（**2026-08-11追加**）。`detikFood` / `foodGoogleNews` の2つ。`sources`とは独立。詳細は第16章 |
+| `getSourcesForLane(lane)` | `lane === 'food'` なら`foodSources`、それ以外は`sources`を返す純関数（**2026-08-11追加**）。export済み |
+| `fetchAllCandidates(lane = 'news')` | `getSourcesForLane(lane)`で選んだソース全件を `Promise.allSettled()` で並行取得。**成功分は `items` に集約、失敗分は握り潰さず `failures`（`{ source: id, error }`）に記録して両方返す**。1ソースが落ちても他は生きる設計。**2026-08-11、`lane`引数を追加（デフォルト`'news'`のため既存の無引数呼び出しは挙動不変）** |
 | `parseRssItems(xml, {fallbackSourceLabel})` | RSS XML → 候補オブジェクト配列（第2章の形状） |
 | `fetchRssSource(url, opts)` | `fetchText()` + `parseRssItems()` |
-| `googleNewsSiteSearchUrl(domain, keyword)` | `site:${domain} ${keyword} when:1d` を URLエンコードし Google News検索RSS の URL を作る（`hl=id&gl=ID&ceid=ID:id`） |
+| `googleNewsSiteSearchUrl(domain, keyword)` | `site:${domain} ${keyword} when:1d` を URLエンコードし Google News検索RSS の URL を作る（`hl=id&gl=ID&ceid=ID:id`）。site制限付き（Kompas用） |
+| `googleNewsSearchUrl(query)`（**2026-08-11追加**） | site制限なしの一般Google News検索RSSのURLを作る純関数（`hl=id&gl=ID&ceid=ID:id`）。`when:`期間はquery文字列側に含める前提（foodレーンの`FOOD_QUERIES`が`when:7d`を内包）。export済み |
 | `KOMPAS_QUERIES`（配列） | Kompas用の検索クエリ6本（2026-08-03に`society`専用クエリを追加し5→6本）。Kompasは直RSSが無いため Google News のサイト内検索で代替。詳細は各カテゴリドキュメント参照 |
-| `fetchKompasViaGoogleNews()` | `KOMPAS_QUERIES` 各クエリを `Promise.allSettled` で取得し、成功分を flatMap。`fallbackSourceLabel: 'Kompas'` を付与した後、`resolveDirectLink()`（D-4）で各item.linkを実記事URLへ解決してから返す |
+| `FOOD_QUERIES`（配列、**2026-08-11追加**） | foodレーン用の一般検索クエリ6本（`restoran baru jakarta when:7d` 等）。週2回実行のため全クエリに`when:7d`を含む。export済み。詳細は第16章 |
+| `fetchGoogleNewsSearchUrls(urls, {fallbackSourceLabel?})`（**2026-08-11追加**） | 複数のGoogle News検索RSS URLを並行取得しflatMapした後、`resolveDirectLink()`（D-4）で実記事URLへ解決する共通処理。`fetchKompasViaGoogleNews()`と`fetchFoodViaGoogleNews()`の共通実装（内部関数、未export） |
+| `fetchKompasViaGoogleNews()` | `KOMPAS_QUERIES`から`googleNewsSiteSearchUrl()`でURLを組み立て、`fetchGoogleNewsSearchUrls(urls, {fallbackSourceLabel: 'Kompas'})`を呼ぶ。**2026-08-11、内部実装を`fetchGoogleNewsSearchUrls()`へリファクタしたが、外部から見た挙動（返り値の形状・fallbackSourceLabelの付与）は不変** |
+| `fetchFoodViaGoogleNews()`（**2026-08-11追加**） | `FOOD_QUERIES`から`googleNewsSearchUrl()`でURLを組み立て、`fetchGoogleNewsSearchUrls(urls)`を呼ぶ（fallbackSourceLabelなし＝RSS内の実際の媒体名をそのまま使う）。`foodSources`の`foodGoogleNews`エントリから使用 |
 | `extractGoogleNewsId(link)` | `news.google.com/rss/articles/<id>` または `/rss/read/<id>` からGoogle News内部の記事IDを取り出す。google.com以外やパス不一致は`null`（D-4、export済み） |
 | `resolveDirectLink(link, timeoutMs?)` | Google仲介URLを実記事URLへ解決する（D-4）。(a)通常のHTTPリダイレクト追跡→(b)google.comのままならGoogle News内部API（batchexecute）のデコードを試行→(c)いずれも失敗時は元のURLのまま返す（fail-open、例外を投げない）。既定タイムアウト5秒。export済み |
 | `parseBatchExecuteResponse(text)` | Google News内部APIのレスポンス本文（`)]}'` プレフィックス付きJSON）から実記事URLを取り出す純関数。想定外の形状は例外を投げる（呼び出し側の`resolveDirectLink()`でfail-openに変換）。export済み |
@@ -85,22 +91,25 @@ functions/api/slack-interactivity.js（Cloudflare Pages Functions）
 |---|---|
 | `MAX_ARTICLES` | `Number(process.env.CRAWL_MAX_ARTICLES || 3)`。1回で生成する最大本数 |
 | `RECENT_DEDUPE_DAYS` | `14`。直近何日分のタイトルを「重複回避」としてLLMに渡すか |
-| `CATEGORY_NAMES` | 7 slug → 日本語カテゴリ名。`CATEGORY_SET`（有効slug集合）と、記事本文フッターの「カテゴリ:」表記に使う |
+| `resolveLane(argv, env)`（**2026-08-11追加**） | レーン決定の純関数。優先順位は CLI引数 `--lane=food`/`--lane=news` > 環境変数 `CRAWL_LANE` > デフォルト`'news'`。不正な値は次の優先順位にフォールバック。export済み。詳細は第16章 |
+| `isDryRun(argv)`（**2026-08-11追加**） | `argv`に`--dry-run`が含まれるかを返す純関数。export済み |
+| `CATEGORY_NAMES` | 8 slug → 日本語カテゴリ名（**2026-08-11、`gourmet`追加。第16章参照**）。`CATEGORY_SET`（有効slug集合）と、記事本文フッターの「カテゴリ:」表記に使う |
 | `GEMINI_API_URL` | `gemini-flash-latest:generateContent`。モデル差し替え箇所 |
-| `ARTICLE_SCHEMA_DESCRIPTION` | LLMに渡す出力フィールド定義（プロンプトに埋め込む。人間可読の説明文） |
-| `ARTICLE_RESPONSE_SCHEMA` | Gemini APIの`responseSchema`（D-5、2026-08-03追加）。`ARTICLE_SCHEMA_DESCRIPTION`のフィールドと同じ内容をOpenAPIサブセット形式で機械的に強制する。詳細は第5章 |
+| `ARTICLE_SCHEMA_DESCRIPTION` | LLMに渡す出力フィールド定義（プロンプトに埋め込む。人間可読の説明文）。**2026-08-11、`gourmet`カテゴリの説明と`placeCandidates`フィールドの説明を追加、`lifestyle`の説明文から飲食要素を除去** |
+| `ARTICLE_RESPONSE_SCHEMA` | Gemini APIの`responseSchema`（D-5、2026-08-03追加）。`ARTICLE_SCHEMA_DESCRIPTION`のフィールドと同じ内容をOpenAPIサブセット形式で機械的に強制する。詳細は第5章。**2026-08-11、optionalな`placeCandidates`配列を追加（第16章）** |
 | `parseGeminiArticlesResponse(text)` | Gemini応答テキストからarticle配列を取り出す（D-5、第5章「応答パース」参照）。export済み |
 | `parseFrontmatterBlock(content)` | frontmatterブロック（`---`〜`---`）から`sourceUrl`/`title`/`pubDate`を正規表現で取り出す純関数。`loadExistingArticles()`と`fetchOpenPrDedupeData()`（D-6）の共通ロジック。export済み |
 | `loadExistingArticles()` | `src/content/articles/` の全 `.md` の frontmatter を `parseFrontmatterBlock()` で読み、`sourceUrls`（Set）と `recentTitles`（`pubDate` が今から14日以内のものだけ）と `files` を返す |
 | `fetchOpenPrDedupeData({token?, repo?})` | オープンPR内で新規追加された記事ファイルのfrontmatterから`sourceUrl`/`title`を集める（D-6、第4章参照）。export済み |
 | `filterCandidates(items, existingSourceUrls)` | 重複排除（第4章） |
-| `draftArticles(candidates, recentTitles)` | Gemini呼び出し（第5章） |
-| `validateArticle(article)` | 書き込み前の検証（第6章）。問題点の配列を返す |
-| `buildMarkdown(article, pubDateStr)` | frontmatter + 本文の生成。**常に `draft: true`**（第7章） |
+| `buildNewsPrompt(trimmed, recentTitles)` / `buildFoodPrompt(trimmed, recentTitles)`（**2026-08-11追加**） | レーンごとのプロンプト文字列を組み立てる（内部関数、未export）。第16章参照 |
+| `draftArticles(candidates, recentTitles, lane = 'news')` | Gemini呼び出し（第5章）。**2026-08-11、`lane`引数を追加**。`lane === 'food'`なら`buildFoodPrompt()`、それ以外は`buildNewsPrompt()`を使う（デフォルト`'news'`のため既存呼び出しの挙動は不変） |
+| `validateArticle(article)` | 書き込み前の検証（第6章）。問題点の配列を返す。`placeCandidates`は検証対象外（任意フィールドのため未指定でもエラーにしない） |
+| `buildMarkdown(article, pubDateStr)` | frontmatter + 本文の生成。**常に `draft: true`**（第7章）。`article.placeCandidates`は参照しない（frontmatterに書かれない。第16章） |
 | `escapeYaml(value)` | YAML二重引用符文字列用に `\` と `"` をエスケープ |
 | `slugify(input)` | ファイル名用スラッグ生成（第7章） |
 | `uniqueFilename(existingFiles, dateStr, slug)` | `YYYY-MM-DD-{slug}.md` が衝突したら `-2`, `-3`... を付与 |
-| `main()` | 上記を順に実行。`.crawl-result.json` を書き出し、`GITHUB_OUTPUT` があれば `count=` を追記 |
+| `main()` | 上記を順に実行。`.crawl-result.json` を書き出し、`GITHUB_OUTPUT` があれば `count=` を追記。**2026-08-11**: 冒頭で`resolveLane()`/`isDryRun()`を評価し、dry-run時はGEMINI_API_KEY未設定チェックと候補取得後のGemini呼び出し・ファイル書き込みをスキップする（第16章） |
 
 `main()` 以外の純粋関数（`escapeYaml` / `validateArticle` / `slugify` / `buildMarkdown` / `parseGeminiArticlesResponse` / `parseFrontmatterBlock` / `fetchOpenPrDedupeData`）は `export` されており、`main()` を走らせずに単体で import して検証できます（第13章）。`node --test` によるユニットテストが `scripts/crawl-and-draft.test.mjs` / `scripts/lib/sources.test.mjs` に整備済み（D-8）。
 
@@ -130,7 +139,7 @@ functions/api/slack-interactivity.js（Cloudflare Pages Functions）
 ### 呼び出し
 
 - エンドポイント: `GEMINI_API_URL`（`gemini-flash-latest`、無料枠）。ヘッダ `x-goog-api-key: process.env.GEMINI_API_KEY`
-- リクエストボディは `{ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: 'application/json', responseSchema: ARTICLE_RESPONSE_SCHEMA } }`（**D-5、2026-08-03対応**）。`responseSchema` はGemini APIのOpenAPI 3.0サブセット形式（`type`は`STRING`/`ARRAY`/`OBJECT`等の大文字列挙値）で、トップレベルを`type: 'ARRAY'`（`items: {type: 'OBJECT', ...}`）にすることで「記事オブジェクトの配列」という形をAPI側に強制させる。`category`フィールドには`enum: Object.keys(CATEGORY_NAMES)`（7 slug）を指定し、不正なカテゴリ文字列が返る余地自体を減らす。`required`/`propertyOrdering`は`ARTICLE_SCHEMA_DESCRIPTION`のフィールド順と揃えてある
+- リクエストボディは `{ contents: [{ parts: [{ text: prompt }] }], generationConfig: { responseMimeType: 'application/json', responseSchema: ARTICLE_RESPONSE_SCHEMA } }`（**D-5、2026-08-03対応**）。`responseSchema` はGemini APIのOpenAPI 3.0サブセット形式（`type`は`STRING`/`ARRAY`/`OBJECT`等の大文字列挙値）で、トップレベルを`type: 'ARRAY'`（`items: {type: 'OBJECT', ...}`）にすることで「記事オブジェクトの配列」という形をAPI側に強制させる。`category`フィールドには`enum: Object.keys(CATEGORY_NAMES)`（8 slug）を指定し、不正なカテゴリ文字列が返る余地自体を減らす。`required`/`propertyOrdering`は`ARTICLE_SCHEMA_DESCRIPTION`のフィールド順と揃えてある。**2026-08-11追加**: optionalフィールド`placeCandidates`（配列。`required`には含めない）も同スキーマに追加した。詳細は第16章
 - 候補は送信前に `trimmed` に縮約: `title` / `snippet`（**先頭300字にスライス**）/ `source` / `link` / `pubDate` のみ
 - **要監視（2026-08-03時点で未検証）**: ローカルに `GEMINI_API_KEY` が無い環境で実装したため、`responseSchema`込みの実呼び出しは一度も検証できていない。Gemini REST APIの公式ドキュメント（`ai.google.dev/api/generate-content`のSchema定義）に準拠する形で実装したが、**次回cron実行時（07:00/11:00 WIB）のログとPR生成結果を要監視**。もし`responseSchema`が原因でGemini APIがエラーを返す場合は、`generationConfig`ごと取り除けば旧来のプレーンプロンプト方式に戻せる（`parseGeminiArticlesResponse()`のフォールバック経路は維持されているため、パース側の後方互換は保たれる）
 
@@ -144,7 +153,7 @@ functions/api/slack-interactivity.js（Cloudflare Pages Functions）
    - 重要な候補が無ければ無理に選ばず0件でよい
 4. **出力フォーマット**: `ARTICLE_SCHEMA_DESCRIPTION`（下記フィールド）。`` ```json `` コードブロック内のJSON配列のみで返す。該当なしは `[]`
 
-出力フィールド（`ARTICLE_SCHEMA_DESCRIPTION`）: `title` / `description`（80〜120字）/ `category`（**7 slugから1つ**）/ `tags`（3〜5個）/ `pubDate`（`YYYY-MM-DD`）/ `source`（候補の値をそのまま）/ `sourceUrl`（候補の `link` をそのまま、改変・生成禁止）/ `slug` / `heading` / `keyPoints`（3点程度の配列）/ `body`（2〜3段落プレーンテキスト）。
+出力フィールド（`ARTICLE_SCHEMA_DESCRIPTION`）: `title` / `description`（80〜120字）/ `category`（**8 slugから1つ**）/ `tags`（3〜5個）/ `pubDate`（`YYYY-MM-DD`）/ `source`（候補の値をそのまま）/ `sourceUrl`（候補の `link` をそのまま、改変・生成禁止）/ `slug` / `heading` / `keyPoints`（3点程度の配列）/ `body`（2〜3段落プレーンテキスト）/ `placeCandidates`（gourmetカテゴリのみ、任意。第16章参照）。
 
 **カテゴリはここでLLMが本文内容を見て決める**。ソースやKompasクエリはあくまで候補が集まりやすいだけで、ルールベースの振り分けは存在しない。
 
@@ -168,7 +177,7 @@ functions/api/slack-interactivity.js（Cloudflare Pages Functions）
 |---|---|
 | `title` | 空でない文字列 |
 | `description` | 空でない文字列 |
-| `category` | `CATEGORY_SET`（7 slug）のいずれか |
+| `category` | `CATEGORY_SET`（8 slug）のいずれか |
 | `tags` | 配列かつ1個以上、全要素が空でない文字列 |
 | `source` | 空でない文字列 |
 | `sourceUrl` | `new URL()` で解釈できる有効なURL |
@@ -199,13 +208,15 @@ functions/api/slack-interactivity.js（Cloudflare Pages Functions）
 
 ## 9. PR作成（.github/workflows/crawl-articles.yml）
 
-- トリガー: cron `0 0 * * *`（07:00 WIB）/ `0 4 * * *`（11:00 WIB）+ `workflow_dispatch`
+- トリガー: cron `0 0 * * *`（07:00 WIB、newsレーン）/ `0 4 * * *`（11:00 WIB、newsレーン）/ `30 0 * * 1,4`（07:30 WIB 月・木、foodレーン。**2026-08-11追加**）+ `workflow_dispatch`（`inputs.lane`でnews/foodを選択可能）
+- **レーン判定**（`Determine crawl lane`ステップ、**2026-08-11追加**）: `github.event_name === 'schedule'` かつ `github.event.schedule === '30 0 * * 1,4'` なら`food`、`workflow_dispatch`なら`inputs.lane`、それ以外（通常のnewsレーンcron）は`news`。結果を`CRAWL_LANE`環境変数として後続の`npm run crawl`ステップに渡す。詳細は第16章
 - `npm run crawl` 実行ステップには `GEMINI_API_KEY` に加えて `GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}` / `GITHUB_REPOSITORY: ${{ github.repository }}` を渡す（**D-6、2026-08-03追加**。`fetchOpenPrDedupeData()` がオープンPRを列挙するために使用。GitHub Actionsのデフォルト`GITHUB_TOKEN`で`pulls`/`contents`の読み取りは可能）
 - `npm run crawl` 実行後、`git status --porcelain src/content/articles | grep '^??'` で**新規ファイルの有無**を判定（`has_new`）
 - 新規があれば `peter-evans/create-pull-request@v8` で PR作成:
   - `add-paths: src/content/articles/*.md`
-  - `branch: auto/articles-${{ github.run_id }}`（この命名で後述の二重通知防止が効く）
+  - `branch: auto/articles-${{ github.run_id }}`（この命名で後述の二重通知防止が効く。レーンに関わらず共通）
   - `commit-message: 'Add draft articles (auto-crawl)'`
+  - `title`: `Determine PR title`ステップの出力（**2026-08-11追加**）。foodレーンなら「自動ドラフト記事【グルメ】(run {run_id})」、それ以外は従来通り「自動ドラフト記事 (run {run_id})」
 - PR番号が取れたら `scripts/notify-draft-pr.mjs --pr=<番号>` を実行
 
 ---
@@ -254,19 +265,20 @@ Cloudflare Pages Functions。ルート `POST /api/slack-interactivity`。必要e
 
 | 変えたいこと | 触るファイル・関数/定数 |
 |---|---|
-| **候補の質**（どのソース/クエリから拾うか） | `scripts/lib/sources.mjs`: `sources` 配列（ソース追加）/ `KOMPAS_QUERIES`（Kompasクエリ）/ 各 `fetch*` 関数 |
-| **選定基準**（何を重要とみなすか） | `scripts/crawl-and-draft.mjs` `draftArticles()` のプロンプト「# ルール」節 |
-| **文体・記事構成** | `draftArticles()` のプロンプト + `ARTICLE_SCHEMA_DESCRIPTION` + `buildMarkdown()`（本文テンプレート） |
+| **候補の質**（どのソース/クエリから拾うか） | newsレーン: `scripts/lib/sources.mjs`: `sources` 配列（ソース追加）/ `KOMPAS_QUERIES`（Kompasクエリ）/ 各 `fetch*` 関数。foodレーン: `foodSources` 配列 / `FOOD_QUERIES`（**2026-08-11追加**、第16章） |
+| **選定基準**（何を重要とみなすか） | `scripts/crawl-and-draft.mjs` `buildNewsPrompt()`（newsレーン）/ `buildFoodPrompt()`（foodレーン、**2026-08-11追加**）の「# ルール」節 |
+| **文体・記事構成** | `buildNewsPrompt()` / `buildFoodPrompt()` のプロンプト + `ARTICLE_SCHEMA_DESCRIPTION` + `buildMarkdown()`（本文テンプレート） |
 | **1回の本数** | 環境変数 `CRAWL_MAX_ARTICLES`（既定は `MAX_ARTICLES` の3）。CI側で設定するなら `crawl-articles.yml` の `env` |
 | **モデル** | `scripts/crawl-and-draft.mjs` `GEMINI_API_URL` |
-| **応答の構造化出力（responseSchema）** | `scripts/crawl-and-draft.mjs` `ARTICLE_RESPONSE_SCHEMA` / `ARTICLE_FIELD_ORDER`（D-5） |
+| **応答の構造化出力（responseSchema）** | `scripts/crawl-and-draft.mjs` `ARTICLE_RESPONSE_SCHEMA` / `ARTICLE_FIELD_ORDER`（D-5）/ `PLACE_CANDIDATE_FIELD_ORDER`（**2026-08-11追加**、第16章） |
 | **検証（受け入れ基準）** | `validateArticle()` + `src/content.config.ts` のzodスキーマ |
 | **重複判定の範囲・期間** | `RECENT_DEDUPE_DAYS` / `loadExistingArticles()` / `filterCandidates()` / `fetchOpenPrDedupeData()`（D-6、オープンPR分） |
 | **Kompas仲介URLの直リンク解決** | `scripts/lib/sources.mjs` `resolveDirectLink()` / `LINK_RESOLVE_TIMEOUT_MS` / `LINK_RESOLVE_CONCURRENCY`（D-4） |
 | **通知の見た目** | `scripts/notify-draft-pr.mjs` `buildBlocks()` |
 | **承認の挙動**（公開時の処理） | `functions/api/slack-interactivity.js` `publishPr()` |
-| **実行スケジュール** | `.github/workflows/crawl-articles.yml` の `cron` |
-| **カテゴリの増減** | `src/content.config.ts`（`category` enum + `mapData`）+ `scripts/crawl-and-draft.mjs` `CATEGORY_NAMES` + `src/lib/categories.ts`（サイト表示メタ）の3箇所を揃える |
+| **実行スケジュール・レーン** | `.github/workflows/crawl-articles.yml` の `cron` / `workflow_dispatch.inputs.lane` / `Determine crawl lane`ステップ（**2026-08-11、food追加**） |
+| **カテゴリの増減** | `src/content.config.ts`（`category` enum + `mapData`）+ `scripts/crawl-and-draft.mjs` `CATEGORY_NAMES` + `src/lib/categories.ts`（サイト表示メタ）の3箇所を揃える。**2026-08-11時点で8カテゴリ**（`gourmet`追加、`lifestyle`は「生活情報」に改名） |
+| **foodレーンのグルメ選定基準・placeCandidates運用** | 第16章（**2026-08-11追加**） |
 | **テスト** | `scripts/crawl-and-draft.test.mjs` / `scripts/lib/sources.test.mjs`（D-8、`node --test`） |
 
 ---
@@ -277,12 +289,14 @@ Cloudflare Pages Functions。ルート `POST /api/slack-interactivity`。必要e
 
 | コマンド | 実体 | 備考 |
 |---|---|---|
-| `npm run crawl` | `node scripts/crawl-and-draft.mjs` | **記事生成のみ**。`GEMINI_API_KEY` 必須。`src/content/articles/` に実ファイルを書き込む。PR作成・Slack通知はしない（CI側の後続ステップでのみ発生） |
-| `npm run discover-restaurants` | `node scripts/discover-restaurants.mjs` | 飲食店ガイド用。[`categories/lifestyle.md`](./categories/lifestyle.md) 参照 |
+| `npm run crawl` | `node scripts/crawl-and-draft.mjs` | **記事生成のみ**（newsレーン）。`GEMINI_API_KEY` 必須（`--dry-run`時を除く）。`src/content/articles/` に実ファイルを書き込む。PR作成・Slack通知はしない（CI側の後続ステップでのみ発生） |
+| `npm run crawl:food`（**2026-08-11追加**） | `node scripts/crawl-and-draft.mjs --lane=food` | foodレーン版。挙動は`npm run crawl`と同じで対象ソース・プロンプトのみ異なる。第16章参照 |
+| `npm run discover-restaurants` | `node scripts/discover-restaurants.mjs` | 飲食店ガイド用。[`categories/gourmet.md`](./categories/gourmet.md)（旧: [`categories/lifestyle.md`](./categories/lifestyle.md)）参照 |
+| `npm run suggest-guides`（**2026-08-11追加**） | `node scripts/suggest-guide-topics.mjs` | 飲食店ガイド記事の未カバートピック提案（詳細は当該スクリプトのテスト `scripts/suggest-guide-topics.test.mjs` 参照。本ドキュメントの主題であるニュース/foodクロールとは別系統） |
 | `npm test` | `node --test 'scripts/**/*.test.mjs'`（**D-8、2026-08-03追加**） | ユニットテスト一式。ネットワークアクセス・APIキーとも不要（GitHub API/fetchはモック化）。`.github/workflows/test.yml` が `push`（main）と `pull_request` で自動実行 |
 
-- **dry-runフラグは無い**。`scripts/crawl-and-draft.mjs` には CLIオプションの解析が無く（唯一の `process.argv` 参照は末尾の実行判定ガード `import.meta.url === \`file://${process.argv[1]}\``のみ）、実行すると必ず Gemini を呼び本番同様に `.md` を書き込む。挙動を絞る手段は環境変数 `CRAWL_MAX_ARTICLES` のみ
-- 純粋関数（`escapeYaml` / `validateArticle` / `slugify` / `buildMarkdown` / `parseGeminiArticlesResponse` / `parseFrontmatterBlock`）と、ネットワークアクセスをfetchモックで検証するテスト対象関数（`fetchOpenPrDedupeData` / `resolveDirectLink` / `extractGoogleNewsId` / `parseBatchExecuteResponse` / `mapWithConcurrency`）は `export` 済みなので、`main()` を走らせずに import して個別に確認できる（第8章のエントリポイントガード）
+- **`--dry-run` フラグ（2026-08-11追加）**: `node scripts/crawl-and-draft.mjs [--lane=food] --dry-run` で、候補取得〜重複フィルタまでを実行し件数・候補タイトル（最大5件）をログ出力した時点で終了する。**Gemini呼び出し・ファイル書き込みは行わない**ため `GEMINI_API_KEY` も不要（`main()`冒頭のキー未設定チェックを`isDryRun()`で分岐してスキップする）。挙動を絞る手段は環境変数 `CRAWL_MAX_ARTICLES` と `--dry-run` の2つ
+- 純粋関数（`escapeYaml` / `validateArticle` / `slugify` / `buildMarkdown` / `parseGeminiArticlesResponse` / `parseFrontmatterBlock` / `resolveLane` / `isDryRun`）と、ネットワークアクセスをfetchモックで検証するテスト対象関数（`fetchOpenPrDedupeData` / `resolveDirectLink` / `extractGoogleNewsId` / `parseBatchExecuteResponse` / `mapWithConcurrency`）は `export` 済みなので、`main()` を走らせずに import して個別に確認できる（第8章のエントリポイントガード）
 - **`node --test` のglob指定は要注意**: `package.json` の `test` スクリプトは `node --test 'scripts/**/*.test.mjs'` のようにglobパターンをシングルクォートで囲む必要がある。クォート無しだと呼び出し元シェル（`npm`経由だと`/bin/sh`、macOS/Linuxとも既定でdash相当）が`**`をglobstarとして展開せず`scripts/*/*.test.mjs`のように1階層のみにマッチしてしまい、`scripts/`直下の`.test.mjs`（`crawl-and-draft.test.mjs`）が実行されなくなる。`node --test scripts`（ディレクトリ指定のみ、glob無し）は本バージョンのNodeでは動作しなかった（`Cannot find module 'scripts'`エラー）ため不採用
 - `scripts/notify-draft-pr.mjs` は `--pr=<番号>` を取り、`GITHUB_TOKEN` / `SLACK_BOT_TOKEN` / `SLACK_CHANNEL_ID` / `GITHUB_REPOSITORY` が揃えば単体実行可能
 
@@ -326,10 +340,87 @@ Google News検索RSSの `item.link` は `https://news.google.com/rss/articles/<�
 
 ---
 
+## 16. foodレーン（グルメ情報、2026-08-11追加）
+
+既存のnewsレーン（Detik/Antara/BMKG/Kompas、安全・社会・経済・生活情報・旅行・ビザ・規制）とは別に、新店オープン等のグルメ情報専用の**foodレーン**を追加した。同じ`scripts/crawl-and-draft.mjs` / `scripts/lib/sources.mjs` を共有し、`lane`引数で候補ソース・プロンプトを切り替える2レーン構成になっている。
+
+### レーン決定（`resolveLane(argv, env)`）
+
+優先順位: **CLI引数 `--lane=food`/`--lane=news`** > **環境変数 `CRAWL_LANE`** > **デフォルト`'news'`**。不正な値（`food`/`news`以外）は次の優先順位にフォールバックする（`crawl-and-draft.mjs`、export済み・純関数）。CIでの実際のレーン判定（cron種別からの割り出し）は第9章「レーン判定」を参照。
+
+### ソース（`scripts/lib/sources.mjs` の `foodSources`）
+
+| id | 内容 |
+|---|---|
+| `detikFood` | `https://food.detik.com/rss`。**実在確認済み（2026-08-11、curl実測）**: `HTTP/2 200`、`content-type: text/xml`、直近100件のグルメ関連記事（`<title>`/`<description>`/`<link>`/`<pubDate>`/`<guid>`を含む標準RSS 2.0形式）。`<item>`内に`<source>`タグが無いため`fallbackSourceLabel: 'Detik'`を指定 |
+| `foodGoogleNews` | site制限なしのGoogle News検索RSS（`googleNewsSearchUrl()`、`FOOD_QUERIES`6本）。`fetchFoodViaGoogleNews()`が各クエリを並行取得しflatMapした後、Kompasと同じ`resolveDirectLink()`（D-4）で実記事URLへ解決する |
+
+`FOOD_QUERIES`（すべて`when:7d` — 週2回実行のため1日分ではなく直近7日分を対象にする）:
+`restoran baru jakarta` / `restoran jepang jakarta` / `kuliner jakarta selatan` / `cafe baru jakarta` / `restoran mall jakarta` / `festival kuliner jakarta`
+
+一般検索RSS（`foodGoogleNews`）は`site:`指定が無いため`item.source`に実際の掲載媒体名（Detik/Kompas/CNN Indonesia等）が入る。そのため`fetchGoogleNewsSearchUrls()`呼び出し時に`fallbackSourceLabel`を渡さず、RSS由来の媒体名をそのまま尊重する（Kompas専用の`fetchKompasViaGoogleNews()`とはこの点が異なる）。
+
+**動作未確認の既知の制約**: `food.detik.com/rss`はローカルのcurl検証では200を安定して返したが、`-o /dev/null`で本文を捨てるリクエストの一部でタイムアウトする揺れも観測した（本文を保存する取得では毎回成功）。CI実行時にタイムアウトが発生しても`fetchAllCandidates()`の`Promise.allSettled`によりfoodGoogleNews側は独立して継続する（fail-open、newsレーンの既存設計を踏襲）。
+
+### 実行頻度・トリガー
+
+`.github/workflows/crawl-articles.yml` に**月・木 07:30 WIB**（`cron: '30 0 * * 1,4'`）を追加。newsレーンの07:00/11:00 WIB（毎日）とは独立したスケジュール。`workflow_dispatch`実行時は`inputs.lane`（`news`/`food`、既定`news`）で手動選択できる。レーン判定の詳細は第9章。
+
+### 選定基準（`buildFoodPrompt()`）
+
+`draftArticles(candidates, recentTitles, lane)`が`lane === 'food'`のとき使うプロンプト（`crawl-and-draft.mjs`）。newsレーン用`buildNewsPrompt()`と並存し、`ARTICLE_SCHEMA_DESCRIPTION`・`ARTICLE_RESPONSE_SCHEMA`は両レーン共通。
+
+- 対象: 新規オープン、閉店・移転、話題の飲食店、フードフェス・グルメイベント、季節限定情報
+- ジャカルタ首都圏在住の日本人にとって有用な情報を優先（日本食、接待・会食向き、家族向き、話題の新店など）
+- 店名・住所・価格・営業時間などの事実情報は候補ニュース（title/snippet）に実際に書かれている内容のみ使用し、推測・創作を禁止
+- `category`は原則`gourmet`
+- 直近`RECENT_DEDUPE_DAYS`（14）日以内の重複回避ルールはnewsレーンと共通
+
+### カテゴリ（8種類への拡張）
+
+`CATEGORY_NAMES`（`crawl-and-draft.mjs`）に`gourmet: 'グルメ・レストラン'`を追加し、7 slug→**8 slug**になった（`src/lib/categories.ts` / `src/content.config.ts`の3箇所を同期。**2026-08-11時点で全て同期済み**）。あわせて既存の`lifestyle`の和名を「生活・グルメ」から**「生活情報」**に改名（グルメ要素を`gourmet`へ分離したため。飲食店ガイド専用エンジンの経緯は[`categories/lifestyle.md`](./categories/lifestyle.md)冒頭の追記および[`categories/gourmet.md`](./categories/gourmet.md)を参照）。`ARTICLE_SCHEMA_DESCRIPTION`の`lifestyle`説明文からも飲食要素を除去し「買い物・学校・病院など在住者の日常生活情報」に変更した。
+
+`gourmet`は`CATEGORY_RESPONSE_SCHEMA`の`enum`にも含まれる共通スキーマのため、理論上はnewsレーンの記事（例: Kompas/Detik発の飲食店関連ニュース）が`gourmet`を選ぶことも起こりうる（レーン別にスキーマを分けていないため）。これは意図した設計（サイト全体でのカテゴリ追加）であり、foodレーン限定の制約ではない。
+
+### placeCandidates（店舗候補、任意フィールド）
+
+`ARTICLE_RESPONSE_SCHEMA`に`placeCandidates`（`ARRAY of OBJECT {name, area, cuisine}`、全て`STRING`）をoptionalフィールドとして追加した（`required`には含めない。`propertyOrdering`には追加）。`buildFoodPrompt()`が「記事で紹介した店舗があれば`name`（現地表記）・`area`・`cuisine`を含めること」と指示する。
+
+- **`validateArticle()`では必須にしない**（未指定でもエラーにならない）
+- **`buildMarkdown()`では無視する**（frontmatter・本文どちらにも書き込まない。記事ファイル自体は`placeCandidates`の有無に関わらず従来通り生成される）
+- **`.crawl-result.json`の`created`エントリ**には、`placeCandidates`が空でない場合のみ`placeCandidates`フィールドを含める
+- **コンソール出力**: 記事作成ログの直後に `  places YAML追加候補: [...]` として出力する
+
+**運用（ローカルでの手動enrich）**: `placeCandidates`は座標（`lat`/`lng`）を含まず、LLMが生成した店名・エリア・料理ジャンルの参考情報にすぎない。`src/data/places/*.yaml`（1店舗=1ファイル、[`categories/lifestyle.md`](./categories/lifestyle.md)「9. 店舗データのメンテナンス用スクリプト」参照）への正式な追加は自動化されておらず、人間が`.crawl-result.json`またはCIログの`placeCandidates`を見て次を手動で行う想定:
+
+1. 既存の`src/data/places/*.yaml`に同一店舗が無いか確認（店名正規化一致 or 座標60m以内は重複扱い）
+2. 新規なら`src/data/places/<slug>.yaml`を作成し、`sourceArticles`にその記事のid（ファイル名から`.md`を除いたもの）を追加
+3. `placeId`が未設定なら`node scripts/enrich-places.mjs`（ローカルPC限定、Places APIキーがIP制限付きのため）でGoogle Places APIから座標・`placeId`を補完
+4. `node scripts/validate-places.mjs`でスキーマ適合・重複を検証してからコミット
+
+foodレーンのGemini呼び出し自体はplacesコレクションを書き換えない（記事生成と店舗データ登録は独立した工程のまま）。
+
+### PRタイトルの分岐
+
+`.github/workflows/crawl-articles.yml`の`Determine PR title`ステップ（第9章）が、foodレーンのPRタイトルを「自動ドラフト記事【グルメ】(run {run_id})」にする。newsレーンは従来通り「自動ドラフト記事 (run {run_id})」。
+
+### CLIオプションまとめ
+
+| オプション/コマンド | 内容 |
+|---|---|
+| `--lane=food` / `--lane=news` | `resolveLane()`が最優先で参照するCLI引数 |
+| `CRAWL_LANE=food` 環境変数 | CLI引数が無い場合に参照（CIの`Determine crawl lane`ステップがこれを設定） |
+| `--dry-run` | 候補取得〜フィルタまで実行し件数・タイトル最大5件を表示して終了（`GEMINI_API_KEY`不要。第13章） |
+| `npm run crawl:food` | `node scripts/crawl-and-draft.mjs --lane=food` のショートカット |
+
+例: `node scripts/crawl-and-draft.mjs --lane=food --dry-run`（APIキー不要でfoodレーンの候補件数だけ確認したいとき）
+
+---
+
 ## 関連ドキュメント
 
 - [`../AUTOMATION.md`](../AUTOMATION.md) — セットアップ・運用コマンド・コスト・既知の制約
 - [`../CONTENT-SOURCES.md`](../CONTENT-SOURCES.md) — 情報源・更新方式の俯瞰
-- カテゴリ別詳細: [`categories/safety.md`](./categories/safety.md) / [`categories/society.md`](./categories/society.md) / [`categories/business.md`](./categories/business.md) / [`categories/travel.md`](./categories/travel.md) / [`categories/visa.md`](./categories/visa.md) / [`categories/regulation.md`](./categories/regulation.md) / [`categories/lifestyle.md`](./categories/lifestyle.md)
+- カテゴリ別詳細: [`categories/safety.md`](./categories/safety.md) / [`categories/society.md`](./categories/society.md) / [`categories/business.md`](./categories/business.md) / [`categories/travel.md`](./categories/travel.md) / [`categories/visa.md`](./categories/visa.md) / [`categories/regulation.md`](./categories/regulation.md) / [`categories/lifestyle.md`](./categories/lifestyle.md) / [`categories/gourmet.md`](./categories/gourmet.md)
 </content>
 </invoke>

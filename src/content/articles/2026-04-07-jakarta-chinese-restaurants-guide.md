@@ -1,7 +1,7 @@
 ---
 title: "ジャカルタの本格中華料理レストラン5選【2026年版】"
 description: "点心から四川料理まで、ジャカルタで中華料理を堪能できるおすすめ店を厳選紹介。PIKもエリアの名店も"
-category: "lifestyle"
+category: "gourmet"
 tags: ["中華料理", "レストラン", "点心", "ジャカルタ", "グルメ", "PIK"]
 pubDate: 2026-04-07
 source: "WebSearch"

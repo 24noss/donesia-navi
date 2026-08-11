@@ -8,6 +8,8 @@ import {
   parseGeminiArticlesResponse,
   parseFrontmatterBlock,
   fetchOpenPrDedupeData,
+  resolveLane,
+  isDryRun,
 } from './crawl-and-draft.mjs';
 
 describe('escapeYaml', () => {
@@ -35,6 +37,26 @@ describe('validateArticle', () => {
 
   test('正しい記事は問題なしの空配列を返す', () => {
     assert.deepEqual(validateArticle(validArticle()), []);
+  });
+
+  test('category が gourmet でも問題なしと判定する（食レーン用カテゴリ追加の確認）', () => {
+    const article = { ...validArticle(), category: 'gourmet' };
+    assert.deepEqual(validateArticle(article), []);
+  });
+
+  test('placeCandidates が無くても必須項目扱いにしない（optional）', () => {
+    const article = validArticle();
+    assert.equal('placeCandidates' in article, false);
+    assert.deepEqual(validateArticle(article), []);
+  });
+
+  test('placeCandidates が付与されていても無視して検証を通す', () => {
+    const article = {
+      ...validArticle(),
+      category: 'gourmet',
+      placeCandidates: [{ name: 'Sushi Tei', area: 'Senopati', cuisine: '日本食' }],
+    };
+    assert.deepEqual(validateArticle(article), []);
   });
 
   test('title が空なら検出する', () => {
@@ -101,6 +123,65 @@ describe('buildMarkdown', () => {
     assert.match(md, /- 要点1/);
     assert.match(md, /\*\*カテゴリ:\*\* 社会・政治/);
     assert.match(md, /\[Kompas\]\(https:\/\/example\.com\/news\/1\)/);
+  });
+
+  test('placeCandidatesが付与されていてもfrontmatter・本文に出力しない（無視する）', () => {
+    const article = {
+      title: 'グルメ記事',
+      description: '説明',
+      category: 'gourmet',
+      tags: ['グルメ'],
+      source: 'Detik',
+      sourceUrl: 'https://example.com/food/1',
+      heading: '本文見出し',
+      keyPoints: ['要点1'],
+      body: '本文テキストです。',
+      placeCandidates: [{ name: 'Sushi Tei', area: 'Senopati', cuisine: '日本食' }],
+    };
+    const md = buildMarkdown(article, '2026-08-11');
+    assert.equal(md.includes('placeCandidates'), false);
+    assert.equal(md.includes('Sushi Tei'), false);
+    assert.match(md, /\*\*カテゴリ:\*\* グルメ・レストラン/);
+  });
+});
+
+describe('resolveLane (レーン決定: --lane= > CRAWL_LANE > デフォルトnews)', () => {
+  test('CLI引数 --lane=food が最優先される', () => {
+    assert.equal(resolveLane(['--lane=food'], { CRAWL_LANE: 'news' }), 'food');
+  });
+
+  test('CLI引数が無ければ環境変数CRAWL_LANEを見る', () => {
+    assert.equal(resolveLane([], { CRAWL_LANE: 'food' }), 'food');
+  });
+
+  test('CLI引数・環境変数どちらも無ければnewsをデフォルトにする', () => {
+    assert.equal(resolveLane([], {}), 'news');
+  });
+
+  test('CLI引数が不正な値ならCRAWL_LANEにフォールバックする', () => {
+    assert.equal(resolveLane(['--lane=invalid'], { CRAWL_LANE: 'food' }), 'food');
+  });
+
+  test('CLI引数・環境変数とも不正な値ならnewsにフォールバックする', () => {
+    assert.equal(resolveLane(['--lane=invalid'], { CRAWL_LANE: 'bogus' }), 'news');
+  });
+
+  test('--lane=news を明示指定した場合はnewsを返す（既存の暗黙デフォルトと同じ結果になることの確認）', () => {
+    assert.equal(resolveLane(['--lane=news'], { CRAWL_LANE: 'food' }), 'news');
+  });
+});
+
+describe('isDryRun', () => {
+  test('--dry-run が含まれていればtrue', () => {
+    assert.equal(isDryRun(['--lane=food', '--dry-run']), true);
+  });
+
+  test('--dry-run が無ければfalse', () => {
+    assert.equal(isDryRun(['--lane=food']), false);
+  });
+
+  test('引数無しでもエラーにならずfalseを返す', () => {
+    assert.equal(isDryRun([]), false);
   });
 });
 

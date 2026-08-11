@@ -58,6 +58,14 @@ function googleNewsSiteSearchUrl(domain, keyword) {
   return `https://news.google.com/rss/search?q=${q}&hl=id&gl=ID&ceid=ID:id`;
 }
 
+// site:制限なしの一般Google News検索RSSのURLを組み立てる純関数。
+// KOMPAS用のgoogleNewsSiteSearchUrl()と異なり when: 期間はqueryの側に含める前提
+// （foodレーンは週2回実行のため when:7d を使う。呼び出し側のFOOD_QUERIESを参照）。
+export function googleNewsSearchUrl(query) {
+  const q = encodeURIComponent(query);
+  return `https://news.google.com/rss/search?q=${q}&hl=id&gl=ID&ceid=ID:id`;
+}
+
 // Kompasは直接RSSが見つからないため、Google Newsのsite内検索RSSで代替する。
 // item.link はGoogleの仲介URL（news.google.com/rss/articles/...）だが、
 // fetchKompasViaGoogleNews() が resolveDirectLink() で実記事URLへの解決を試みる（D-4、fail-open）。
@@ -187,9 +195,12 @@ export async function mapWithConcurrency(items, limit, fn) {
   return results;
 }
 
-async function fetchKompasViaGoogleNews() {
+// 複数のGoogle News検索RSS URLを並行取得し、実記事URLへの解決（D-4）まで行う共通処理。
+// fetchKompasViaGoogleNews()（既存newsレーン）とfetchFoodViaGoogleNews()（foodレーン）の両方から使う。
+// fallbackSourceLabelを渡さない場合はRSS内のitem.source（実際の掲載媒体名）をそのまま使う。
+async function fetchGoogleNewsSearchUrls(urls, { fallbackSourceLabel } = {}) {
   const results = await Promise.allSettled(
-    KOMPAS_QUERIES.map((keyword) => fetchRssSource(googleNewsSiteSearchUrl('kompas.com', keyword), { fallbackSourceLabel: 'Kompas' }))
+    urls.map((url) => fetchRssSource(url, fallbackSourceLabel ? { fallbackSourceLabel } : undefined))
   );
   const items = results.filter((r) => r.status === 'fulfilled').flatMap((r) => r.value);
 
@@ -198,6 +209,28 @@ async function fetchKompasViaGoogleNews() {
     ...item,
     link: await resolveDirectLink(item.link),
   }));
+}
+
+async function fetchKompasViaGoogleNews() {
+  const urls = KOMPAS_QUERIES.map((keyword) => googleNewsSiteSearchUrl('kompas.com', keyword));
+  return fetchGoogleNewsSearchUrls(urls, { fallbackSourceLabel: 'Kompas' });
+}
+
+// foodレーン専用: site制限なしの一般検索RSSでジャカルタのグルメ・新規オープン情報を拾う。
+// 週2回実行のため各クエリに when:7d を含める。一般検索なのでitem.sourceには実際の掲載媒体名
+// （Detik/Kompas/CNN Indonesia等）が入るため、fallbackSourceLabelで上書きしない（元の媒体名を尊重する）。
+export const FOOD_QUERIES = [
+  'restoran baru jakarta when:7d',
+  'restoran jepang jakarta when:7d',
+  'kuliner jakarta selatan when:7d',
+  'cafe baru jakarta when:7d',
+  'restoran mall jakarta when:7d',
+  'festival kuliner jakarta when:7d',
+];
+
+async function fetchFoodViaGoogleNews() {
+  const urls = FOOD_QUERIES.map((query) => googleNewsSearchUrl(query));
+  return fetchGoogleNewsSearchUrls(urls);
 }
 
 async function fetchBmkgEarthquakes() {
@@ -253,8 +286,30 @@ export const sources = [
   },
 ];
 
-export async function fetchAllCandidates() {
-  const settled = await Promise.allSettled(sources.map((s) => s.fetch()));
+// foodレーン（グルメ情報）専用のソース登録簿。newsレーンの`sources`とは独立に管理する。
+// - detikFood: food.detik.com の公式RSS（実在確認済み、2026-08-11）。100件規模のグルメニュースを配信。
+// - foodGoogleNews: site制限なしのGoogle News検索RSS（FOOD_QUERIES）。新規オープン等を横断的に拾う。
+export const foodSources = [
+  {
+    id: 'detikFood',
+    label: 'Detik Food',
+    fetch: () => fetchRssSource('https://food.detik.com/rss', { fallbackSourceLabel: 'Detik' }),
+  },
+  {
+    id: 'foodGoogleNews',
+    label: 'Google News (Kuliner)',
+    fetch: fetchFoodViaGoogleNews,
+  },
+];
+
+// lane('news' | 'food')から使用するソース配列を選ぶ純関数。'food'以外は常にnewsレーン（既存挙動）。
+export function getSourcesForLane(lane) {
+  return lane === 'food' ? foodSources : sources;
+}
+
+export async function fetchAllCandidates(lane = 'news') {
+  const activeSources = getSourcesForLane(lane);
+  const settled = await Promise.allSettled(activeSources.map((s) => s.fetch()));
   const failures = [];
   const items = [];
 
@@ -262,7 +317,7 @@ export async function fetchAllCandidates() {
     if (result.status === 'fulfilled') {
       items.push(...result.value);
     } else {
-      failures.push({ source: sources[i].id, error: String(result.reason) });
+      failures.push({ source: activeSources[i].id, error: String(result.reason) });
     }
   });
 

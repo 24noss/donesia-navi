@@ -16,6 +16,7 @@ const CATEGORY_COLOR: Record<CategorySlug, string> = {
   safety: '#CE3B3B',
   society: '#3A6B8C',
   business: '#C9A44A',
+  gourmet: '#C1502B',
   lifestyle: '#5BA88E',
   travel: '#8B6FBF',
   visa: '#D47B3E',

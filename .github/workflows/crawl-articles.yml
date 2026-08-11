@@ -2,9 +2,18 @@ name: Crawl & Draft Articles
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 07:00 WIB (UTC+7)
-    - cron: '0 4 * * *' # 11:00 WIB (UTC+7)
-  workflow_dispatch: {}
+    - cron: '0 0 * * *' # 07:00 WIB (UTC+7) - newsレーン
+    - cron: '0 4 * * *' # 11:00 WIB (UTC+7) - newsレーン
+    - cron: '30 0 * * 1,4' # 07:30 WIB (UTC+7) 月・木 - foodレーン
+  workflow_dispatch:
+    inputs:
+      lane:
+        description: 'クロールレーン'
+        type: choice
+        options:
+          - news
+          - food
+        default: news
 
 permissions:
   contents: write
@@ -31,11 +40,34 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # レーン判定: schedule('30 0 * * 1,4' = 月・木 07:30 WIB)ならfood、
+      # workflow_dispatchならinputs.lane、それ以外(通常のnewsレーンcron)はnews。
+      - name: Determine crawl lane
+        id: lane
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ github.event.schedule }}" = "30 0 * * 1,4" ]; then
+            echo "lane=food" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "lane=${{ github.event.inputs.lane }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "lane=news" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Determine PR title
+        id: prtitle
+        run: |
+          if [ "${{ steps.lane.outputs.lane }}" = "food" ]; then
+            echo "title=自動ドラフト記事【グルメ】(run ${{ github.run_id }})" >> "$GITHUB_OUTPUT"
+          else
+            echo "title=自動ドラフト記事 (run ${{ github.run_id }})" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Crawl sources and draft articles
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          CRAWL_LANE: ${{ steps.lane.outputs.lane }}
         run: npm run crawl
 
       - name: Check for new draft articles
@@ -55,7 +87,7 @@ jobs:
           add-paths: src/content/articles/*.md
           commit-message: 'Add draft articles (auto-crawl)'
           branch: auto/articles-${{ github.run_id }}
-          title: '自動ドラフト記事 (run ${{ github.run_id }})'
+          title: ${{ steps.prtitle.outputs.title }}
           body: |
             クロール自動生成によるドラフト記事です。すべて `draft: true` のため、マージしても本番サイトには表示されません。
 
