@@ -6,7 +6,7 @@ tags: ["ラーメン", "日本食", "ジャカルタ", "グルメ", "ハラル"]
 pubDate: 2026-08-11
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
-draft: true
+draft: false
 ---
 
 ## ジャカルタでラーメンが恋しくなったら
