@@ -6,7 +6,7 @@ tags: ["カフェ", "コーヒー", "ジャカルタ", "グルメ", "スペシ�
 pubDate: 2026-08-11
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
-draft: true
+draft: false
 ---
 
 ## ジャカルタはアジア屈指のスペシャルティコーヒー大国
