@@ -6,7 +6,7 @@ tags: ["インドネシア中央銀行", "プラボウォ大統領", "為替", "
 pubDate: 2026-08-11
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/tren/read/2026/08/11/074500365/reuters-soroti-prabowo-calonkan-destry-damayanti-jadi-gubernur-bi-rupiah"
-draft: true
+draft: false
 ---
 
 ## プラボウォ大統領が中銀総裁にデストリー副総裁を指名、市場好感でルピア高に
