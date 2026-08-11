@@ -6,7 +6,7 @@ tags: ["焼肉", "日本食", "ジャカルタ", "グルメ", "和牛", "レス�
 pubDate: 2026-08-11
 source: "WebSearch"
 sourceUrl: "https://www.tripadvisor.com/Restaurants-g294229-zfd11735-Jakarta_Java-Yakiniku_Japanese_BBQ.html"
-draft: true
+draft: false
 ---
 
 ## ジャカルタの焼肉、和牛レベルは東京と遜色なし
