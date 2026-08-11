@@ -6,7 +6,7 @@ tags: ["BMKG", "ボゴール", "気象警報", "大雨", "防災"]
 pubDate: 2026-08-10
 source: "Kompas"
 sourceUrl: "http://megapolitan.kompas.com/read/2026/08/10/19463731/bmkg-waspada-hujan-sedang-lebat-di-bogor-selasa-11-agustus-2026"
-draft: true
+draft: false
 ---
 
 ## BMKGがボゴール地域に大雨注意報を発令、土砂災害や交通混乱に警戒
