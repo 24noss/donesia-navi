@@ -6,7 +6,7 @@ tags: ["サッカー", "FIFA", "ジャカルタ", "バンドン", "イベント"
 pubDate: 2026-08-10
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8612720/erick-thohir-temui-pramono-bahas-venue-fifa-asean-cup-di-jakarta"
-draft: true
+draft: false
 ---
 
 ## 東南アジア最高峰のサッカー大会がジャカルタとバンドンで開催へ
