@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "トランスジャカルタ", "千島列島", "交通
 pubDate: 2026-08-11
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8613055/waka-dprd-dki-dukung-transj-kelola-transportasi-pulau-seribu-bangun-awareness"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ州政府が千島列島への水上交通統合を推進
