@@ -1,0 +1,15 @@
+name: Paris Bistro
+nameEn: Paris Bistro
+category: restaurant
+area: スディルマン
+cuisine: european
+priceRange: mid
+halal: unverified
+servesAlcohol: yes
+lat: -6.216563
+lng: 106.815024
+googleMapsQuery: Paris Bistro Jakarta Mori Tower Sudirman Jakarta
+status: open
+verifiedAt: 2026-08-11
+sourceArticles:
+  - 2026-08-11-jakarta-french-restaurants-guide
