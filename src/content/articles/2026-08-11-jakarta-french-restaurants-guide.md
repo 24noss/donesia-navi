@@ -6,7 +6,7 @@ tags: ["フレンチ", "フランス料理", "レストラン", "ジャカルタ
 pubDate: 2026-08-11
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
-draft: true
+draft: false
 ---
 
 ## ジャカルタでフレンチを探すなら。接待・記念日にも使える5店
