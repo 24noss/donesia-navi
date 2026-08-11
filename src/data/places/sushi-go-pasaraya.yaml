@@ -1,0 +1,16 @@
+name: Sushi Go!
+nameEn: Sushi Go! Pasaraya Blok M
+category: restaurant
+area: ブロックM
+cuisine: japanese
+priceRange: budget
+halal: no
+servesAlcohol: unverified
+lat: -6.2436
+lng: 106.7986
+googleMapsQuery: Sushi Go Pasaraya Blok M Jakarta Selatan
+isChain: true
+status: open
+verifiedAt: 2026-08-11
+sourceArticles:
+  - 2026-08-11-jakarta-sushi-guide
