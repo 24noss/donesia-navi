@@ -6,7 +6,7 @@ tags: ["ベカシ", "交通", "バス", "ハラパンインダ", "生活情報"]
 pubDate: 2026-08-10
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/10/12194481/trans-beken-bekasi-harapan-indah-beroperasi-lagi-15-agustus-ini-yang"
-draft: true
+draft: false
 ---
 
 ## ベカシ〜ハラパン・インダ間のバス路線が評価改善を経て再開へ
