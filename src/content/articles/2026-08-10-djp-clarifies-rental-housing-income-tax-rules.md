@@ -6,7 +6,7 @@ tags: ["国税総局", "DJP", "不動産賃貸", "所得税", "税務"]
 pubDate: 2026-08-10
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/10/135503226/djp-tegaskan-pajak-rumah-kontrakan-bukan-pajak-baru"
-draft: true
+draft: false
 ---
 
 ## 国税総局が住宅賃貸にかかる課税ルールを解説、10％の最終所得税適用を再確認
