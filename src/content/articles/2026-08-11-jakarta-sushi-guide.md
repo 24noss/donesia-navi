@@ -6,7 +6,7 @@ tags: ["寿司", "日本食", "ジャカルタ", "グルメ", "レストラン",
 pubDate: 2026-08-11
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
-draft: true
+draft: false
 ---
 
 ## ジャカルタで「本当に美味しい寿司」を探す在住日本人へ
