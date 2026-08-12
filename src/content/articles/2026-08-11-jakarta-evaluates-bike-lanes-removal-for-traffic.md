@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通渋滞", "自転車専用レーン", "道路交
 pubDate: 2026-08-11
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8614156/pramono-terima-banyak-masukan-jalur-sepeda-dihapus-akan-dibahas-khusus"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ州知事、主要幹線道路の自転車専用レーン見直し・撤去検討を発表
