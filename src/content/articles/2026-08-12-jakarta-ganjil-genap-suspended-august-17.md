@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "奇数偶数規制", "独立記念日", "交通規制
 pubDate: 2026-08-12
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8614795/catat-ganjil-genap-jakarta-ditiadakan-saat-hut-ri-17-agustus"
-draft: true
+draft: false
 ---
 
 ## 独立記念日の祝日にあわせ奇数偶数規制が一時免除へ
