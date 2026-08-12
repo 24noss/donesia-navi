@@ -77,7 +77,9 @@ async function githubApi(env, path, opts = {}) {
 }
 
 // ファイル更新直後はGitHub側のmergeable判定がまだ非同期に計算中で、
-// 405 "Pull Request is not mergeable" が一時的に返ることがあるためリトライする。
+// 405 "Pull Request is not mergeable" や 409 "Head branch is out of date" が
+// 一時的に返ることがあるためリトライする(2026-08-11: ガイド記事PR #27〜29の承認が
+// 409で失敗した実例あり。どちらも再計算完了後の再試行で成功する同種の一時エラー)。
 async function mergeWithRetry(env, repo, prNumber, { retries = 5, intervalMs = 2000 } = {}) {
   for (let i = 0; i < retries; i += 1) {
     try {
@@ -88,7 +90,8 @@ async function mergeWithRetry(env, repo, prNumber, { retries = 5, intervalMs = 2
       return;
     } catch (err) {
       const isLastAttempt = i === retries - 1;
-      if (isLastAttempt || !String(err.message).includes('405')) throw err;
+      const isRetryable = String(err.message).includes('405') || String(err.message).includes('409');
+      if (isLastAttempt || !isRetryable) throw err;
       await new Promise((resolve) => setTimeout(resolve, intervalMs));
     }
   }
