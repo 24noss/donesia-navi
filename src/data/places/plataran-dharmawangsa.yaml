@@ -4,12 +4,14 @@ category: restaurant
 area: ダルマワンサ
 cuisine: indonesian
 priceRange: high
-halal: yes
+halal: unverified
 servesAlcohol: yes
 lat: -6.2612
 lng: 106.7988
 googleMapsQuery: Plataran Dharmawangsa Jl Dharmawangsa Raya No.6 Jakarta Selatan
 status: open
-verifiedAt: 2026-04-07
+verifiedAt: 2026-08-12
 sourceArticles:
   - 2026-04-07-jakarta-indonesian-restaurants-guide
+  - 2026-08-12-jakarta-halal-restaurants-guide
+description: 予約サイト等では「ハラール対応」と紹介されるが、BPJPH/MUI公式データベース・一次情報での認証番号は確認できず(2026年8月再調査)。ワイン&スピリッツメニューを完備。

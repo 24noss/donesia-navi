@@ -4,13 +4,15 @@ category: restaurant
 area: メンテン
 cuisine: chinese
 priceRange: high
-halal: yes
+halal: unverified
 servesAlcohol: unverified
 lat: -6.1980742
 lng: 106.8244094
 googleMapsQuery: Twelve Chinese Dining Menteng Jakarta
 placeId: ChIJlbfOLJr1aS4R4WnohuhIaUU
 status: open
-verifiedAt: 2026-08-03
+verifiedAt: 2026-08-12
 sourceArticles:
   - 2026-04-07-jakarta-chinese-restaurants-guide
+  - 2026-08-12-jakarta-halal-restaurants-guide
+description: 公式サイトは「No Pork No Lard」の自主方針を明言するが、BPJPH/MUI公式認証番号への言及は確認できず(2026年8月再調査)。「オープンバー」を掲げ、ビール・カクテル提供に触れるレビューもあり。
