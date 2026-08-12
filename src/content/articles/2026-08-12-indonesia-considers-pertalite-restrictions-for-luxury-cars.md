@@ -6,7 +6,7 @@ tags: ["ガソリン", "ペルタライト", "燃料補助金", "インドネシ
 pubDate: 2026-08-12
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/11/201300026/pemerintah-kaji-pembatasan-pertalite-mobil-mewah-tak-bisa-beli-bbm-subsidi"
-draft: true
+draft: false
 ---
 
 ## 補助金ガソリンの購入対象見直しへ　高級車への供給制限を議論
