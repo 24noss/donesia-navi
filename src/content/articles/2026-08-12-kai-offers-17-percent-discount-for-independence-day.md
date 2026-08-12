@@ -6,7 +6,7 @@ tags: ["KAI", "鉄道", "独立記念日", "割引キャンペーン"]
 pubDate: 2026-08-12
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8614793/spesial-hut-ri-ada-diskon-tiket-kereta-api-jarak-jauh-simak-ketentuannya"
-draft: true
+draft: false
 ---
 
 ## 8月14日〜17日乗車分を対象に長距離列車が17％オフに
