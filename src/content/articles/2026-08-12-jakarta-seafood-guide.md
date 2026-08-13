@@ -6,7 +6,7 @@ tags: ["シーフード", "海鮮", "カニ", "ジャカルタ", "グルメ", "�
 pubDate: 2026-08-12
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
-draft: true
+draft: false
 ---
 
 ## ジャカルタで「殻を割って食べる」シーフードを探す在住日本人へ
