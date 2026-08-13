@@ -47,7 +47,7 @@ draft: true
 | ジャカルタ（CGK）⇔ バンコク（タイ） | 2026年8月6日からダブルデイリーで新規就航 |
 | バリ（DPS）⇔ プーケット（タイ） | 2026年9月9日から週4便で就航予定 |
 
-タイ路線の新設については本サイトでも既報のとおりで、ジャカルタ在住者にとっては近隣国への渡航選択肢が広がる動きだ（関連記事: [航空トランスヌサ、ジャカルタ・バリ発タイ行きの直行便を新設](/articles/2026-08-04-transnusa-direct-flights-jakarta-bali-thailand)）。
+タイ路線の新設については本サイトでも既報のとおりで、ジャカルタ在住者にとっては近隣国への渡航選択肢が広がる動きだ（関連記事: [航空トランスヌサ、ジャカルタ・バリ発タイ行きの直行便を新設](/articles/2026-08-04-transnusa-direct-flights-jakarta-bali-thailand/)）。
 
 ---
 
@@ -173,6 +173,6 @@ A. インドネシア国内線にはEU基準のような法定の金銭補償制
 - [Semua Rute Penerbangan TransNusa Delay Sejak 5 Juli 2024 Imbas Cuaca Ekstrem — Kompas](https://travel.kompas.com/read/2024/07/07/160350927/semua-rute-penerbangan-transnusa-delay-sejak-5-juli-2024-imbas-cuaca-ekstrem)
 - [トランスヌサ航空利用でジャカルタからバリ島へ！サーフボードチャージなど — world-surf-travel.com](https://world-surf-travel.com/2025/08/16/post15191/)
 - [バリ島Aug.2024 part1 トランスヌサ航空の遅延 — note.com](https://note.com/yasu471/n/n003c2d9c6bcb)
-- [航空トランスヌサ、ジャカルタ・バリ発タイ行きの直行便を新設（本サイト既存記事）](/articles/2026-08-04-transnusa-direct-flights-jakarta-bali-thailand)
+- [航空トランスヌサ、ジャカルタ・バリ発タイ行きの直行便を新設（本サイト既存記事）](/articles/2026-08-04-transnusa-direct-flights-jakarta-bali-thailand/)
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*
