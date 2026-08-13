@@ -17,7 +17,10 @@ const { tag } = Astro.props;
 const allArticles = await getCollection('articles', ({ data }) => !data.draft && data.tags.includes(tag));
 const articles = allArticles.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<Base title={`#${tag} の記事一覧`} description={`「${tag}」タグが付いた記事の一覧です。`}>
+{/* タグページはnoindex: 大半が記事1〜2本の薄い一覧でGSCの「インデックス未登録」の主因
+    (2026-08-13時点で323タグ中252タグが記事1本のみ)。クロールバジェットを記事・店舗
+    ページに集中させるため、サイト内回遊専用とする(sitemapからも除外済み)。 */}
+<Base title={`#${tag} の記事一覧`} description={`「${tag}」タグが付いた記事の一覧です。`} noindex={true}>
 
   <div class="container static-page">
 

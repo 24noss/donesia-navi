@@ -12,7 +12,9 @@ export default defineConfig({
     sitemap({
       changefreq: 'daily',
       priority: 0.7,
-      filter: (page) => !page.includes('/draft'),
+      // /tag/: noindexの薄い一覧ページ(タグページ側のコメント参照)。
+      // /search/: robots.txtでDisallowしておりsitemap掲載と矛盾するため除外。
+      filter: (page) => !page.includes('/draft') && !page.includes('/tag/') && !page.includes('/search'),
     }),
   ],
   markdown: {
