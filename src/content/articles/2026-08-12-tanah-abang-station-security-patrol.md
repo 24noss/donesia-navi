@@ -6,7 +6,7 @@ tags: ["ジャカルタ治安", "タナアバン駅", "注意喚起", "防犯", 
 pubDate: 2026-08-12
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/12/22553241/marak-copet-dan-pemalakan-polisi-dan-pemkot-jakpus-bakal-patroli-di"
-draft: true
+draft: false
 ---
 
 ## タナアバン駅周辺でスリや恐喝が相次ぐ　警察と市当局が警備・パトロールを強化
