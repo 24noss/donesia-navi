@@ -6,9 +6,10 @@ cuisine: cafe
 priceRange: budget
 halal: unverified
 servesAlcohol: no
-lat: -6.2443
-lng: 106.8009
+lat: -6.244554900000001
+lng: 106.79969480000001
 googleMapsQuery: Filosofi Kopi Melawai Jl Melawai VI Jakarta Selatan
+placeId: ChIJcWGKG2zxaS4RFcxWKOyqtH4
 isChain: true
 status: open
 sourceArticles:

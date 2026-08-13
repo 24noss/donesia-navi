@@ -6,9 +6,10 @@ cuisine: indonesian
 priceRange: budget
 halal: unverified
 servesAlcohol: no
-lat: -6.2455
-lng: 106.8003
+lat: -6.2453071
+lng: 106.80165579999999
 googleMapsQuery: RM Sepakat Padang Restaurant Jl Melawai IX Blok M Jakarta Selatan
+placeId: ChIJWwbL727xaS4R40h5moHJP84
 status: open
 sourceArticles:
   - 2026-08-13-jakarta-blok-m-restaurants-guide
