@@ -6,7 +6,7 @@ tags: ["EV", "電動バイク", "チカラン", "プラボウォ大統領", "自
 pubDate: 2026-08-13
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8616153/prabowo-bakal-resmikan-motor-listrik-nasional-hari-ini"
-draft: true
+draft: false
 ---
 
 ## プラボウォ大統領、チカランの工場で国産電動バイクエコシステムを正式発足
