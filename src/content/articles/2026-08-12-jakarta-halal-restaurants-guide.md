@@ -6,7 +6,7 @@ tags: ["ハラル", "ハラール", "レストラン", "ジャカルタ", "グ�
 pubDate: 2026-08-12
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
-draft: true
+draft: false
 ---
 
 ## ムスリムの同僚と、安心して食事を囲むために
