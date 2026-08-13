@@ -6,7 +6,7 @@ tags: ["ジャカルタグルメ", "和牛", "宮崎牛", "ハラールフード
 pubDate: 2026-08-07
 source: "publika.id"
 sourceUrl: "https://www.publika.id/restoran-jakarta-padukan-wagyu-a5-kuliner-ntt"
-draft: true
+draft: false
 ---
 
 ## ハラール認証の宮崎A5和牛とインドネシアNTT料理がコラボレーション
