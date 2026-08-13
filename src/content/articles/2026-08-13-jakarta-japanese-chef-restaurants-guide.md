@@ -221,6 +221,8 @@ draft: true
 - [Chope — Gokuniku Japanese Restaurant](https://www.chope.co/jakarta-restaurants/restaurant/gokuniku-japanese-restaurant-kebayoran-baru?lang=id_ID)
 - [Exquisite Taste Magazine — New Tables Jakarta: Gokuniku](https://exquisite-taste-magazine.com/new-tables-jakarta-gokuniku/)
 - [Nibble.id — 10 Restoran Baru di Jakarta Maret 2026](https://www.nibble.id/restoran-baru-di-jakarta-maret-2026/)
+- [Threads（@aptjokro）— Gokuniku現地レビュー投稿](https://www.threads.com/@aptjokro/post/DVRUt7DE7pU/nyobain-resto-sukiyaki-dan-shabu-baru-di-daerah-senopati-namanya-gokuniku-worth)
+- [TikTok（@vanissakaris）— Gokuniku「chefnya aja dari Jepang asli」言及動画](https://www.tiktok.com/@vanissakaris/video/7506128483874180359)
 - [Yakiniku Sakai Holdings — Izakaya Murasaki ARDEN GROVE 開店告知](https://ys-holdings.co.jp/en/15797/)
 - [JJC（ジャカルタ・ジャパンクラブ）個人部会 — Murasaki Izakaya](https://jjc.or.id/kojin/kojintokuten/murasaki-izakaya/)
 - [What's New Indonesia — Enishi Yakiniku Elevates the Art of Japanese Yakiniku](https://whatsnewindonesia.com/jakarta/feature/experience/enishi-yakiniku-elevates-art-japanese-yakiniku-jakarta)
