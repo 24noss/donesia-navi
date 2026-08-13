@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "電気自動車", "車両税", "税制改正", "交�
 pubDate: 2026-08-12
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/12/17361871/pemprov-jakarta-usul-pajak-mobil-listrik-dikaji-ulang-78-persen-pemilik"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ州歳入庁、EV向け車両税100％免除措置の再検討を中央政府等に要請
