@@ -6,7 +6,7 @@ tags: ["ガルーダインドネシア", "バンドン", "バリ島", "フライ
 pubDate: 2026-08-13
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/13/105735027/garuda-indonesia-terbang-dari-bandung-ke-denpasar-pp-tiket-rp-13-jutaan"
-draft: true
+draft: false
 ---
 
 ## ガルーダ・インドネシア航空がバンドン〜バリ島直行便を開設　アクセス大幅向上へ
