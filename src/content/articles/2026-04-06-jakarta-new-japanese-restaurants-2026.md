@@ -44,7 +44,7 @@ draft: false
 | ジャンル | ラーメン・居酒屋 |
 | 価格帯 | 中価格帯 |
 | オープン | 2026年3月 |
-| ハラル | ✅ ハラル対応（No Pork, No Lard） |
+| ハラル | ⚠️ 要確認（No Pork, No Lard, No Mirinの自主方針を公式に明言。BPJPH/MUI公式認証は未確認、2026年8月再調査） |
 | アルコール | ⚠️ 要確認 |
 | Google Map | [地図を見る](https://www.google.com/maps/search/Zuzu+Ramen+Izakaya+SCBD+Park+Jakarta) |
 
