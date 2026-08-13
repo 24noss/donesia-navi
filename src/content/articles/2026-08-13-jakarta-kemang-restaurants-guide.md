@@ -13,7 +13,7 @@ draft: true
 
 クマン（Kemang）は南ジャカルタを代表する外国人居住エリアの一つで、在住日本人を含む多くの外国人がコンドミニアムや一戸建てに暮らす。メインストリートのJl. Kemang Rayaとその周辺には、カフェ・レストラン・バーが密集しており、平日の仕事帰りから週末の家族での外食まで幅広いシーンに対応できる懐の深さが魅力だ。一方で、渋滞と駐車事情の悩ましさもクマンならではで、事前に土地勘を持っておくと動きやすい。
 
-本記事では、南ジャカルタの生活圏として利用頻度の高いクマンエリアから、ジャンルのバランスを意識して5軒を選定した。特別な日に使える本格イタリアン、家族での週末ランチにぴったりのパダン料理、大人数で楽しめる中華点心、カジュアルな韓国グルメ、そして週末ブランチの定番コーヒーショップまで、それぞれ利用シーンが異なる店を揃えている。営業時間・ハラール対応・アルコール提供の有無も可能な限り複数ソースで裏取りした上で掲載している。
+本記事では、南ジャカルタの生活圏として利用頻度の高いクマンエリアから、ジャンルのバランスを意識して5軒を選定した。特別な日に使える本格イタリアン、家族での週末ランチにぴったりのパダン料理、大人数で楽しめる中華点心、みんなでシェアしたい韓国フライドチキン、そして週末ブランチの定番コーヒーショップまで、それぞれ利用シーンが異なる店を揃えている。営業時間・ハラール対応・アルコール提供の有無も可能な限り複数ソースで裏取りした上で掲載している。
 
 > **価格表記について:** 本記事の価格は各店のメニュー・デリバリー表示価格を、1円≒112ルピア（2026年8月時点の実勢レート目安）で換算しています。実際の為替・現地価格は変動するほか、店舗によっては表示価格に加えて税・サービス料（合計15〜21%程度が一般的）が別途加算される場合があります。**最新の価格は必ず店舗に直接ご確認ください。**
 >
@@ -114,34 +114,33 @@ draft: true
 
 ---
 
-### 4. Ko Ru Ruk（コルロク）― クマン
+### 4. Kyochon Kemang（教村／キョチョン）― クマン
 
 | 項目 | 詳細 |
 |------|------|
-| エリア | 南ジャカルタ、クマン地区（15th Park Kemang, Jl. Kemang Raya No.76, RT.13/RW.2, Bangka, Jakarta Selatan 12730） |
-| ジャンル | 韓国料理（トッポッキ・屋台グルメ） |
-| 予算 | Rp6,000〜69,600/品目安（約50〜620円、複数品の注文で1人1万円以下も可能） |
+| エリア | 南ジャカルタ、クマン地区（La Codefin / Everplate Kemang内, Jl. Kemang I No.3, Jakarta Selatan） |
+| ジャンル | 韓国料理（フライドチキン専門チェーン） |
+| 予算 | Rp110,000〜282,000/セット目安（約980〜2,520円、1〜2名でのシェアを想定） |
 | 営業時間 | 要確認 |
-| ハラル | ⚠️ 要確認（一部商品にオンライン販売時「Halal」表記があるが、公式BPJPH/MUI認証の提示は未確認） |
+| ハラル | ⚠️ 要確認（公式ハラール認証の提示は未確認） |
 | アルコール | ⚠️ 要確認 |
-| Google Map | [地図を見る](https://www.google.com/maps/search/Ko+Ru+Ruk+Korean+Resto+15th+Park+Kemang+Jl+Kemang+Raya+No.76+Jakarta+Selatan) |
+| Google Map | [地図を見る](https://www.google.com/maps/search/Kyochon+Everplate+Kemang+Jl+Kemang+I+No.3+Jakarta+Selatan) |
 
-商業施設「15th Park Kemang」内にある、韓国の屋台グルメ・家庭料理を中心に扱うカジュアルなコリアンレストラン。店名は韓国語で「お腹がすいた音」を意味するといい、トッポッキ・キムパブ（韓国風海苔巻き）・チヂミ・コーンドッグといった、日本でも人気の高い韓国屋台グルメが手頃な価格で楽しめる。
+韓国発、世界展開するフライドチキンチェーン「教村（Kyochon）」のクマン店。フードホール型商業施設「Everplate Kemang」内のLa Codefinに入居しており、ジャカルタではクラパガディンやプルイットなど他エリアにも複数店舗を構える。2度揚げ製法による薄皮でカリッとした食感と、看板のしょうゆだれ（Soy/Red）・はちみつだれ（Honey）の2大フレーバーが特徴だ。
 
-看板のトッポッキは、オリジナル・チーズ・ロゼ・カルボナーラなど複数のフレーバーから選べるのが特徴。キムパブも定番のキムチ味から、ツナ・ソーセージ入りまでバリエーションが豊富で、軽食からしっかりめの食事まで幅広く対応できる。
+メニューはウィング中心のシェア向けセット構成。ウィング6個+ライス+ドリンク+サラダの「Combo 2」や、ハーフチキン12個+ライス2人前+ドリンク2杯の「Combo 3」など、2〜3人でシェアしやすいボリュームが揃う。フードホール内という立地から、家族での週末の軽い食事や、他テナントの料理と組み合わせたシェア利用にも向く。
 
-価格帯が手頃なため、子どもと一緒の食事や、ちょっとした軽食にも使いやすい。デリバリー・テイクアウトにも対応しているため、**自宅でゆっくり楽しみたい場合はGoFood等での注文も選択肢**になる。
+チェーン店のため味・品質の安定感は高い一方、クマン店固有の営業時間や設備情報はローカル店に比べて情報が乏しい。**利用前にGoFood/GrabFoodアプリまたは公式Instagram（@kyochon_id）で最新の営業状況を確認するのがおすすめ**。
 
 **代表メニューの価格（税・サービス料別）:**
 
 | メニュー | 価格（IDR） | 価格（JPY目安） |
 |---------|------------|---------------|
-| Gimbab Kimchi（キムチキムパブ） | Rp49,200 | 約440円 |
-| Odeng Kuah（韓国式おでん） | Rp42,000 | 約380円 |
-| Corndog（コーンドッグ） | Rp25,000 | 約220円 |
-| メニュー価格帯 | Rp6,000〜69,600 | 約50〜620円 |
+| Combo 2（ウィング6個+ライス+ドリンク+サラダ） | Rp110,000 | 約980円 |
+| Combo 3（ハーフチキン12個+ライス2人前+ドリンク2杯+サラダ） | Rp209,000 | 約1,870円 |
+| ウィング8個+8個（Soy/Red＋Honey） | Rp228,000 | 約2,040円 |
 
-*価格出典: [pergikuliner.com](https://pergikuliner.com/restaurants/jakarta/kko-reu-reuk-kemang)*　※最新の価格は店舗に直接ご確認ください
+*価格出典: [nonabelanja.com](https://nonabelanja.com/menu-kyochon/)*　※クマン店固有ではなくKyochon Indonesia全体の目安価格。最新の価格は店舗に直接ご確認ください
 
 ---
 
@@ -181,7 +180,7 @@ draft: true
 | 接待・特別な日のディナー | Toscana | 本格イタリアン、ワインを含むアルコールメニューあり |
 | 家族での週末ランチ（インドネシア料理） | Pagi Sore Kemang | 庭付きの広い店内、駐車スペースも確保しやすい |
 | 大人数でシェア・点心好き | Dragon Flames | 深夜5時まで営業、点心の種類が豊富 |
-| カジュアルに韓国グルメ・子ども連れ | Ko Ru Ruk | 手頃な価格帯、テイクアウトも対応 |
+| みんなでシェア・韓国フライドチキン | Kyochon Kemang | ウィング/ハーフチキンのセットメニュー、フードホール内で気軽に利用可 |
 | 週末ブランチ・作業もできるカフェ | One Fifteenth Coffee Kemang | 朝7時開店、本格コーヒーとフード両方充実 |
 
 ---
@@ -193,7 +192,7 @@ draft: true
 | Toscana | イタリアン | Rp50,001〜100,000 | 約450〜890円 | ⚠️ 要確認 | 🍺 あり |
 | Pagi Sore Kemang | インドネシア（パダン） | Rp25,000〜120,000 | 約220〜1,070円 | ⚠️ 要確認 | ⚠️ 要確認 |
 | Dragon Flames | 中華 | Rp50,000〜100,000 | 約450〜890円 | ⚠️ 要確認 | ⚠️ 要確認 |
-| Ko Ru Ruk | 韓国 | Rp6,000〜69,600（品目安） | 約50〜620円 | ⚠️ 要確認 | ⚠️ 要確認 |
+| Kyochon Kemang | 韓国（フライドチキン） | Rp110,000〜282,000（セット目安） | 約980〜2,520円 | ⚠️ 要確認 | ⚠️ 要確認 |
 | One Fifteenth Coffee Kemang | カフェ | Rp28,000〜180,000 | 約250〜1,610円 | ⚠️ 要確認 | 🚫 なし |
 
 ※JPY換算レート: 1円≒112ルピア（2026年8月時点の目安）。※価格は取材・調査時点のもので、変更される場合があります。※最新の価格は店舗に直接ご確認ください
@@ -204,8 +203,8 @@ draft: true
 
 - **渋滞と駐車事情に注意。** Jl. Kemang Rayaは南北を貫く一本道が主要動線のため、平日夕方や週末夜は渋滞しやすい。路上駐車のスペースは限られる店舗も多く、時間に余裕を持って向かうか、配車アプリの利用も検討したい
 - **週末ブランチ〜ランチ帯は混雑しやすい。** カフェ・ブランチ系の店（One Fifteenth Coffeeなど）は土日の午前〜昼にかけて席が埋まりやすいため、大人数の場合は開店直後を狙うか予約可否を確認しておくと安心
-- **ハラール認証を公式に確認できた店は今回5軒中0軒。** 「Halal」を自称・宣伝している店（Pagi Sore Kemang、Dragon Flames、Ko Ru Ruk）はあるが、いずれもBPJPH/MUIの公式認証提示までは確認できていない。厳密な認証を求める場合は来店前に店舗へ直接確認を
-- **クマン・バンカエリアには本記事で紹介しきれなかった人気店も多い。** ハラール認証済みおまかせ寿司のGuresu Diningや、バンカのD'Cost Seafoodなども在住者に人気があり、今後の記事で別途紹介予定
+- **ハラール認証を公式に確認できた店は今回5軒中0軒。** 「Halal」を自称・宣伝している店（Pagi Sore Kemang、Dragon Flames）はあるが、いずれもBPJPH/MUIの公式認証提示までは確認できていない。厳密な認証を求める場合は来店前に店舗へ直接確認を
+- **クマン・バンカエリアには本記事で紹介しきれなかった人気店も多い。** ハラール認証済みおまかせ寿司のGuresu Diningは、[ハラルレストランガイド](/articles/2026-08-12-jakarta-halal-restaurants-guide/)で詳しく紹介している
 - **為替レート・現地物価は変動するため**、本記事の価格・ハラール・アルコール情報はあくまで調査時点のもの。ご利用前に必ず店舗へ直接ご確認ください
 
 ---
@@ -218,8 +217,8 @@ draft: true
 - [berempat.com — Dragon Flames Restaurant](https://berempat.com/bisnis/kuliner-dan-restoran/7555/dragon-flames-restaurant-jagonya-menu-favorit-dimsum/)
 - [foodierate.com — Dragon Flames Kemang](https://www.foodierate.com/listing/dragon-flames-jakarta-selatan-kemang)
 - [tripadvisor.com — Dragon Flames Reviews](https://www.tripadvisor.com/Restaurant_Review-g294229-d8547857-Reviews-Dragon_Flames-Jakarta_Java.html)
-- [koruruk.com — Ko Ru Ruk 公式サイト](https://koruruk.com/)
-- [pergikuliner.com — Kko-Reu-Reuk, Kemang](https://pergikuliner.com/restaurants/jakarta/kko-reu-reuk-kemang)
+- [nonabelanja.com — Menu Kyochon Chicken Indonesia](https://nonabelanja.com/menu-kyochon/)
+- [pergikuliner.com — Kyochon, Kemang](https://pergikuliner.com/restaurants/jakarta/kyochon-kemang)
 - [pergikuliner.com — One Fifteenth Coffee, Kemang](https://pergikuliner.com/restaurants/1-15-one-fifteenth-coffee-kemang/menus)
 - [nowjakarta.co.id — One Fifteenth Coffee Kemang](https://www.nowjakarta.co.id/one-fifteenth-coffee-kemang/)
 
