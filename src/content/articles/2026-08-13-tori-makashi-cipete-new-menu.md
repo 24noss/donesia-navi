@@ -6,7 +6,7 @@ tags: ["ジャカルタグルメ", "チペテ", "Tori Makashi", "新メニュー
 pubDate: 2026-08-13
 source: "Radar Bogor"
 sourceUrl: "https://radarbogor.jawapos.com/kuliner/2608130003/bella-kuku-tanesia-cicipi-menu-baru-tori-makashi-cipete-sambal-bawang-daun-jeruk-jadi-favorit"
-draft: true
+draft: false
 ---
 
 ## チペテの「Tori Makashi」に特製サンバルを合わせた新メニューが登場
