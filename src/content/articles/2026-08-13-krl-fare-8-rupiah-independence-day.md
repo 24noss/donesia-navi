@@ -6,7 +6,7 @@ tags: ["KRL", "コミューターライン", "独立記念日", "特別運賃", 
 pubDate: 2026-08-13
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/13/112031627/promo-17-agustus-2026-naik-krl-cuma-rp-8-tanpa-syarat"
-draft: true
+draft: false
 ---
 
 ## 8月17日限定でKRL運賃が「8ルピア」に　第81回独立記念日を記念した特別割引
