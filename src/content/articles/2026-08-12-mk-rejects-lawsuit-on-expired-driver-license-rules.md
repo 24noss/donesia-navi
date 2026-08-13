@@ -6,7 +6,7 @@ tags: ["運転免許証", "SIM", "憲法裁判所", "交通ルール", "免許�
 pubDate: 2026-08-12
 source: "Kompas"
 sourceUrl: "https://nasional.kompas.com/read/2026/08/13/06545661/alasan-mk-tolak-gugatan-aturan-telat-perpanjang-sim-harus-bikin-baru"
-draft: true
+draft: false
 ---
 
 ## 憲法裁判所、免許更新遅れで再試験を課す警察規則に対する申立を却下
