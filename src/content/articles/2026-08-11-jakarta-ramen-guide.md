@@ -120,7 +120,7 @@ draft: false
 | ジャンル | ラーメン・居酒屋（鶏ベース） |
 | 予算 | Rp70,000〜150,000/人（約630〜1,340円） |
 | 営業時間 | 要確認（SCBD Park施設全体の営業時間は6:00〜24:00、店舗個別の時間は要確認） |
-| ハラル | ✅ ハラル対応（No Pork, No Lard 明記） |
+| ハラル | ⚠️ 要確認（No Pork, No Lard を自主表示。公式認証未確認、2026年8月再調査） |
 | アルコール | ⚠️ 要確認 |
 | Google Map | [地図を見る](https://www.google.com/maps/search/Zuzu+Ramen+Izakaya+SCBD+Park+Jakarta) |
 
@@ -128,7 +128,7 @@ draft: false
 
 看板の「トリュフビーフラーメン」は、とろみのある鶏白湯スープに黒トリュフを削りかけた贅沢な一杯。汁なしの「ドライスパイシー柚子ラーメン」もあり、辛いものと爽やかな柑橘の組み合わせを楽しめる。自家製麺は無発酵タイプで胃もたれしにくいのも特徴だ。
 
-SCBD・スディルマンエリアで働く日本人駐在員にとっては、オフィスから近く、ハラル対応のため現地スタッフや取引先とのランチにも使いやすい貴重な存在。居酒屋メニューも一部揃っており、軽い飲み利用にも対応できるが、アルコールの提供有無は確認できていないため、来店前の確認をおすすめする。
+SCBD・スディルマンエリアで働く日本人駐在員にとっては、オフィスから近く、「No Pork, No Lard」を掲げているため現地スタッフや取引先とのランチの候補にもなる存在（ただしBPJPH/MUI公式のハラル認証は確認できておらず、2026年8月再調査でも未確認のまま。ムスリムのゲストとの利用前は直接確認をおすすめする）。居酒屋メニューも一部揃っており、軽い飲み利用にも対応できるが、アルコールの提供有無は確認できていないため、来店前の確認をおすすめする。
 
 **代表メニューの価格（税・サービス料別）:**
 
@@ -181,7 +181,7 @@ SCBD・スディルマンエリアで働く日本人駐在員にとっては、�
 | シーン | おすすめ店 | ポイント |
 |-------|----------|---------|
 | 日本の味を素直に楽しみたい | 一風堂 | 本場と遜色ない豚骨スープ |
-| ムスリムの同僚・友人と一緒に | Ramen For The Soul / Zuzu Ramen / 清六家 | いずれも豚肉不使用でハラル対応 |
+| ムスリムの同僚・友人と一緒に | Ramen For The Soul / Zuzu Ramen / 清六家 | いずれも豚肉不使用でハラル対応（Zuzuは公式認証未確認、2026年8月再調査） |
 | 隠れ家的な一杯を探している | まる玉らーめん | ビル地下の知る人ぞ知る名店 |
 | SCBD・スディルマンで働くビジネスパーソン | Zuzu Ramen & Izakaya | オフィス街からアクセス良好 |
 | コスパ重視・日常使い | 清六家 | MUI認証済みで価格も手頃 |
@@ -195,7 +195,7 @@ SCBD・スディルマンエリアで働く日本人駐在員にとっては、�
 | 一風堂 セナヤンパーク | スナヤン | Rp150,000〜250,000 | 約1,340〜2,230円 | ❌ 非ハラル | 要確認 |
 | まる玉らーめん | スナヤン | Rp75,000〜125,000 | 約670〜1,120円 | ❌ 非ハラル | 🍺 あり |
 | Ramen For The Soul | ウォルターモンギンシディ | Rp70,000〜120,000 | 約630〜1,070円 | ✅ ハラル対応 | 要確認 |
-| Zuzu Ramen & Izakaya | SCBD | Rp70,000〜150,000 | 約630〜1,340円 | ✅ ハラル対応 | 要確認 |
+| Zuzu Ramen & Izakaya | SCBD | Rp70,000〜150,000 | 約630〜1,340円 | ⚠️ 要確認 | 要確認 |
 | 清六家 本店 | ブロックM | Rp60,000〜105,000 | 約540〜940円 | ✅ ハラル対応（MUI） | ❌ なし |
 
 ※JPY換算レート: 1円 ≈ 112 IDR（2026年8月時点の目安）
@@ -231,5 +231,7 @@ SCBD・スディルマンエリアで働く日本人駐在員にとっては、�
 - [RAMEN SEIROCK-YA Honten – Corner](https://www.corner.inc/place/18167)
 - [3 Restoran Ramen Halal Bersertifikat MUI – Halalstyle](https://www.halalstyle.com/trend/read/3-restoran-ramen-halal-bersertifikat-mui)
 - [【2025年最新版】ジャカルタおすすめラーメンランキングTOP13 – ジョグジャラン](https://jogjalanjalan.com/best-ramen-jakarta-indonesia/)
+- [Pencarian Data Sertifikat Halal – BPJPH公式データベース](https://bpjph.halal.go.id/sertifikat-halal/sertifikat)（2026年8月再調査でZuzu Ramen & Izakayaの認証を検索したが該当なし）
+- [Review Zuzu Ramen & Izakaya SCBD Park – Babel Insight](https://www.babelinsight.id/review-zuzu-ramen-izakaya-scbd-park)
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*
