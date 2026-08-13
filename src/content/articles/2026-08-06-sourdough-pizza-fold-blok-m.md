@@ -6,7 +6,7 @@ tags: ["ジャカルタグルメ", "ブロックM", "ピザ", "新店オープ�
 pubDate: 2026-08-06
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/food/read/2026/08/07/053100775/piza-sourdough-lipat-baru-buka-di-blok-m-bebas-tambah-topping-saus"
-draft: true
+draft: false
 ---
 
 ## ブロックMに折りたたみスタイルのサワードゥピザ新店が登場
