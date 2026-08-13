@@ -6,9 +6,10 @@ cuisine: japanese
 priceRange: luxury
 halal: unverified
 servesAlcohol: yes
-lat: -6.2305
-lng: 106.808
+lat: -6.2305402999999995
+lng: 106.8079782
 googleMapsQuery: Hakuren Omakase Restaurant Senopati Jakarta
+placeId: ChIJT_8C-3jxaS4RAOXQuGSwbRs
 status: open
 verifiedAt: 2026-08-11
 sourceArticles:

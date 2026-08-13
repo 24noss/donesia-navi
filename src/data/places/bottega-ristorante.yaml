@@ -6,9 +6,10 @@ cuisine: european
 priceRange: high
 halal: unverified
 servesAlcohol: yes
-lat: -6.2262
-lng: 106.8098
+lat: -6.2261915
+lng: 106.80744589999999
 googleMapsQuery: Bottega Ristorante Fairgrounds SCBD Jakarta
+placeId: ChIJ5aJPovvzaS4RzL46POFo91E
 status: open
 verifiedAt: 2026-08-11
 sourceArticles:

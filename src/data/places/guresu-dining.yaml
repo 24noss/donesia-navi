@@ -6,10 +6,12 @@ cuisine: japanese
 priceRange: high
 halal: yes
 servesAlcohol: no
-lat: -6.253
-lng: 106.814
+lat: -6.2647754
+lng: 106.8235876
 googleMapsQuery: Guresu Dining Kemang Timur Bangka Jakarta Selatan
+placeId: ChIJg__7fwDzaS4RUbIVLIb5HwI
 status: open
+verifiedAt: 2026-08-13
 sourceArticles:
   - 2026-08-12-jakarta-halal-restaurants-guide
 description: インドネシア初のハラール認証取得済みおまかせ寿司専門店(2023年3月取得)。Jl. Kemang Timur No.39B, Bangka所在。

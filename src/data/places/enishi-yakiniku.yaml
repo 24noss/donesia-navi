@@ -6,9 +6,10 @@ cuisine: japanese
 priceRange: luxury
 halal: unverified
 servesAlcohol: yes
-lat: -6.208379
-lng: 106.821336
+lat: -6.2085237
+lng: 106.82048259999999
 googleMapsQuery: Enishi Yakiniku Sudirman 7.8 Jl Jend Sudirman Kav 7-8 Jakarta Pusat
+placeId: ChIJEUxNDpz1aS4RPD-d8iuwP34
 status: open
 verifiedAt: 2026-08-11
 sourceArticles:

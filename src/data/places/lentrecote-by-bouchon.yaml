@@ -6,9 +6,10 @@ cuisine: european
 priceRange: mid
 halal: unverified
 servesAlcohol: yes
-lat: -6.2329
-lng: 106.8121
+lat: -6.232874799999999
+lng: 106.81213389999999
 googleMapsQuery: L'Entrecote by Bouchon Senopati Jakarta
+placeId: ChIJNy5Cdd3xaS4RGtB571QnD6M
 status: open
 verifiedAt: 2026-08-11
 sourceArticles:

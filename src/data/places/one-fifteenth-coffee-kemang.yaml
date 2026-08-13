@@ -6,9 +6,10 @@ cuisine: cafe
 priceRange: budget
 halal: unverified
 servesAlcohol: no
-lat: -6.2622195
-lng: 106.8158583
+lat: -6.262076599999999
+lng: 106.8159403
 googleMapsQuery: One Fifteenth Coffee Kemang Jl Kemang Raya No.37 Jakarta Selatan
+placeId: ChIJi94N3JHxaS4Rm5Z9S6pTcsw
 status: open
 verifiedAt: 2026-08-11
 sourceArticles:

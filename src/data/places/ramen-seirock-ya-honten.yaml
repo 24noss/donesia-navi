@@ -7,9 +7,10 @@ priceRange: budget
 halal: yes
 servesAlcohol: no
 isChain: true
-lat: -6.2467693
-lng: 106.7917884
+lat: -6.247364999999999
+lng: 106.7917949
 googleMapsQuery: Ramen Seirock-Ya Honten Jl KH Ahmad Dahlan No.22A Jakarta Selatan
+placeId: ChIJ52EUBA3xaS4RXlqT4gTVIgo
 status: open
 verifiedAt: 2026-08-11
 sourceArticles:

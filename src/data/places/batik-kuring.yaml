@@ -6,9 +6,10 @@ cuisine: indonesian
 priceRange: high
 halal: unverified
 servesAlcohol: unverified
-lat: -6.2271
-lng: 106.8098
+lat: -6.226737
+lng: 106.8093742
 googleMapsQuery: Batik Kuring SCBD Park Jakarta
+placeId: ChIJdd3B8VDxaS4ROG4YcM5vdHY
 status: open
 sourceArticles:
   - 2026-08-12-jakarta-seafood-guide

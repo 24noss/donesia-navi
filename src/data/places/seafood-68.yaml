@@ -6,9 +6,10 @@ cuisine: indonesian
 priceRange: mid
 halal: unverified
 servesAlcohol: unverified
-lat: -6.2387
-lng: 106.8138
+lat: -6.239155200000001
+lng: 106.81127169999999
 googleMapsQuery: Seafood 68 Santa Wolter Monginsidi Jakarta Selatan
+placeId: ChIJK3MuT2fxaS4R6siboUTHjeU
 status: open
 sourceArticles:
   - 2026-08-12-jakarta-seafood-guide

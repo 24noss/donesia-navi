@@ -6,9 +6,10 @@ cuisine: cafe
 priceRange: mid
 halal: unverified
 servesAlcohol: no
-lat: -6.2245991
-lng: 106.8037461
+lat: -6.2247233
+lng: 106.8040965
 googleMapsQuery: Common Grounds Coffee FX Sudirman Jl Jenderal Sudirman Jakarta Pusat
+placeId: ChIJNU6kvDzxaS4RchqIb5_LaHk
 status: open
 verifiedAt: 2026-08-11
 sourceArticles:

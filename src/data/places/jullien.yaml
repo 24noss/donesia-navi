@@ -6,9 +6,10 @@ cuisine: european
 priceRange: high
 halal: unverified
 servesAlcohol: yes
-lat: -6.224452
-lng: 106.809645
+lat: -6.2256462
+lng: 106.8100865
 googleMapsQuery: Jullien Pacific Place SCBD Jakarta
+placeId: ChIJKWShBHXxaS4Ro9f9qAi3rLE
 status: open
 verifiedAt: 2026-08-11
 sourceArticles:

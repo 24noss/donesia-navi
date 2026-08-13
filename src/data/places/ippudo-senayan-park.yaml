@@ -7,9 +7,10 @@ priceRange: mid
 halal: no
 servesAlcohol: unverified
 isChain: true
-lat: -6.2125204
-lng: 106.8038602
+lat: -6.2124261
+lng: 106.8039742
 googleMapsQuery: Ippudo Senayan Park Jl Gerbang Pemuda Jakarta Pusat
+placeId: ChIJO3nw-Zn3aS4RRvCb9n9DF4s
 status: open
 verifiedAt: 2026-08-11
 sourceArticles:

@@ -6,9 +6,10 @@ cuisine: cafe
 priceRange: budget
 halal: unverified
 servesAlcohol: no
-lat: -6.2307194
-lng: 106.8081821
+lat: -6.2305277
+lng: 106.80808479999999
 googleMapsQuery: Anomali Coffee Senopati Jl Senopati No.19 Jakarta Selatan
+placeId: ChIJUbFWB1vxaS4Rz4bnXgpxEoc
 status: open
 verifiedAt: 2026-08-11
 sourceArticles:

@@ -6,9 +6,10 @@ cuisine: japanese
 priceRange: budget
 halal: no
 servesAlcohol: unverified
-lat: -6.2436
-lng: 106.7986
+lat: -6.2437331
+lng: 106.80276660000001
 googleMapsQuery: Sushi Go Pasaraya Blok M Jakarta Selatan
+placeId: ChIJ2wVOnSzxaS4R5VN5sQWW_TE
 isChain: true
 status: open
 verifiedAt: 2026-08-11

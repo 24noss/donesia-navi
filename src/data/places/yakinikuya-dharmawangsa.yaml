@@ -6,9 +6,10 @@ cuisine: japanese
 priceRange: mid
 halal: unverified
 servesAlcohol: unverified
-lat: -6.253324
-lng: 106.80143
+lat: -6.2532309
+lng: 106.8016091
 googleMapsQuery: Yakinikuya Tokyo BBQ Darmawangsa Square Jl Darmawangsa VI Jakarta Selatan
+placeId: ChIJcXRhxHXxaS4RNSqzYW7nZyo
 status: open
 verifiedAt: 2026-08-11
 sourceArticles:

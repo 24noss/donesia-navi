@@ -6,9 +6,10 @@ cuisine: indonesian
 priceRange: mid
 halal: unverified
 servesAlcohol: no
-lat: -6.227389
-lng: 106.797111
+lat: -6.2272435
+lng: 106.79705039999999
 googleMapsQuery: Remboelan Senayan City Jakarta
+placeId: ChIJb0HbZkjxaS4RUd1O9UBSfE0
 status: open
 sourceArticles:
   - 2026-08-12-jakarta-halal-restaurants-guide

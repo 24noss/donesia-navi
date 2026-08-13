@@ -6,9 +6,10 @@ cuisine: cafe
 priceRange: budget
 halal: unverified
 servesAlcohol: no
-lat: -6.1978673
-lng: 106.8241611
+lat: -6.1978594
+lng: 106.8242186
 googleMapsQuery: One Fifteenth Coffee Menteng Jl Dr Kusuma Atmaja No.79 Jakarta Pusat
+placeId: ChIJf6MNsRj0aS4RDjI7MBqjIG4
 status: open
 verifiedAt: 2026-08-11
 sourceArticles:

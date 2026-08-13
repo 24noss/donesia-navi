@@ -6,9 +6,10 @@ cuisine: other
 priceRange: high
 halal: unverified
 servesAlcohol: yes
-lat: -6.2419
-lng: 106.8102
+lat: -6.241052
+lng: 106.8102282
 googleMapsQuery: Cut The Crab Senopati Kebayoran Baru Jakarta
+placeId: ChIJ7-s652bxaS4RWGoOsWMHXqw
 status: open
 sourceArticles:
   - 2026-08-12-jakarta-seafood-guide

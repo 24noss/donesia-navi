@@ -6,9 +6,10 @@ cuisine: cafe
 priceRange: budget
 halal: unverified
 servesAlcohol: no
-lat: -6.2291849
-lng: 106.8125158
+lat: -6.2300233
+lng: 106.8123299
 googleMapsQuery: Kurasu Senopati Jl Tulodong Bawah I No.9 Jakarta Selatan
+placeId: ChIJ8wC3UeXxaS4RsTt-2tFL2wU
 status: open
 verifiedAt: 2026-08-11
 sourceArticles:
