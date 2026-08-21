@@ -6,7 +6,7 @@ tags: ["ジャカルタグルメ", "新店舗", "地中海料理", "和牛", "�
 pubDate: 2026-08-19
 source: "Detik"
 sourceUrl: "https://food.detik.com/resto-dan-kafe/d-8625174/planta-reserva-steak-wagyu-dan-soto-betawi-dengan-sentuhan-mediterania"
-draft: true
+draft: false
 ---
 
 ## 地中海のエッセンスを加えた和牛ステーキと伝統料理が楽しめる話題の新店
