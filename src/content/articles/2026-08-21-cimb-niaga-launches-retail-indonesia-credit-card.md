@@ -6,7 +6,7 @@ tags: ["CIMB Niaga", "クレジットカード", "QRIS", "キャッシュレス"
 pubDate: 2026-08-21
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/21/090000426/cimb-niaga-resmi-terbitkan-kki-ritel-bisa-transaksi-pakai-qris-hingga-bebas"
-draft: true
+draft: false
 ---
 
 ## 国内決済エコシステムの拡大へ、個人向けKKIでQRIS決済が進化
