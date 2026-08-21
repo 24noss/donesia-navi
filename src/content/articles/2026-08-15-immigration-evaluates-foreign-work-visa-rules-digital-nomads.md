@@ -6,7 +6,7 @@ tags: ["就労ビザ", "外国人規制", "移民局", "デジタルノマド", 
 pubDate: 2026-08-15
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/15/131500927/dampak-digital-nomad-dirjen-imigrasi-kaji-aturan-baru-visa-kerja-wna"
-draft: true
+draft: false
 ---
 
 ## 多様化する働き方に対応し外国人就労ビザおよび活動制限の明確化へ
