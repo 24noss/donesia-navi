@@ -6,7 +6,7 @@ tags: ["交通事故", "ジャゴラウィ高速", "東ジャカルタ", "注意
 pubDate: 2026-08-21
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5704684/polisi-selidiki-kecelakaan-maut-mobil-tabrak-truk-di-tol-jagorawi"
-draft: true
+draft: false
 ---
 
 ## 高速道路での追突・車両炎上事故、警察が原因究明を進める
