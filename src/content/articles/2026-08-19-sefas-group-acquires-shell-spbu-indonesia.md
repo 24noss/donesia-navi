@@ -6,7 +6,7 @@ tags: ["シェル", "ガソリンスタンド", "SEFAS", "エネルギー", "企
 pubDate: 2026-08-19
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/19/143816826/sefas-group-akuisisi-100-persen-bisnis-spbu-shell-di-indonesia"
-draft: true
+draft: false
 ---
 
 ## 地元エネルギー流通大手SEFASがシェルの国内給油所網を完全取得
