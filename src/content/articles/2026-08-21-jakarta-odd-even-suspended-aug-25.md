@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通規制", "奇数偶数規制", "道路交通"]
 pubDate: 2026-08-21
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/21/11200791/ganjil-genap-jakarta-ditiadakan-pada-25-agustus-2026-cek-daftar-jalannya"
-draft: true
+draft: false
 ---
 
 ## 8月25日は市内主要25路線で奇数偶数規制が終日停止
