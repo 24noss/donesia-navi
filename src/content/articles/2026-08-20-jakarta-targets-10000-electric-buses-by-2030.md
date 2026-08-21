@@ -6,7 +6,7 @@ tags: ["トランスジャカルタ", "EVバス", "大気汚染対策", "環境�
 pubDate: 2026-08-20
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/20/15124831/ada-10000-bus-listrik-yang-akan-mengaspal-di-jakarta-pada-2030"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ州、2030年までに電気バス1万台導入へ　大気汚染改善を加速
