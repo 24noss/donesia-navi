@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "大気汚染", "乾季", "健康管理"]
 pubDate: 2026-08-16
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8620703/pramono-ungkap-modifikasi-cuaca-untuk-tekan-polusi-terhambat-tak-ada-awan"
-draft: true
+draft: false
 ---
 
 ## 乾燥続きでジャカルタの空気質が悪化、雨雲不足で人工降雨の実施も足踏み
