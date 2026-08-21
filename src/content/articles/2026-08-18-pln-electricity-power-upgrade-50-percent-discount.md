@@ -6,7 +6,7 @@ tags: ["PLN", "電気料金", "生活情報", "プロモーション", "ジャ�
 pubDate: 2026-08-18
 source: "Kompas"
 sourceUrl: "https://amp.kompas.com/tren/read/2026/08/18/123000165/diskon-50-persen-tambah-daya-pln-hingga-25-agustus-2026-ini-daftar-harganya"
-draft: true
+draft: false
 ---
 
 ## 独立記念月間限定、PLN Mobileアプリ経由の増設申請で手数料が半額に
