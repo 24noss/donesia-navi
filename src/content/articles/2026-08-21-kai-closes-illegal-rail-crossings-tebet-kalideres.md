@@ -6,7 +6,7 @@ tags: ["KRL", "鉄道", "交通安全", "ジャカルタ", "事故"]
 pubDate: 2026-08-21
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8627964/2-orang-tertemper-krl-kai-segera-tutup-perlintasan-liar-tebet-dan-kalideres"
-draft: true
+draft: false
 ---
 
 ## KAI、人身事故相次ぐテベットとカリデレスの非公認踏切を閉鎖へ
