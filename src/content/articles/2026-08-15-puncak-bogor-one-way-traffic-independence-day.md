@@ -6,7 +6,7 @@ tags: ["交通規制", "プンチャック", "ボゴール", "渋滞情報", "�
 pubDate: 2026-08-15
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8620361/polisi-siapkan-rekayasa-one-way-saat-17-agustus-di-puncak-bogor"
-draft: true
+draft: false
 ---
 
 ## 祝日当日は朝にジャカルタ発プンチャック行き、午後に戻り方向を優先
