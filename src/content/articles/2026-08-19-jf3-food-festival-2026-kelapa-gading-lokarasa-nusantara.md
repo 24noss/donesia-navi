@@ -6,7 +6,7 @@ tags: ["JF3", "フードフェス", "クラパガディン", "インドネシア
 pubDate: 2026-08-19
 source: "kabarindo.com"
 sourceUrl: "https://www.kabarindo.com/gaya-hidup/4032958875/jf3-food-festival-2026-hadirkan-lokarasa-nusantara-45-hari-menyusuri-jejak-rasa-indonesia"
-draft: true
+draft: false
 ---
 
 ## インドネシア全土のローカルフードを巡る毎年恒例の大型グルメイベント
