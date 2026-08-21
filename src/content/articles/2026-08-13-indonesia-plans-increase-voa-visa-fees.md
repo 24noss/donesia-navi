@@ -6,7 +6,7 @@ tags: ["到着ビザ", "VoA", "入国管理局", "出張手続き", "外国人�
 pubDate: 2026-08-13
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/13/180000027/tarif-visa-on-arrival-indonesia-bakal-naik-wna-bayar-lebih-mahal"
-draft: true
+draft: false
 ---
 
 ## 外国人向け到着ビザ（VoA）の料金見直しへ、当局が方針を検討
