@@ -6,7 +6,7 @@ tags: ["アンコール", "独立記念日", "イベント", "祝日", "ジャ�
 pubDate: 2026-08-14
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/14/21215521/ancol-gratiskan-tiket-masuk-pada-17-agustus-2026-ini-syaratnya"
-draft: true
+draft: false
 ---
 
 ## アンコールが独立記念日に入場無料キャンペーン、伝統競技イベントも開催
