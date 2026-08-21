@@ -6,7 +6,7 @@ tags: ["地震", "自然災害", "ラブアンバジョ", "NTT", "注意喚起"]
 pubDate: 2026-08-15
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8619672/korban-jiwa-gempa-ntt-m-7-bertambah-jadi-5-orang"
-draft: true
+draft: false
 ---
 
 ## フローレス島北部沖で強い地震、ラブアンバジョ発着便にも影響
