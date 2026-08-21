@@ -6,7 +6,7 @@ tags: ["トランスヌサ", "TransNusa", "国内線", "LCC", "航空券", "バ�
 pubDate: 2026-08-13
 source: "WebSearch"
 sourceUrl: "https://www.transnusa.co.id/"
-draft: true
+draft: false
 ---
 
 ## トランスヌサ航空とは？ジャカルタ在住日本人にとっての使いどころ
