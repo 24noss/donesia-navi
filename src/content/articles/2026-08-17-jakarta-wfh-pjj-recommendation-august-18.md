@@ -6,7 +6,7 @@ tags: ["ジャカルタ州政府", "在宅勤務", "遠隔授業", "交通対策
 pubDate: 2026-08-17
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/tren/read/2026/08/17/173000165/pemprov-dki-jakarta-keluarkan-imbauan-wfh-pada-18-agustus-2026"
-draft: true
+draft: false
 ---
 
 ## 州政府が柔軟な勤務形態とPJJを推奨、祝日明けの混雑緩和を図る
