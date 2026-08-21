@@ -6,7 +6,7 @@ tags: ["DAMRI", "スカルノハッタ空港", "ブロックM", "公共交通", 
 pubDate: 2026-08-20
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/20/210136127/promo-damri-dari-blok-m-ke-bandara-soekarno-hatta-cuma-rp-50000"
-draft: true
+draft: false
 ---
 
 ## DAMRI、ブロックM〜空港線を特別運賃5万ルピアで運行プロモ
