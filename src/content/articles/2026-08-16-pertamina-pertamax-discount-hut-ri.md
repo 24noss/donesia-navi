@@ -6,7 +6,7 @@ tags: ["プルタミナ", "ガソリン", "独立記念日", "プロモーショ
 pubDate: 2026-08-16
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5696841/pertamina-patra-niaga-berikan-diskon-pertamax-rp450-lt-sambut-hut-ri"
-draft: true
+draft: false
 ---
 
 ## 独立記念日に合わせた燃料割引、MyPertamina経由での給油でお得に
