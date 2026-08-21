@@ -6,7 +6,7 @@ tags: ["交通規制", "独立記念日", "ジャカルタ", "モナス"]
 pubDate: 2026-08-16
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5696736/ini-pengalihan-jalan-saat-rangkaian-acara-peringatan-hut-81-ri"
-draft: true
+draft: false
 ---
 
 ## 独立記念日の式典・祝祭に伴いモナス周辺などで段階的通行規制を実施
