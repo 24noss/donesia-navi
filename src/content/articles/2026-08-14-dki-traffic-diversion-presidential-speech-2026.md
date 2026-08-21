@@ -6,7 +6,7 @@ tags: ["交通規制", "ジャカルタ", "大統領演説", "スナヤン", "�
 pubDate: 2026-08-14
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5693499/polisi-siapkan-pengalihan-arus-lalin-saat-pidato-kenegaraan-presiden"
-draft: true
+draft: false
 ---
 
 ## 国会周辺で交通規制と大規模警備、移動の際は迂回路確認を
