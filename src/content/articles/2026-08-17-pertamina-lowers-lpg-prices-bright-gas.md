@@ -6,7 +6,7 @@ tags: ["プルタミナ", "エルピジ", "プロパンガス", "物価", "生�
 pubDate: 2026-08-17
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/tren/read/2026/08/17/170000765/pertamina-resmi-turunkan-harga-elpiji-5-5-kg-dan-12-kg-ini-daftarnya"
-draft: true
+draft: false
 ---
 
 ## 国際CP価格の変動を反映し、家庭用ノンサブシディガスの価格を改定
