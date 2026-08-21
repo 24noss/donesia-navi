@@ -6,7 +6,7 @@ tags: ["地震", "スラウェシ", "BMKG", "防災"]
 pubDate: 2026-08-15
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8620524/gempa-m-6-2-guncang-parigi-moutong-sulteng-tak-berpotensi-tsunami"
-draft: true
+draft: false
 ---
 
 ## 中部スラウェシ州でM6.2の地震を観測、パルなど広範囲で揺れ
