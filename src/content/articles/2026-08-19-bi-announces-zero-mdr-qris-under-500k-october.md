@@ -6,7 +6,7 @@ tags: ["QRIS", "インドネシア中央銀行", "キャッシュレス決済", 
 pubDate: 2026-08-19
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/tren/read/2026/08/19/110000365/mulai-1-oktober-2026-transaksi-qris-hingga-rp-500.000-bebas-mdr-ini"
-draft: true
+draft: false
 ---
 
 ## QRIS決済の加盟店手数料無料枠が50万ルピアへ拡大、10月1日施行
