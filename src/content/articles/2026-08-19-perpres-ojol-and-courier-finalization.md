@@ -6,7 +6,7 @@ tags: ["オンライン配車", "Grab", "Gojek", "規制", "労働環境"]
 pubDate: 2026-08-19
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8624815/2-hal-diketahui-soal-perpres-ojol-yang-sedang-difinalisasi"
-draft: true
+draft: false
 ---
 
 ## 配車サービスやフードデリバリー運転手の待遇改善へ、新大統領令の策定が大詰め
