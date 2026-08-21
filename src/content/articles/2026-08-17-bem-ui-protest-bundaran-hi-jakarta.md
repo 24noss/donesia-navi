@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "デモ情報", "ブンダランHI", "交通規制", "
 pubDate: 2026-08-17
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/17/18303101/bem-ui-demo-di-bundaran-hi-jakpus-besok-ini-tuntutannya"
-draft: true
+draft: false
 ---
 
 ## 学生団体が主要交差点で示威行動を計画、周辺の交通渋滞に注意
