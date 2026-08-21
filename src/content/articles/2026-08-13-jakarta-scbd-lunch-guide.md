@@ -6,7 +6,7 @@ tags: ["SCBD", "ランチ", "ジャカルタ", "グルメ", "レストラン", "
 pubDate: 2026-08-13
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
-draft: true
+draft: false
 ---
 
 ## SCBDで働く在住日本人の「今日のランチ、どこにする?」に応える
