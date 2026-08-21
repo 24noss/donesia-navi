@@ -6,7 +6,7 @@ tags: ["ハリム空港", "スカルノハッタ空港", "フライト情報", "
 pubDate: 2026-08-14
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/14/060500027/penerbangan-dari-bandara-halim-dialihkan-ke-soekarno-hatta-untuk-hut-ke-81-ri"
-draft: true
+draft: false
 ---
 
 ## ハリム空港の定期便がスカルノ・ハッタ空港へ一時振替運航
