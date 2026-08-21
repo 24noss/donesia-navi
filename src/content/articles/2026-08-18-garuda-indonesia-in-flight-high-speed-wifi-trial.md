@@ -6,7 +6,7 @@ tags: ["ガルーダ航空", "機内Wi-Fi", "航空", "出張", "旅行"]
 pubDate: 2026-08-18
 source: "Kompas"
 sourceUrl: "http://money.kompas.com/read/2026/08/18/213348326/garuda-indonesia-uji-coba-internet-cepat-di-pesawat-bisa-video-call-di?source=terkini_artikel"
-draft: true
+draft: false
 ---
 
 ## 機内でもビデオ通話が可能に、ガルーダ航空が次世代の高速機内Wi-Fiサービスを導入へ
