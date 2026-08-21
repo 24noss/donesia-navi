@@ -6,7 +6,7 @@ tags: ["自動車", "EV", "中国車", "インドネシア市場", "経済"]
 pubDate: 2026-08-19
 source: "Antara"
 sourceUrl: "https://otomotif.antaranews.com/berita/5700893/penjualan-mobil-china-di-indonesia-naik-82-persen-di-semester-1-2026"
-draft: true
+draft: false
 ---
 
 ## 中国ブランド車の卸売台数が82％増加、手頃なEVモデル中心に攻勢強まる
