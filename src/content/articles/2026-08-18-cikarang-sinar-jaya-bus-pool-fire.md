@@ -6,7 +6,7 @@ tags: ["チカラン", "火災", "事故", "交通", "安全情報"]
 pubDate: 2026-08-18
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8624794/nasib-puluhan-bus-hangus-dilalap-api-buntut-kebakaran-di-cikarang"
-draft: true
+draft: false
 ---
 
 ## 工業団地近郊のバスプールで約5時間に及ぶ火災、運行休止中のバス50台が焼失
