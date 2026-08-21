@@ -6,7 +6,7 @@ tags: ["バンドン", "アウトレット", "Whoosh", "ファクトリーアウ
 pubDate: 2026-08-13
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ在住日本人に「バンドンのアウトレット」が刺さる理由
