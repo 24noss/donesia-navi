@@ -6,7 +6,7 @@ tags: ["BMKG", "天気予報", "雨季", "ジャカルタ", "生活情報"]
 pubDate: 2026-08-20
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8626438/bmkg-musim-hujan-di-jabodetabek-mulai-pertengahan-oktober"
-draft: true
+draft: false
 ---
 
 ## 首都圏の雨季入りは10月中旬以降、乾季終盤の体調管理に留意
