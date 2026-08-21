@@ -6,7 +6,7 @@ tags: ["グルメ", "レストラン", "ジャカルタ", "在住ガイド", "�
 pubDate: 2026-08-13
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
-draft: true
+draft: false
 ---
 
 ## ジャカルタの外食シーン、結局どこに行けばいいのか問題
