@@ -6,7 +6,7 @@ tags: ["クマン", "ジャカルタ", "グルメ", "レストラン", "南ジ�
 pubDate: 2026-08-13
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
-draft: true
+draft: false
 ---
 
 ## 在住日本人の生活圏「クマン」で外食先を探す
