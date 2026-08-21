@@ -6,7 +6,7 @@ tags: ["フードフェス", "西ジャカルタ", "モールチプトラ", "イ
 pubDate: 2026-08-19
 source: "Detik"
 sourceUrl: "https://food.detik.com/foto-kuliner/d-8625313/intip-serunya-berburu-kuliner-di-festival-kampung-legendaris-jakbar"
-draft: true
+draft: false
 ---
 
 ## パレンバンのペンペッから各地のローカル珈琲まで、老舗グルメが一堂に
