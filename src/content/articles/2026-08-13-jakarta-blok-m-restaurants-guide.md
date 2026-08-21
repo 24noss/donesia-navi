@@ -6,7 +6,7 @@ tags: ["ブロックM", "リトルトーキョー", "メラワイ", "グルメ",
 pubDate: 2026-08-13
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"
-draft: true
+draft: false
 ---
 
 ## ブロックM＝「リトルトーキョー」に日本人が今も通う理由
