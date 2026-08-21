@@ -6,7 +6,7 @@ tags: ["治安", "警察", "違法薬物", "南ジャカルタ", "注意喚起"]
 pubDate: 2026-08-19
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5700959/polda-metro-jaya-bongkar-industri-rumahan-tembakau-sintetis-di-jaksel"
-draft: true
+draft: false
 ---
 
 ## 住宅街で化学物質を用いた合成薬物を製造、警察が関係者を拘束し捜査を拡大
