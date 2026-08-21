@@ -6,7 +6,7 @@ tags: ["国籍法", "ビザ", "法改正", "国際結婚", "制度改革"]
 pubDate: 2026-08-14
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8619189/wamenkum-ungkap-ruu-soal-kewarganegaraan-ganda-terbatas-sedang-disusun"
-draft: true
+draft: false
 ---
 
 ## 法務省が限定的二重国籍法案を準備、国際家庭の国籍選択に変化の兆し
