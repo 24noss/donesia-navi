@@ -6,7 +6,7 @@ tags: ["森林火災", "ヘイズ", "航空情報", "カリマンタン", "乾�
 pubDate: 2026-08-21
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/21/194309727/karhutla-kalimantan-semua-penerbangan-di-bandara-singkawang-dihentikan"
-draft: true
+draft: false
 ---
 
 ## カリマンタン等の森林火災による煙霧で空港閉鎖や欠航が発生、渡航者は最新状況の確認を
