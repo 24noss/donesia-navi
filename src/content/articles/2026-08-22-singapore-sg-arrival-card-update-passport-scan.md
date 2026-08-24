@@ -6,7 +6,7 @@ tags: ["シンガポール", "SG Arrival Card", "出入国手続き", "海外旅
 pubDate: 2026-08-22
 source: "Kompas"
 sourceUrl: "http://travel.kompas.com/read/2026/08/22/180000127/sg-arrival-card-singapura-diperbarui-ada-bahasa-indonesia-dan-scan-paspor?source=terkini_artikel"
-draft: true
+draft: false
 ---
 
 ## シンガポールの電子入国カードが利便性向上、パスポートスキャン機能などを実装
