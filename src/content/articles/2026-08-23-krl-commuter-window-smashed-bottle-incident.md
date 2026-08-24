@@ -6,7 +6,7 @@ tags: ["KRL", "コミューターライン", "鉄道", "治安", "ボゴール"]
 pubDate: 2026-08-23
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8631438/viral-kaca-jendela-krl-pecah-dilempar-botol-kai-telusuri-pelaku"
-draft: true
+draft: false
 ---
 
 ## KRLボゴール線で車両に酒瓶が投げ込まれる被害
