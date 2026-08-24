@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "火災", "テベット", "治安", "防災"]
 pubDate: 2026-08-24
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8631828/kebakaran-kosan-dan-ruko-fotokopi-di-tebet-4-orang-tewas"
-draft: true
+draft: false
 ---
 
 ## 南ジャカルタ・テベットで下宿火災が発生、4人死亡
