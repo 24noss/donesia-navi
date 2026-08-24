@@ -6,7 +6,7 @@ tags: ["KRL", "マンガライ", "タウラン", "治安", "交通機関"]
 pubDate: 2026-08-21
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/21/18185121/krl-jakarta-bogor-sudah-dapat-melintas-usai-ada-tawuran-di-dekat?source=terkini_artikel"
-draft: true
+draft: false
 ---
 
 ## マンガライ駅周辺での投石・集団衝突によりKRLが約1時間遅延、駅ホームで一時大混雑
