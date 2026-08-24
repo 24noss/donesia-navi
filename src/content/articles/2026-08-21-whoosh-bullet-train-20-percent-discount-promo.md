@@ -6,7 +6,7 @@ tags: ["高速鉄道", "Whoosh", "バンドン", "割引プロモ", "鉄道"]
 pubDate: 2026-08-21
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/21/183600327/diskon-whoosh-20-persen-pada-agustus-september-2026-ini-syaratnya"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ〜バンドン間を最速で結ぶWhoosh、8月・9月限定の20％割引を実施中
