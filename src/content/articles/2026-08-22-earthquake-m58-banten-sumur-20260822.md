@@ -6,7 +6,7 @@ tags: ["地震", "防災", "バンテン州", "ジャカルタ"]
 pubDate: 2026-08-22
 source: "BMKG"
 sourceUrl: "https://www.bmkg.go.id/gempabumi/gempa-dirasakan.bmkg#2026-08-21T17%3A41%3A43%2B00%3A00"
-draft: true
+draft: false
 ---
 
 ## バンテン州スムール沖を震源とするM5.8の地震が発生
