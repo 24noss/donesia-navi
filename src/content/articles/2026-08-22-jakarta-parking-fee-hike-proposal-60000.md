@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "駐車料金", "交通政策", "渋滞対策"]
 pubDate: 2026-08-22
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/22/06295271/tarif-parkir-jakarta-diusulkan-naik-hingga-rp-60000-per-jam-ini-alasan"
-draft: true
+draft: false
 ---
 
 ## 車両利用抑制に向けゾーン別駐車料金の改定を検討
