@@ -6,7 +6,7 @@ tags: ["ロンボク島", "サデ村", "火災", "観光地", "安全情報"]
 pubDate: 2026-08-23
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/23/085720227/desa-sade-lombok-kebakaran-rumah-tradisional-dan-warisan-budaya-tak-tersisa?source=headline"
-draft: true
+draft: false
 ---
 
 ## ロンボク島・サデ伝統村で火災が発生、伝統家屋に甚大な被害
