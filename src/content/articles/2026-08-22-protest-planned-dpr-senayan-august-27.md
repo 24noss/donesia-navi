@@ -6,7 +6,7 @@ tags: ["治安", "デモ", "国会議事堂", "交通規制", "ジャカルタ"]
 pubDate: 2026-08-22
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/22/07285121/warga-pati-berdatangan-ke-dpr-siapkan-aksi-27-agustus-bawa-2-tuntutan"
-draft: true
+draft: false
 ---
 
 ## 27日の国会前デモに向け参加者が集結、周辺の交通混雑や規制に注意
