@@ -6,7 +6,7 @@ tags: ["ボゴール", "プンチャック", "電気バス", "公共交通", "�
 pubDate: 2026-08-22
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/22/20160411/pemkab-bogor-siapkan-rute-bus-listrik-hingga-depok-dan-puncak"
-draft: true
+draft: false
 ---
 
 ## ボゴール県、デポックおよび観光地プンチャックへの電気バス路線を新設へ
