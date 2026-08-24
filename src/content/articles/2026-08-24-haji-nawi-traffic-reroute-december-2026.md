@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通規制", "ハジナビ", "南ジャカルタ", 
 pubDate: 2026-08-24
 source: "Kompas"
 sourceUrl: "https://otomotif.kompas.com/read/2026/08/24/062200015/ada-proyek-rekayasa-lalin-di-haji-nawi-berlaku-hingga-desember-2026"
-draft: true
+draft: false
 ---
 
 ## 南ジャカルタ・ハジナビ通りで工事による交通規制が実施中
