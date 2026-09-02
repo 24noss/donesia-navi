@@ -6,7 +6,7 @@ tags: ["ブンダランHI", "都市開発", "地下通路", "MRTジャカルタ"
 pubDate: 2026-08-24
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/properti/read/2026/08/24/153000821/proyek-rp-200-miliar-bawah-tanah-bundaran-hi-terhubung-mal-mewah-hingga?page=all&utm_source=Google&utm_medium=Newstand&utm_campaign=partner"
-draft: true
+draft: false
 ---
 
 ## ブンダランHIの地下に2000億ルピア規模の連結空間、MRTと主要ビルが直結へ
