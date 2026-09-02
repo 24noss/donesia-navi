@@ -6,7 +6,7 @@ tags: ["パサールルンプット", "ジャカルタ", "映画館", "Jaksinema
 pubDate: 2026-08-25
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/26/060700227/bioskop-mini-jaksinema-pasar-rumput-hadir-di-jaksel-tiket-rp-15.000"
-draft: true
+draft: false
 ---
 
 ## パサール・ルンプット市場内に1.5万ルピアの格安ミニシアターが登場
