@@ -6,7 +6,7 @@ tags: ["SBIホールディングス", "Ajaib", "フィンテック", "日系企�
 pubDate: 2026-08-31
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/31/144801626/disuntik-rp-48-triliun-oleh-sbi-holdings-jepang-ajaib-ini-bukti-investasi?source=terkini_artikel"
-draft: true
+draft: false
 ---
 
 ## 日本のSBIホールディングス、インドネシア大手投資アプリAjaibに4.8兆ルピアを出資
