@@ -6,7 +6,7 @@ tags: ["スカルノハッタ空港", "フライト情報", "欠航", "煙霧", 
 pubDate: 2026-08-24
 source: "Kompas"
 sourceUrl: "http://megapolitan.kompas.com/read/2026/08/24/19294671/43-penerbangan-tujuan-kalimantan-dari-bandara-soetta-dibatalkan-akibat?source=terkini_artikel"
-draft: true
+draft: false
 ---
 
 ## 森林火災の煙霧悪化でスカルノ・ハッタ空港発着便に影響、カリマンタン路線43便が運休
