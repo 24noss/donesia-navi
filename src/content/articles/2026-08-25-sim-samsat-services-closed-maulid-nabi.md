@@ -6,7 +6,7 @@ tags: ["運転免許証", "SIM更新", "Samsat", "祝日", "ジャカルタ警�
 pubDate: 2026-08-25
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5709967/maulid-nabi-layanan-sim-dan-samsat-keliling-di-jakarta-libur"
-draft: true
+draft: false
 ---
 
 ## モーリッド・ナビ祝日でSIMおよびSamsatの公共手続き窓口が一時休止
