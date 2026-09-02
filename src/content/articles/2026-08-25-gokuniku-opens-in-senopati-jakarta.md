@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "日本食", "セノパティ", "すき焼き", "接�
 pubDate: 2026-08-25
 source: "Wartakotalive"
 sourceUrl: "https://wartakota.tribunnews.com/travel/899353/gokuniku-buka-restoran-di-senopati-tawarkan-premium-japanese-dining-dengan-vip-room-dan-karaoke"
-draft: true
+draft: false
 ---
 
 ## セノパティに上質な肉料理と完全個室を備えた和食ダイニングが誕生
