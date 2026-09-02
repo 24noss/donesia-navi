@@ -6,7 +6,7 @@ tags: ["火災", "ブカシ", "事故", "治安・安全"]
 pubDate: 2026-08-31
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/30/21295091/pabrik-mi-instan-di-bekasi-kebakaran"
-draft: true
+draft: false
 ---
 
 ## ブカシの即席麺工場で火災、消防隊が深夜まで消火活動
