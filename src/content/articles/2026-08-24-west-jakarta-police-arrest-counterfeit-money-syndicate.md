@@ -6,7 +6,7 @@ tags: ["治安", "偽札", "西ジャカルタ", "注意喚起", "警察摘発"]
 pubDate: 2026-08-24
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8633132/polres-jakbar-bongkar-kasus-uang-palsu-rp-1-5-m-11-pelaku-ditangkap"
-draft: true
+draft: false
 ---
 
 ## 高額紙幣の偽造グループが摘発、現金取引時の偽札混入に警戒を
