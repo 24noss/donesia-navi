@@ -6,7 +6,7 @@ tags: ["KRL", "踏切事故", "タナアバン", "カレット", "鉄道運行�
 pubDate: 2026-08-24
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8633259/mobil-tertemper-krl-di-jalur-tanah-abang-karet-perjalanan-sempat-terganggu"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ中心部で列車と車の衝突事故、踏切通過時の安全確認を徹底呼びかけ
