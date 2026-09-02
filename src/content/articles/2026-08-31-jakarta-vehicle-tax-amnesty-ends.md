@@ -6,7 +6,7 @@ tags: ["車両税", "交通行政", "ジャカルタ", "税金"]
 pubDate: 2026-08-31
 source: "Kompas"
 sourceUrl: "https://otomotif.kompas.com/read/2026/08/31/063908515/jangan-terlewat-pemutihan-pajak-kendaraan-jakarta-berakhir-hari-ini"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ州の車両税延滞金免除（ペムティハン）が本日終了
