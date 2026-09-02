@@ -6,7 +6,7 @@ tags: ["プルタミナ", "ガソリン価格", "物価", "生活情報", "交�
 pubDate: 2026-08-31
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/09/01/043700926/harga-bbm-pertamina-terbaru-1-september-2026-3-jenis-bbm-ini-naik"
-draft: true
+draft: false
 ---
 
 ## プルタミナが9月1日付で燃料価格を改定　プルタマックス・ターボなど一部が値上げ
