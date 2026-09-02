@@ -6,7 +6,7 @@ tags: ["公共交通", "KRL", "ジャカルタ", "通勤電車"]
 pubDate: 2026-08-31
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/30/170500127/mulai-1-september-penumpang-krl-di-stasiun-karet-dialihkan-ke-bni-city-ini"
-draft: true
+draft: false
 ---
 
 ## カレット駅の旅客扱いが終了、隣接のBNIシティ駅へ統合
