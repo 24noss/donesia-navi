@@ -6,7 +6,7 @@ tags: ["ムラピ山", "火山噴火", "火砕流", "ジョグジャカルタ", 
 pubDate: 2026-08-25
 source: "Kompas"
 sourceUrl: "http://yogyakarta.kompas.com/read/2026/08/25/200900978/selasa-siang-gunung-merapi-luncurkan-awan-panas-sejauh-2000-meter?source=terkini_artikel"
-draft: true
+draft: false
 ---
 
 ## ムラピ山で火砕流観測、周辺地域での活動に警戒を
