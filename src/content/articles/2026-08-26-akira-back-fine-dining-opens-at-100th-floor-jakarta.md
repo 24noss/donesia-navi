@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "ファインダイニング", "AkiraBack", "和牛", 
 pubDate: 2026-08-26
 source: "Kumparan"
 sourceUrl: "https://kumparan.com/kumparanfood/restoran-akira-back-hadirkan-pengalaman-bersantap-fine-dining-di-lantai-100-283myHm3Ohu"
-draft: true
+draft: false
 ---
 
 ## 地上100階の絶景とともに楽しむ洗練されたモダンダイニング
