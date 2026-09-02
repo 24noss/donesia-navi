@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "メンテン", "インドネシア料理", "新店舗
 pubDate: 2026-08-27
 source: "Detik"
 sourceUrl: "https://food.detik.com/info-kuliner/d-8637308/serodja-menteng-hadirkan-sajian-nusantara-dan-butik-wastra-indonesia"
-draft: true
+draft: false
 ---
 
 ## 伝統燻製技術と文化空間が融合した注目のインドネシア料理店
