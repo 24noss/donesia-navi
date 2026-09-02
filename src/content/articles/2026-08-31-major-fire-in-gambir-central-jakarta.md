@@ -6,7 +6,7 @@ tags: ["火災事故", "中央ジャカルタ", "ガンビル", "防災", "治�
 pubDate: 2026-08-31
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8642421/114-rumah-terdampak-kebakaran-di-gambir-jakpus-tim-forensik-diterjunkan"
-draft: true
+draft: false
 ---
 
 ## 中央ジャカルタ・ガンビル地区で大規模火災が発生　114棟被災、避難所4カ所開設
