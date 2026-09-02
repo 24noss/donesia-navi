@@ -6,7 +6,7 @@ tags: ["南ジャカルタ", "ペット", "動物病院", "獣医師", "注意�
 pubDate: 2026-08-26
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/26/10292291/hati-hati-puluhan-dokter-hewan-di-jaksel-tak-punya-izin-praktik"
-draft: true
+draft: false
 ---
 
 ## 南ジャカルタで無認可獣医が横行、ペット受診時の確認を呼びかけ
