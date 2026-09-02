@@ -6,7 +6,7 @@ tags: ["LRTジャカルタ", "公共交通機関", "マンガライ", "クラパ
 pubDate: 2026-08-25
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8633400/lrt-kelapa-gading-manggarai-segera-beroperasi-dprd-minta-terhubung-ke-tj-krl"
-draft: true
+draft: false
 ---
 
 ## LRTジャカルタの延伸区間が完成、マンガライ駅へのアクセスが大幅改善へ
