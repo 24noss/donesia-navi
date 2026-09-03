@@ -2,7 +2,7 @@
 title: "CFD限定のトランスジャカルタ新路線が開通、スナヤン〜アンコール間でアンコール入場無料特典も"
 description: "ジャカルタ州政府とトランスジャカルタは、日曜朝のカーフリーデー（CFD）限定でスナヤンとアンコールを結ぶ特別バス路線を新設した。運賃は3,500ルピアで、乗客はアンコールの入場料が無料となる。"
 category: "lifestyle"
-tags: ["トランスジャカルタ", "デモ", "生活情報", "バス"]
+tags: ["トランスジャカルタ", "イベント", "生活情報", "バス"]
 pubDate: 2026-08-09
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/09/13174441/transjakarta-khusus-cfd-rute-senayan-ancol-resmi-beroperasi-tarif-rp-3500"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/09/13174441/transjakarta-khusus-cfd-rute-senayan-ancol-resmi-beroperasi-tarif-rp-3500)
 **カテゴリ:** 生活・グルメ
-**タグ:** トランスジャカルタ, デモ, 生活情報, バス
+**タグ:** トランスジャカルタ, イベント, 生活情報, バス
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*
