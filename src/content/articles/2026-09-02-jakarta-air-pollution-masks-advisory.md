@@ -6,7 +6,7 @@ tags: ["大気汚染", "ジャカルタ", "健康管理", "注意喚起"]
 pubDate: 2026-09-02
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/02/19364401/udara-jakarta-tidak-sehat-dinkes-minta-warga-pakai-masker-dan-bayi-tak"
-draft: true
+draft: false
 ---
 
 ## 乾季の影響でジャカルタの大気質が悪化、保健局がマスク着用と乳幼児の外出自粛を勧告
