@@ -8,6 +8,9 @@ import {
   buildDraftOnlyCoveredTopics,
   formatDryRunReport,
   buildSlackBlocks,
+  attachSuggestions,
+  attachGscMatches,
+  topGscQueriesByImpressions,
   TARGET_TOPICS,
   MIN_CANDIDATE_PLACES,
   PRIORITY_ORDER,
@@ -156,6 +159,15 @@ describe('countCandidatePlaces', () => {
     const places = [null, { cuisine: 'japanese', status: 'open' }];
     assert.equal(countCandidatePlaces(topic, places), 1);
   });
+
+  test('cuisineもareaもnull(用途軸トピック)なら算出対象外としてnullを返す', () => {
+    const topic = { id: 'kaishoku', cuisine: null, area: null };
+    const places = [
+      { cuisine: 'japanese', status: 'open' },
+      { cuisine: 'other', status: 'open' },
+    ];
+    assert.equal(countCandidatePlaces(topic, places), null);
+  });
 });
 
 describe('buildUncoveredTopics', () => {
@@ -244,6 +256,19 @@ describe('formatDryRunReport', () => {
     ];
     const report = formatDryRunReport(entries);
     assert.doesNotMatch(report, /要ディスカバリー/);
+  });
+
+  test('候補数がnull(用途軸トピック)なら「算出対象外(用途軸)」と表示し要ディスカバリーは付記しない', () => {
+    const entries = [
+      {
+        topic: { id: 'kaishoku', label: '会食・接待向けレストランガイド', priority: 'high', rationale: 'テスト理由' },
+        candidateCount: null,
+      },
+    ];
+    const report = formatDryRunReport(entries);
+    assert.match(report, /候補店舗数: 算出対象外\(用途軸\)/);
+    assert.doesNotMatch(report, /要ディスカバリー/);
+    assert.doesNotMatch(report, /既知の掲載候補/);
   });
 
   test('draftOnlyEntriesを渡すと(draft)付きの参考セクションを追加する', () => {
@@ -337,6 +362,140 @@ describe('buildSlackBlocks', () => {
     assert.match(sectionBlocks[0].text.text, /関連記事あり\(部分カバー/);
     assert.match(sectionBlocks[0].text.text, /洋食・ヨーロッパ料理レストラン5選/);
   });
+
+  test('候補数がnull(用途軸トピック)なら「算出対象外(用途軸)」と表示する', () => {
+    const entries = [
+      {
+        topic: { id: 'kaishoku', label: '会食・接待向けレストランガイド', priority: 'high', rationale: 'r' },
+        candidateCount: null,
+      },
+    ];
+    const blocks = buildSlackBlocks(entries);
+    const sectionBlocks = blocks.filter((b) => b.type === 'section');
+    assert.match(sectionBlocks[0].text.text, /候補店舗数: 算出対象外\(用途軸\)/);
+    assert.doesNotMatch(sectionBlocks[0].text.text, /要ディスカバリー/);
+  });
+
+  test('entry.suggestionsがあればsectionテキストに「実際に検索されている語」を含む(最大5語)', () => {
+    const entries = [
+      {
+        topic: { id: 'kaishoku', label: '会食・接待向けレストランガイド', priority: 'high', rationale: 'r' },
+        candidateCount: null,
+        suggestions: ['ジャカルタ 会食 個室', 'ジャカルタ 接待 日本料理', 'a', 'b', 'c', 'd'],
+      },
+    ];
+    const blocks = buildSlackBlocks(entries);
+    const text = blocks.filter((b) => b.type === 'section')[0].text.text;
+    assert.match(text, /実際に検索されている語: ジャカルタ 会食 個室, ジャカルタ 接待 日本料理, a, b, c/);
+    assert.doesNotMatch(text, /, d/);
+  });
+
+  test('entry.gscMatchesがあればsectionテキストに「GSC実クエリ」を含む', () => {
+    const entries = [
+      {
+        topic: { id: 'kaishoku', label: '会食・接待向けレストランガイド', priority: 'high', rationale: 'r' },
+        candidateCount: null,
+        gscMatches: [{ query: 'ジャカルタ 会食', impressions: 120, clicks: 8 }],
+      },
+    ];
+    const blocks = buildSlackBlocks(entries);
+    const text = blocks.filter((b) => b.type === 'section')[0].text.text;
+    assert.match(text, /GSC実クエリ: ジャカルタ 会食\(表示120回\/クリック8回\)/);
+  });
+
+  test('suggestions/gscMatchesが無いentryには該当行を出さない', () => {
+    const entries = [
+      { topic: { id: 'kaishoku', label: '会食・接待向けレストランガイド', priority: 'high', rationale: 'r' }, candidateCount: null },
+    ];
+    const text = buildSlackBlocks(entries).filter((b) => b.type === 'section')[0].text.text;
+    assert.doesNotMatch(text, /実際に検索されている語/);
+    assert.doesNotMatch(text, /GSC実クエリ/);
+  });
+
+  test('seedSuggestionsを渡すとcontextブロックで一般語サジェストを表示する', () => {
+    const entries = [{ topic: { id: 'kaishoku', label: '会食ガイド', priority: 'high', rationale: 'r' }, candidateCount: null }];
+    const seedSuggestions = [
+      { seed: 'ジャカルタ グルメ', suggestions: ['ジャカルタ グルメ 日本人'] },
+      { seed: 'ジャカルタ レストラン', suggestions: [] },
+    ];
+    const blocks = buildSlackBlocks(entries, [], { seedSuggestions });
+    const contextBlocks = blocks.filter((b) => b.type === 'context');
+    assert.ok(contextBlocks.some((b) => /検索サジェスト\(一般語\)/.test(b.elements[0].text)));
+    assert.ok(contextBlocks.some((b) => /ジャカルタ グルメ 日本人/.test(b.elements[0].text)));
+  });
+
+  test('gscTopQueriesを渡すとcontextブロックで表示回数上位クエリを表示する', () => {
+    const entries = [{ topic: { id: 'kaishoku', label: '会食ガイド', priority: 'high', rationale: 'r' }, candidateCount: null }];
+    const gscTopQueries = [{ query: 'ジャカルタ グルメ', impressions: 500, clicks: 30 }];
+    const blocks = buildSlackBlocks(entries, [], { gscTopQueries });
+    const contextBlocks = blocks.filter((b) => b.type === 'context');
+    assert.ok(contextBlocks.some((b) => /GSC表示回数上位クエリ: ジャカルタ グルメ\(表示500回\/クリック30回\)/.test(b.elements[0].text)));
+  });
+
+  test('seedSuggestions/gscTopQueriesを渡さなければ従来通り追加contextブロックは無い', () => {
+    const entries = [{ topic: { id: 'kaishoku', label: '会食ガイド', priority: 'high', rationale: 'r' }, candidateCount: null }];
+    const blocks = buildSlackBlocks(entries);
+    const contextBlocks = blocks.filter((b) => b.type === 'context');
+    assert.equal(contextBlocks.length, 1); // 「承認する場合は...」のみ
+  });
+});
+
+describe('attachSuggestions', () => {
+  test('topic.idに一致するsuggestionsをentryへ付与する', () => {
+    const entries = [{ topic: { id: 'kaishoku' } }, { topic: { id: 'family' } }];
+    const result = attachSuggestions(entries, { kaishoku: ['a', 'b'] });
+    assert.deepEqual(result[0].suggestions, ['a', 'b']);
+    assert.equal(result[1].suggestions, undefined);
+  });
+
+  test('該当suggestionsが空配列/未定義ならentryを変更しない', () => {
+    const entries = [{ topic: { id: 'kaishoku' } }];
+    const result = attachSuggestions(entries, { kaishoku: [] });
+    assert.equal(result[0].suggestions, undefined);
+  });
+});
+
+describe('attachGscMatches', () => {
+  test('keywordsに部分一致する行を表示回数順(上位3件)で付与する', () => {
+    const entries = [{ topic: { id: 'kaishoku', keywords: ['会食', '接待'] } }];
+    const gscRows = [
+      { keys: ['ジャカルタ 会食'], impressions: 100, clicks: 5 },
+      { keys: ['ジャカルタ 接待 レストラン'], impressions: 300, clicks: 20 },
+      { keys: ['ジャカルタ ラーメン'], impressions: 999, clicks: 50 },
+    ];
+    const result = attachGscMatches(entries, gscRows);
+    assert.equal(result[0].gscMatches.length, 2);
+    assert.equal(result[0].gscMatches[0].query, 'ジャカルタ 接待 レストラン');
+  });
+
+  test('gscRowsがnullなら何もしない', () => {
+    const entries = [{ topic: { id: 'kaishoku', keywords: ['会食'] } }];
+    assert.deepEqual(attachGscMatches(entries, null), entries);
+  });
+
+  test('一致行が無ければgscMatchesを付与しない', () => {
+    const entries = [{ topic: { id: 'sushi', keywords: ['寿司', 'すし'] } }];
+    const gscRows = [{ keys: ['ジャカルタ ラーメン'], impressions: 100, clicks: 5 }];
+    const result = attachGscMatches(entries, gscRows);
+    assert.equal(result[0].gscMatches, undefined);
+  });
+});
+
+describe('topGscQueriesByImpressions', () => {
+  test('表示回数の多い順に上位n件を返す', () => {
+    const gscRows = [
+      { keys: ['a'], impressions: 10, clicks: 1 },
+      { keys: ['b'], impressions: 50, clicks: 2 },
+      { keys: ['c'], impressions: 30, clicks: 3 },
+    ];
+    const result = topGscQueriesByImpressions(gscRows, 2);
+    assert.deepEqual(result.map((r) => r.query), ['b', 'c']);
+  });
+
+  test('gscRowsがnull/空なら空配列を返す', () => {
+    assert.deepEqual(topGscQueriesByImpressions(null), []);
+    assert.deepEqual(topGscQueriesByImpressions([]), []);
+  });
 });
 
 describe('TARGET_TOPICS / PRIORITY_ORDER 整合性', () => {
@@ -361,5 +520,48 @@ describe('TARGET_TOPICS / PRIORITY_ORDER 整合性', () => {
 
   test('15〜20トピック程度である', () => {
     assert.ok(TARGET_TOPICS.length >= 15 && TARGET_TOPICS.length <= 20, `件数: ${TARGET_TOPICS.length}`);
+  });
+
+  test('2026-09〜: エリア単体トピック(scbd/blok-m/senayan/kemang/pondok-indah)は削除済み(オーナー判断: エリア名では誰も検索しない)', () => {
+    const ids = TARGET_TOPICS.map((t) => t.id);
+    for (const removedId of ['scbd', 'blok-m', 'senayan', 'kemang', 'pondok-indah']) {
+      assert.ok(!ids.includes(removedId), `${removedId} が残存している`);
+    }
+  });
+
+  test('用途軸トピック(kaishoku/family/date-dinner/group-party/work-cafe/private-room)が存在する', () => {
+    const ids = TARGET_TOPICS.map((t) => t.id);
+    for (const usageId of ['kaishoku', 'family', 'date-dinner', 'group-party', 'work-cafe', 'private-room']) {
+      assert.ok(ids.includes(usageId), `${usageId} が存在しない`);
+    }
+  });
+
+  test('用途軸トピックはcuisine/areaがいずれもnull(候補店舗数を算出させないため)', () => {
+    const usageIds = new Set(['kaishoku', 'family', 'date-dinner', 'group-party', 'work-cafe', 'private-room']);
+    for (const topic of TARGET_TOPICS.filter((t) => usageIds.has(t.id))) {
+      assert.equal(topic.cuisine, null, `${topic.id} のcuisineがnullでない`);
+      assert.equal(topic.area, null, `${topic.id} のareaがnullでない`);
+    }
+  });
+
+  test('料理ジャンル軸の既存トピックはcuisineが引き続き設定されている(変更されていないことの確認)', () => {
+    const genreCuisine = {
+      italian: 'european',
+      cafe: 'cafe',
+      yakiniku: 'japanese',
+      ramen: 'japanese',
+      sushi: 'japanese',
+      french: 'european',
+      seafood: 'other',
+      halal: 'other',
+      'indian-curry': 'other',
+      thai: 'other',
+      vietnamese: 'other',
+    };
+    for (const [id, cuisine] of Object.entries(genreCuisine)) {
+      const topic = TARGET_TOPICS.find((t) => t.id === id);
+      assert.ok(topic, `${id} が見つからない`);
+      assert.equal(topic.cuisine, cuisine, `${id} のcuisineが変更されている`);
+    }
   });
 });

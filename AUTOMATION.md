@@ -202,7 +202,9 @@ npm run discover-restaurants
 
 ## 目的
 
-Search Console(GSC)の流入クエリは「ジャカルタ 中華」「ジャカルタ イタリアン」「ジャカルタ 韓国料理」のような、エリア×料理ジャンルのガイド型検索が主力。既存のレストランガイド記事（中華5選・韓国5選など）がこれを一部カバーしているが、未対応の組み合わせ（イタリアン単体・カフェ・焼肉など）も多い。人手でGSCを毎回確認する代わりに、あらかじめ定義したターゲットトピック一覧と既存記事・掲載店舗データを突き合わせて未カバートピックを算出し、優先度順にSlackで提案する。
+Search Console(GSC)の流入クエリは「ジャカルタ 中華」「ジャカルタ イタリアン」「ジャカルタ 韓国料理」のような、料理ジャンル軸のガイド型検索が主力。既存のレストランガイド記事（中華5選・韓国5選など）がこれを一部カバーしているが、未対応の組み合わせ（イタリアン単体・カフェ・焼肉など）も多い。人手でGSCを毎回確認する代わりに、あらかじめ定義したターゲットトピック一覧と既存記事・掲載店舗データを突き合わせて未カバートピックを算出し、優先度順にSlackで提案する。
+
+**トピック軸について(2026-09〜)**: 当初は「料理ジャンル」に加えて「エリア」（SCBD・ブロックM・スナヤン・クマン・ポンドックインダ）も軸にしていたが、「エリア名では誰も検索しない」というオーナー判断によりエリア単体トピックは全廃止した。代わりに、ユーザーが実際に検索する軸である「用途」（会食・接待/子連れ・ファミリー/デート・記念日/大人数・宴会/作業・ノマド/個室あり）をトピックに追加している。用途軸トピックは`cuisine`/`area`のいずれも指定できない（特定の料理ジャンル・エリアに紐づかないため）ため、候補店舗数は算出せず「算出対象外(用途軸)」と表示する（詳細は下記「トピックリストのメンテ方法」）。
 
 ## 実行頻度
 
@@ -212,7 +214,7 @@ Search Console(GSC)の流入クエリは「ジャカルタ 中華」「ジャカ
 
 ```
 scripts/suggest-guide-topics.mjs
-  1. スクリプト内定数 TARGET_TOPICS（GSCクエリ由来、15〜20件程度）を評価
+  1. スクリプト内定数 TARGET_TOPICS（GSCクエリ由来、15〜20件程度。料理ジャンル軸+用途軸）を評価
   2. src/content/articles/*.md のfrontmatter(title/tags/category/draft)を読み、
      category が gourmet または lifestyle の記事に絞った上で、
      トピックのkeywordsが title に含まれていれば「カバー済み」と判定
@@ -226,8 +228,19 @@ scripts/suggest-guide-topics.mjs
   3. src/data/places/*.yaml を集計し、各未カバートピックについて
      cuisine一致（areaトピックならarea一致）かつstatus!=closedの店舗数を
      「既知の掲載候補」としてカウント。5件未満なら「要ディスカバリー」と付記
+     （2026-09〜: cuisine/areaともnullの用途軸トピックは絞り込み条件が無く全店舗を
+       誤カウントしてしまうため、候補数をnullとし「算出対象外(用途軸)」と表示。
+       「要ディスカバリー」注記も付けない）
   4. 未カバートピックを優先度(high→mid→low)順に並べ、上位3件をSlackへ投稿
      （全件カバー済みなら投稿をスキップ）
+  5.（本番実行のみ、--dry-runではスキップ）Slack提案対象の上位トピックそれぞれについて
+     Googleサジェスト（無料・認証不要）で「実際に検索されている語」を最大5語取得して添える。
+     一般シード語（「ジャカルタ グルメ」「ジャカルタ レストラン」「ジャカルタ カフェ」）の
+     サジェストもまとめてSlackのcontextブロックで表示する
+  6.（本番実行のみ、GSC_SERVICE_ACCOUNT_KEY設定時のみ）Search Console APIから直近28日の
+     検索クエリを取得し、各トピックのkeywordsに部分一致する実クエリを「GSC実クエリ」として
+     添える。表示回数上位10クエリもcontextブロックで表示する。キー未設定時は従来通り
+     このステップをスキップする（fail-open）
 ```
 
 ## トピックリストのメンテ方法
@@ -235,10 +248,14 @@ scripts/suggest-guide-topics.mjs
 `scripts/suggest-guide-topics.mjs`内の`TARGET_TOPICS`配列を直接編集する。1件は`{id, label, keywords, area, cuisine, priority, rationale}`のオブジェクト。
 
 - `keywords`: 記事のtitleとの一致判定に使う語（表記ゆれがあれば複数指定。例: `寿司`/`すし`）。tagsは判定に使わない(2026-08-11〜)ため、専用記事のtitleに実際に入る語を選ぶこと
-- `cuisine`/`area`: `src/content.config.ts`のplacesスキーマのenum値と一致させること（一致しないと候補店舗数が常に0になる）
+- `cuisine`/`area`: `src/content.config.ts`のplacesスキーマのenum値と一致させること（一致しないと候補店舗数が常に0になる）。**用途軸トピック（後述）はいずれもnullにする**
 - `priority`: `high`/`mid`/`low`。Slack提案は上位3件のみのため、優先度の並びが提案結果に直結する
+- トピックには2つの軸がある:
+  - **料理ジャンル軸**（`cuisine`を指定。例: `italian`/`cafe`/`yakiniku`など）: 「何を食べたいか」で検索されるトピック。候補店舗数はcuisine（+area）一致で算出される
+  - **用途軸**（`cuisine: null, area: null`。例: `kaishoku`/`family`/`date-dinner`/`group-party`/`work-cafe`/`private-room`）: 「どういう用途で使うか」で検索されるトピック。cuisine/areaで絞り込めないため候補店舗数は算出せず、出力側で「算出対象外(用途軸)」と表示する（`countCandidatePlaces`が`null`を返す仕様。「要ディスカバリー」注記も付かない）
+  - **エリア単体トピックは廃止済み**（2026-09〜）。「エリア名では誰も検索しない」というオーナー判断による。新規追加は行わないこと
 
-GSCの実クエリは変動するため、**四半期ごとに見直す**（Search Consoleの検索パフォーマンスレポートを確認し、クリック・表示回数の多いクエリで未カバーのものを追加/優先度調整する）。
+GSCの実クエリは変動するため、**四半期ごとに見直す**（Search Consoleの検索パフォーマンスレポートを確認し、クリック・表示回数の多いクエリで未カバーのものを追加/優先度調整する。GSC連携（後述）を設定していればSlack投稿内の「GSC実クエリ」「表示回数上位クエリ」も参考にできる）。
 
 ## 提案後のフロー
 
@@ -261,6 +278,8 @@ Slackに提案が投稿される（優先度・理由・既知の掲載候補数
 | `.github/workflows/suggest-guide-topics.yml` | cronトリガー（月曜08:00 WIB）+ `workflow_dispatch` |
 | `scripts/suggest-guide-topics.mjs` | 本体。トピック定義・カバレッジ判定・候補店舗数算出・Slack投稿 |
 | `scripts/lib/slack.mjs` | Slack `chat.postMessage`の共通ラッパー（`postSlackMessage({ token, channel, text, blocks })`） |
+| `scripts/lib/google-suggest.mjs` | Google検索サジェスト（オートコンプリート）取得の薄いラッパー（`fetchGoogleSuggestions(query)`）。無料・APIキー不要、fail-open |
+| `scripts/lib/gsc.mjs` | Google Search Console (Search Analytics API) 連携。サービスアカウントJWTを自前生成してアクセストークンを取得し、直近28日の検索クエリを取得する（`getGscData(...)`）。fail-open |
 
 ## 動作確認方法
 
@@ -268,9 +287,34 @@ Slackに提案が投稿される（優先度・理由・既知の掲載候補数
 # Slack投稿なし・ネットワーク/環境変数不要。未カバートピック一覧をコンソールに出力
 node scripts/suggest-guide-topics.mjs --dry-run
 
-# Slackに実際に投稿（SLACK_BOT_TOKEN / SLACK_CHANNEL_ID が必要）
+# Slackに実際に投稿（SLACK_BOT_TOKEN / SLACK_CHANNEL_ID が必要。
+# GSC_SERVICE_ACCOUNT_KEY / GSC_SITE_URL は任意。未設定でも従来通り動く）
 SLACK_BOT_TOKEN=xxx SLACK_CHANNEL_ID=xxx node scripts/suggest-guide-topics.mjs
 ```
+
+## Googleサジェスト連携
+
+`scripts/lib/google-suggest.mjs`が`https://suggestqueries.google.com/complete/search`（無料・APIキー不要）を叩き、指定クエリの検索サジェスト語を取得する。本番実行（Slack投稿）時のみ、Slack提案対象の上位トピックそれぞれについて「ジャカルタ &lt;先頭keyword&gt;」のサジェストを取得し、Slackの各トピックブロックに「実際に検索されている語」として最大5語添える。一般シード語（「ジャカルタ グルメ」「ジャカルタ レストラン」「ジャカルタ カフェ」）のサジェストもまとめてcontextブロックで表示する。タイムアウト5秒、失敗時はthrowせず空配列を返すfail-open設計のため、`--dry-run`はこれまで通りネットワークなしで動く（このステップ自体を呼ばない）。
+
+## Search Console(GSC)連携
+
+Search Console APIは無料（課金対象外）。外部依存パッケージは追加せず、`scripts/lib/gsc.mjs`が`node:crypto`でサービスアカウントのJWT(RS256)を自前生成し、OAuth2トークン取得→Search Analytics APIで直近28日の検索クエリ（`dimensions: ['query']`, `rowLimit: 100`）を取得する。
+
+環境変数:
+
+- `GSC_SERVICE_ACCOUNT_KEY`: サービスアカウントのJSONキー文字列（GitHub Secrets）
+- `GSC_SITE_URL`: GSCプロパティのURL（GitHub Variables）。デフォルト`sc-domain:indonesia-navi.com`
+
+本番実行時、`GSC_SERVICE_ACCOUNT_KEY`が設定されていれば、(a) 各`TARGET_TOPICS`のkeywordsに部分一致する実クエリがあればそのトピックのSlackブロックに「GSC実クエリ: &lt;クエリ&gt; (表示X回/クリックY回)」を添え、(b) 表示回数上位10クエリをcontextブロックで表示する。未設定なら`console.log`で案内してスキップする（fail-open。2026-09時点ではまだ未設定のため、未設定時も従来通り動くことを担保している）。
+
+### GSC側セットアップ手順（初回のみ、ユーザー作業）
+
+1. GCPプロジェクトで **Search Console API** を有効化する
+2. GCPで **サービスアカウント** を作成する
+3. サービスアカウントの **JSONキーを発行** する
+4. Google Search Consoleの`indonesia-navi.com`プロパティに、そのサービスアカウントのメールアドレスを **「閲覧者」として追加** する（Search Console > 設定 > ユーザーと権限）
+5. GitHubリポジトリのSecretsに、発行したJSONキーの中身をそのまま **`GSC_SERVICE_ACCOUNT_KEY`** として登録する（Settings > Secrets and variables > Actions）
+6. （任意）GSCプロパティがデフォルトの`sc-domain:indonesia-navi.com`と異なる場合は、GitHub Variablesに **`GSC_SITE_URL`** を登録する
 
 ## 既知の制約
 
@@ -280,4 +324,6 @@ SLACK_BOT_TOKEN=xxx SLACK_CHANNEL_ID=xxx node scripts/suggest-guide-topics.mjs
   - この変更により、上記3トピックはいずれも未カバーへ戻り、`italian`はSlack提案の上位に再び表示されるようになった（実データで確認済み。中華・韓国・インドネシア料理などの専用ガイドがあるトピックは引き続き正しくカバー済み判定される）
   - 残存リスク: gourmet/lifestyle以外のcategoryで書かれたガイド記事があれば拾えない、専用記事のtitleにトピックの語が含まれない言い回し（例:「本場の味」のような婉曲表現のみ）だと未カバー扱いのままになる、といったエッジケースは残る。`TARGET_TOPICS`のkeywords選定時は実際の記事titleの言い回しを意識すること
 - 候補店舗数はcuisine/areaの一致のみで算出しており、料理ジャンル内の細分類（例:「イタリアン」トピックに対して`cuisine: european`の店舗を全てカウント。フレンチ店も含まれる）までは区別していない
+- **（2026-09〜）エリア単体トピックは全廃止した**。「エリア名では誰も検索しない」というオーナー判断による。代わりに追加した用途軸トピック（会食・接待/子連れ・ファミリー/デート・記念日/大人数・宴会/作業・ノマド/個室あり）は`cuisine`/`area`を持たないため候補店舗数を算出できず、「算出対象外(用途軸)」と表示する仕様（要ディスカバリー注記も付けない）
+- Googleサジェスト・GSC連携はいずれも「本番実行（Slack投稿）時のみ」動作する参考情報であり、未カバートピックの判定ロジック自体（カバレッジ判定・優先度順ソート）には影響しない
 

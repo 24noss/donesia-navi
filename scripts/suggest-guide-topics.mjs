@@ -13,6 +13,8 @@ import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import { postSlackMessage } from './lib/slack.mjs';
+import { fetchGoogleSuggestions } from './lib/google-suggest.mjs';
+import { getGscData, matchQueriesToTopic } from './lib/gsc.mjs';
 
 const ARTICLES_DIR = path.join(process.cwd(), 'src/content/articles');
 const PLACES_DIR = path.join(process.cwd(), 'src/data/places');
@@ -32,6 +34,14 @@ const PRIORITY_LABEL = { high: '🔴 高', mid: '🟡 中', low: '🟢 低' };
 // - cuisine: src/data/places/*.yaml の cuisine と一致する店舗を候補としてカウントする(任意)
 // - area: src/data/places/*.yaml の area と一致する店舗を候補としてカウントする(任意)
 //   ※ cuisine/area は content.config.ts の places スキーマのenum値と一致させること
+//
+// 2026-09〜: エリア単体トピック(scbd/blok-m/senayan/kemang/pondok-indah)を全廃止。
+// 「エリア名では誰も検索しない」というオーナー判断による(オーナー決定事項)。
+// 代わりに、ユーザーが実際に検索する軸である「用途(会食・接待/子連れ/デート/大人数/作業/個室など)」
+// トピックを追加した。用途軸トピックは cuisine/area がいずれも null になるため、
+// countCandidatePlaces は候補店舗数を算出できず null を返す(=全店舗が対象になってしまう誤カウントを防ぐ)。
+// 出力側(formatCandidateLine)は candidateCount === null のとき
+// 「候補店舗数: 算出対象外(用途軸)」と表示し、「要ディスカバリー」注記も付けない。
 export const TARGET_TOPICS = [
   {
     id: 'italian',
@@ -106,51 +116,6 @@ export const TARGET_TOPICS = [
     rationale: 'ムスリム在住者・出張者からのハラル検索需要',
   },
   {
-    id: 'scbd',
-    label: 'SCBDランチ・レストランガイド',
-    keywords: ['SCBD'],
-    area: 'SCBD',
-    cuisine: null,
-    priority: 'mid',
-    rationale: 'SCBDオフィス街のランチ需要があるが、エリア横断ガイドなし',
-  },
-  {
-    id: 'blok-m',
-    label: 'ブロックMのレストランガイド',
-    keywords: ['ブロックM'],
-    area: 'ブロックM',
-    cuisine: null,
-    priority: 'mid',
-    rationale: '在住日本人の生活圏だが、エリア単体ガイドなし',
-  },
-  {
-    id: 'senayan',
-    label: 'スナヤンのレストランガイド',
-    keywords: ['スナヤン'],
-    area: 'スナヤン',
-    cuisine: null,
-    priority: 'low',
-    rationale: 'エリア単体のレストランガイドなし',
-  },
-  {
-    id: 'kemang',
-    label: 'クマンのレストランガイド',
-    keywords: ['クマン'],
-    area: 'クマン',
-    cuisine: null,
-    priority: 'mid',
-    rationale: '在住日本人の生活圏だが、エリア単体ガイドなし',
-  },
-  {
-    id: 'pondok-indah',
-    label: 'ポンドックインダのレストランガイド',
-    keywords: ['ポンドックインダ'],
-    area: 'ポンドックインダ',
-    cuisine: null,
-    priority: 'low',
-    rationale: 'ファミリー層在住エリアだが、専用ガイドなし',
-  },
-  {
     id: 'indian-curry',
     label: 'インドカレーガイド',
     keywords: ['インドカレー', 'インド料理'],
@@ -176,6 +141,65 @@ export const TARGET_TOPICS = [
     cuisine: 'other',
     priority: 'low',
     rationale: '一定の流入はあるが、中華・韓国ほど優先度は高くない',
+  },
+  // ここから用途軸トピック(2026-09〜、オーナー決定事項)。
+  // 「何を食べたいか」(上記の料理ジャンル軸)に加えて「どういう用途か」で検索されるため追加。
+  // cuisine/area はいずれもnull(候補店舗数は算出対象外。TARGET_TOPICS冒頭コメント参照)。
+  {
+    id: 'kaishoku',
+    label: '会食・接待向けレストランガイド',
+    keywords: ['会食', '接待'],
+    area: null,
+    cuisine: null,
+    priority: 'high',
+    rationale: '駐在員の業務需要が最も強い用途軸',
+  },
+  {
+    id: 'family',
+    label: '子連れ・ファミリー向けレストランガイド',
+    keywords: ['子連れ', 'ファミリー'],
+    area: null,
+    cuisine: null,
+    priority: 'high',
+    rationale: '家族帯同駐在層の定番ニーズ',
+  },
+  {
+    id: 'date-dinner',
+    label: 'デート・記念日ディナーガイド',
+    // 「記念日」単体だと「独立記念日」等のニュース記事タイトルに部分一致して誤カバー判定になるため、
+    // 「記念日ディナー」に限定する(2026-09-03: lifestyleカテゴリのKRL独立記念日記事で実際に誤判定が発生)。
+    keywords: ['デート', '記念日ディナー'],
+    area: null,
+    cuisine: null,
+    priority: 'mid',
+    rationale: '用途軸検索の定番',
+  },
+  {
+    id: 'group-party',
+    label: '大人数・宴会向けレストランガイド',
+    keywords: ['大人数', '宴会', '貸切'],
+    area: null,
+    cuisine: null,
+    priority: 'mid',
+    rationale: '送別会・歓迎会シーズンの需要',
+  },
+  {
+    id: 'work-cafe',
+    label: '作業・ノマドカフェガイド',
+    keywords: ['作業カフェ', 'ノマド', 'Wi-Fi'],
+    area: null,
+    cuisine: null,
+    priority: 'mid',
+    rationale: 'リモートワーク需要。既存cafeトピックとは用途が異なる',
+  },
+  {
+    id: 'private-room',
+    label: '個室ありレストランガイド',
+    keywords: ['個室'],
+    area: null,
+    cuisine: null,
+    priority: 'mid',
+    rationale: '会食・家族利用の絞り込み需要',
   },
 ];
 
@@ -288,7 +312,10 @@ export function isTopicCovered(topic, articlesMeta) {
 
 // トピックに対する既知の掲載候補店舗数。
 // cuisine一致(+ areaトピックならarea一致)かつ status !== 'closed' の店舗数を数える。
+// cuisine/area がいずれもnull(用途軸トピック)の場合、絞り込み条件が無く全店舗がヒットしてしまうため、
+// 算出不能としてnullを返す(呼び出し側はnullを「算出対象外」として表示する。formatCandidateLine参照)。
 export function countCandidatePlaces(topic, places) {
+  if (!topic.cuisine && !topic.area) return null;
   return places.filter((p) => {
     if (!p || p.status === 'closed') return false;
     if (topic.cuisine && p.cuisine !== topic.cuisine) return false;
@@ -323,6 +350,14 @@ function discoveryNote(candidateCount) {
   return candidateCount < MIN_CANDIDATE_PLACES ? '（要ディスカバリー: npm run discover-restaurants）' : '';
 }
 
+// 候補店舗数の表示行を組み立てる。
+// candidateCount が null(cuisine/areaともnullの用途軸トピック。countCandidatePlaces参照)の場合は
+// 「算出対象外(用途軸)」と表示し、「要ディスカバリー」注記は付けない。
+function formatCandidateLine(candidateCount) {
+  if (candidateCount === null) return '候補店舗数: 算出対象外(用途軸)';
+  return `既知の掲載候補: ${candidateCount}店${discoveryNote(candidateCount)}`;
+}
+
 // tagsのみで一致した記事(=専用記事ではないが関連はある)を「関連記事あり(部分カバー)」の参考行として整形する。
 // coverage.relatedTagsOnly が空なら何も返さない(カバー済み扱いにはしないため、あくまで参考情報)。
 function formatRelatedNote(coverage) {
@@ -354,7 +389,7 @@ export function formatDryRunReport(uncoveredEntries, draftOnlyEntries = []) {
     lines.push(
       `${i + 1}. [${PRIORITY_LABEL[topic.priority] || topic.priority}] ${topic.label} (${topic.id})`,
       `   理由: ${topic.rationale}`,
-      `   既知の掲載候補: ${candidateCount}店${discoveryNote(candidateCount)}`
+      `   ${formatCandidateLine(candidateCount)}`
     );
     const relatedNote = formatRelatedNote(coverage);
     if (relatedNote) lines.push(relatedNote);
@@ -363,9 +398,34 @@ export function formatDryRunReport(uncoveredEntries, draftOnlyEntries = []) {
   return lines.join('\n');
 }
 
+// entry(topic単位)のsectionテキストに添える「実際に検索されている語」行。
+// entry.suggestions(fetchGoogleSuggestionsの結果、呼び出し側で事前取得してentryに付与したもの)が
+// 空/未指定なら何も返さない。
+function formatSuggestionsNote(entry) {
+  if (!entry.suggestions?.length) return '';
+  return `\n実際に検索されている語: ${entry.suggestions.slice(0, 5).join(', ')}`;
+}
+
+// entry(topic単位)のsectionテキストに添える「GSC実クエリ」行。
+// entry.gscMatches(attachGscMatchesで付与した{query, impressions, clicks}の配列)が
+// 空/未指定なら何も返さない。
+function formatGscNote(entry) {
+  if (!entry.gscMatches?.length) return '';
+  const text = entry.gscMatches
+    .map((m) => `${m.query}(表示${m.impressions}回/クリック${m.clicks}回)`)
+    .join(' / ');
+  return `\nGSC実クエリ: ${text}`;
+}
+
 // Slack投稿用のBlock Kitメッセージを組み立てる。
 // draftOnlyEntries: buildDraftOnlyCoveredTopics()の結果(省略可)。指定時は末尾に「(draft)」付きのcontextブロックを追加する。
-export function buildSlackBlocks(entries, draftOnlyEntries = []) {
+// 第3引数(省略可):
+//   - seedSuggestions: [{ seed, suggestions }] 一般シード語のGoogleサジェスト結果。指定時はcontextブロックで表示。
+//   - gscTopQueries: [{ query, impressions, clicks }] GSC表示回数上位クエリ。指定時はcontextブロックで表示。
+//   entries内の各要素に suggestions(string[]) / gscMatches({query,impressions,clicks}[]) が
+//   付与されていれば、各トピックのsectionテキストにも「実際に検索されている語」「GSC実クエリ」を追加する。
+//   (いずれもsuggest-guide-topics.mjsの本番実行時のみ付与される。--dry-runでは付与されない)
+export function buildSlackBlocks(entries, draftOnlyEntries = [], { seedSuggestions = [], gscTopQueries = [] } = {}) {
   const blocks = [{ type: 'header', text: { type: 'plain_text', text: '📝 今週のガイド記事提案' } }];
 
   for (const entry of entries) {
@@ -378,7 +438,7 @@ export function buildSlackBlocks(entries, draftOnlyEntries = []) {
       type: 'section',
       text: {
         type: 'mrkdwn',
-        text: `*${topic.label}*\n優先度: ${priorityLabel}\n理由: ${topic.rationale}\n既知の掲載候補: ${candidateCount}店${discoveryNote(candidateCount)}${relatedNote}`,
+        text: `*${topic.label}*\n優先度: ${priorityLabel}\n理由: ${topic.rationale}\n${formatCandidateLine(candidateCount)}${relatedNote}${formatSuggestionsNote(entry)}${formatGscNote(entry)}`,
       },
     });
   }
@@ -387,6 +447,26 @@ export function buildSlackBlocks(entries, draftOnlyEntries = []) {
     type: 'context',
     elements: [{ type: 'mrkdwn', text: '承認する場合はこのスレッドに返信するか、Claude Codeセッションでリサーチ・執筆を進めてください。' }],
   });
+
+  const seedLines = seedSuggestions
+    .filter((s) => s.suggestions?.length)
+    .map((s) => `${s.seed}: ${s.suggestions.slice(0, 5).join(', ')}`);
+  if (seedLines.length > 0) {
+    blocks.push({
+      type: 'context',
+      elements: [{ type: 'mrkdwn', text: `検索サジェスト(一般語)\n${seedLines.join('\n')}` }],
+    });
+  }
+
+  if (gscTopQueries.length > 0) {
+    const text = gscTopQueries
+      .map((q) => `${q.query}(表示${q.impressions}回/クリック${q.clicks}回)`)
+      .join(' / ');
+    blocks.push({
+      type: 'context',
+      elements: [{ type: 'mrkdwn', text: `GSC表示回数上位クエリ: ${text}` }],
+    });
+  }
 
   if (draftOnlyEntries.length > 0) {
     const list = draftOnlyEntries.map((e) => `${e.topic.label} (draft)`).join(' / ');
@@ -397,6 +477,41 @@ export function buildSlackBlocks(entries, draftOnlyEntries = []) {
   }
 
   return blocks;
+}
+
+// buildSlackBlocks向けに、Slack提出対象entriesへGoogleサジェスト結果を付与する(純粋関数)。
+// suggestionsByTopicId: { [topicId]: string[] } (呼び出し側でfetchGoogleSuggestionsを事前実行して渡す)。
+// 既存entryは書き換えず、新規オブジェクトを返す。
+export function attachSuggestions(entries, suggestionsByTopicId) {
+  return entries.map((entry) => {
+    const suggestions = suggestionsByTopicId?.[entry.topic.id];
+    return suggestions?.length ? { ...entry, suggestions } : entry;
+  });
+}
+
+// buildSlackBlocks向けに、Slack提出対象entriesへGSC実クエリのマッチ結果を付与する(純粋関数)。
+// gscRows: gsc.mjsのgetGscData()が返す行配列(nullなら何もしない=GSC未連携時のfail-open)。
+// 一致クエリは表示回数の多い順に上位3件のみ付与する。
+export function attachGscMatches(entries, gscRows) {
+  if (!gscRows?.length) return entries;
+  return entries.map((entry) => {
+    const matches = matchQueriesToTopic(entry.topic, gscRows)
+      .slice()
+      .sort((a, b) => (b.impressions || 0) - (a.impressions || 0))
+      .slice(0, 3)
+      .map((row) => ({ query: row.keys?.[0] || '', impressions: row.impressions || 0, clicks: row.clicks || 0 }));
+    return matches.length > 0 ? { ...entry, gscMatches: matches } : entry;
+  });
+}
+
+// GSC行群を表示回数の多い順に上位n件、Slack表示用の形に整形する(純粋関数)。
+export function topGscQueriesByImpressions(gscRows, n = 10) {
+  if (!gscRows?.length) return [];
+  return gscRows
+    .slice()
+    .sort((a, b) => (b.impressions || 0) - (a.impressions || 0))
+    .slice(0, n)
+    .map((row) => ({ query: row.keys?.[0] || '', impressions: row.impressions || 0, clicks: row.clicks || 0 }));
 }
 
 async function main() {
@@ -424,7 +539,30 @@ async function main() {
   }
 
   const top = uncovered.slice(0, TOP_SUGGESTION_COUNT);
-  const blocks = buildSlackBlocks(top, draftOnlyCovered);
+
+  // Googleサジェスト連携(無料・認証不要、fail-open)。--dry-runでは呼ばれない経路。
+  const seedWords = ['ジャカルタ グルメ', 'ジャカルタ レストラン', 'ジャカルタ カフェ'];
+  const seedSuggestions = await Promise.all(
+    seedWords.map(async (seed) => ({ seed, suggestions: await fetchGoogleSuggestions(seed) }))
+  );
+  const suggestionsByTopicId = {};
+  await Promise.all(
+    top.map(async (entry) => {
+      const query = `ジャカルタ ${entry.topic.keywords[0]}`;
+      suggestionsByTopicId[entry.topic.id] = (await fetchGoogleSuggestions(query)).slice(0, 5);
+    })
+  );
+  const topWithSuggestions = attachSuggestions(top, suggestionsByTopicId);
+
+  // Search Console連携(無料、GSC_SERVICE_ACCOUNT_KEY未設定ならfail-openでスキップ)。
+  const gscRows = await getGscData({
+    serviceAccountKeyJson: process.env.GSC_SERVICE_ACCOUNT_KEY,
+    siteUrl: process.env.GSC_SITE_URL,
+  });
+  const topWithGsc = attachGscMatches(topWithSuggestions, gscRows);
+  const gscTopQueries = topGscQueriesByImpressions(gscRows, 10);
+
+  const blocks = buildSlackBlocks(topWithGsc, draftOnlyCovered, { seedSuggestions, gscTopQueries });
   await postSlackMessage({
     token,
     channel,
