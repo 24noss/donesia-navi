@@ -2,7 +2,7 @@
 title: "タンゲランの住宅街「パラマウント・ペタルス」、ジャカルタ結ぶシャトルバス運行を開始"
 description: "不動産開発パラマウント・ペタルスは大手バス会社ホワイトホースと提携し、タンゲランと同地区からジャカルタ主要拠点等を結ぶシャトルバスの運行を開始した。居住者や通勤者の利便性向上が期待されている。"
 category: "lifestyle"
-tags: ["シャトルバス", "ジャカルタ交通", "タンゲラン", "パラマウントペタルス", "生活情報"]
+tags: ["交通", "生活情報"]
 pubDate: 2026-08-03
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5677036/paramount-petals-hadirkan-shuttle-bus-ke-jakarta-dan-sekitarnya"
@@ -25,6 +25,6 @@ draft: true
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5677036/paramount-petals-hadirkan-shuttle-bus-ke-jakarta-dan-sekitarnya)
 **カテゴリ:** 生活・グルメ
-**タグ:** シャトルバス, ジャカルタ交通, タンゲラン, パラマウントペタルス, 生活情報
+**タグ:** 交通, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*
