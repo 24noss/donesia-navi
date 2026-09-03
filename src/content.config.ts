@@ -1,5 +1,12 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import tagVocabulary from './data/tag-vocabulary.json';
+
+// タグは統制語彙(src/data/tag-vocabulary.json)のみ許可。語彙外タグはビルドエラーになる。
+// 使い捨てタグの増殖でタグページがGSCノイズ化した問題(2026-09-03恒久対応)の再発防止で、
+// 記事の生成経路(自動クロール/ガイド執筆エージェント/手編集)を問わず機械的に強制する。
+// 新しいタグが必要な場合は語彙ファイルに追加してから使うこと。
+const VALID_TAGS = new Set(tagVocabulary.vocabulary.map((v) => v.tag));
 
 const articles = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/articles' }),
@@ -7,7 +14,13 @@ const articles = defineCollection({
     title: z.string(),
     description: z.string(),
     category: z.enum(['safety', 'society', 'business', 'gourmet', 'lifestyle', 'travel', 'visa', 'regulation']),
-    tags: z.array(z.string()).default([]),
+    tags: z
+      .array(
+        z.string().refine((t) => VALID_TAGS.has(t), {
+          message: '語彙外のタグです。src/data/tag-vocabulary.json に定義されたタグのみ使用できます',
+        })
+      )
+      .default([]),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     source: z.string().optional(),
