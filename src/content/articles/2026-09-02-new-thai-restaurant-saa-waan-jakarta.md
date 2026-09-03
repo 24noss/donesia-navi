@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "新店舗", "タイ料理", "グルメ", "レスト�
 pubDate: 2026-09-02
 source: "bernas.id"
 sourceUrl: "https://bernas.id/nasional/news/restoran-thailand-baru-di-jakarta-saa-waan-hadirkan-teh-premium-chiang-rai-2026-09-02"
-draft: true
+draft: false
 ---
 
 ## ジャカルタに本格タイ料理店「Saa Waan」が新登場
