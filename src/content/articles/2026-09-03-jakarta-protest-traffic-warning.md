@@ -6,7 +6,7 @@ tags: ["交通規制", "デモ", "ジャカルタ", "渋滞"]
 pubDate: 2026-09-03
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/03/08412951/3-demo-mahasiswa-dan-pekerja-di-jakarta-hari-ini-potensi-macet-di-titik"
-draft: true
+draft: false
 ---
 
 ## 学生や労働者によるデモが市内複数箇所で発生、主要道路での交通渋滞に注意
