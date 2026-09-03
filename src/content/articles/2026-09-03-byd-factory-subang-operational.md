@@ -6,7 +6,7 @@ tags: ["BYD", "電気自動車", "スバン", "西ジャワ", "自動車産業"]
 pubDate: 2026-09-03
 source: "Antara"
 sourceUrl: "https://otomotif.antaranews.com/berita/5724273/pabrik-byd-di-subang-resmi-beroperasi-dan-serap-5000-pekerja-lokal"
-draft: true
+draft: false
 ---
 
 ## BYDのスバン新工場が正式稼働、5,000人規模の現地採用を計画
