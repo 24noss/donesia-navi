@@ -6,7 +6,7 @@ tags: ["中央銀行", "バンクインドネシア", "金融政策", "人事", 
 pubDate: 2026-09-02
 source: "Kompas"
 sourceUrl: "http://money.kompas.com/read/2026/09/02/160412026/ma-resmi-lantik-destry-damayanti-sebagai-gubernur-bi-periode-2026-2031?source=terkini_artikel"
-draft: true
+draft: false
 ---
 
 ## 中銀の新総裁にデストリ氏が就任、2026〜2031年の新体制が始動
