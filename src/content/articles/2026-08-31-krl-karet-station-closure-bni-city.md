@@ -2,7 +2,7 @@
 title: "KRLカレット駅が9月1日で閉鎖、BNIシティ駅へ旅客サービスを全面統合"
 description: "ジャカルタ中心部のKRLコミューターライン・カレット駅が2026年9月1日より旅客営業を終了し閉鎖されます。乗降客は隣接するBNIシティ駅への利用に移行となり、両駅を結ぶ歩行者用通路が整備されています。"
 category: "lifestyle"
-tags: ["公共交通", "KRL", "ジャカルタ", "通勤電車"]
+tags: ["交通", "KRL", "ジャカルタ"]
 pubDate: 2026-08-31
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/30/170500127/mulai-1-september-penumpang-krl-di-stasiun-karet-dialihkan-ke-bni-city-ini"
@@ -25,6 +25,6 @@ KompasおよびDetik各紙の報道によると、KAIコミューターはジャ
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/30/170500127/mulai-1-september-penumpang-krl-di-stasiun-karet-dialihkan-ke-bni-city-ini)
 **カテゴリ:** 生活情報
-**タグ:** 公共交通, KRL, ジャカルタ, 通勤電車
+**タグ:** 交通, KRL, ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "8月1日にモナスで10万人規模の建国祈祷イベント、周辺交通混雑に注意"
 description: "2026年8月1日にジャカルタのモナスで宗教省主催の建国記念祈祷イベントが開催される。約10万人の来場が見込まれており、周辺道路やガンビル駅周辺での交通規制や混雑に警戒が必要だ。"
 category: "safety"
-tags: ["モナス", "ジャカルタ", "交通規制", "建国記念", "イベント"]
+tags: ["中央ジャカルタ", "ジャカルタ", "交通規制", "独立記念日", "イベント"]
 pubDate: 2026-07-31
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5674028/kemenag-perkirakan-100-ribu-orang-akan-hadiri-zikir-dan-doa-kebangsaan"
@@ -25,6 +25,6 @@ AntaraおよびDetik各紙の報道によると、インドネシア宗教省（
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5674028/kemenag-perkirakan-100-ribu-orang-akan-hadiri-zikir-dan-doa-kebangsaan)
 **カテゴリ:** 生活・グルメ
-**タグ:** モナス, ジャカルタ, 交通規制, 建国記念, イベント
+**タグ:** 中央ジャカルタ, ジャカルタ, 交通規制, 独立記念日, イベント
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

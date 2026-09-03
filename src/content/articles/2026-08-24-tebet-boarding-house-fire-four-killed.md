@@ -2,7 +2,7 @@
 title: "南ジャカルタ・テベットで下宿火災、4人死亡　電気トラブルが原因か"
 description: "南ジャカルタ・テベット地区の下宿（コス）兼店舗で火災が発生し、居住者4人が死亡した。初期調査では電気系統のトラブルが原因とみられている。乾期における漏電や過電流など火の取り扱いへの警戒が呼びかけられている。"
 category: "safety"
-tags: ["ジャカルタ", "火災", "テベット", "治安", "防災"]
+tags: ["ジャカルタ", "火災", "南ジャカルタ", "治安", "防災"]
 pubDate: 2026-08-24
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8631828/kebakaran-kosan-dan-ruko-fotokopi-di-tebet-4-orang-tewas"
@@ -21,6 +21,6 @@ Detikの報道によると、南ジャカルタ・テベット地区にある下
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8631828/kebakaran-kosan-dan-ruko-fotokopi-di-tebet-4-orang-tewas)
 **カテゴリ:** 安全・災害
-**タグ:** ジャカルタ, 火災, テベット, 治安, 防災
+**タグ:** ジャカルタ, 火災, 南ジャカルタ, 治安, 防災
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

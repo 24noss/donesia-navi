@@ -2,7 +2,7 @@
 title: "KPK、南ジャカルタおよび中央ジャカルタの出入国管理局を家宅捜索　滞在許可巡る疑惑で"
 description: "汚職撲滅委員会（KPK）は、元法務人権省政務次官らが関与する外国人の滞在許可証を巡る不正疑惑に関連し、南ジャカルタおよび中央ジャカルタの出入国管理局を家宅捜索した。在住邦人手続きへの影響が注目される。"
 category: "society"
-tags: ["イミグレーション", "KPK", "出入国管理局", "滞在許可", "汚職捜査"]
+tags: ["ビザ", "治安"]
 pubDate: 2026-08-04
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8604547/kpk-geledah-kantor-imigrasi-jaksel-terkait-kasus-eks-wamen-silmy-karim"
@@ -21,6 +21,6 @@ Detikの報道によると、汚職撲滅委員会（KPK）は、南ジャカル
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8604547/kpk-geledah-kantor-imigrasi-jaksel-terkait-kasus-eks-wamen-silmy-karim)
 **カテゴリ:** 社会・政治
-**タグ:** イミグレーション, KPK, 出入国管理局, 滞在許可, 汚職捜査
+**タグ:** ビザ, 治安
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

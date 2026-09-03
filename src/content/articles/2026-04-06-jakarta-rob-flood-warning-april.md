@@ -2,7 +2,7 @@
 title: "ジャカルタ北部沿岸12地区に高潮（ロブ）警報、4月9日まで警戒を"
 description: "ジャカルタ北部の沿岸12地区で高潮（banjir rob）の発生が予測されています。対象エリアと在住者が取るべき対策をまとめました。"
 category: "safety"
-tags: ["高潮", "ジャカルタ", "洪水", "北ジャカルタ", "防災"]
+tags: ["洪水", "ジャカルタ", "北ジャカルタ", "防災"]
 pubDate: 2026-04-06
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8431050/waspada-12-wilayah-pesisir-utara-jakarta-potensi-banjir-rob-sampai-9-april"

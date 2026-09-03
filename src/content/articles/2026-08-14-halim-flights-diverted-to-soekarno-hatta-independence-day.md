@@ -2,7 +2,7 @@
 title: "ハリム空港発着便、独立記念日の式典に伴いスカルノ・ハッタ空港へ一時移管"
 description: "東ジャカルタのハリム・ペルダナクスマ空港を発着する一部の定期旅客便が、独立記念日行事および軍用機運用に伴い、スカルノ・ハッタ国際空港（Cengkareng）へ一時振替運航されます。該当期間のフライト利用者は確認が必要です。"
 category: "travel"
-tags: ["ハリム空港", "スカルノハッタ空港", "フライト情報", "独立記念日", "空港アクセス"]
+tags: ["フライト情報", "スカルノハッタ空港", "独立記念日"]
 pubDate: 2026-08-14
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/14/060500027/penerbangan-dari-bandara-halim-dialihkan-ke-soekarno-hatta-untuk-hut-ke-81-ri"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、ジャカルタ東部のハリム・ペルダ�
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/14/060500027/penerbangan-dari-bandara-halim-dialihkan-ke-soekarno-hatta-untuk-hut-ke-81-ri)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** ハリム空港, スカルノハッタ空港, フライト情報, 独立記念日, 空港アクセス
+**タグ:** フライト情報, スカルノハッタ空港, 独立記念日
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

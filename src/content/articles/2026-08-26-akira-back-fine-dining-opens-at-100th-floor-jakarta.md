@@ -2,7 +2,7 @@
 title: "地上100階のファインダイニング「Akira Back」がジャカルタに登場　和牛やタラバガニを提供"
 description: "ジャカルタの超高層ビル100階にミシュランシェフ監修のファインダイニング「Akira Back」がオープン。贅沢な夜景とともに和牛やタラバガニを堪能できる。"
 category: "gourmet"
-tags: ["ジャカルタ", "ファインダイニング", "AkiraBack", "和牛", "夜景"]
+tags: ["ジャカルタ", "グルメ", "和牛"]
 pubDate: 2026-08-26
 source: "Kumparan"
 sourceUrl: "https://kumparan.com/kumparanfood/restoran-akira-back-hadirkan-pengalaman-bersantap-fine-dining-di-lantai-100-283myHm3Ohu"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kumparan](https://kumparan.com/kumparanfood/restoran-akira-back-hadirkan-pengalaman-bersantap-fine-dining-di-lantai-100-283myHm3Ohu)
 **カテゴリ:** グルメ・レストラン
-**タグ:** ジャカルタ, ファインダイニング, AkiraBack, 和牛, 夜景
+**タグ:** ジャカルタ, グルメ, 和牛
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

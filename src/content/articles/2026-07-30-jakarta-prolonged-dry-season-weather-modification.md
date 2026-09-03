@@ -2,7 +2,7 @@
 title: "ジャカルタで2〜3週間無降水、干ばつ長期化へ 州政府が人工降雨を実施検討"
 description: "インドネシア気象気候地球物理庁（BMKG）が乾季の長期化とエルニーニョ現象を予測する中、ジャカルタ特別州では2〜3週間降雨がなく、プラモノ知事は人工降雨の実施を検討している。"
 category: "society"
-tags: ["ジャカルタ気象", "乾季", "BMKG", "人工降雨", "大気汚染"]
+tags: ["BMKG", "大気汚染"]
 pubDate: 2026-07-30
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8596556/jakarta-2-3-pekan-tanpa-hujan-pramono-bakal-siapkan-modifikasi-cuaca"
@@ -25,6 +25,6 @@ draft: true
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8596556/jakarta-2-3-pekan-tanpa-hujan-pramono-bakal-siapkan-modifikasi-cuaca)
 **カテゴリ:** 社会・政治
-**タグ:** ジャカルタ気象, 乾季, BMKG, 人工降雨, 大気汚染
+**タグ:** BMKG, 大気汚染
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

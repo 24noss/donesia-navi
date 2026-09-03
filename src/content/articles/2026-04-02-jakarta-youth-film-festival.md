@@ -2,7 +2,7 @@
 title: "ジャカルタで若手映画祭開催へ——BI×DKI州が映画産業の育成を後押し"
 description: "Bank IndonesiaとDKIジャカルタ州政府が共催する「Jakarta Youth Film Festival」が開催。短編映画上映や業界関係者との座談会を実施。"
 category: "business"
-tags: ["映画祭", "ジャカルタ", "Bank Indonesia", "クリエイティブ産業", "イベント"]
+tags: ["イベント", "ジャカルタ", "インドネシア経済"]
 pubDate: 2026-04-02
 source: "Liputan6"
 sourceUrl: "https://www.liputan6.com/news/read/6309200/bi-dan-pemprov-dki-dorong-industri-film-lewat-jakarta-youth-film-festival"
@@ -25,6 +25,6 @@ JYFFでは短編映画の上映に加え、映画業界の第一線で活躍す�
 ---
 **情報ソース:** [Liputan6](https://www.liputan6.com/news/read/6309200/bi-dan-pemprov-dki-dorong-industri-film-lewat-jakarta-youth-film-festival)
 **カテゴリ:** 経済・ビジネス
-**タグ:** 映画祭, ジャカルタ, Bank Indonesia, クリエイティブ産業, イベント
+**タグ:** イベント, ジャカルタ, インドネシア経済
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

@@ -2,7 +2,7 @@
 title: "イースター連休でモナス（独立記念塔）が大混雑、観光列車に長蛇の列"
 description: "パスカ（イースター）の連休を利用してモナス周辺に家族連れが殺到。観光列車は長い行列に。"
 category: "society"
-tags: ["モナス", "イースター", "連休", "ジャカルタ観光", "パスカ"]
+tags: ["中央ジャカルタ", "イベント", "観光", "交通規制"]
 pubDate: 2026-04-04
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8428857/monas-dipadati-pengunjung-saat-long-weekend-warga-antre-kereta-wisata"
@@ -27,6 +27,6 @@ draft: false
 ---
 **情報ソース:** [Detik News](https://news.detik.com/berita/d-8428857/monas-dipadati-pengunjung-saat-long-weekend-warga-antre-kereta-wisata)
 **カテゴリ:** 社会・政治
-**タグ:** モナス、イースター、連休、ジャカルタ観光、パスカ
+**タグ:** 中央ジャカルタ, イベント, 観光, 交通規制
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

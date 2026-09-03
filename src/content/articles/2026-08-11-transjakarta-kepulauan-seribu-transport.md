@@ -2,7 +2,7 @@
 title: "トランスジャカルタ、千島列島への水上交通を統括へ　手頃な運賃でアクセス向上を目指す"
 description: "ジャカルタ州政府とトランスジャカルタは、ジャカルタ北部に位置する千島列島（クプラウアン・スリブ）への水上交通機関の統合管理を進めています。運賃の適正化や利便性向上により、住民や観光客の移動を円滑にする計画です。"
 category: "society"
-tags: ["ジャカルタ", "トランスジャカルタ", "千島列島", "交通インフラ", "観光"]
+tags: ["ジャカルタ", "トランスジャカルタ", "インフラ", "観光"]
 pubDate: 2026-08-11
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8613055/waka-dprd-dki-dukung-transj-kelola-transportasi-pulau-seribu-bangun-awareness"
@@ -23,6 +23,6 @@ DetikおよびKompas各紙の報道によると、ジャカルタ州政府と国
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8613055/waka-dprd-dki-dukung-transj-kelola-transportasi-pulau-seribu-bangun-awareness)
 **カテゴリ:** 社会・政治
-**タグ:** ジャカルタ, トランスジャカルタ, 千島列島, 交通インフラ, 観光
+**タグ:** ジャカルタ, トランスジャカルタ, インフラ, 観光
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

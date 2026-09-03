@@ -2,7 +2,7 @@
 title: "タイ首相訪印に伴いジャカルタ市内で交通規制実施　8月3日〜4日の移動に注意"
 description: "タイのアヌティン首相が8月3日〜4日にインドネシアを訪問し、プラボウォ大統領との首脳会談等を行う。これに伴いジャカルタ警視庁は市内主要道路で交通規制および警護態勢を実施する。"
 category: "safety"
-tags: ["交通規制", "ジャカルタ", "首脳会談", "タイ首相", "渋滞"]
+tags: ["交通規制", "ジャカルタ", "渋滞"]
 pubDate: 2026-08-03
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8601535/pm-thailand-kunjungan-ke-ri-3-4-agustus-sejumlah-ruas-jalan-direkayasa"
@@ -25,6 +25,6 @@ DetikおよびAntara通信の報道によると、タイのアヌティン・チ
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8601535/pm-thailand-kunjungan-ke-ri-3-4-agustus-sejumlah-ruas-jalan-direkayasa)
 **カテゴリ:** 安全・災害
-**タグ:** 交通規制, ジャカルタ, 首脳会談, タイ首相, 渋滞
+**タグ:** 交通規制, ジャカルタ, 渋滞
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

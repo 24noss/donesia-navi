@@ -2,7 +2,7 @@
 title: "プルタミナ、独立記念日を記念して「プルタマックス」等を1リットルあたり450ルピア割引"
 description: "国営石油プルタミナ傘下のプルタミナ・パトラ・ニアガは、第81回インドネシア独立記念日を祝し、プルタマックスなど非補助燃料を対象に1リットルあたり450ルピアを割り引く特別プロモーションを実施します。"
 category: "lifestyle"
-tags: ["プルタミナ", "ガソリン", "独立記念日", "プロモーション"]
+tags: ["プルタミナ", "物価", "独立記念日", "キャンペーン・プロモ"]
 pubDate: 2026-08-16
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5696841/pertamina-patra-niaga-berikan-diskon-pertamax-rp450-lt-sambut-hut-ri"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5696841/pertamina-patra-niaga-berikan-diskon-pertamax-rp450-lt-sambut-hut-ri)
 **カテゴリ:** 生活情報
-**タグ:** プルタミナ, ガソリン, 独立記念日, プロモーション
+**タグ:** プルタミナ, 物価, 独立記念日, キャンペーン・プロモ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

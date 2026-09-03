@@ -2,7 +2,7 @@
 title: "西ジャカルタ警察、約15.6億ルピアの偽札偽造・流通グループ11人を摘発"
 description: "西ジャカルタ警察署は、10万ルピア紙幣を中心とした総額15億6,000万ルピア相当の偽札偽造シンジケートを摘発し、11人を逮捕した。現金決済の際は偽造防止特徴の確認が呼びかけられている。"
 category: "safety"
-tags: ["治安", "偽札", "西ジャカルタ", "注意喚起", "警察摘発"]
+tags: ["治安", "西ジャカルタ", "注意喚起"]
 pubDate: 2026-08-24
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8633132/polres-jakbar-bongkar-kasus-uang-palsu-rp-1-5-m-11-pelaku-ditangkap"
@@ -25,6 +25,6 @@ Detikの報道によると、西ジャカルタ警視庁（Polres Metro Jakarta 
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8633132/polres-jakbar-bongkar-kasus-uang-palsu-rp-1-5-m-11-pelaku-ditangkap)
 **カテゴリ:** 安全・災害
-**タグ:** 治安, 偽札, 西ジャカルタ, 注意喚起, 警察摘発
+**タグ:** 治安, 西ジャカルタ, 注意喚起
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

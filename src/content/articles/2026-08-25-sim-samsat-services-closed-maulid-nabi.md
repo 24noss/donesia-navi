@@ -2,7 +2,7 @@
 title: "預言者生誕祭の祝日に伴い、ジャカルタの運転免許（SIM）更新・Samsat窓口が休業"
 description: "イスラム教の祝日「モーリッド・ナビ（預言者生誕祭）」に伴い、ジャカルタ警視庁管轄の運転免許証（SIM）更新窓口および移動式Samsat窓口の業務が休止となります。更新期限を迎える方は手続き期間の確認が必要です。"
 category: "lifestyle"
-tags: ["運転免許証", "SIM更新", "Samsat", "祝日", "ジャカルタ警視庁"]
+tags: ["生活情報", "治安"]
 pubDate: 2026-08-25
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5709967/maulid-nabi-layanan-sim-dan-samsat-keliling-di-jakarta-libur"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5709967/maulid-nabi-layanan-sim-dan-samsat-keliling-di-jakarta-libur)
 **カテゴリ:** 生活情報
-**タグ:** 運転免許証, SIM更新, Samsat, 祝日, ジャカルタ警視庁
+**タグ:** 生活情報, 治安
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

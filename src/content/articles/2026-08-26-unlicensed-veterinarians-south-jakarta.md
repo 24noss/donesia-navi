@@ -2,7 +2,7 @@
 title: "南ジャカルタで無認可の獣医師が多数確認　ペット飼育者に注意呼びかけ"
 description: "南ジャカルタ市内で獣医師免許（SIPDRH）を持たずに診療活動を行っている獣医師が複数確認された。地元自治体や獣医師会はペットオーナーに対し、診療を受ける前に正規の開業許可証を確認するよう注意を呼びかけている。"
 category: "lifestyle"
-tags: ["南ジャカルタ", "ペット", "動物病院", "獣医師", "注意喚起"]
+tags: ["南ジャカルタ", "医療", "注意喚起"]
 pubDate: 2026-08-26
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/26/10292291/hati-hati-puluhan-dokter-hewan-di-jaksel-tak-punya-izin-praktik"
@@ -25,6 +25,6 @@ Kompasの報道によると、南ジャカルタ地域において正規の診�
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/26/10292291/hati-hati-puluhan-dokter-hewan-di-jaksel-tak-punya-izin-praktik)
 **カテゴリ:** 生活情報
-**タグ:** 南ジャカルタ, ペット, 動物病院, 獣医師, 注意喚起
+**タグ:** 南ジャカルタ, 医療, 注意喚起
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

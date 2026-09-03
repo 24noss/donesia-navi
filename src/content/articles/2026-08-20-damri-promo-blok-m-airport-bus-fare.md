@@ -2,7 +2,7 @@
 title: "国営バスDAMRI、ブロックM〜スカルノ・ハッタ国際空港線を5万ルピアに割引プロモ"
 description: "国営バス運行会社DAMRIは、南ジャカルタのブロックMとスカルノ・ハッタ国際空港を結ぶ空港バス路線において、運賃が片道5万ルピアとなる特別プロモーションを実施している。日本人居住者が多い南部エリアからの空港アクセスがお得になる。"
 category: "travel"
-tags: ["DAMRI", "スカルノハッタ空港", "ブロックM", "公共交通", "空港アクセス"]
+tags: ["バス", "スカルノハッタ空港", "ブロックM", "交通", "フライト情報"]
 pubDate: 2026-08-20
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/20/210136127/promo-damri-dari-blok-m-ke-bandara-soekarno-hatta-cuma-rp-50000"
@@ -25,6 +25,6 @@ DAMRIの空港バスはエアコン完備で、スカルノ・ハッタ空港の
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/20/210136127/promo-damri-dari-blok-m-ke-bandara-soekarno-hatta-cuma-rp-50000)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** DAMRI, スカルノハッタ空港, ブロックM, 公共交通, 空港アクセス
+**タグ:** バス, スカルノハッタ空港, ブロックM, 交通, フライト情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

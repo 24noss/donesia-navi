@@ -2,7 +2,7 @@
 title: "2026年8月1日からの電気料金体系が決定、政府・PLN公表"
 description: "インドネシア政府は2026年8月1日から適用される電気料金価格（Tarif Listrik）を発表した。家庭用や事業用を含む各区分における料金体系が提示され、生活コストへの影響が注目される。"
 category: "lifestyle"
-tags: ["電気料金", "PLN", "生活コスト", "ジャカルタ生活", "インフラ"]
+tags: ["物価", "生活情報", "インフラ"]
 pubDate: 2026-07-29
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMivwFBVV95cUxQLVgzcXBuR0hDcmR1UWx6andzVDg5eWpCamtxWHJnV2JrT3pUei1qZXlvRzBlX1B0REUtUXZyb0oyWG5NcHE1Vld3WWdybkU1M0ZtM0CDQlNxdXVld0dvSGFJako4U1BmTjJBNF9jOVN0cWQxYTU1bUVhMF9ZVnNadjVsUjlVRXo5MjFjRENSRTRRaTktSW9tTDNIeFFjNi1nUmhsSDcxSlV0SmxYaE9xd2FjNzhQbWZfd25lYkRrNNIBvwFBVV95cUxQNHE0VC1JMVRKQV82dEtMOGstYmV0d1BqaUJzNzlGcmx3Vk9ndmh3Wld6LVF4cmN6TTVKZVNwcldudHZrVGpZc2c1WDBXa2taZTltT3NObTJhQktuc0NtaEpUMldEa2FvLTBtenBXdDRuTjIxSVBPcnRscW05LTQ0Y0hndlFuMmtUOXp6c1hONmF0TElWQUpFUnRMUENaTFJHNEJyUEFjb3dtdHF5VENWQ2hSbWhRYkFYbFVQVWw0Yw?oc=5"
@@ -25,6 +25,6 @@ draft: true
 ---
 **情報ソース:** [Kompas](https://news.google.com/rss/articles/CBMivwFBVV95cUxQLVgzcXBuR0hDcmR1UWx6andzVDg5eWpCamtxWHJnV2JrT3pUei1qZXlvRzBlX1B0REUtUXZyb0oyWG5NcHE1Vld3WWdybkU1M0ZtM0CDQlNxdXVld0dvSGFJako4U1BmTjJBNF9jOVN0cWQxYTU1bUVhMF9ZVnNadjVsUjlVRXo5MjFjRENSRTRRaTktSW9tTDNIeFFjNi1nUmhsSDcxSlV0SmxYaE9xd2FjNzhQbWZfd25lYkRrNNIBvwFBVV95cUxQNHE0VC1JMVRKQV82dEtMOGstYmV0d1BqaUJzNzlGcmx3Vk9ndmh3Wld6LVF4cmN6TTVKZVNwcldudHZrVGpZc2c1WDBXa2taZTltT3NObTJhQktuc0NtaEpUMldEa2FvLTBtenBXdDRuTjIxSVBPcnRscW05LTQ0Y0hndlFuMmtUOXp6c1hONmF0TElWQUpFUnRMUENaTFJHNEJyUEFjb3dtdHF5VENWQ2hSbWhRYkFYbFVQVWw0Yw?oc=5)
 **カテゴリ:** 生活・グルメ
-**タグ:** 電気料金, PLN, 生活コスト, ジャカルタ生活, インフラ
+**タグ:** 物価, 生活情報, インフラ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

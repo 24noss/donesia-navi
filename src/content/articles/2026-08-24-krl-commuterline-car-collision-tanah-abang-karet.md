@@ -2,7 +2,7 @@
 title: "タナアバン〜カレット間で乗用車とKRLが衝突　ダイヤ乱れに注意呼びかけ"
 description: "ジャカルタ中心部のタナアバン〜カレット駅間の線路内で、乗用車がKRLコミューターラインと衝突する事故が発生した。怪我人は報告されていないものの、一部列車に遅延が発生し、鉄道当局が注意を呼びかけている。"
 category: "safety"
-tags: ["KRL", "踏切事故", "タナアバン", "カレット", "鉄道運行情報"]
+tags: ["KRL", "鉄道", "中央ジャカルタ"]
 pubDate: 2026-08-24
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8633259/mobil-tertemper-krl-di-jalur-tanah-abang-karet-perjalanan-sempat-terganggu"
@@ -25,6 +25,6 @@ KAIコミューターの発表によると、この事故による乗客や車�
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8633259/mobil-tertemper-krl-di-jalur-tanah-abang-karet-perjalanan-sempat-terganggu)
 **カテゴリ:** 安全・災害
-**タグ:** KRL, 踏切事故, タナアバン, カレット, 鉄道運行情報
+**タグ:** KRL, 鉄道, 中央ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

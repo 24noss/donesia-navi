@@ -2,7 +2,7 @@
 title: "トルコが電気・ガス料金を二桁引き上げ、インドネシアのエネルギー政策への示唆"
 description: "トルコが電気・天然ガス料金の大幅値上げを発表。エネルギー補助金改革を進めるインドネシアにとっても他人事ではない動き。"
 category: "regulation"
-tags: ["エネルギー価格", "電気料金", "国際経済", "インドネシア電力"]
+tags: ["物価", "インドネシア経済", "インフラ"]
 pubDate: 2026-04-04
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5510677/turki-umumkan-kenaikan-harga-listrik-dan-gas-alam-hingga-dua-digit"
@@ -27,6 +27,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5510677/turki-umumkan-kenaikan-harga-listrik-dan-gas-alam-hingga-dua-digit)
 **カテゴリ:** 規制・法務
-**タグ:** エネルギー価格、電気料金、国際経済、インドネシア電力
+**タグ:** 物価, インドネシア経済, インフラ
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

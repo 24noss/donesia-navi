@@ -2,7 +2,7 @@
 title: "西ジャワ州ブカシの即席麺「Mie Sedaap」工場で火災発生、消火活動が難航"
 description: "西ジャワ州ブカシ市にある即席麺大手「Mie Sedaap」の製造工場で8月30日夜に大規模な火災が発生しました。段ボール保管倉庫などから出火し、消防隊が深夜まで消火および冷却作業にあたりました。"
 category: "safety"
-tags: ["火災", "ブカシ", "事故", "治安・安全"]
+tags: ["火災", "注意喚起", "交通規制", "治安"]
 pubDate: 2026-08-31
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/30/21295091/pabrik-mi-instan-di-bekasi-kebakaran"
@@ -25,6 +25,6 @@ Kompas、Detik各紙の報道によると、西ジャワ州ブカシ市メダン
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/30/21295091/pabrik-mi-instan-di-bekasi-kebakaran)
 **カテゴリ:** 安全・災害
-**タグ:** 火災, ブカシ, 事故, 治安・安全
+**タグ:** 火災, 注意喚起, 交通規制, 治安
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

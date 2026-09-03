@@ -2,7 +2,7 @@
 title: "南ジャカルタ・ファトマワティ通りでUターン閉鎖の試行運用を開始　交通渋滞緩和へ"
 description: "ジャカルタ運輸局は南ジャカルタのファトマワティ病院通りにあるUターン（転回場所）の閉鎖実験を開始しました。周辺道路の慢性的な混雑緩和を目指す試みであり、自家用車やタクシーで同エリアを通行する際は迂回路の確認が必要です。"
 category: "safety"
-tags: ["交通規制", "ファトマワティ", "ジャカルタ交通", "渋滞対策", "南ジャカルタ"]
+tags: ["交通規制", "南ジャカルタ", "交通"]
 pubDate: 2026-08-06
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5682252/dishub-dki-uji-coba-penutupan-perputaran-arah-di-rs-fatmawati-raya"
@@ -21,6 +21,6 @@ Antara通信の報道によると、ジャカルタ州運輸局（Dishub DKI）�
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5682252/dishub-dki-uji-coba-penutupan-perputaran-arah-di-rs-fatmawati-raya)
 **カテゴリ:** 安全・災害
-**タグ:** 交通規制, ファトマワティ, ジャカルタ交通, 渋滞対策, 南ジャカルタ
+**タグ:** 交通規制, 南ジャカルタ, 交通
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

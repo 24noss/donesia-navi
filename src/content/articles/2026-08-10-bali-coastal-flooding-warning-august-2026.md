@@ -2,7 +2,7 @@
 title: "バリ島沿岸部で8月11日〜17日に高潮の恐れ　BMKGが注意呼びかけ"
 description: "バリ島の気象気候監測局（BBMKG）は、8月11日から17日にかけてバリ島の沿岸6エリアで高潮（沿岸氾濫）が発生する恐れがあるとして、住民や観光客に警戒を呼びかけている。"
 category: "safety"
-tags: ["バリ", "高潮", "注意報", "災害情報", "BMKG"]
+tags: ["バリ島", "洪水", "注意喚起", "防災", "BMKG"]
 pubDate: 2026-08-10
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5687096/bbmkg-waspada-potensi-rob-di-enam-pesisir-bali-pada-1117-agustus"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5687096/bbmkg-waspada-potensi-rob-di-enam-pesisir-bali-pada-1117-agustus)
 **カテゴリ:** 安全・災害
-**タグ:** バリ, 高潮, 注意報, 災害情報, BMKG
+**タグ:** バリ島, 洪水, 注意喚起, 防災, BMKG
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

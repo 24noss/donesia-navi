@@ -2,7 +2,7 @@
 title: "クバヨランバル・セノパティ周辺の人気日本食5選【2026年版】"
 description: "老舗の複合型和食店から話題のニクドン専門店まで、南ジャカルタで評判の高い日本食レストラン5軒を、営業時間・ハラール・アルコール可否つきで紹介。"
 category: "gourmet"
-tags: ["日本食", "レストラン", "クバヨランバル", "セノパティ", "グルメ"]
+tags: ["日本食", "レストラン", "セノパティ", "グルメ"]
 pubDate: 2026-07-30
 source: "Google Places API + WebSearch"
 sourceUrl: "https://www.google.com/maps"

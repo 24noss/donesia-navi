@@ -2,7 +2,7 @@
 title: "南ジャカルタ・セノパティに日本料理「Gokuniku」がオープン　和牛すき焼きやVIPルームを完備"
 description: "南ジャカルタ・セノパティに高級日本食レストラン「Gokuniku」がオープンした。特製スパイシートマトすき焼きやプレミアム和牛を提供し、個室やカラオケも備える。"
 category: "gourmet"
-tags: ["ジャカルタ", "日本食", "セノパティ", "すき焼き", "接待"]
+tags: ["ジャカルタ", "日本食", "セノパティ", "会食・接待"]
 pubDate: 2026-08-25
 source: "Wartakotalive"
 sourceUrl: "https://wartakota.tribunnews.com/travel/899353/gokuniku-buka-restoran-di-senopati-tawarkan-premium-japanese-dining-dengan-vip-room-dan-karaoke"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Wartakotalive](https://wartakota.tribunnews.com/travel/899353/gokuniku-buka-restoran-di-senopati-tawarkan-premium-japanese-dining-dengan-vip-room-dan-karaoke)
 **カテゴリ:** グルメ・レストラン
-**タグ:** ジャカルタ, 日本食, セノパティ, すき焼き, 接待
+**タグ:** ジャカルタ, 日本食, セノパティ, 会食・接待
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "FIFA ASEAN Cup 2026の開催地にジャカルタとバンドンのスタジアムが選出"
 description: "2026年に開催されるFIFA ASEAN Cupの開催スタジアムとして、ジャカルタのゲロラ・ブン・カルノ（SUGBK）と西ジャワ州バンドンのシ・ジャラク・ハルパットが選出されました。両都市で大会に向けた準備が進められています。"
 category: "society"
-tags: ["サッカー", "FIFA", "ジャカルタ", "バンドン", "イベント"]
+tags: ["イベント", "ジャカルタ", "バンドン"]
 pubDate: 2026-08-10
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8612720/erick-thohir-temui-pramono-bahas-venue-fifa-asean-cup-di-jakarta"
@@ -23,6 +23,6 @@ DetikおよびKompas各紙の報道によると、インドネシアサッカー
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8612720/erick-thohir-temui-pramono-bahas-venue-fifa-asean-cup-di-jakarta)
 **カテゴリ:** 社会・政治
-**タグ:** サッカー, FIFA, ジャカルタ, バンドン, イベント
+**タグ:** イベント, ジャカルタ, バンドン
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

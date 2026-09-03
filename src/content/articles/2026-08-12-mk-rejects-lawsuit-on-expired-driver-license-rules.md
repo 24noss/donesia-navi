@@ -2,7 +2,7 @@
 title: "運転免許証の更新遅れ「新規取り直し」規定、憲法裁判所が違憲訴訟を却下"
 description: "インドネシア憲法裁判所（MK）は、運転免許証（SIM）の有効期限が切れた際に新規取得（再試験）を義務付ける現行規則を不服とした訴訟を不適法却下した。有効期限切れ後の更新は認められず、再受験が必要なルールが維持される。"
 category: "regulation"
-tags: ["運転免許証", "SIM", "憲法裁判所", "交通ルール", "免許更新"]
+tags: ["生活情報", "交通規制"]
 pubDate: 2026-08-12
 source: "Kompas"
 sourceUrl: "https://nasional.kompas.com/read/2026/08/13/06545661/alasan-mk-tolak-gugatan-aturan-telat-perpanjang-sim-harus-bikin-baru"
@@ -21,6 +21,6 @@ Kompas紙の報道によると、インドネシア憲法裁判所（MK）は、
 ---
 **情報ソース:** [Kompas](https://nasional.kompas.com/read/2026/08/13/06545661/alasan-mk-tolak-gugatan-aturan-telat-perpanjang-sim-harus-bikin-baru)
 **カテゴリ:** 規制・法務
-**タグ:** 運転免許証, SIM, 憲法裁判所, 交通ルール, 免許更新
+**タグ:** 生活情報, 交通規制
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

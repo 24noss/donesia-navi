@@ -2,7 +2,7 @@
 title: "8月1日からインドネシア独立記念月間がスタート、政府が国旗掲揚を呼びかけ"
 description: "8月17日のインドネシア独立81周年を前に、政府は8月1日から31日までの1か月間、赤白旗の掲揚を呼びかけている。全市民に加え、オフィスや店舗、アパートなどの民間施設も掲揚対象となる。"
 category: "society"
-tags: ["独立記念日", "国旗掲揚", "インドネシア政府", "ジャカルタ生活", "社会マナー"]
+tags: ["独立記念日", "生活情報"]
 pubDate: 2026-07-31
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8598348/sambut-hut-ke-81-ri-pasang-bendera-merah-putih-mulai-tanggal-berapa"
@@ -25,6 +25,6 @@ Detikの報道によると、インドネシア政府は第81回独立記念日�
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8598348/sambut-hut-ke-81-ri-pasang-bendera-merah-putih-mulai-tanggal-berapa)
 **カテゴリ:** 社会・政治
-**タグ:** 独立記念日, 国旗掲揚, インドネシア政府, ジャカルタ生活, 社会マナー
+**タグ:** 独立記念日, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

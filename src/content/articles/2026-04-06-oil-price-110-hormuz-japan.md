@@ -2,7 +2,7 @@
 title: "原油価格110ドル突破、ホルムズ海峡情勢で日本も外交対応"
 description: "イラン情勢によるホルムズ海峡の供給不安で原油110ドルに。インドネシアの燃料価格や生活コストへの影響を解説。"
 category: "business"
-tags: ["原油価格", "ホルムズ海峡", "燃料", "物価", "日本"]
+tags: ["物価"]
 pubDate: 2026-04-06
 source: "Kompas / Antara"
 sourceUrl: "https://money.kompas.com/read/2026/04/06/101547626/harga-minyak-dunia-tembus-110-dollar-as"
@@ -42,6 +42,6 @@ draft: false
 - [Antara — 日本首相のイラン対応](https://www.antaranews.com/berita/5512901/pm-jepang-gunakan-jalur-komunikasi-langsung-ke-iran-soal-selat-hormuz)
 
 **カテゴリ:** 経済・ビジネス
-**タグ:** 原油価格、ホルムズ海峡、燃料、物価、日本
+**タグ:** 物価
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

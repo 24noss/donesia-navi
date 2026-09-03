@@ -2,7 +2,7 @@
 title: "ノンストップ高速料金「MLFF」再試験へ——実用化はいつ？"
 description: "走行中に料金を自動決済するMLFF（Multi Lane Free Flow）の再試験が決定。過去の頓挫を経て、政府が一から検証をやり直すと報じられている。"
 category: "society"
-tags: ["高速道路", "MLFF", "交通", "ETC", "インフラ"]
+tags: ["交通", "インフラ"]
 pubDate: 2026-04-02
 source: "Detik / Kompas"
 sourceUrl: "https://finance.detik.com/infrastruktur/d-8427308/bayar-tol-tanpa-setop-belum-jadi-juga-kini-mau-diuji-coba-lagi"
@@ -27,6 +27,6 @@ draft: false
 ---
 **情報ソース:** [Detik Finance](https://finance.detik.com/infrastruktur/d-8427308/bayar-tol-tanpa-setop-belum-jadi-juga-kini-mau-diuji-coba-lagi) / [Kompas](https://money.kompas.com/read/2026/04/02/202524926/sempat-mandek-proyek-tol-tanpa-henti-kembali-diuji)
 **カテゴリ:** 社会・政治
-**タグ:** 高速道路, MLFF, 交通, ETC, インフラ
+**タグ:** 交通, インフラ
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

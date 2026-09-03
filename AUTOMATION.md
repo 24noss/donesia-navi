@@ -122,6 +122,16 @@ gh variable set SLACK_CHANNEL_ID --body "C0AQFC6U8UE"   # 設定済み（2026-07
 - **飲食店ガイド（ハラール・酒類・エリア等のmapDataつき）は本パイプラインの対象外**: 既存のレストランガイド記事群（`content.config.ts`の`mapData`フィールド、料理別ガイド）はニュースではなく常時更新型のディレクトリコンテンツであり、ニュースRSSクロールでは生成できない。別途Google Places API等を使った専用の仕組みが必要。実装済み（後述の「レストラン・ディレクトリ自動更新パイプライン」節を参照）
 - Gemini APIは構造化出力（responseSchema + responseMimeType: application/json）を使用（2026-08-03〜）。パースは素のJSON.parse→失敗時に旧来のフェンス抽出/正規表現へフォールバックする多段構成。書き込み前の`validateArticle()`のスキーマガードも従来通り維持
 
+## タグ統制（SEO対応）
+
+2026年9月、タグページ495件（73%が記事1本のみ）が全ページnoindexとなりGSCの「インデックス未登録」ノイズの主因になっていた問題への恒久対応として、タグを**統制語彙71個**に集約した。
+
+- **語彙ファイル**: [`src/data/tag-vocabulary.json`](./src/data/tag-vocabulary.json)。各タグは `{ tag, axis }` で定義（axisはarea/cuisine/usecase/life/typeの5分類、表示上の意味づけ用）
+- **自動記事のタグはコードで強制**: `scripts/crawl-and-draft.mjs` はプロンプトに語彙リストを列挙して指示するだけでなく、Gemini応答のパース後に `filterTagsByVocabulary(tags, category)` という純粋関数（同ファイルからexport、テストは `crawl-and-draft.test.mjs`）で機械的にフィルタする。語彙に無いタグ（固有名詞等）は除去され、フィルタ後に0個になった場合はカテゴリ別デフォルトタグ（`CATEGORY_DEFAULT_TAG`、例: `gourmet`→「グルメ」、`safety`→「注意喚起」）を1個付与する。プロンプト任せにしないことで、モデルが語彙を無視した場合でも語彙外タグがサイトに出ない
+- **人間・エージェントが書くガイド記事も同じ運用ルール**: レストランガイド等を手動（またはClaude Codeセッション）で追加する場合も、frontmatterの`tags`と本文末尾の`**タグ:**`行は必ず `src/data/tag-vocabulary.json` の71語彙から選ぶこと。語彙に無い概念のタグが必要になった場合は、まず語彙ファイルへの追加を検討し、既存タグへの統合可否も含めて判断する（安易な新規タグ追加はタグ増殖の再発を招く）
+- **タグページは記事3本以上で自動的にインデックス対象になる**: `src/pages/tag/[tag].astro` はビルド時に該当タグの記事数を数え、3本以上なら `noindex={false}`（title/descriptionもSEO向けの文言に切り替え）、未満なら `noindex={true}` にする。手動設定は不要で、記事が増えて閾値を超えれば次回ビルドで自動的にインデックス許可に切り替わる
+- **2026年9月の移行時点**: 既存196記事は `src/data/tag-vocabulary.json` のマッピングで一括リタグ済み（タグ種類数516種→64種に集約）。ビルド後のタグページ数は62件（≒語彙71個のうち実使用分）、うち50件がインデックス許可（記事3本以上）、12件がnoindex（記事3本未満）
+
 ## コスト
 
 - Gemini API呼び出し: 1日2回 × 1回あたり候補180件程度をまとめて1コールに渡す設計（`gemini-flash-latest`、無料枠）

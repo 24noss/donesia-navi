@@ -2,7 +2,7 @@
 title: "ジャカルタ州政府、電気自動車（EV）の車両税免除見直しを検討　混雑緩和と財源確保へ"
 description: "ジャカルタ州政府は、現在100％免除されている電気自動車（EV）の車両税（PKB）について見直しを要請している。EV所有者の約78％が富裕層であることや渋滞対策、地方歳入の確保などが背景にある。"
 category: "regulation"
-tags: ["ジャカルタ", "電気自動車", "車両税", "税制改正", "交通政策"]
+tags: ["ジャカルタ", "EV", "生活情報", "交通規制"]
 pubDate: 2026-08-12
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/12/17361871/pemprov-jakarta-usul-pajak-mobil-listrik-dikaji-ulang-78-persen-pemilik"
@@ -21,6 +21,6 @@ Kompas紙の報道によると、ジャカルタ州政府（DKI Jakarta）は、
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/12/17361871/pemprov-jakarta-usul-pajak-mobil-listrik-dikaji-ulang-78-persen-pemilik)
 **カテゴリ:** 規制・法務
-**タグ:** ジャカルタ, 電気自動車, 車両税, 税制改正, 交通政策
+**タグ:** ジャカルタ, EV, 生活情報, 交通規制
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

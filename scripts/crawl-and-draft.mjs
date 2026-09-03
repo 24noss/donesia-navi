@@ -1,6 +1,7 @@
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { fetchAllCandidates } from './lib/sources.mjs';
+import tagVocabularyData from '../src/data/tag-vocabulary.json' with { type: 'json' };
 
 const ARTICLES_DIR = path.join(process.cwd(), 'src/content/articles');
 const MAX_ARTICLES = Number(process.env.CRAWL_MAX_ARTICLES || 3);
@@ -34,6 +35,48 @@ const CATEGORY_NAMES = {
 };
 const CATEGORY_SET = new Set(Object.keys(CATEGORY_NAMES));
 
+// タグ統制語彙（src/data/tag-vocabulary.json、71個）。プロンプトへの列挙と
+// filterTagsByVocabulary() による機械的フィルタの両方で使う（プロンプト任せにしない）。
+export const TAG_VOCABULARY = tagVocabularyData.vocabulary.map((v) => v.tag);
+const TAG_VOCABULARY_SET = new Set(TAG_VOCABULARY);
+
+// filterTagsByVocabulary() でフィルタ後にtagsが0個になった場合のカテゴリ別デフォルトタグ。
+// CATEGORY_NAMES の実キー8種類（safety/society/business/lifestyle/travel/visa/regulation/gourmet）
+// に対応させる。society/regulation は語彙に専用タグが無いため「生活情報」（雑多な生活情報の受け皿）を割り当てる。
+const CATEGORY_DEFAULT_TAG = {
+  safety: '注意喚起',
+  society: '生活情報',
+  business: 'インドネシア経済',
+  lifestyle: '生活情報',
+  travel: '観光',
+  visa: 'ビザ',
+  regulation: '生活情報',
+  gourmet: 'グルメ',
+};
+
+// Geminiが返したtagsを統制語彙でフィルタする純粋関数。プロンプトで語彙を指示していても
+// モデルが語彙外の語（固有名詞等）を混ぜてくることがあるため、コード側でも強制する。
+// - 語彙に無いタグを除去し、重複を除去する
+// - フィルタ後に0個になった場合はカテゴリ別デフォルトタグを1個付与する（該当カテゴリが無ければ空配列のまま）
+// - 最大5個に切り詰める
+export function filterTagsByVocabulary(tags, category, vocabulary = TAG_VOCABULARY_SET) {
+  const vocabSet = vocabulary instanceof Set ? vocabulary : new Set(vocabulary);
+  const source = Array.isArray(tags) ? tags : [];
+  const filtered = [];
+  const seen = new Set();
+  for (const t of source) {
+    if (typeof t === 'string' && vocabSet.has(t) && !seen.has(t)) {
+      seen.add(t);
+      filtered.push(t);
+    }
+  }
+  if (filtered.length === 0) {
+    const defaultTag = CATEGORY_DEFAULT_TAG[category];
+    return defaultTag ? [defaultTag] : [];
+  }
+  return filtered.slice(0, 5);
+}
+
 // Gemini free tier(gemini-flash-latest)を使用。ai-report-biz/pipeline/enrich.pyの
 // call_llm()と同じ呼び出し方式（プレーンプロンプト+テキストからJSON抽出）を踏襲する。
 //
@@ -63,7 +106,8 @@ const ARTICLE_SCHEMA_DESCRIPTION = `
   - lifestyle: 買い物・学校・病院など在住者の日常生活情報（注意喚起ニュースはsafety）
   - gourmet: 飲食店・カフェ・グルメイベント・食に関する情報
   - travel/visa/regulation: 旅行・ビザ手続き・法制度の情報（制度の「改正」はregulation、手続きの「案内」はvisa）
-- tags: 3〜5個の日本語タグの配列
+- tags: 以下の統制語彙リストから2〜5個選んだタグの配列。リストに無い語・店名等の固有名詞をtagsに入れないこと（固有名詞はtitle/本文に書く）。
+  語彙リスト: ${TAG_VOCABULARY.join(', ')}
 - pubDate: "YYYY-MM-DD"形式の文字列
 - source: 候補の"source"フィールドをそのまま使う
 - sourceUrl: 候補の"link"フィールドをそのまま使う（改変・推測・生成をしない）
@@ -577,6 +621,11 @@ async function main() {
   let filesForNaming = existingFiles;
 
   for (const article of capped) {
+    // プロンプトで語彙を指示していても徹底されない場合があるため、コード側でも強制フィルタする。
+    if (Array.isArray(article.tags)) {
+      article.tags = filterTagsByVocabulary(article.tags, article.category);
+    }
+
     const problems = validateArticle(article);
     if (problems.length > 0) {
       console.warn(`スキーマ不正のためスキップ: "${article.title}" — ${problems.join(', ')}`);

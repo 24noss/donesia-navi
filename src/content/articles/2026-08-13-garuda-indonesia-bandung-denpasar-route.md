@@ -2,7 +2,7 @@
 title: "ガルーダ航空、バンドン〜バリ（デンパサール）直行便を開設　往復130万ルピア台から"
 description: "ガルーダ・インドネシア航空がバンドンとバリ島デンパサールを結ぶ直行便を開設。手頃な運賃設定となっており、西ジャワ在住者の観光やビジネスの利便性向上が期待される。"
 category: "travel"
-tags: ["ガルーダインドネシア", "バンドン", "バリ島", "フライト情報", "国内線"]
+tags: ["フライト情報", "バンドン", "バリ島"]
 pubDate: 2026-08-13
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/13/105735027/garuda-indonesia-terbang-dari-bandung-ke-denpasar-pp-tiket-rp-13-jutaan"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/13/105735027/garuda-indonesia-terbang-dari-bandung-ke-denpasar-pp-tiket-rp-13-jutaan)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** ガルーダインドネシア, バンドン, バリ島, フライト情報, 国内線
+**タグ:** フライト情報, バンドン, バリ島
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

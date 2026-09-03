@@ -2,7 +2,7 @@
 title: "8月1日よりガソリン価格が改定、プルタミナ「Pertamax」などが値下げ"
 description: "国営石油プルタミナは8月1日より非補助金ガソリン価格を改定した。主要銘柄「Pertamax」が1リットルあたり1万5,950ルピアに値下げされたほか、民間スタンドでも価格調整が行われている。"
 category: "lifestyle"
-tags: ["ガソリン", "プルタミナ", "物価", "生活情報", "ジャカルタ"]
+tags: ["物価", "プルタミナ", "生活情報", "ジャカルタ"]
 pubDate: 2026-08-01
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMiwwFBVV95cUxONXN4a01KVzdacWUyOHhQTHB2S0dBaFFWa2VCeEhzNk5nNU8yMk9RT2dYMld2N084S08xWk85T0H3dkxldUoybWN5RU1jR3kyNUdKTXJCTkxUREEteE56ZlZqNHlkQmFJX0dHdHVUekhCSDBEeXEtOHFaUWcwV2dydFpTWG9NTzNzTnRHSzJxbzFhTW8wcVliUzZBWmFrT0hmMzZqT1JabjBVMFE5ZVdkLXhZbGMxZEctbWl4c0EwQmdUX1k?oc=5"
@@ -25,6 +25,6 @@ Kompas、Antara各紙の報道によると、インドネシア国営石油プ�
 ---
 **情報ソース:** [Kompas](https://news.google.com/rss/articles/CBMiwwFBVV95cUxONXN4a01KVzdacWUyOHhQTHB2S0dBaFFWa2VCeEhzNk5nNU8yMk9RT2dYMld2N084S08xWk85T0H3dkxldUoybWN5RU1jR3kyNUdKTXJCTkxUREEteE56ZlZqNHlkQmFJX0dHdHVUekhCSDBEeXEtOHFaUWcwV2dydFpTWG9NTzNzTnRHSzJxbzFhTW8wcVliUzZBWmFrT0hmMzZqT1JabjBVMFE5ZVdkLXhZbGMxZEctbWl4c0EwQmdUX1k?oc=5)
 **カテゴリ:** 生活・グルメ
-**タグ:** ガソリン, プルタミナ, 物価, 生活情報, ジャカルタ
+**タグ:** 物価, プルタミナ, 生活情報, ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

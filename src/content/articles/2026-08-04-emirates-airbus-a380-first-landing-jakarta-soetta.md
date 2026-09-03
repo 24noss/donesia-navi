@@ -2,7 +2,7 @@
 title: "エミレーツ航空の超大型機「A380」、スカルノ・ハッタ空港に初就航へ"
 description: "エミレーツ航空が初となる超大型旅客機エアバスA380-800をスカルノ・ハッタ国際空港に投入。ドバイ〜ジャカルタ路線での供給座席数が拡大し、出張や一時帰国、旅行の利便性向上が期待される。"
 category: "travel"
-tags: ["スカルノ・ハッタ空港", "エミレーツ航空", "A380", "ジャカルタ", "国際線"]
+tags: ["スカルノハッタ空港", "フライト情報", "ジャカルタ"]
 pubDate: 2026-08-04
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5678928/airbus-a380-800-emirates-akan-mendarat-perdana-di-bandara-soetta"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5678928/airbus-a380-800-emirates-akan-mendarat-perdana-di-bandara-soetta)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** スカルノ・ハッタ空港, エミレーツ航空, A380, ジャカルタ, 国際線
+**タグ:** スカルノハッタ空港, フライト情報, ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

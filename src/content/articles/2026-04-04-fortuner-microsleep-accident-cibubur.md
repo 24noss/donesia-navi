@@ -2,7 +2,7 @@
 title: "居眠り運転でフォーチュナーが横転、チブブールで単独事故——連休中の運転に注意"
 description: "チブブール（ブカシ市）でマイクロスリープが原因とみられる単独事故が発生。連休中の長距離運転には十分な注意を。"
 category: "society"
-tags: ["交通事故", "チブブール", "居眠り運転", "連休", "交通安全"]
+tags: ["交通規制", "イベント"]
 pubDate: 2026-04-04
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8428777/pengemudi-diduga-microsleep-fortuner-kecelakaan-hingga-terbalik-di-cibubur"
@@ -32,6 +32,6 @@ draft: false
 ---
 **情報ソース:** [Detik News](https://news.detik.com/berita/d-8428777/pengemudi-diduga-microsleep-fortuner-kecelakaan-hingga-terbalik-di-cibubur)
 **カテゴリ:** 社会・政治
-**タグ:** 交通事故、チブブール、居眠り運転、連休、交通安全
+**タグ:** 交通規制, イベント
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

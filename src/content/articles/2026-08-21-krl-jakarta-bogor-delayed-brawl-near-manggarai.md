@@ -2,7 +2,7 @@
 title: "マンガライ付近の線路沿いで集団衝突（タウラン）発生、KRLボゴール線が一時遅延・混乱"
 description: "ジャカルタのマンガライ駅付近の線路沿いで若者グループによる集団衝突（タウラン）が発生し、安全確保のためKRLコミューターライン（ジャカルタ・コタ〜ボゴール線）の運行に一時大幅な遅れと混雑が生じました。"
 category: "safety"
-tags: ["KRL", "マンガライ", "タウラン", "治安", "交通機関"]
+tags: ["KRL", "鉄道", "注意喚起", "治安", "交通"]
 pubDate: 2026-08-21
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/21/18185121/krl-jakarta-bogor-sudah-dapat-melintas-usai-ada-tawuran-di-dekat?source=terkini_artikel"
@@ -25,6 +25,6 @@ Kompas、Detik各紙の報道によると、ジャカルタ首都圏の鉄道要
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/21/18185121/krl-jakarta-bogor-sudah-dapat-melintas-usai-ada-tawuran-di-dekat?source=terkini_artikel)
 **カテゴリ:** 安全・災害
-**タグ:** KRL, マンガライ, タウラン, 治安, 交通機関
+**タグ:** KRL, 鉄道, 注意喚起, 治安, 交通
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

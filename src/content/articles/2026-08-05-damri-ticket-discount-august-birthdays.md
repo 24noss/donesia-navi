@@ -2,7 +2,7 @@
 title: "国営バスDAMRI、8月生まれ対象にチケット45％割引プロモーションを実施"
 description: "国営バス会社DAMRIは、インドネシア独立記念月間に合わせ、8月生まれの乗客を対象にチケット料金を45％割り引くキャンペーンを実施しています。長距離バス等を利用した国内旅行や移動がお得になる期間限定の取り組みです。"
 category: "lifestyle"
-tags: ["DAMRI", "バス", "割引キャンペーン", "独立記念日", "生活情報"]
+tags: ["バス", "キャンペーン・プロモ", "独立記念日", "生活情報"]
 pubDate: 2026-08-05
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/05/143827527/ada-diskon-tiket-damri-45-persen-khusus-yang-lahir-bulan-agustus"
@@ -21,6 +21,6 @@ Kompasの報道によると、インドネシアの国営バス運行会社DAMRI
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/05/143827527/ada-diskon-tiket-damri-45-persen-khusus-yang-lahir-bulan-agustus)
 **カテゴリ:** 生活・グルメ
-**タグ:** DAMRI, バス, 割引キャンペーン, 独立記念日, 生活情報
+**タグ:** バス, キャンペーン・プロモ, 独立記念日, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "西ジャカルタで男子小学生向けHPVワクチン接種が開始　ガン予防を拡大"
 description: "西ジャカルタ行政市で、男子小学生を対象としたHPVワクチンの定期接種が初めて実施された。従来の女子児童向けプログラムを男子児童にも拡大し、ガン予防の強化と集団免疫の向上を目指している。"
 category: "society"
-tags: ["西ジャカルタ", "HPVワクチン", "医療健康", "学校保健", "予防接種"]
+tags: ["西ジャカルタ", "医療"]
 pubDate: 2026-08-03
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/03/10484901/perdana-siswa-laki-laki-sd-di-jakbar-jalani-vaksin-hpv-cegah-kanker"
@@ -23,6 +23,6 @@ Kompasの報道によると、西ジャカルタ行政市内の小学校にお�
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/03/10484901/perdana-siswa-laki-laki-sd-di-jakbar-jalani-vaksin-hpv-cegah-kanker)
 **カテゴリ:** 社会・政治
-**タグ:** 西ジャカルタ, HPVワクチン, 医療健康, 学校保健, 予防接種
+**タグ:** 西ジャカルタ, 医療
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

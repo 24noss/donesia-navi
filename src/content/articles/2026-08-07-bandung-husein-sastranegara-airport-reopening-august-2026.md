@@ -2,7 +2,7 @@
 title: "バンドンのフセイン・サストラネガラ空港、8月14日の運航再開に向け準備進行中"
 description: "バンドンのフセイン・サストラネガラ空港（BDO）が、2026年8月14日の運航再開に向けてターミナル内の清掃や設備点検などの準備を進めている。再稼働による利便性向上が期待される。"
 category: "travel"
-tags: ["バンドン", "フセインサストラネガラ空港", "ジャワ島", "空港", "インドネシア交通"]
+tags: ["バンドン", "フライト情報", "観光", "交通"]
 pubDate: 2026-08-07
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/foto/5683695/persiapan-bandara-husein-sastranegara-bandung-jelang-pengoperasian-14-agustus-mendatang"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/foto/5683695/persiapan-bandara-husein-sastranegara-bandung-jelang-pengoperasian-14-agustus-mendatang)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** バンドン, フセインサストラネガラ空港, ジャワ島, 空港, インドネシア交通
+**タグ:** バンドン, フライト情報, 観光, 交通
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

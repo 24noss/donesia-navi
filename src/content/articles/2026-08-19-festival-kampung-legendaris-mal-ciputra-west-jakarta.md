@@ -2,7 +2,7 @@
 title: "西ジャカルタのモール・チプトラで「カンポン・レジェンダリス」開催　全国の名店40軒超が集結"
 description: "西ジャカルタのモール・チプトラにて、インドネシア各地の伝説的な名店40店舗以上が集まるグルメイベント「Festival Kampung Legendaris」が開催中。パレンバンのペンペッや地方の銘菓などを快適なモール内で楽しめる。"
 category: "gourmet"
-tags: ["フードフェス", "西ジャカルタ", "モールチプトラ", "インドネシア料理", "ご当地グルメ"]
+tags: ["イベント", "西ジャカルタ", "インドネシア料理", "グルメ"]
 pubDate: 2026-08-19
 source: "Detik"
 sourceUrl: "https://food.detik.com/foto-kuliner/d-8625313/intip-serunya-berburu-kuliner-di-festival-kampung-legendaris-jakbar"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Detik](https://food.detik.com/foto-kuliner/d-8625313/intip-serunya-berburu-kuliner-di-festival-kampung-legendaris-jakbar)
 **カテゴリ:** グルメ・レストラン
-**タグ:** フードフェス, 西ジャカルタ, モールチプトラ, インドネシア料理, ご当地グルメ
+**タグ:** イベント, 西ジャカルタ, インドネシア料理, グルメ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

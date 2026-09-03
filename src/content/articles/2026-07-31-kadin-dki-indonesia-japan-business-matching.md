@@ -2,7 +2,7 @@
 title: "KADIN DKIが日印ビジネスマッチングを開催、両国企業の連携促進へ"
 description: "ジャカルタ特別州商工会議所（KADIN DKI）は、インドネシアと日本企業のパートナーシップ強化を目的としたビジネスマッチングイベントを実施。貿易や製造業など多分野での協業展開が期待される。"
 category: "business"
-tags: ["KADIN", "ジャカルタ", "日印ビジネス", "ビジネスマッチング"]
+tags: ["インドネシア経済", "ジャカルタ"]
 pubDate: 2026-07-31
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5673964/kadin-dki-perkuat-jejaring-bisnis-indonesia-jepang-melalui-business-matching"
@@ -25,6 +25,6 @@ KADIN DKIは、ジャカルタにおける経済活動の活性化に向けて�
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5673964/kadin-dki-perkuat-jejaring-bisnis-indonesia-jepang-melalui-business-matching)
 **カテゴリ:** 経済・ビジネス
-**タグ:** KADIN, ジャカルタ, 日印ビジネス, ビジネスマッチング
+**タグ:** インドネシア経済, ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

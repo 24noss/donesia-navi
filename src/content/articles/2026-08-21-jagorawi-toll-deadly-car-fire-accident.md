@@ -2,7 +2,7 @@
 title: "ジャゴラウィ高速で乗用車の追突・炎上事故　2人死亡、警察が原因捜査"
 description: "東ジャカルタのジャゴラウィ高速道路で乗用車がトラック後部に追突し炎上、2人が死亡する重大事故が発生した。警察が詳細な事故原因を調べており、高速道路利用時の注意が求められる。"
 category: "safety"
-tags: ["交通事故", "ジャゴラウィ高速", "東ジャカルタ", "注意喚起"]
+tags: ["交通規制", "ジャカルタ", "注意喚起"]
 pubDate: 2026-08-21
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5704684/polisi-selidiki-kecelakaan-maut-mobil-tabrak-truk-di-tol-jagorawi"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5704684/polisi-selidiki-kecelakaan-maut-mobil-tabrak-truk-di-tol-jagorawi)
 **カテゴリ:** 安全・災害
-**タグ:** 交通事故, ジャゴラウィ高速, 東ジャカルタ, 注意喚起
+**タグ:** 交通規制, ジャカルタ, 注意喚起
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

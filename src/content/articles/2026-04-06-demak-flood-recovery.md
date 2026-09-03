@@ -2,7 +2,7 @@
 title: "中部ジャワ・デマックの洪水が引き始め、住民が復旧作業に着手"
 description: "中部ジャワ州デマック県で発生した洪水が徐々に引き始め、住民が帰宅して家屋の清掃・修復を開始。堤防の修復作業も継続中。"
 category: "safety"
-tags: ["洪水", "デマック", "中部ジャワ", "災害", "復旧"]
+tags: ["洪水", "防災", "インフラ"]
 pubDate: 2026-04-06
 source: "Detik"
 sourceUrl: "https://news.detik.com/foto-news/d-8430670/pascabanjir-surut-warga-demak-bersihkan-rumah-rusak"
@@ -27,6 +27,6 @@ Detikのフォトレポートによると、住民たちは泥まみれになっ
 ---
 **情報ソース:** [Detik](https://news.detik.com/foto-news/d-8430670/pascabanjir-surut-warga-demak-bersihkan-rumah-rusak)
 **カテゴリ:** 安全・災害
-**タグ:** 洪水, デマック, 中部ジャワ, 災害, 復旧
+**タグ:** 洪水, 防災, インフラ
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

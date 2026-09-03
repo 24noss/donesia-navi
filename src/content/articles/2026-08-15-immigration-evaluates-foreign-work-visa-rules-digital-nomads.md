@@ -2,7 +2,7 @@
 title: "移民総局、デジタルノマド急増を受け外国人就労ビザ制度の見直しを検討"
 description: "インドネシア移民総局は、国内でリモートワークを行う外国人「デジタルノマド」の増加に伴い、就労の定義や滞在枠組みを適正化するため外国人向け就労ビザ（Visa Kerja）の法規定見直しを進めている。"
 category: "regulation"
-tags: ["就労ビザ", "外国人規制", "移民局", "デジタルノマド", "滞在許可"]
+tags: ["ビザ", "作業カフェ"]
 pubDate: 2026-08-15
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/15/131500927/dampak-digital-nomad-dirjen-imigrasi-kaji-aturan-baru-visa-kerja-wna"
@@ -21,6 +21,6 @@ Kompasの報道によると、法務移民省の移民総局は、バリ島な�
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/15/131500927/dampak-digital-nomad-dirjen-imigrasi-kaji-aturan-baru-visa-kerja-wna)
 **カテゴリ:** 規制・法務
-**タグ:** 就労ビザ, 外国人規制, 移民局, デジタルノマド, 滞在許可
+**タグ:** ビザ, 作業カフェ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

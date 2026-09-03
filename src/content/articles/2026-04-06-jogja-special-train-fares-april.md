@@ -2,7 +2,7 @@
 title: "ジョグジャ発の特別割引列車、4月のGo Show運賃一覧"
 description: "2026年4月、ジョグジャカルタ発のGo Showチケット対象列車と特別運賃をまとめました。週末旅行の参考に。"
 category: "travel"
-tags: ["鉄道", "ジョグジャカルタ", "旅行", "Go Show", "KAI"]
+tags: ["鉄道", "ジョグジャカルタ", "観光", "フライト情報"]
 pubDate: 2026-04-06
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/04/06/105420226/tarif-khusus-kereta-api-april-2026-dari-jogja-ini-daftar-kereta-go-show-dan"
@@ -32,6 +32,6 @@ Go Show運賃の対象列車や具体的な料金は、KAI公式アプリ「Acce
 ---
 **情報ソース:** [Kompas](https://money.kompas.com/read/2026/04/06/105420226/tarif-khusus-kereta-api-april-2026-dari-jogja-ini-daftar-kereta-go-show-dan)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** 鉄道、ジョグジャカルタ、旅行、Go Show、KAI
+**タグ:** 鉄道, ジョグジャカルタ, 観光, フライト情報
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

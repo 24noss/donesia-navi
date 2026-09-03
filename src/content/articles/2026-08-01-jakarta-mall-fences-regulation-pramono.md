@@ -2,7 +2,7 @@
 title: "ジャカルタ州政府、モール等の「高いフェンス設置」指導へ 「不必要な不安を与える」と知事"
 description: "ジャカルタ市内の商業施設などで高いフェンスが相次いで設置されている問題に対し、プラモノ州知事は治安悪化の不穏な印象を与えるとして指導を行う方針を示した。警察当局は現在の状況について静観と冷静な対応を呼びかけている。"
 category: "society"
-tags: ["ジャカルタ", "ショッピングモール", "治安", "プラモノ知事", "ジャカルタ生活"]
+tags: ["ジャカルタ", "生活情報", "治安"]
 pubDate: 2026-08-01
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8599798/pramono-bakal-tertibkan-pagar-tinggi-di-mal-jakarta-jangan-bikin-image-tak-aman"
@@ -25,6 +25,6 @@ Detik紙の報道によると、ジャカルタ特別州のプラモノ・アヌ
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8599798/pramono-bakal-tertibkan-pagar-tinggi-di-mal-jakarta-jangan-bikin-image-tak-aman)
 **カテゴリ:** 社会・政治
-**タグ:** ジャカルタ, ショッピングモール, 治安, プラモノ知事, ジャカルタ生活
+**タグ:** ジャカルタ, 生活情報, 治安
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

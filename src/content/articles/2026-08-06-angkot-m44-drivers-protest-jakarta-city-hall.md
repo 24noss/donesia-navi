@@ -2,7 +2,7 @@
 title: "乗合バスM44の運転手がジャカルタ庁舎前で抗議デモ　JakLingko路線重複に不満"
 description: "南ジャカルタなどを運行する乗合バスM44の運転手らが、JakLingkoとの路線重複による収入減少を訴えデモを実施しました。1週間以内の改善がなければ再デモを予告しています。"
 category: "safety"
-tags: ["交通規制", "ジャカルタ交通", "デモ情報", "JakLingko", "アンコット"]
+tags: ["交通規制", "交通", "デモ"]
 pubDate: 2026-08-06
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/06/17444941/sopir-angkot-m44-ultimatum-pemprov-dki-demo-lagi-jika-seminggu-tak-ada"
@@ -21,6 +21,6 @@ Kompas、Detik各紙の報道によると、南ジャカルタのテベットエ
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/06/17444941/sopir-angkot-m44-ultimatum-pemprov-dki-demo-lagi-jika-seminggu-tak-ada)
 **カテゴリ:** 安全・災害
-**タグ:** 交通規制, ジャカルタ交通, デモ情報, JakLingko, アンコット
+**タグ:** 交通規制, 交通, デモ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

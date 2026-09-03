@@ -2,7 +2,7 @@
 title: "ジャカルタ北部沿岸で8月13日まで高潮の恐れ、州防災局が注意呼びかけ"
 description: "ジャカルタ特別州防災局（BPBD DKI）は、大潮の影響によりジャカルタ北部の沿岸地域で8月13日まで高潮（Banjir Rob）による冠水が発生する可能性があるとして、居住者や通行者に警戒を呼びかけています。"
 category: "safety"
-tags: ["ジャカルタ", "高潮", "防災", "注意喚起"]
+tags: ["ジャカルタ", "洪水", "防災", "注意喚起"]
 pubDate: 2026-08-07
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/07/13121101/bpbd-dki-ingatkan-potensi-banjir-rob-di-pesisir-utara-jakarta-hingga-13"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/07/13121101/bpbd-dki-ingatkan-potensi-banjir-rob-di-pesisir-utara-jakarta-hingga-13)
 **カテゴリ:** 安全・災害
-**タグ:** ジャカルタ, 高潮, 防災, 注意喚起
+**タグ:** ジャカルタ, 洪水, 防災, 注意喚起
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

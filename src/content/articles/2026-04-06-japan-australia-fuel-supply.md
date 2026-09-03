@@ -2,7 +2,7 @@
 title: "日本がオーストラリアへの燃料供給を保証、エネルギー安全保障で連携強化"
 description: "中東情勢が緊迫する中、日本がオーストラリアへの燃料供給継続を確約。日本のエネルギー外交の動きをまとめました。"
 category: "business"
-tags: ["エネルギー", "日豪関係", "燃料", "原油", "外交"]
+tags: ["インドネシア経済", "物価"]
 pubDate: 2026-04-06
 source: "Detik"
 sourceUrl: "https://news.detik.com/abc-australia/d-8431244/dunia-hari-ini-jepang-pastikan-pasokan-bbm-untuk-australia-normal"
@@ -35,6 +35,6 @@ Detik（ABC Australia報道の転載）によると、日豪両政府の最近�
 ---
 **情報ソース:** [Detik — Dunia Hari Ini: Jepang Pastikan Pasokan BBM untuk Australia Normal](https://news.detik.com/abc-australia/d-8431244/dunia-hari-ini-jepang-pastikan-pasokan-bbm-untuk-australia-normal)
 **カテゴリ:** 経済・ビジネス
-**タグ:** エネルギー、日豪関係、燃料、原油、外交
+**タグ:** インドネシア経済, 物価
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

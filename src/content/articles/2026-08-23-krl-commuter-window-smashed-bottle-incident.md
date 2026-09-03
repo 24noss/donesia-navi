@@ -2,7 +2,7 @@
 title: "KRLボゴール線で瓶投擲の被害　窓ガラス破損でKAIが捜査へ"
 description: "KRLコミューターラインのボゴール線走行中、線路外から酒瓶が投げ込まれて客車の窓ガラスが破損する事件が発生した。PT KAI Commuterは乗客の安全を脅かす重大な違法行為として非難し、警察と連携して犯人の特定を進めている。"
 category: "safety"
-tags: ["KRL", "コミューターライン", "鉄道", "治安", "ボゴール"]
+tags: ["KRL", "鉄道", "治安", "ボゴール"]
 pubDate: 2026-08-23
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8631438/viral-kaca-jendela-krl-pecah-dilempar-botol-kai-telusuri-pelaku"
@@ -21,6 +21,6 @@ Detikの報道によると、ボゴール方面へ向けて運行中だったKRL
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8631438/viral-kaca-jendela-krl-pecah-dilempar-botol-kai-telusuri-pelaku)
 **カテゴリ:** 安全・災害
-**タグ:** KRL, コミューターライン, 鉄道, 治安, ボゴール
+**タグ:** KRL, 鉄道, 治安, ボゴール
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

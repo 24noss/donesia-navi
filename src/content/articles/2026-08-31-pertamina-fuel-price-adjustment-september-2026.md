@@ -2,7 +2,7 @@
 title: "プルタミナが9月1日より非補助燃料の価格改定　プルタマックス・ターボなど3種が値上げ"
 description: "国営プルタミナが9月1日付で燃料価格を改定。プルタマックスは据え置きとなる一方、プルタマックス・ターボなど高オクタン価ガソリン3種が引き上げられました。"
 category: "lifestyle"
-tags: ["プルタミナ", "ガソリン価格", "物価", "生活情報", "交通"]
+tags: ["プルタミナ", "物価", "生活情報", "交通"]
 pubDate: 2026-08-31
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/09/01/043700926/harga-bbm-pertamina-terbaru-1-september-2026-3-jenis-bbm-ini-naik"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、国営石油会社プルタミナ（Pertamina�
 ---
 **情報ソース:** [Kompas](https://money.kompas.com/read/2026/09/01/043700926/harga-bbm-pertamina-terbaru-1-september-2026-3-jenis-bbm-ini-naik)
 **カテゴリ:** 生活情報
-**タグ:** プルタミナ, ガソリン価格, 物価, 生活情報, 交通
+**タグ:** プルタミナ, 物価, 生活情報, 交通
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

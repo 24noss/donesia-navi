@@ -2,7 +2,7 @@
 title: "トランスジャカルタ、ブロックM〜アンコール線の運行時間を今週末延長"
 description: "PT Transportasi Jakartaは、ブロックMとアンコールを結ぶ1W路線の運行時間を今週末にかけて延長することを発表しました。週末のレジャー客の利便性向上を図ります。"
 category: "safety"
-tags: ["トランスジャカルタ", "ブロックM", "アンコール", "交通情報", "ジャカルタ"]
+tags: ["トランスジャカルタ", "ブロックM", "生活情報", "交通規制", "ジャカルタ"]
 pubDate: 2026-08-08
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5685365/jam-operasional-transjakarta-blok-m-ancol-diperpanpang-pekan-ini"
@@ -21,6 +21,6 @@ PT Transportasi Jakarta（Transjakarta）は、ジャカルタ南部のブロッ
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5685365/jam-operasional-transjakarta-blok-m-ancol-diperpanpang-pekan-ini)
 **カテゴリ:** 安全・災害
-**タグ:** トランスジャカルタ, ブロックM, アンコール, 交通情報, ジャカルタ
+**タグ:** トランスジャカルタ, ブロックM, 生活情報, 交通規制, ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

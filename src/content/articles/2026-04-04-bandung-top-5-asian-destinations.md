@@ -2,7 +2,7 @@
 title: "バンドンがアジア観光地トップ5入り、日本の都市と肩を並べる評価"
 description: "バンドンがアジアの注目観光地トップ5に選出。日本やベトナムの都市と並ぶ高評価で、週末旅行先としても再注目。"
 category: "travel"
-tags: ["バンドン", "観光", "アジアランキング", "週末旅行", "西ジャワ"]
+tags: ["バンドン", "観光"]
 pubDate: 2026-04-04
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/04/04/120600927/bandung-masuk-5-besar-destinasi-wisata-terbaik-asia-sejajar-jepang"
@@ -27,6 +27,6 @@ draft: false
 ---
 **情報ソース:** [Kompas Travel](https://travel.kompas.com/read/2026/04/04/120600927/bandung-masuk-5-besar-destinasi-wisata-terbaik-asia-sejajar-jepang)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** バンドン、観光、アジアランキング、週末旅行、西ジャワ
+**タグ:** バンドン, 観光
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

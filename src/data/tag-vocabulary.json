@@ -1,0 +1,288 @@
+{
+  "vocabulary": [
+    {
+      "tag": "ジャカルタ",
+      "axis": "area"
+    },
+    {
+      "tag": "南ジャカルタ",
+      "axis": "area"
+    },
+    {
+      "tag": "北ジャカルタ",
+      "axis": "area"
+    },
+    {
+      "tag": "西ジャカルタ",
+      "axis": "area"
+    },
+    {
+      "tag": "中央ジャカルタ",
+      "axis": "area"
+    },
+    {
+      "tag": "ブロックM",
+      "axis": "area"
+    },
+    {
+      "tag": "クマン",
+      "axis": "area"
+    },
+    {
+      "tag": "セノパティ",
+      "axis": "area"
+    },
+    {
+      "tag": "クラパガディン",
+      "axis": "area"
+    },
+    {
+      "tag": "バンドン",
+      "axis": "area"
+    },
+    {
+      "tag": "ボゴール",
+      "axis": "area"
+    },
+    {
+      "tag": "バリ島",
+      "axis": "area"
+    },
+    {
+      "tag": "ジョグジャカルタ",
+      "axis": "area"
+    },
+    {
+      "tag": "日本食",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "和牛",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "中華料理",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "韓国料理",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "インドネシア料理",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "イタリアン",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "フレンチ",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "シーフード",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "ハラル",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "カフェ",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "ラーメン",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "寿司",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "焼肉",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "タイ料理",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "ベトナム料理",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "インドカレー",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "スイーツ",
+      "axis": "cuisine"
+    },
+    {
+      "tag": "会食・接待",
+      "axis": "usecase"
+    },
+    {
+      "tag": "ファミリー",
+      "axis": "usecase"
+    },
+    {
+      "tag": "デート",
+      "axis": "usecase"
+    },
+    {
+      "tag": "大人数・宴会",
+      "axis": "usecase"
+    },
+    {
+      "tag": "作業カフェ",
+      "axis": "usecase"
+    },
+    {
+      "tag": "個室",
+      "axis": "usecase"
+    },
+    {
+      "tag": "グルメ",
+      "axis": "life"
+    },
+    {
+      "tag": "レストラン",
+      "axis": "life"
+    },
+    {
+      "tag": "交通規制",
+      "axis": "life"
+    },
+    {
+      "tag": "生活情報",
+      "axis": "life"
+    },
+    {
+      "tag": "注意喚起",
+      "axis": "life"
+    },
+    {
+      "tag": "防災",
+      "axis": "life"
+    },
+    {
+      "tag": "治安",
+      "axis": "life"
+    },
+    {
+      "tag": "独立記念日",
+      "axis": "life"
+    },
+    {
+      "tag": "交通",
+      "axis": "life"
+    },
+    {
+      "tag": "BMKG",
+      "axis": "life"
+    },
+    {
+      "tag": "インドネシア経済",
+      "axis": "life"
+    },
+    {
+      "tag": "物価",
+      "axis": "life"
+    },
+    {
+      "tag": "KRL",
+      "axis": "life"
+    },
+    {
+      "tag": "イベント",
+      "axis": "life"
+    },
+    {
+      "tag": "インフラ",
+      "axis": "life"
+    },
+    {
+      "tag": "スカルノハッタ空港",
+      "axis": "life"
+    },
+    {
+      "tag": "火災",
+      "axis": "life"
+    },
+    {
+      "tag": "トランスジャカルタ",
+      "axis": "life"
+    },
+    {
+      "tag": "バス",
+      "axis": "life"
+    },
+    {
+      "tag": "プルタミナ",
+      "axis": "life"
+    },
+    {
+      "tag": "渋滞",
+      "axis": "life"
+    },
+    {
+      "tag": "地震",
+      "axis": "life"
+    },
+    {
+      "tag": "洪水",
+      "axis": "life"
+    },
+    {
+      "tag": "鉄道",
+      "axis": "life"
+    },
+    {
+      "tag": "ビザ",
+      "axis": "life"
+    },
+    {
+      "tag": "医療",
+      "axis": "life"
+    },
+    {
+      "tag": "両替・金融",
+      "axis": "life"
+    },
+    {
+      "tag": "デモ",
+      "axis": "life"
+    },
+    {
+      "tag": "大気汚染",
+      "axis": "life"
+    },
+    {
+      "tag": "EV",
+      "axis": "life"
+    },
+    {
+      "tag": "観光",
+      "axis": "life"
+    },
+    {
+      "tag": "フライト情報",
+      "axis": "life"
+    },
+    {
+      "tag": "新店オープン",
+      "axis": "type"
+    },
+    {
+      "tag": "閉店",
+      "axis": "type"
+    },
+    {
+      "tag": "キャンペーン・プロモ",
+      "axis": "type"
+    }
+  ]
+}

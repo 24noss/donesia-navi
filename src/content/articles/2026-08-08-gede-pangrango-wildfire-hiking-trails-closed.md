@@ -2,7 +2,7 @@
 title: "ゲデ・パングランゴ山で山火事が発生、すべての登山ルートが一時閉鎖"
 description: "西ジャワ州のゲデ・パングランゴ国立公園内で山火事が発生し、環境林業省が消火活動を行うとともに、安全確保のため全登山ルートの閉鎖を発表しました。"
 category: "safety"
-tags: ["ゲデ・パングランゴ山", "山火事", "登山閉鎖", "西ジャワ", "安全情報"]
+tags: ["防災"]
 pubDate: 2026-08-08
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5685452/kemenhut-tangani-kebakaran-di-gunung-gede-pangrango-tutup-pendakian"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5685452/kemenhut-tangani-kebakaran-di-gunung-gede-pangrango-tutup-pendakian)
 **カテゴリ:** 安全・災害
-**タグ:** ゲデ・パングランゴ山, 山火事, 登山閉鎖, 西ジャワ, 安全情報
+**タグ:** 防災
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

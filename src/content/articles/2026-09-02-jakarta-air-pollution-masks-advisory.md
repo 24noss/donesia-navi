@@ -2,7 +2,7 @@
 title: "ジャカルタで大気汚染が悪化、保健局がマスク着用や乳児の外出自粛を呼びかけ"
 description: "ジャカルタ首都特別州の保健局（Dinkes）は大気質の悪化を受け、市民に対しマスクの着用を呼びかけるとともに、乳幼児の外出を控えるよう勧告した。長期化する乾季の影響で汚染物質が滞留しており、呼吸器感染症などの健康被害への注意が必要となっている。"
 category: "safety"
-tags: ["大気汚染", "ジャカルタ", "健康管理", "注意喚起"]
+tags: ["大気汚染", "ジャカルタ", "医療", "注意喚起"]
 pubDate: 2026-09-02
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/02/19364401/udara-jakarta-tidak-sehat-dinkes-minta-warga-pakai-masker-dan-bayi-tak"
@@ -25,6 +25,6 @@ Kompasの報道によると、ジャカルタ首都特別州の保健局（Dinke
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/09/02/19364401/udara-jakarta-tidak-sehat-dinkes-minta-warga-pakai-masker-dan-bayi-tak)
 **カテゴリ:** 安全・災害
-**タグ:** 大気汚染, ジャカルタ, 健康管理, 注意喚起
+**タグ:** 大気汚染, ジャカルタ, 医療, 注意喚起
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

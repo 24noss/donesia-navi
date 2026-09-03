@@ -2,7 +2,7 @@
 title: "フランスの重大犯罪指名手配犯、ジャカルタ市内で警察により逮捕"
 description: "フランスで殺人などの重大犯罪に関与し、国際指名手配されていたフランス人容疑者がジャカルタ市内で逮捕された。近く本国へ強制送還される。"
 category: "safety"
-tags: ["治安", "ジャカルタ", "警察", "国際指名手配", "安全"]
+tags: ["治安", "ジャカルタ", "注意喚起"]
 pubDate: 2026-08-05
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8604749/adrien-schneider-buron-high-profile-asal-prancis-ditangkap-di-jakarta"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8604749/adrien-schneider-buron-high-profile-asal-prancis-ditangkap-di-jakarta)
 **カテゴリ:** 安全・災害
-**タグ:** 治安, ジャカルタ, 警察, 国際指名手配, 安全
+**タグ:** 治安, ジャカルタ, 注意喚起
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

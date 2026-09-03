@@ -2,7 +2,7 @@
 title: "LRTジャカルタ「クラパガディン〜マンガライ線」が開業準備完了　運賃は一律5,000ルピア"
 description: "LRTジャカルタのクラパガディン〜マンガライ区間（12.2km）の整備が完了し、正式開業を控えている。10月まではプロモーション運賃として一律5,000ルピアで利用できる見込みで、市内主要ターミナルとの接続性向上が期待される。"
 category: "lifestyle"
-tags: ["LRTジャカルタ", "公共交通機関", "マンガライ", "クラパガディン", "ジャカルタインフラ"]
+tags: ["鉄道", "クラパガディン", "交通", "インフラ"]
 pubDate: 2026-08-25
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8633400/lrt-kelapa-gading-manggarai-segera-beroperasi-dprd-minta-terhubung-ke-tj-krl"
@@ -25,6 +25,6 @@ KompasおよびDetik各紙の報道によると、ジャカルタ首都特別州
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8633400/lrt-kelapa-gading-manggarai-segera-beroperasi-dprd-minta-terhubung-ke-tj-krl)
 **カテゴリ:** 生活情報
-**タグ:** LRTジャカルタ, 公共交通機関, マンガライ, クラパガディン, ジャカルタインフラ
+**タグ:** 鉄道, クラパガディン, 交通, インフラ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

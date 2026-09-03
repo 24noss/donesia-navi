@@ -2,7 +2,7 @@
 title: "中部スラウェシ州パリギ・モウトンでM6.2の地震発生、津波の心配なし"
 description: "中部スラウェシ州パリギ・モウトン県付近を震源とするマグニチュード6.2の地震が発生しました。揺れは州都パルやゴロンタロでも観測されましたが、津波の心配はありません。"
 category: "safety"
-tags: ["地震", "スラウェシ", "BMKG", "防災"]
+tags: ["地震", "BMKG", "防災"]
 pubDate: 2026-08-15
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8620524/gempa-m-6-2-guncang-parigi-moutong-sulteng-tak-berpotensi-tsunami"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8620524/gempa-m-6-2-guncang-parigi-moutong-sulteng-tak-berpotensi-tsunami)
 **カテゴリ:** 安全・災害
-**タグ:** 地震, スラウェシ, BMKG, 防災
+**タグ:** 地震, BMKG, 防災
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

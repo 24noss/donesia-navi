@@ -2,7 +2,7 @@
 title: "プラボウォ大統領、中銀総裁候補にデストリー氏を指名　ルピア相場が上昇"
 description: "プラボウォ大統領は、インドネシア中央銀行（BI）の次期総裁候補として現副総裁のデストリー・ダマヤンティ氏を指名する大統領書簡を国会に提出した。政策の継続性を評価した市場が好感し、為替市場でルピア買戻しの動きが広がっている。"
 category: "business"
-tags: ["インドネシア中央銀行", "プラボウォ大統領", "為替", "ルピア", "金融政策"]
+tags: ["インドネシア経済", "両替・金融"]
 pubDate: 2026-08-11
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/tren/read/2026/08/11/074500365/reuters-soroti-prabowo-calonkan-destry-damayanti-jadi-gubernur-bi-rupiah"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://www.kompas.com/tren/read/2026/08/11/074500365/reuters-soroti-prabowo-calonkan-destry-damayanti-jadi-gubernur-bi-rupiah)
 **カテゴリ:** 経済・ビジネス
-**タグ:** インドネシア中央銀行, プラボウォ大統領, 為替, ルピア, 金融政策
+**タグ:** インドネシア経済, 両替・金融
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

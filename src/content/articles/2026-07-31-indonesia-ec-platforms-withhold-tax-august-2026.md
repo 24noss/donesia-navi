@@ -2,7 +2,7 @@
 title: "ShopeeやTokopediaなど大手EC、8月1日より出品者の売上から0.5％を自動源泉徴収へ"
 description: "Shopee、Tokopedia、Lazada、Blibliの大手EC4社は、2026年8月1日よりプラットフォーム上のセラー売上から0.5％の税金を自動徴収する仕組みを導入します。事業者や個人の納税手続きに直接影響します。"
 category: "regulation"
-tags: ["ECサイト", "税制改正", "Shopee", "Tokopedia", "ビジネス"]
+tags: ["生活情報", "インドネシア経済"]
 pubDate: 2026-07-31
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMixgFBVV95cUxOdHNkbHpZNHdoVTliVFptaENCQWRfT18tOWk5UWc3MDNVRThaRy13bVVac2d6X1ZyYXJaQ0tBOVZiOTY0LTBXWXhBNzlfNHJTelRzTEs0dWpYTU55dHBveVl3Rk54cWJxakQ3X0NjS3ZVbmlocTBLQjFhUEl5dWF3MWdJQ09kOGJLTlYtUnB4dk95YkZVYnhSTk9waWxtOFNMQ2l4OF9GNWRMdGlwSktDYmlJZ2U5MUVVVkVydzFRNTV6MmZmWmc?oc=5"
@@ -25,6 +25,6 @@ Kompasの報道によると、インドネシアの主要電子商取引（EC）
 ---
 **情報ソース:** [Kompas](https://news.google.com/rss/articles/CBMixgFBVV95cUxOdHNkbHpZNHdoVTliVFptaENCQWRfT18tOWk5UWc3MDNVRThaRy13bVVac2d6X1ZyYXJaQ0tBOVZiOTY0LTBXWXhBNzlfNHJTelRzTEs0dWpYTU55dHBveVl3Rk54cWJxakQ3X0NjS3ZVbmlocTBLQjFhUEl5dWF3MWdJQ09kOGJLTlYtUnB4dk95YkZVYnhSTk9waWxtOFNMQ2l4OF9GNWRMdGlwSktDYmlJZ2U5MUVVVkVydzFRNTV6MmZmWmc?oc=5)
 **カテゴリ:** 規制・法務
-**タグ:** ECサイト, 税制改正, Shopee, Tokopedia, ビジネス
+**タグ:** 生活情報, インドネシア経済
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

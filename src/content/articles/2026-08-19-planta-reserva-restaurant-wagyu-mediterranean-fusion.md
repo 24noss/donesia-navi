@@ -2,7 +2,7 @@
 title: "地中海×インドネシア料理の新店「Planta Reserva」がオープン　和牛ステーキや和牛ソト・ブタウィを提供"
 description: "地中海料理とインドネシア郷土料理を融合させた注目の新レストラン「Planta Reserva」が登場。高品質な和牛ステーキや、和牛を用いた特製ソト・ブタウィなど独創的なメニューが話題を呼んでいる。"
 category: "gourmet"
-tags: ["ジャカルタグルメ", "新店舗", "地中海料理", "和牛", "インドネシア料理"]
+tags: ["グルメ", "新店オープン", "和牛", "インドネシア料理"]
 pubDate: 2026-08-19
 source: "Detik"
 sourceUrl: "https://food.detik.com/resto-dan-kafe/d-8625174/planta-reserva-steak-wagyu-dan-soto-betawi-dengan-sentuhan-mediterania"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Detik](https://food.detik.com/resto-dan-kafe/d-8625174/planta-reserva-steak-wagyu-dan-soto-betawi-dengan-sentuhan-mediterania)
 **カテゴリ:** グルメ・レストラン
-**タグ:** ジャカルタグルメ, 新店舗, 地中海料理, 和牛, インドネシア料理
+**タグ:** グルメ, 新店オープン, 和牛, インドネシア料理
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

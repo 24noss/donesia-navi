@@ -2,7 +2,7 @@
 title: "「交通違反の罰金150％引き上げ」はデマ　警察庁交通局がSNSの誤情報に注意呼びかけ"
 description: "SNSなどで拡散した「2026年から交通違反の罰金が150％値上げされ、全面手動取り締まりが復活する」との情報について、国家警察交通局はデマであると公式に否定し、冷静な対応を呼びかけた。"
 category: "safety"
-tags: ["交通ルール", "罰金", "デマ注意", "インドネシア警察", "ETLE"]
+tags: ["交通規制", "治安", "注意喚起"]
 pubDate: 2026-08-04
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8604393/kakorlantas-kenaikan-denda-tilang-dan-pemberlakuan-tilang-manual-menyeluruh-hoaks"
@@ -21,6 +21,6 @@ Detikの報道によると、インドネシア国家警察交通局（Korlantas
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8604393/kakorlantas-kenaikan-denda-tilang-dan-pemberlakuan-tilang-manual-menyeluruh-hoaks)
 **カテゴリ:** 安全・災害
-**タグ:** 交通ルール, 罰金, デマ注意, インドネシア警察, ETLE
+**タグ:** 交通規制, 治安, 注意喚起
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

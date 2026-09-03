@@ -2,7 +2,7 @@
 title: "中国系自動車のインドネシア販売台数、2026年上半期は前年比82％増と急伸"
 description: "インドネシア国内における中国系ブランド自動車の卸売販売台数が2026年上半期に前年同期比82％増を記録。EV需要の高まりや手頃な価格設定を背景に市場シェアを急速に拡大しています。"
 category: "business"
-tags: ["自動車", "EV", "中国車", "インドネシア市場", "経済"]
+tags: ["EV", "インドネシア経済"]
 pubDate: 2026-08-19
 source: "Antara"
 sourceUrl: "https://otomotif.antaranews.com/berita/5700893/penjualan-mobil-china-di-indonesia-naik-82-persen-di-semester-1-2026"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://otomotif.antaranews.com/berita/5700893/penjualan-mobil-china-di-indonesia-naik-82-persen-di-semester-1-2026)
 **カテゴリ:** 経済・ビジネス
-**タグ:** 自動車, EV, 中国車, インドネシア市場, 経済
+**タグ:** EV, インドネシア経済
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

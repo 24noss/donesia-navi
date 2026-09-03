@@ -2,7 +2,7 @@
 title: "KRL人身事故の連続発生を受け、KAIがテベットとカリデレスの非公認踏切を閉鎖へ"
 description: "ジャカルタ首都圏のKRL線路内で歩行者との接触事故が相次ぎ、ダイヤに乱れが生じた。これを受けインドネシア国鉄（KAI）は安全確保のため、南ジャカルタ・テベットと西ジャカルタ・カリデレスの非公認踏切を恒久的に閉鎖する方針を決定した。"
 category: "safety"
-tags: ["KRL", "鉄道", "交通安全", "ジャカルタ", "事故"]
+tags: ["KRL", "鉄道", "交通規制", "ジャカルタ"]
 pubDate: 2026-08-21
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8627964/2-orang-tertemper-krl-kai-segera-tutup-perlintasan-liar-tebet-dan-kalideres"
@@ -25,6 +25,6 @@ DetikおよびKompas各紙の報道によると、ジャカルタ首都圏を走
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8627964/2-orang-tertemper-krl-kai-segera-tutup-perlintasan-liar-tebet-dan-kalideres)
 **カテゴリ:** 安全・災害
-**タグ:** KRL, 鉄道, 交通安全, ジャカルタ, 事故
+**タグ:** KRL, 鉄道, 交通規制, ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

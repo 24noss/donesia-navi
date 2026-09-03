@@ -2,7 +2,7 @@
 title: "ガルーダ・インドネシア航空、高度3万フィートでの高速機内Wi-Fi試験運用を開始"
 description: "ガルーダ・インドネシア航空が機内での高速インターネット通信の試験運用を開始。上空3万フィートでもビデオ通話がスムーズに行える高速通信環境の提供を目指す。"
 category: "travel"
-tags: ["ガルーダ航空", "機内Wi-Fi", "航空", "出張", "旅行"]
+tags: ["フライト情報", "ビザ", "観光"]
 pubDate: 2026-08-18
 source: "Kompas"
 sourceUrl: "http://money.kompas.com/read/2026/08/18/213348326/garuda-indonesia-uji-coba-internet-cepat-di-pesawat-bisa-video-call-di?source=terkini_artikel"
@@ -21,6 +21,6 @@ Kompas紙の報道によると、インドネシアのフラッグキャリア�
 ---
 **情報ソース:** [Kompas](http://money.kompas.com/read/2026/08/18/213348326/garuda-indonesia-uji-coba-internet-cepat-di-pesawat-bisa-video-call-di?source=terkini_artikel)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** ガルーダ航空, 機内Wi-Fi, 航空, 出張, 旅行
+**タグ:** フライト情報, ビザ, 観光
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "インドネシアのハラール規制強化、海外・輸入食品企業も対応急ぐ"
 description: "インドネシア政府が進める食品・飲料向けハラール認証の義務化に伴い、タイなど海外の食品輸出企業が対応に追われている。制度の厳格化に伴い、日本からの輸入食品や在住者の日常的な食材調達にも影響を及ぼす可能性がある。"
 category: "regulation"
-tags: ["ハラール認証", "食品規制", "輸入食品", "インドネシア経済"]
+tags: ["ハラル", "インドネシア経済"]
 pubDate: 2026-08-08
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/08/202000826/indonesia-perketat-aturan-halal-eksportir-makanan-thailand-bersiap"
@@ -21,6 +21,6 @@ Kompasの報道によると、インドネシア政府による食品・飲料�
 ---
 **情報ソース:** [Kompas](https://money.kompas.com/read/2026/08/08/202000826/indonesia-perketat-aturan-halal-eksportir-makanan-thailand-bersiap)
 **カテゴリ:** 規制・法務
-**タグ:** ハラール認証, 食品規制, 輸入食品, インドネシア経済
+**タグ:** ハラル, インドネシア経済
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

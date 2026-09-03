@@ -2,7 +2,7 @@
 title: "GBKでチェルシー対ACミランの親善試合開催へ　警視庁が1,200人規模で警備・交通対策"
 description: "ジャカルタのゲロラ・ブン・カルノ（GBK）スタジアムでサッカーのチェルシー対ACミラン戦が開催されることに伴い、ジャカルタ警視庁は1,200人規模の警察官を動員して周辺の警備および交通整理を実施する。周辺道路の混雑に注意が必要。"
 category: "safety"
-tags: ["GBK", "交通規制", "サッカー", "ジャカルタ警視庁", "イベント"]
+tags: ["イベント", "交通規制", "治安"]
 pubDate: 2026-08-08
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8609868/polda-metro-kerahkan-1-200-personel-amankan-laga-chelsea-vs-milan-di-gbk"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8609868/polda-metro-kerahkan-1-200-personel-amankan-laga-chelsea-vs-milan-di-gbk)
 **カテゴリ:** 安全・災害
-**タグ:** GBK, 交通規制, サッカー, ジャカルタ警視庁, イベント
+**タグ:** イベント, 交通規制, 治安
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

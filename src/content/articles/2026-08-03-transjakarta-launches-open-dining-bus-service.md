@@ -2,7 +2,7 @@
 title: "トランスジャカルタ、バス車内で食事を楽しむ「オープンダイニング」を開始"
 description: "トランスジャカルタは、移動するバスの車内で食事を楽しめる新サービス「オープンダイニング」を開始した。ジャカルタ市内の景観や夜景を楽しみながら本格的な料理を味わえる新たなエンターテインメントとして注目を集めている。"
 category: "lifestyle"
-tags: ["トランスジャカルタ", "オープンダイニング", "ジャカルタグルメ", "バスツアー", "ライフスタイル"]
+tags: ["トランスジャカルタ", "グルメ", "イベント", "観光", "生活情報"]
 pubDate: 2026-08-03
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/03/181200827/10-fakta-open-dining-transjakarta-layanan-makan-mewah-di-atas-bus"
@@ -23,6 +23,6 @@ Kompasの報道によると、ジャカルタの公営路線バスを運営す�
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/03/181200827/10-fakta-open-dining-transjakarta-layanan-makan-mewah-di-atas-bus)
 **カテゴリ:** 生活・グルメ
-**タグ:** トランスジャカルタ, オープンダイニング, ジャカルタグルメ, バスツアー, ライフスタイル
+**タグ:** トランスジャカルタ, グルメ, イベント, 観光, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

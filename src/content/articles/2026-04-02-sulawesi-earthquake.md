@@ -2,7 +2,7 @@
 title: "北スラウェシでM7.6の地震、津波警報も発令 — 在住者は最新情報の確認を"
 description: "北スラウェシ州で強い地震が発生し、津波警報が発令。プラボウォ大統領が被災住民の即時避難を指示。在住者は最新の安全情報を確認してください。"
 category: "safety"
-tags: ["地震", "津波", "北スラウェシ", "安全情報", "BNPB"]
+tags: ["地震", "防災"]
 pubDate: 2026-04-02
 source: "Liputan6"
 sourceUrl: "https://www.liputan6.com/news/read/6308883/"

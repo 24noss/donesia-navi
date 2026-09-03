@@ -2,7 +2,7 @@
 title: "MRT Jakarta、DKI州事務局長を新たにコミサリスに任命"
 description: "MRT Jakartaが州事務局長ウス・クスワント氏をコミサリスに選任。通勤利用者への影響と今後の路線拡張への期待を解説。"
 category: "society"
-tags: ["MRT", "ジャカルタ", "交通", "インフラ"]
+tags: ["交通", "ジャカルタ", "インフラ"]
 pubDate: 2026-04-06
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/04/06/11242911/mrt-jakarta-ungkap-alasan-tunjuk-sekda-dki-uus-kuswanto-jadi-komisaris"
@@ -25,6 +25,6 @@ MRT Jakarta側は、今回の人事について「関連する法令・規則の
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/04/06/11242911/mrt-jakarta-ungkap-alasan-tunjuk-sekda-dki-uus-kuswanto-jadi-komisaris)
 **カテゴリ:** 社会・政治
-**タグ:** MRT、ジャカルタ、交通、インフラ
+**タグ:** 交通, ジャカルタ, インフラ
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

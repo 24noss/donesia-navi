@@ -2,7 +2,7 @@
 title: "学生団体BEM UI、中央ジャカルタのブンダランHIで抗議デモを実施予定"
 description: "インドネシア大学学生自治会（BEM UI）は8月18日、中央ジャカルタのブンダランHI周辺で抗議デモを行うと発表し、警察が警戒を強めています。"
 category: "safety"
-tags: ["ジャカルタ", "デモ情報", "ブンダランHI", "交通規制", "治安情報"]
+tags: ["ジャカルタ", "デモ", "中央ジャカルタ", "交通規制", "治安"]
 pubDate: 2026-08-17
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/17/18303101/bem-ui-demo-di-bundaran-hi-jakpus-besok-ini-tuntutannya"
@@ -21,6 +21,6 @@ Kompasの報道によると、インドネシア大学の学生自治会（BEM U
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/17/18303101/bem-ui-demo-di-bundaran-hi-jakpus-besok-ini-tuntutannya)
 **カテゴリ:** 安全・災害
-**タグ:** ジャカルタ, デモ情報, ブンダランHI, 交通規制, 治安情報
+**タグ:** ジャカルタ, デモ, 中央ジャカルタ, 交通規制, 治安
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

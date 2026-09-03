@@ -2,7 +2,7 @@
 title: "2026年7月は1991年以来「最も乾燥した7月」に、BMKGが渇水警戒呼びかけ"
 description: "インドネシア気象気候細工業庁（BMKG）は、2026年7月の全国降水量が1991年以降で最も少ない水準となったと発表した。乾季の長期化に伴う水不足や火災リスクへの対策が求められている。"
 category: "society"
-tags: ["BMKG", "乾季", "少雨", "気象情報", "水不足"]
+tags: ["BMKG"]
 pubDate: 2026-08-04
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5678936/bmkg-juli-2026-menjadi-juli-terkering-sejak-1991"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5678936/bmkg-juli-2026-menjadi-juli-terkering-sejak-1991)
 **カテゴリ:** 社会・政治
-**タグ:** BMKG, 乾季, 少雨, 気象情報, 水不足
+**タグ:** BMKG
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "ジャカルタ警視庁、南ジャカルタで合成タバコの密造拠点を摘発　薬物取締りを強化"
 description: "ジャカルタ警視庁麻薬捜査局は、南ジャカルタの住宅街で危険な合成タバコを製造していた拠点を摘発。違法薬物の流通防止に向け警戒を強めています。"
 category: "safety"
-tags: ["治安", "警察", "違法薬物", "南ジャカルタ", "注意喚起"]
+tags: ["治安", "南ジャカルタ", "注意喚起"]
 pubDate: 2026-08-19
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5700959/polda-metro-jaya-bongkar-industri-rumahan-tembakau-sintetis-di-jaksel"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5700959/polda-metro-jaya-bongkar-industri-rumahan-tembakau-sintetis-di-jaksel)
 **カテゴリ:** 安全・災害
-**タグ:** 治安, 警察, 違法薬物, 南ジャカルタ, 注意喚起
+**タグ:** 治安, 南ジャカルタ, 注意喚起
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

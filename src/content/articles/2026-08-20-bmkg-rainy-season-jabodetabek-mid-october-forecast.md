@@ -2,7 +2,7 @@
 title: "ジャカルタ首都圏の雨季入りは10月中旬から、気象庁（BMKG）が予測"
 description: "気象気候地球物理庁（BMKG）は、ジャカルタ首都圏（Jabodetabek）における雨季の始まりが2026年10月中旬頃になるとの予測を発表した。当面は乾燥した気候が続く見通し。"
 category: "lifestyle"
-tags: ["BMKG", "天気予報", "雨季", "ジャカルタ", "生活情報"]
+tags: ["BMKG", "ジャカルタ", "生活情報"]
 pubDate: 2026-08-20
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8626438/bmkg-musim-hujan-di-jabodetabek-mulai-pertengahan-oktober"
@@ -25,6 +25,6 @@ Detikの報道によると、気象気候地球物理庁（BMKG）は、ジャ�
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8626438/bmkg-musim-hujan-di-jabodetabek-mulai-pertengahan-oktober)
 **カテゴリ:** 生活情報
-**タグ:** BMKG, 天気予報, 雨季, ジャカルタ, 生活情報
+**タグ:** BMKG, ジャカルタ, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

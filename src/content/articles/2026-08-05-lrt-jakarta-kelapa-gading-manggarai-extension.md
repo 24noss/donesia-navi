@@ -2,7 +2,7 @@
 title: "LRTジャカルタのクラパガディン〜マンガライ延伸線、1日8万人の利用を見込む"
 description: "ジャカルタ州政府はLRTジャカルタのクラパガディン〜マンガライ間の延伸工事を進めており、開通後は1日当たり約8万人の輸送を見込んでいる。インフラ債の発行等で資金を投じる。"
 category: "society"
-tags: ["LRTジャカルタ", "クラパガディン", "マンガライ", "交通インフラ", "ジャカルタ"]
+tags: ["鉄道", "クラパガディン", "インフラ", "ジャカルタ"]
 pubDate: 2026-08-05
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/05/22191281/lrt-jakarta-kelapa-gading-manggarai-diproyeksikan-angkut-80000-penumpang"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/05/22191281/lrt-jakarta-kelapa-gading-manggarai-diproyeksikan-angkut-80000-penumpang)
 **カテゴリ:** 社会・政治
-**タグ:** LRTジャカルタ, クラパガディン, マンガライ, 交通インフラ, ジャカルタ
+**タグ:** 鉄道, クラパガディン, インフラ, ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "インドネシア金融庁（OJK）とSRO、金ETF（上場投資信託）を正式導入"
 description: "インドネシア金融庁（OJK）と証券自己規制機関（SRO）は、金（ゴールド）を裏付けとする上場投資信託（ETF）を正式にローンチした。国内投資家の投資選択肢拡大が期待される。"
 category: "business"
-tags: ["OJK", "金ETF", "金融", "資産運用", "インドネシア経済"]
+tags: ["両替・金融", "インドネシア経済"]
 pubDate: 2026-08-10
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5687168/ojk-dan-sro-resmi-luncurkan-instrumen-investasi-etf-emas"
@@ -21,6 +21,6 @@ Antara通信の報道によると、インドネシア金融庁（OJK）と証�
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5687168/ojk-dan-sro-resmi-luncurkan-instrumen-investasi-etf-emas)
 **カテゴリ:** 経済・ビジネス
-**タグ:** OJK, 金ETF, 金融, 資産運用, インドネシア経済
+**タグ:** 両替・金融, インドネシア経済
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

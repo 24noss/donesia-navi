@@ -2,7 +2,7 @@
 title: "シンガポールの電子入国カード「SG Arrival Card」が更新 パスポート読み取り機能や多言語に対応"
 description: "シンガポール入国時に提出が必要な「SG Arrival Card」がシステム刷新され、パスポート読み取りやインドネシア語を含む多言語対応が追加されました。出張や旅行での入力手続きがさらにスムーズになります。"
 category: "travel"
-tags: ["シンガポール", "SG Arrival Card", "出入国手続き", "海外旅行", "東南アジア"]
+tags: ["観光", "フライト情報", "ビザ"]
 pubDate: 2026-08-22
 source: "Kompas"
 sourceUrl: "http://travel.kompas.com/read/2026/08/22/180000127/sg-arrival-card-singapura-diperbarui-ada-bahasa-indonesia-dan-scan-paspor?source=terkini_artikel"
@@ -25,6 +25,6 @@ Kompasの報道によると、シンガポールへの入国時に提出が義�
 ---
 **情報ソース:** [Kompas](http://travel.kompas.com/read/2026/08/22/180000127/sg-arrival-card-singapura-diperbarui-ada-bahasa-indonesia-dan-scan-paspor?source=terkini_artikel)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** シンガポール, SG Arrival Card, 出入国手続き, 海外旅行, 東南アジア
+**タグ:** 観光, フライト情報, ビザ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

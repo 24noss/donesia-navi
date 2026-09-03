@@ -2,7 +2,7 @@
 title: "ジャカルタ州政府、ゴミ収集システムを改定　家庭でのゴミ分別徹底を呼びかけ"
 description: "ジャカルタ特別州政府は持続可能な廃棄物管理に向け収集システムを刷新し、住民に対し家庭でのゴミ分別徹底を求めている。最終処分場での単純投棄廃止を目指す取り組みの一環だ。"
 category: "society"
-tags: ["ジャカルタ", "ゴミ分別", "環境対策", "生活情報"]
+tags: ["ジャカルタ", "生活情報"]
 pubDate: 2026-07-30
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMixgFBVV95cUxOYnhpVXRzV0FPRm9LTlZzVlBsMUExakhFZ1pwWEVFMnVVSERfeXdHaWIyenUyMWtiWE5FM09jX3FfMmM0aEwzQkVpUkE5RVY4dUt0ZVY2YVJ0S3ptZnFncGJvX0tsWW9iVnd4dEk2eXBHcUJIT0F2czBmUzVQZW91NGhMbHczcDR5RHVISFlTcFVWY0JLb3NfREN2d2pHTEZZcnE1MmVyZE5nUjZyRWJNZ1J4RU5iM05XcTZ6U0ZTUXI3Q004Q3c?oc=5"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、ジャカルタ特別州政府は環境負荷�
 ---
 **情報ソース:** [Kompas](https://news.google.com/rss/articles/CBMixgFBVV95cUxOYnhpVXRzV0FPRm9LTlZzVlBsMUExakhFZ1pwWEVFMnVVSERfeXdHaWIyenUyMWtiWE5FM09jX3FfMmM0aEwzQkVpUkE5RVY4dUt0ZVY2YVJ0S3ptZnFncGJvX0tsWW9iVnd4dEk2eXBHcUJIT0F2czBmUzVQZW91NGhMbHczcDR5RHVISFlTcFVWY0JLb3NfREN2d2pHTEZZcnE1MmVyZE5nUjZyRWJNZ1J4RU5iM05XcTZ6U0ZTUXI3Q004Q3c?oc=5)
 **カテゴリ:** 社会・政治
-**タグ:** ジャカルタ, ゴミ分別, 環境対策, 生活情報
+**タグ:** ジャカルタ, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

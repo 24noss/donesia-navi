@@ -2,7 +2,7 @@
 title: "法務省、限定的「二重国籍」法案を策定中 国際結婚家庭やディアスポラ対象に制度緩和へ"
 description: "インドネシア法務省は、限定的な二重国籍制度を導入するための法改正案（RUU）を策定していることを明らかにした。海外在住者や国際結婚家庭の子どもの国籍保持に向けた前進として注目される。"
 category: "regulation"
-tags: ["国籍法", "ビザ", "法改正", "国際結婚", "制度改革"]
+tags: ["ビザ", "生活情報"]
 pubDate: 2026-08-14
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8619189/wamenkum-ungkap-ruu-soal-kewarganegaraan-ganda-terbatas-sedang-disusun"
@@ -25,6 +25,6 @@ Detikの報道によると、インドネシア法務副大臣のエディ・ヒ
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8619189/wamenkum-ungkap-ruu-soal-kewarganegaraan-ganda-terbatas-sedang-disusun)
 **カテゴリ:** 規制・法務
-**タグ:** 国籍法, ビザ, 法改正, 国際結婚, 制度改革
+**タグ:** ビザ, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

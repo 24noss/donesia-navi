@@ -2,7 +2,7 @@
 title: "トランスジャカルタ6U路線（ブロックM〜パサールミング）が8月8日よりルート変更"
 description: "トランスジャカルタは8月8日より、ブロックMとパサールミングを結ぶ6U路線の運行ルートを変更すると発表しました。一部停留所の変更やルート見直しが行われるため、通勤や外出で同路線を利用する在住者は最新の運行情報の確認が必要です。"
 category: "safety"
-tags: ["トランスジャカルタ", "交通情報", "ジャカルタ生活", "ブロックM", "バス"]
+tags: ["トランスジャカルタ", "交通規制", "生活情報", "ブロックM", "バス"]
 pubDate: 2026-08-05
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/05/19520081/rute-transjakarta-6u-blok-mpasar-minggu-berubah-mulai-8-agustus-cek"
@@ -21,6 +21,6 @@ Kompasの報道によると、ジャカルタの公営バス「トランスジ�
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/05/19520081/rute-transjakarta-6u-blok-mpasar-minggu-berubah-mulai-8-agustus-cek)
 **カテゴリ:** 安全・災害
-**タグ:** トランスジャカルタ, 交通情報, ジャカルタ生活, ブロックM, バス
+**タグ:** トランスジャカルタ, 交通規制, 生活情報, ブロックM, バス
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

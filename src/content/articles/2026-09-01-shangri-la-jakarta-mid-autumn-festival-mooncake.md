@@ -2,7 +2,7 @@
 title: "シャングリ・ラ ジャカルタ、中秋節の限定「低糖月餅」を発売　ランタン風パッケージで登場"
 description: "シャングリ・ラ ホテル ジャカルタが、中秋節に向けた特製月餅（ムーンケーキ）を発売。健康志向に合わせた低糖仕立てで、ランタンを模した華やかな限定パッケージが用意されている。"
 category: "gourmet"
-tags: ["シャングリ・ラ ジャカルタ", "中秋節", "月餅", "ホテルスイーツ", "手土産"]
+tags: ["グルメ", "レストラン", "スイーツ"]
 pubDate: 2026-09-01
 source: "Fimela"
 sourceUrl: "https://www.fimela.com/amp/8282213/mooncake-rendah-gula-hingga-cahaya-lampion-hangatkan-perayaan-mid-autumn-festival-di-shangri-la-jakarta"
@@ -25,6 +25,6 @@ draft: true
 ---
 **情報ソース:** [Fimela](https://www.fimela.com/amp/8282213/mooncake-rendah-gula-hingga-cahaya-lampion-hangatkan-perayaan-mid-autumn-festival-di-shangri-la-jakarta)
 **カテゴリ:** グルメ・レストラン
-**タグ:** シャングリ・ラ ジャカルタ, 中秋節, 月餅, ホテルスイーツ, 手土産
+**タグ:** グルメ, レストラン, スイーツ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

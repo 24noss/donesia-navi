@@ -2,7 +2,7 @@
 title: "ジャカルタにタイ料理新店「Saa Waan」オープン　チェンライ産プレミアムティーや本格料理を提供"
 description: "ジャカルタに本格的なタイ料理を提供する新レストラン「Saa Waan」がオープンした。オーセンティックなタイ料理メニューに加え、タイ北部のチェンライ産プレミアムティーなどを揃える。"
 category: "gourmet"
-tags: ["ジャカルタ", "新店舗", "タイ料理", "グルメ", "レストラン"]
+tags: ["ジャカルタ", "新店オープン", "タイ料理", "グルメ", "レストラン"]
 pubDate: 2026-09-02
 source: "bernas.id"
 sourceUrl: "https://bernas.id/nasional/news/restoran-thailand-baru-di-jakarta-saa-waan-hadirkan-teh-premium-chiang-rai-2026-09-02"
@@ -25,6 +25,6 @@ draft: true
 ---
 **情報ソース:** [bernas.id](https://bernas.id/nasional/news/restoran-thailand-baru-di-jakarta-saa-waan-hadirkan-teh-premium-chiang-rai-2026-09-02)
 **カテゴリ:** グルメ・レストラン
-**タグ:** ジャカルタ, 新店舗, タイ料理, グルメ, レストラン
+**タグ:** ジャカルタ, 新店オープン, タイ料理, グルメ, レストラン
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

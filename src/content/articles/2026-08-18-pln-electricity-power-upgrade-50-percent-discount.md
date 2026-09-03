@@ -2,7 +2,7 @@
 title: "国営電力PLN、電気契約の増設費用が半額になる50％割引プロモを実施中　8月25日まで"
 description: "国営電力PLNが独立記念月間に合わせて契約電力の増設手数料が50％割引となるキャンペーンを実施中。対象や申請方法、8月25日までの受付期限について解説します。"
 category: "lifestyle"
-tags: ["PLN", "電気料金", "生活情報", "プロモーション", "ジャカルタ生活"]
+tags: ["物価", "生活情報", "キャンペーン・プロモ"]
 pubDate: 2026-08-18
 source: "Kompas"
 sourceUrl: "https://amp.kompas.com/tren/read/2026/08/18/123000165/diskon-50-persen-tambah-daya-pln-hingga-25-agustus-2026-ini-daftar-harganya"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、インドネシア国営電力会社（PLN）�
 ---
 **情報ソース:** [Kompas](https://amp.kompas.com/tren/read/2026/08/18/123000165/diskon-50-persen-tambah-daya-pln-hingga-25-agustus-2026-ini-daftar-harganya)
 **カテゴリ:** 生活情報
-**タグ:** PLN, 電気料金, 生活情報, プロモーション, ジャカルタ生活
+**タグ:** 物価, 生活情報, キャンペーン・プロモ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

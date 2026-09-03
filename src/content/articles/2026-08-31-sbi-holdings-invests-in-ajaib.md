@@ -2,7 +2,7 @@
 title: "日本のSBIホールディングス、インドネシア投資アプリ大手Ajaibに約4.8兆ルピアを出資"
 description: "SBIホールディングスがインドネシアのフィンテック投資大手Ajaibに約4.8兆ルピアの大型出資を実施。AIやテック人材の拡充を進める方針です。"
 category: "business"
-tags: ["SBIホールディングス", "Ajaib", "フィンテック", "日系企業", "投資"]
+tags: ["両替・金融", "インドネシア経済"]
 pubDate: 2026-08-31
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/31/144801626/disuntik-rp-48-triliun-oleh-sbi-holdings-jepang-ajaib-ini-bukti-investasi?source=terkini_artikel"
@@ -25,6 +25,6 @@ Ajaibの経営陣は、今回の大型調達資金について、高度なテク
 ---
 **情報ソース:** [Kompas](https://money.kompas.com/read/2026/08/31/144801626/disuntik-rp-48-triliun-oleh-sbi-holdings-jepang-ajaib-ini-bukti-investasi?source=terkini_artikel)
 **カテゴリ:** 経済・ビジネス
-**タグ:** SBIホールディングス, Ajaib, フィンテック, 日系企業, 投資
+**タグ:** 両替・金融, インドネシア経済
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

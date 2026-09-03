@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /search/
 
 # Sitemap
 Sitemap: https://indonesia-navi.com/sitemap-index.xml

@@ -2,7 +2,7 @@
 title: "国営石油プルタミナ、家庭用プロパンガス「エルピジ」5.5kgおよび12kg缶を値下げ"
 description: "プルタミナは非補助対象の家庭用プロパンガス（ブライトガス）5.5kg缶と12kg缶の販売価格引き下げを正式発表しました。"
 category: "lifestyle"
-tags: ["プルタミナ", "エルピジ", "プロパンガス", "物価", "生活情報"]
+tags: ["プルタミナ", "物価", "生活情報"]
 pubDate: 2026-08-17
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/tren/read/2026/08/17/170000765/pertamina-resmi-turunkan-harga-elpiji-5-5-kg-dan-12-kg-ini-daftarnya"
@@ -21,6 +21,6 @@ Kompasの報道によると、インドネシア国営石油・ガス大手プ�
 ---
 **情報ソース:** [Kompas](https://www.kompas.com/tren/read/2026/08/17/170000765/pertamina-resmi-turunkan-harga-elpiji-5-5-kg-dan-12-kg-ini-daftarnya)
 **カテゴリ:** 生活情報
-**タグ:** プルタミナ, エルピジ, プロパンガス, 物価, 生活情報
+**タグ:** プルタミナ, 物価, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

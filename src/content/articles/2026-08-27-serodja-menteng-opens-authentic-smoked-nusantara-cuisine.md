@@ -2,7 +2,7 @@
 title: "中央ジャカルタ・メンテンに「Serodja」がオープン　燻製技法のインドネシア伝統料理を提供"
 description: "中央ジャカルタのメンテンにインドネシア郷土料理店「Serodja」がオープン。伝統的な燻製技術を用いた料理とともに伝統織物のブティックも併設する。"
 category: "gourmet"
-tags: ["ジャカルタ", "メンテン", "インドネシア料理", "新店舗", "会食"]
+tags: ["ジャカルタ", "中央ジャカルタ", "グルメ", "インドネシア料理", "新店オープン"]
 pubDate: 2026-08-27
 source: "Detik"
 sourceUrl: "https://food.detik.com/info-kuliner/d-8637308/serodja-menteng-hadirkan-sajian-nusantara-dan-butik-wastra-indonesia"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Detik](https://food.detik.com/info-kuliner/d-8637308/serodja-menteng-hadirkan-sajian-nusantara-dan-butik-wastra-indonesia)
 **カテゴリ:** グルメ・レストラン
-**タグ:** ジャカルタ, メンテン, インドネシア料理, 新店舗, 会食
+**タグ:** ジャカルタ, 中央ジャカルタ, グルメ, インドネシア料理, 新店オープン
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

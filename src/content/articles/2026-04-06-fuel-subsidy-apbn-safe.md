@@ -2,7 +2,7 @@
 title: "燃料補助金カットを国会が拒否、財務大臣「APBNは年内安泰」と明言"
 description: "JK元副大統領の燃料補助金削減提案を国会予算委が拒否。財務大臣もAPBNの安全と補助金燃料の価格維持を表明しました。"
 category: "society"
-tags: ["燃料補助金", "APBN", "国会", "財務大臣", "BBM"]
+tags: ["物価", "インドネシア経済", "デモ"]
 pubDate: 2026-04-06
 source: "Kompas / Detik"
 sourceUrl: "https://nasional.kompas.com/read/2026/04/06/14035671/ketua-banggar-dpr-tolak-usulan-jk-minta-kurangi-subsidi-bbm"
@@ -42,6 +42,6 @@ draft: false
 - [Detik Finance — Di Depan DPR, Purbaya Ungkap Orang Dalam Kemenkeu Bilang APBN Kuat 2 Minggu](https://finance.detik.com/energi/d-8431229/di-depan-dpr-purbaya-ungkap-orang-dalam-kemenkeu-bilang-apbn-kuat-2-minggu)
 
 **カテゴリ:** 社会・政治
-**タグ:** 燃料補助金、APBN、国会、財務大臣、BBM
+**タグ:** 物価, インドネシア経済, デモ
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

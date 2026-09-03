@@ -2,7 +2,7 @@
 title: "ジャカルタ州政府、公式アプリ「JAKI」にリアルタイムCCTV機能を統合　「JAKI Pay」導入も準備"
 description: "ジャカルタ州政府は公式市民アプリ「JAKI」の機能を強化し、市内CCTVのリアルタイム映像確認機能を統合した。さらに独自の電子決済機能「JAKI Pay」の導入準備も進めており、行政サービスの利便性向上を目指す。"
 category: "society"
-tags: ["ジャカルタ", "JAKI", "行政サービス", "CCTV", "アプリ"]
+tags: ["ジャカルタ", "生活情報"]
 pubDate: 2026-08-03
 source: "Kompas"
 sourceUrl: "https://kilasdaerah.kompas.com/dki-jakarta/read/2026/08/03/11212621/jakarta.perkuat.ekosistem.digital.jaki.hadirkan.integrasi.cctv.dan.siapkan.jaki.pay"
@@ -23,6 +23,6 @@ Kompasの報道によると、ジャカルタ特別州政府は行政統合ア�
 ---
 **情報ソース:** [Kompas](https://kilasdaerah.kompas.com/dki-jakarta/read/2026/08/03/11212621/jakarta.perkuat.ekosistem.digital.jaki.hadirkan.integrasi.cctv.dan.siapkan.jaki.pay)
 **カテゴリ:** 社会・政治
-**タグ:** ジャカルタ, JAKI, 行政サービス, CCTV, アプリ
+**タグ:** ジャカルタ, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

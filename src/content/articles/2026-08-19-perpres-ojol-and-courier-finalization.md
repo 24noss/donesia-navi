@@ -2,7 +2,7 @@
 title: "オンライン配車・配送員を保護する大統領令、8月末〜9月上旬に制定へ"
 description: "政府と国会は、GrabやGojekなどオンライン配車・フードデリバリー・宅配配達員の法的保護や労働環境を規定する大統領令の最終調整を進めており、まもなく公布される見込み。"
 category: "regulation"
-tags: ["オンライン配車", "Grab", "Gojek", "規制", "労働環境"]
+tags: ["交通", "生活情報"]
 pubDate: 2026-08-19
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8624815/2-hal-diketahui-soal-perpres-ojol-yang-sedang-difinalisasi"
@@ -21,6 +21,6 @@ Detik紙の報道によると、インドネシア政府と国会（DPR）は、
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8624815/2-hal-diketahui-soal-perpres-ojol-yang-sedang-difinalisasi)
 **カテゴリ:** 規制・法務
-**タグ:** オンライン配車, Grab, Gojek, 規制, 労働環境
+**タグ:** 交通, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

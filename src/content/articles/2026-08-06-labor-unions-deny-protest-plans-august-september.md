@@ -2,7 +2,7 @@
 title: "労働組合Partai Buruh・KSPI、8〜9月の大規模デモ実施を否定"
 description: "インドネシア労働党（Partai Buruh）と労働組合総連盟（KSPI）は、8月および9月に大規模なデモ活動を行わないと発表しました。SNS上のデモ噂を否定する形となります。"
 category: "safety"
-tags: ["デモ情報", "ジャカルタ治安", "労働組合", "KSPI", "交通影響"]
+tags: ["デモ", "治安", "交通規制"]
 pubDate: 2026-08-06
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/06/14321881/partai-buruh-dan-kspi-pastikan-tak-akan-demo-agustus-september-2026"
@@ -21,6 +21,6 @@ Kompas紙の報道によると、インドネシア労働党（Partai Buruh）�
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/06/14321881/partai-buruh-dan-kspi-pastikan-tak-akan-demo-agustus-september-2026)
 **カテゴリ:** 安全・災害
-**タグ:** デモ情報, ジャカルタ治安, 労働組合, KSPI, 交通影響
+**タグ:** デモ, 治安, 交通規制
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

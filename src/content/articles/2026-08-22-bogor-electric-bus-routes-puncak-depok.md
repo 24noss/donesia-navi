@@ -2,7 +2,7 @@
 title: "ボゴール県政府、プンチャックやデポックを結ぶ「電気バス」新路線の運行を計画"
 description: "西ジャワ州ボゴール県政府は、週末の深刻な渋滞緩和や環境負荷軽減を目的に、プンチャック高原や隣接するデポック市を結ぶ電気バス（EVバス）路線の整備を進めています。"
 category: "lifestyle"
-tags: ["ボゴール", "プンチャック", "電気バス", "公共交通", "渋滞対策"]
+tags: ["ボゴール", "EV", "インフラ", "交通", "交通規制"]
 pubDate: 2026-08-22
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/22/20160411/pemkab-bogor-siapkan-rute-bus-listrik-hingga-depok-dan-puncak"
@@ -25,6 +25,6 @@ Kompasの報道によると、西ジャワ州ボゴール県政府は、域内�
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/22/20160411/pemkab-bogor-siapkan-rute-bus-listrik-hingga-depok-dan-puncak)
 **カテゴリ:** 生活情報
-**タグ:** ボゴール, プンチャック, 電気バス, 公共交通, 渋滞対策
+**タグ:** ボゴール, EV, インフラ, 交通, 交通規制
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

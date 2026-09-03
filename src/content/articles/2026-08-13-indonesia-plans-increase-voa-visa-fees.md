@@ -2,7 +2,7 @@
 title: "外国人向け「到着ビザ（VoA）」の手数料引き上げを検討　法務・移民当局"
 description: "インドネシア政府が外国人旅行者や短期滞在者向けに提供している「到着ビザ（VoA / e-VoA）」の料金改定（引き上げ）を検討していることが明らかになりました。出張者や日本からの渡航者受け入れに影響する可能性があります。"
 category: "visa"
-tags: ["到着ビザ", "VoA", "入国管理局", "出張手続き", "外国人政策"]
+tags: ["ビザ"]
 pubDate: 2026-08-13
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/13/180000027/tarif-visa-on-arrival-indonesia-bakal-naik-wna-bayar-lebih-mahal"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、インドネシア法務人権省・移民総�
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/13/180000027/tarif-visa-on-arrival-indonesia-bakal-naik-wna-bayar-lebih-mahal)
 **カテゴリ:** ビザ・手続き
-**タグ:** 到着ビザ, VoA, 入国管理局, 出張手続き, 外国人政策
+**タグ:** ビザ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

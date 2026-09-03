@@ -2,7 +2,7 @@
 title: "プラボウォ大統領、チカランで国産電動バイクエコシステムを正式発表へ"
 description: "プラボウォ大統領は8月13日、西ジャワ州チカランのPT Ilectra Motor Group（ALVA）の生産拠点を訪問し、国産電動バイク（Molinas）エコシステムを正式に発足させる。国内EV産業の促進とサプライチェーン強化を目指す。"
 category: "business"
-tags: ["EV", "電動バイク", "チカラン", "プラボウォ大統領", "自動車産業"]
+tags: ["EV", "インドネシア経済"]
 pubDate: 2026-08-13
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8616153/prabowo-bakal-resmikan-motor-listrik-nasional-hari-ini"
@@ -21,6 +21,6 @@ Detik、Antara各紙の報道によると、プラボウォ大統領は8月13日
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8616153/prabowo-bakal-resmikan-motor-listrik-nasional-hari-ini)
 **カテゴリ:** 経済・ビジネス
-**タグ:** EV, 電動バイク, チカラン, プラボウォ大統領, 自動車産業
+**タグ:** EV, インドネシア経済
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "インドネシア中銀、10月1日より50万ルピア以下のQRIS決済手数料を無料化"
 description: "インドネシア中央銀行（BI）は、QRコード決済「QRIS」の加盟店手数料（MDR）について、1回あたり最大50万ルピアまでの取引を対象に2026年10月1日からゼロにすると発表した。"
 category: "business"
-tags: ["QRIS", "インドネシア中央銀行", "キャッシュレス決済", "電子マネー", "金融政策"]
+tags: ["両替・金融", "インドネシア経済"]
 pubDate: 2026-08-19
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/tren/read/2026/08/19/110000365/mulai-1-oktober-2026-transaksi-qris-hingga-rp-500.000-bebas-mdr-ini"
@@ -25,6 +25,6 @@ Kompasの報道によると、インドネシア中央銀行（BI）は、全国
 ---
 **情報ソース:** [Kompas](https://www.kompas.com/tren/read/2026/08/19/110000365/mulai-1-oktober-2026-transaksi-qris-hingga-rp-500.000-bebas-mdr-ini)
 **カテゴリ:** 経済・ビジネス
-**タグ:** QRIS, インドネシア中央銀行, キャッシュレス決済, 電子マネー, 金融政策
+**タグ:** 両替・金融, インドネシア経済
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

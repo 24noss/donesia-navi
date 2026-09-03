@@ -2,7 +2,7 @@
 title: "ジャカルタ州政府、8月18日に在宅勤務（WFH）と学校の遠隔授業を推奨"
 description: "ジャカルタ州政府は8月18日、独立記念日イベント後の混雑緩和や市民の利便性を考慮し、企業へのWFHおよび学校のオンライン授業実施を呼びかけました。"
 category: "society"
-tags: ["ジャカルタ州政府", "在宅勤務", "遠隔授業", "交通対策", "生活情報"]
+tags: ["生活情報", "大気汚染", "交通規制"]
 pubDate: 2026-08-17
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/tren/read/2026/08/17/173000165/pemprov-dki-jakarta-keluarkan-imbauan-wfh-pada-18-agustus-2026"
@@ -21,6 +21,6 @@ KompasやDetik各紙の報道によると、ジャカルタ首都特別州政府
 ---
 **情報ソース:** [Kompas](https://www.kompas.com/tren/read/2026/08/17/173000165/pemprov-dki-jakarta-keluarkan-imbauan-wfh-pada-18-agustus-2026)
 **カテゴリ:** 社会・政治
-**タグ:** ジャカルタ州政府, 在宅勤務, 遠隔授業, 交通対策, 生活情報
+**タグ:** 生活情報, 大気汚染, 交通規制
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

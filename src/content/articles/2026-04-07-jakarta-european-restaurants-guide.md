@@ -2,7 +2,7 @@
 title: "ジャカルタの洋食・ヨーロッパ料理レストラン5選【2026年版】"
 description: "イタリアンからフレンチまで、ジャカルタで本格洋食が楽しめるレストランを厳選。接待やデートにもおすすめ。"
 category: "gourmet"
-tags: ["洋食", "ヨーロッパ料理", "イタリアン", "フレンチ", "ジャカルタ", "グルメ"]
+tags: ["イタリアン", "フレンチ", "ジャカルタ", "グルメ"]
 pubDate: 2026-04-07
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"

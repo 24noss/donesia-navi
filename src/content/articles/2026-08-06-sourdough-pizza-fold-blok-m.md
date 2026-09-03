@@ -2,7 +2,7 @@
 title: "ブロックMに折りたたみサワードゥピザ店が新規オープン　トッピングソースを自由にカスタマイズ可能"
 description: "ジャカルタ南部のブロックMエリアに、天然酵母のサワードゥ生地を使用した折りたたみピザの新店がオープンしました。好みでソースやトッピングを追加できる自由度の高さが話題を集めています。"
 category: "gourmet"
-tags: ["ジャカルタグルメ", "ブロックM", "ピザ", "新店オープン"]
+tags: ["グルメ", "ブロックM", "イタリアン", "新店オープン"]
 pubDate: 2026-08-06
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/food/read/2026/08/07/053100775/piza-sourdough-lipat-baru-buka-di-blok-m-bebas-tambah-topping-saus"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://www.kompas.com/food/read/2026/08/07/053100775/piza-sourdough-lipat-baru-buka-di-blok-m-bebas-tambah-topping-saus)
 **カテゴリ:** グルメ・レストラン
-**タグ:** ジャカルタグルメ, ブロックM, ピザ, 新店オープン
+**タグ:** グルメ, ブロックM, イタリアン, 新店オープン
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

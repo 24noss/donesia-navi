@@ -2,7 +2,7 @@
 title: "ベカシの路線バス「Trans Beken」が8月15日より運行再開　ルート見直し完了"
 description: "ベカシ市内の主要な公共交通機関である路線バス「Trans Beken」が、運行ルートや体制の見直しを経て8月15日から運行を再開します。ハラパン・インダ地区などを結ぶ市民の足として利便性改善が期待されています。"
 category: "lifestyle"
-tags: ["ベカシ", "交通", "バス", "ハラパンインダ", "生活情報"]
+tags: ["生活情報", "交通", "バス"]
 pubDate: 2026-08-10
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/10/12194481/trans-beken-bekasi-harapan-indah-beroperasi-lagi-15-agustus-ini-yang"
@@ -23,6 +23,6 @@ Kompas紙の報道によると、西ジャワ州ベカシ市内で運行され�
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/10/12194481/trans-beken-bekasi-harapan-indah-beroperasi-lagi-15-agustus-ini-yang)
 **カテゴリ:** 生活・グルメ
-**タグ:** ベカシ, 交通, バス, ハラパンインダ, 生活情報
+**タグ:** 生活情報, 交通, バス
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

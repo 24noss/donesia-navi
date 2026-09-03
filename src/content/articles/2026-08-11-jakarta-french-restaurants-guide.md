@@ -2,7 +2,7 @@
 title: "ジャカルタのおすすめフレンチレストラン5選【2026年版】"
 description: "接待や記念日にジャカルタでフレンチを探すなら必見。SCBDの本格ファインダイニングAMUZから話題の新店Jullien、気軽なビストロまで、予算・雰囲気別に厳選5店を紹介する。"
 category: "gourmet"
-tags: ["フレンチ", "フランス料理", "レストラン", "ジャカルタ", "グルメ", "接待"]
+tags: ["フレンチ", "レストラン", "ジャカルタ", "グルメ", "会食・接待"]
 pubDate: 2026-08-11
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"

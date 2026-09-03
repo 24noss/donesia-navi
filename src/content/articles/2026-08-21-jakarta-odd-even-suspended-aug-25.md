@@ -2,7 +2,7 @@
 title: "ジャカルタ州の奇数偶数規制、8月25日に一時解除へ"
 description: "ジャカルタ首都特別州の主要幹線道路で実施されている奇数偶数（ガンジル・グナップ）規制が、2026年8月25日に一時解除される。自家用車を利用する在住者は最新の交通情報を確認されたい。"
 category: "safety"
-tags: ["ジャカルタ", "交通規制", "奇数偶数規制", "道路交通"]
+tags: ["ジャカルタ", "交通規制"]
 pubDate: 2026-08-21
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/21/11200791/ganjil-genap-jakarta-ditiadakan-pada-25-agustus-2026-cek-daftar-jalannya"
@@ -25,6 +25,6 @@ Kompasの報道によると、ジャカルタ首都特別州運輸局および�
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/21/11200791/ganjil-genap-jakarta-ditiadakan-pada-25-agustus-2026-cek-daftar-jalannya)
 **カテゴリ:** 安全・災害
-**タグ:** ジャカルタ, 交通規制, 奇数偶数規制, 道路交通
+**タグ:** ジャカルタ, 交通規制
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

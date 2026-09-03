@@ -2,7 +2,7 @@
 title: "南ジャカルタの私立学校で約1000丁の銃器と薬物を発見　警察が捜査を開始"
 description: "南ジャカルタの私立学校施設内で、実銃やエアガンなど約1000丁の銃器および違法薬物が見つかり、地元警察が捜査を進めています。KompasおよびDetikが報じました。"
 category: "safety"
-tags: ["ジャカルタ治安", "南ジャカルタ", "銃器押収", "事件", "警察捜査"]
+tags: ["治安", "南ジャカルタ"]
 pubDate: 2026-08-06
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/06/18140221/kronologi-995-senjata-api-ditemukan-di-sekolah-swasta-jaksel"
@@ -21,6 +21,6 @@ Kompas、Detik各紙の報道によると、南ジャカルタにある私立学
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/06/18140221/kronologi-995-senjata-api-ditemukan-di-sekolah-swasta-jaksel)
 **カテゴリ:** 安全・災害
-**タグ:** ジャカルタ治安, 南ジャカルタ, 銃器押収, 事件, 警察捜査
+**タグ:** 治安, 南ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

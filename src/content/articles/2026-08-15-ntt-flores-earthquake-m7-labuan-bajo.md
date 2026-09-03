@@ -2,7 +2,7 @@
 title: "NTT州フローレス島沖でM7.7の大規模地震 ラブアンバジョなどで被害、航空便に影響も"
 description: "東ヌサ・トゥンガラ（NTT）州沖でM7.7の大規模な地震が発生し、一時津波警報が発令された。観光地ラブアンバジョなどで建物被害や停電が報告され、航空便の欠航など影響が出ている。"
 category: "safety"
-tags: ["地震", "自然災害", "ラブアンバジョ", "NTT", "注意喚起"]
+tags: ["地震", "防災", "注意喚起"]
 pubDate: 2026-08-15
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8619672/korban-jiwa-gempa-ntt-m-7-bertambah-jadi-5-orang"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8619672/korban-jiwa-gempa-ntt-m-7-bertambah-jadi-5-orang)
 **カテゴリ:** 安全・災害
-**タグ:** 地震, 自然災害, ラブアンバジョ, NTT, 注意喚起
+**タグ:** 地震, 防災, 注意喚起
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

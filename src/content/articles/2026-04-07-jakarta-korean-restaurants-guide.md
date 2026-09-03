@@ -2,7 +2,7 @@
 title: "ジャカルタで人気の韓国料理レストラン5選【2026年版】"
 description: "サムギョプサルからビビンバまで、ジャカルタで本格韓国料理が楽しめるおすすめ店を在住者目線で紹介。"
 category: "gourmet"
-tags: ["韓国料理", "レストラン", "サムギョプサル", "ジャカルタ", "グルメ"]
+tags: ["韓国料理", "レストラン", "ジャカルタ", "グルメ"]
 pubDate: 2026-04-07
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"

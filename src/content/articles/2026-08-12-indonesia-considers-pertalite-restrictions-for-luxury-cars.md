@@ -2,7 +2,7 @@
 title: "政府、高級車への「ペルタライト」販売制限を検討　燃料補助金の適正化目指す"
 description: "インドネシア政府は、補助金対象ガソリン「ペルタライト」の富裕層や高級車への販売を制限する方向で検討を開始した。二輪車は制限対象外となる見通し。"
 category: "business"
-tags: ["ガソリン", "ペルタライト", "燃料補助金", "インドネシア経済"]
+tags: ["物価", "インドネシア経済"]
 pubDate: 2026-08-12
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/11/201300026/pemerintah-kaji-pembatasan-pertalite-mobil-mewah-tak-bisa-beli-bbm-subsidi"
@@ -21,6 +21,6 @@ Kompasの報道によると、インドネシア政府は補助金対象ガソ�
 ---
 **情報ソース:** [Kompas](https://money.kompas.com/read/2026/08/11/201300026/pemerintah-kaji-pembatasan-pertalite-mobil-mewah-tak-bisa-beli-bbm-subsidi)
 **カテゴリ:** 経済・ビジネス
-**タグ:** ガソリン, ペルタライト, 燃料補助金, インドネシア経済
+**タグ:** 物価, インドネシア経済
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

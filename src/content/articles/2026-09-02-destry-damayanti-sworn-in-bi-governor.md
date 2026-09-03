@@ -2,7 +2,7 @@
 title: "インドネシア最高裁、デストリ・ダマヤンティ氏を中銀（BI）新総裁に正式任命"
 description: "インドネシア最高裁判所は、中央銀行（BI）の新総裁としてデストリ・ダマヤンティ氏を正式に就任させる宣誓式を執り行った。任期は2026年から2031年までの5年間で、金融市場の安定維持や経済成長支援に向けた政策運営が注目される。"
 category: "business"
-tags: ["中央銀行", "バンクインドネシア", "金融政策", "人事", "為替安定"]
+tags: ["インドネシア経済", "両替・金融"]
 pubDate: 2026-09-02
 source: "Kompas"
 sourceUrl: "http://money.kompas.com/read/2026/09/02/160412026/ma-resmi-lantik-destry-damayanti-sebagai-gubernur-bi-periode-2026-2031?source=terkini_artikel"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、インドネシア最高裁判所（MA）にて
 ---
 **情報ソース:** [Kompas](http://money.kompas.com/read/2026/09/02/160412026/ma-resmi-lantik-destry-damayanti-sebagai-gubernur-bi-periode-2026-2031?source=terkini_artikel)
 **カテゴリ:** 経済・ビジネス
-**タグ:** 中央銀行, バンクインドネシア, 金融政策, 人事, 為替安定
+**タグ:** インドネシア経済, 両替・金融
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

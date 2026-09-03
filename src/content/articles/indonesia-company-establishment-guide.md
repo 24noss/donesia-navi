@@ -2,7 +2,7 @@
 title: "インドネシアで法人設立する手順と費用【2026年完全ガイド】"
 description: "インドネシアでの法人設立（PT PMA）の手順、必要書類、費用、注意点を日本語で詳しく解説。"
 category: "regulation"
-tags: ["法人設立", "PT PMA", "外資規制", "投資"]
+tags: ["生活情報", "両替・金融"]
 pubDate: 2026-04-04
 draft: false
 ---

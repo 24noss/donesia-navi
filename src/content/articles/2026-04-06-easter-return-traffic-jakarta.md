@@ -2,7 +2,7 @@
 title: "パスカ連休明けUターンラッシュ、ジャカルタ方面の高速道路が渋滞"
 description: "イースター連休が終わり、ジャカルタ方面の高速道路でUターンラッシュが発生。ジャゴラウィ、ジャペック各線で渋滞、事故も。"
 category: "society"
-tags: ["渋滞", "高速道路", "パスカ", "Uターンラッシュ", "ジャカルタ"]
+tags: ["渋滞", "交通", "交通規制", "イベント", "ジャカルタ"]
 pubDate: 2026-04-06
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8430780/libur-long-weekend-paskah-usai-lalin-ke-arah-jakarta-kembali-padat"
@@ -27,6 +27,6 @@ Detikの報道によると、特に渋滞が激しいのはジャゴラウィ高
 ---
 **情報ソース:** [Detik - Uターンラッシュ](https://news.detik.com/berita/d-8430780/libur-long-weekend-paskah-usai-lalin-ke-arah-jakarta-kembali-padat) / [Detik - ジャティブニン事故](https://news.detik.com/berita/d-8430757/ada-mobil-terperosok-lalin-di-tol-jatibening-arah-cawang-padat)
 **カテゴリ:** 社会・政治
-**タグ:** 渋滞, 高速道路, パスカ, Uターンラッシュ, ジャカルタ
+**タグ:** 渋滞, 交通, 交通規制, イベント, ジャカルタ
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

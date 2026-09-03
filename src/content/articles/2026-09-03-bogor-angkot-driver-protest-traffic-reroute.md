@@ -2,7 +2,7 @@
 title: "ボゴール市役所前で乗り合いバス運転手による大規模デモ　交通規制と渋滞に注意"
 description: "西ジャワ州ボゴール市の市役所前で乗り合いバス（アンコット）の運転手らによる抗議デモが発生し、市街中心部で交通渋滞が発生している。現地警察は周辺道路で交通整理と迂回路の指定を実施しており、ボゴール周辺を利用する際は最新の道路情報に注意が必要。"
 category: "safety"
-tags: ["ボゴール", "抗議デモ", "交通規制", "アンコット", "渋滞情報"]
+tags: ["ボゴール", "デモ", "交通規制"]
 pubDate: 2026-09-03
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/03/06482661/sopir-angkot-demo-di-balai-kota-bogor-hari-ini-rekayasa-lalu-lintas"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、西ジャワ州ボゴール市の市役所（Ba
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/09/03/06482661/sopir-angkot-demo-di-balai-kota-bogor-hari-ini-rekayasa-lalu-lintas)
 **カテゴリ:** 安全・災害
-**タグ:** ボゴール, 抗議デモ, 交通規制, アンコット, 渋滞情報
+**タグ:** ボゴール, デモ, 交通規制
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

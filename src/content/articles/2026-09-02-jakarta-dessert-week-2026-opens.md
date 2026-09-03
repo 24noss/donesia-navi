@@ -2,7 +2,7 @@
 title: "「ジャカルタ・デザート・ウィーク2026」が開幕　ダンドゥット音楽とスイーツが融合"
 description: "首都圏のスイーツの祭典「ジャカルタ・デザート・ウィーク2026」が開催。今年はインドネシアの大衆音楽「ダンドゥット」をテーマに、音楽と食の要素を融合させたユニークな創作スイーツが登場する。"
 category: "gourmet"
-tags: ["ジャカルタ", "ジャカルタデザートウィーク", "スイーツ", "イベント", "カフェ"]
+tags: ["ジャカルタ", "スイーツ", "イベント", "カフェ"]
 pubDate: 2026-09-02
 source: "Detik"
 sourceUrl: "https://food.detik.com/berita-boga/d-8645175/jakarta-dessert-week-2026-hadir-menggoyang-lidah-penikmat-kudapan-manis"
@@ -25,6 +25,6 @@ draft: true
 ---
 **情報ソース:** [Detik](https://food.detik.com/berita-boga/d-8645175/jakarta-dessert-week-2026-hadir-menggoyang-lidah-penikmat-kudapan-manis)
 **カテゴリ:** グルメ・レストラン
-**タグ:** ジャカルタ, ジャカルタデザートウィーク, スイーツ, イベント, カフェ
+**タグ:** ジャカルタ, スイーツ, イベント, カフェ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

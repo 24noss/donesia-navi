@@ -2,7 +2,7 @@
 title: "CIMB Niaga、QRIS連携の個人向け「インドネシア・クレジットカード（KKI）」を発行"
 description: "大手民間銀行CIMB Niagaは、中央銀行が推進する国内決済規格に基づく個人向けクレジットカード「KKI」の取り扱いを開始した。QRIS決済との統合による利便性向上が見込まれる。"
 category: "business"
-tags: ["CIMB Niaga", "クレジットカード", "QRIS", "キャッシュレス", "金融"]
+tags: ["両替・金融"]
 pubDate: 2026-08-21
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/21/090000426/cimb-niaga-resmi-terbitkan-kki-ritel-bisa-transaksi-pakai-qris-hingga-bebas"
@@ -25,6 +25,6 @@ Kompasの報道によると、インドネシア大手民間銀行のPT Bank CIM
 ---
 **情報ソース:** [Kompas](https://money.kompas.com/read/2026/08/21/090000426/cimb-niaga-resmi-terbitkan-kki-ritel-bisa-transaksi-pakai-qris-hingga-bebas)
 **カテゴリ:** 経済・ビジネス
-**タグ:** CIMB Niaga, クレジットカード, QRIS, キャッシュレス, 金融
+**タグ:** 両替・金融
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

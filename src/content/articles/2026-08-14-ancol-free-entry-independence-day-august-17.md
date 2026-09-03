@@ -2,7 +2,7 @@
 title: "ジャカルタのアンコール、8月17日独立記念日に入場無料イベントを実施 事前予約制"
 description: "北ジャカルタの海洋総合リゾート「アンコール」は、8月17日の独立記念日にゲート入場料を無料化する特別イベントを実施する。恒例の木登り競争やコンサートなどが催される予定。"
 category: "lifestyle"
-tags: ["アンコール", "独立記念日", "イベント", "祝日", "ジャカルタ"]
+tags: ["生活情報", "独立記念日", "イベント", "ジャカルタ"]
 pubDate: 2026-08-14
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/14/21215521/ancol-gratiskan-tiket-masuk-pada-17-agustus-2026-ini-syaratnya"
@@ -25,6 +25,6 @@ Kompasの報道によると、北ジャカルタの総合レジャー施設タ�
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/14/21215521/ancol-gratiskan-tiket-masuk-pada-17-agustus-2026-ini-syaratnya)
 **カテゴリ:** 生活情報
-**タグ:** アンコール, 独立記念日, イベント, 祝日, ジャカルタ
+**タグ:** 生活情報, 独立記念日, イベント, ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

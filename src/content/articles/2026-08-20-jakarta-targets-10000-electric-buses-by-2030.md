@@ -2,7 +2,7 @@
 title: "ジャカルタ州政府、2030年までに電気バス1万台の導入を目指す方針"
 description: "ジャカルタ州政府は深刻な大気汚染の改善と脱炭素社会の実現に向け、2030年までに都内の公共交通網へ計1万台の電気バス（EVバス）を配備する目標を発表した。トランスジャカルタを中心にEV車両への刷新を進める。"
 category: "society"
-tags: ["トランスジャカルタ", "EVバス", "大気汚染対策", "環境政策", "ジャカルタ州政府"]
+tags: ["トランスジャカルタ", "EV", "大気汚染", "生活情報"]
 pubDate: 2026-08-20
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/20/15124831/ada-10000-bus-listrik-yang-akan-mengaspal-di-jakarta-pada-2030"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、ジャカルタ州政府は都内の大気汚�
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/20/15124831/ada-10000-bus-listrik-yang-akan-mengaspal-di-jakarta-pada-2030)
 **カテゴリ:** 社会・政治
-**タグ:** トランスジャカルタ, EVバス, 大気汚染対策, 環境政策, ジャカルタ州政府
+**タグ:** トランスジャカルタ, EV, 大気汚染, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

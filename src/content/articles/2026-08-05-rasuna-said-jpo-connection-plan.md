@@ -2,7 +2,7 @@
 title: "ジャカルタ・ラスナサイド通りの「未接続」歩道橋、州政府が連結改修へ"
 description: "ジャカルタ南部クニンガン地区のHRラスナ・サイド通りで、隣接しながら接続されていなかった2つの歩道橋（JPO）について、ジャカルタ州政府が連結改修を行う方針を決定した。"
 category: "society"
-tags: ["ジャカルタ", "歩道橋", "インフラ整備", "クニンガン", "交通"]
+tags: ["ジャカルタ", "インフラ", "南ジャカルタ", "交通"]
 pubDate: 2026-08-05
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/05/09015241/tak-lagi-bikin-bingung-dua-jpo-di-rasuna-said-jaksel-akan-disambungkan"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/05/09015241/tak-lagi-bikin-bingung-dua-jpo-di-rasuna-said-jaksel-akan-disambungkan)
 **カテゴリ:** 社会・政治
-**タグ:** ジャカルタ, 歩道橋, インフラ整備, クニンガン, 交通
+**タグ:** ジャカルタ, インフラ, 南ジャカルタ, 交通
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

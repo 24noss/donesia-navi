@@ -64,7 +64,7 @@ const currentPath = Astro.url.pathname;
   </script>
 
   <meta name="description" content={description} />
-  {noindex && <meta name="robots" content="noindex, nofollow" />}
+  {noindex && <meta name="robots" content="noindex, follow" />}
   <title>{fullTitle}</title>
 
   <!-- Canonical & hreflang -->

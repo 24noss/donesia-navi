@@ -2,7 +2,7 @@
 title: "西ジャワ州チカランのバスプールで大規模火災、車両50台が全焼"
 description: "日系企業が集まる西ジャワ州チカランのバス車庫で火災が発生し、留置されていたバス50台が全焼。死傷者は報告されていないが、警察が原因を調査中。"
 category: "safety"
-tags: ["チカラン", "火災", "事故", "交通", "安全情報"]
+tags: ["火災", "交通規制", "交通", "防災"]
 pubDate: 2026-08-18
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8624794/nasib-puluhan-bus-hangus-dilalap-api-buntut-kebakaran-di-cikarang"
@@ -21,6 +21,6 @@ DetikおよびKompas各紙の報道によると、日系企業の工場が多く
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8624794/nasib-puluhan-bus-hangus-dilalap-api-buntut-kebakaran-di-cikarang)
 **カテゴリ:** 安全・災害
-**タグ:** チカラン, 火災, 事故, 交通, 安全情報
+**タグ:** 火災, 交通規制, 交通, 防災
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

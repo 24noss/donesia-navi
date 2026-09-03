@@ -2,7 +2,7 @@
 title: "クラパガディンで「JF3フードフェスティバル2026」開催　45日間にわたり全国の名物グルメが集結"
 description: "北ジャカルタ・クラパガディンで大型グルメイベント「JF3 Food Festival 2026」が開催中。45日間の長期にわたり、インドネシア各地のローカルフードやプレミアム料理が一堂に会する。"
 category: "gourmet"
-tags: ["JF3", "フードフェス", "クラパガディン", "インドネシア料理", "北ジャカルタ"]
+tags: ["イベント", "クラパガディン", "インドネシア料理", "北ジャカルタ"]
 pubDate: 2026-08-19
 source: "kabarindo.com"
 sourceUrl: "https://www.kabarindo.com/gaya-hidup/4032958875/jf3-food-festival-2026-hadirkan-lokarasa-nusantara-45-hari-menyusuri-jejak-rasa-indonesia"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [kabarindo.com](https://www.kabarindo.com/gaya-hidup/4032958875/jf3-food-festival-2026-hadirkan-lokarasa-nusantara-45-hari-menyusuri-jejak-rasa-indonesia)
 **カテゴリ:** グルメ・レストラン
-**タグ:** JF3, フードフェス, クラパガディン, インドネシア料理, 北ジャカルタ
+**タグ:** イベント, クラパガディン, インドネシア料理, 北ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "スカルノ・ハッタ国際空港で外国人パイロットを逮捕、26kgのMDMA密輸容疑"
 description: "スカルノ・ハッタ国際空港にて26kgのエクスタシー（MDMA）を密輸しようとした外国人パイロットが逮捕された。薬物検査で覚醒剤などの陽性反応も確認されている。"
 category: "safety"
-tags: ["スカルノハッタ空港", "治安", "薬物摘発", "事件"]
+tags: ["スカルノハッタ空港", "治安"]
 pubDate: 2026-07-30
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8597773/pilot-asing-kurir-26-kg-ekstasi-di-soetta-jadi-tersangka-dan-ditahan"
@@ -25,6 +25,6 @@ Detik紙の報道によると、ジャカルタの玄関口であるスカルノ
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8597773/pilot-asing-kurir-26-kg-ekstasi-di-soetta-jadi-tersangka-dan-ditahan)
 **カテゴリ:** 安全・災害
-**タグ:** スカルノハッタ空港, 治安, 薬物摘発, 事件
+**タグ:** スカルノハッタ空港, 治安
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

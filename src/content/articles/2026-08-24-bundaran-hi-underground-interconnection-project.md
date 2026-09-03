@@ -2,7 +2,7 @@
 title: "ブンダランHI地下で連結通路プロジェクトが進行　高級モールや周辺オフィスを接続へ"
 description: "中央ジャカルタのブンダランHI周辺で、高級商業施設やウィスマ・ヌサンタラなどを結ぶ総額約2,000億ルピア規模の地下歩行者ネットワーク計画が進展しています。雨天時や混雑時の回遊性向上が期待されます。"
 category: "society"
-tags: ["ブンダランHI", "都市開発", "地下通路", "MRTジャカルタ", "インフラ"]
+tags: ["中央ジャカルタ", "インフラ", "交通"]
 pubDate: 2026-08-24
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/properti/read/2026/08/24/153000821/proyek-rp-200-miliar-bawah-tanah-bundaran-hi-terhubung-mal-mewah-hingga?page=all&utm_source=Google&utm_medium=Newstand&utm_campaign=partner"
@@ -21,6 +21,6 @@ Kompas紙の報道によると、中央ジャカルタ中心部のブンダラ�
 ---
 **情報ソース:** [Kompas](https://www.kompas.com/properti/read/2026/08/24/153000821/proyek-rp-200-miliar-bawah-tanah-bundaran-hi-terhubung-mal-mewah-hingga?page=all&utm_source=Google&utm_medium=Newstand&utm_campaign=partner)
 **カテゴリ:** 社会・政治
-**タグ:** ブンダランHI, 都市開発, 地下通路, MRTジャカルタ, インフラ
+**タグ:** 中央ジャカルタ, インフラ, 交通
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

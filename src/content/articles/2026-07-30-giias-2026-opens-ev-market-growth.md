@@ -2,7 +2,7 @@
 title: "「GIIAS 2026」が開幕、EVシフト進むインドネシア自動車市場で各社が新型車を披露"
 description: "インドネシア最大級の自動車展示会「GIIAS 2026」が開幕。工業相が開会式でEV市場振興の目標を表明したほか、中国メーカーなど新興EVブランドの新規参入も相次ぎ注目を集めている。"
 category: "business"
-tags: ["GIIAS2026", "自動車", "EV", "インドネシア経済"]
+tags: ["EV", "インドネシア経済"]
 pubDate: 2026-07-30
 source: "Antara"
 sourceUrl: "https://otomotif.antaranews.com/video/5673504/buka-giias-2026-menperin-target-lcev-rp212-triliun-harus-tercapai"
@@ -25,6 +25,6 @@ Antara報道によると、バンテン州タンゲランのICE BSDにて、国�
 ---
 **情報ソース:** [Antara](https://otomotif.antaranews.com/video/5673504/buka-giias-2026-menperin-target-lcev-rp212-triliun-harus-tercapai)
 **カテゴリ:** 経済・ビジネス
-**タグ:** GIIAS2026, 自動車, EV, インドネシア経済
+**タグ:** EV, インドネシア経済
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

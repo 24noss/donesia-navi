@@ -2,7 +2,7 @@
 title: "ジャカルタ州運輸局、8月17日の独立記念式典に伴い市内主要道路で交通規制を実施"
 description: "ジャカルタ州運輸局（Dishub）は、第81回インドネシア独立記念日の式典および市民祝祭の開催に伴い、モナス周辺を中心とする市内主要道路で状況に応じた交通規制や迂回路の運用を実施すると発表した。"
 category: "safety"
-tags: ["交通規制", "独立記念日", "ジャカルタ", "モナス"]
+tags: ["交通規制", "独立記念日", "ジャカルタ", "中央ジャカルタ"]
 pubDate: 2026-08-16
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5696736/ini-pengalihan-jalan-saat-rangkaian-acara-peringatan-hut-81-ri"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5696736/ini-pengalihan-jalan-saat-rangkaian-acara-peringatan-hut-81-ri)
 **カテゴリ:** 安全・災害
-**タグ:** 交通規制, 独立記念日, ジャカルタ, モナス
+**タグ:** 交通規制, 独立記念日, ジャカルタ, 中央ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "中国EV大手BYD、西ジャワ州スバンの新工場が正式稼働　5,000人の現地雇用を創出"
 description: "中国のEV大手BYDが西ジャワ州スバン県に建設した最新製造工場が正式に稼働を開始した。現地で約5,000人の雇用を創出する計画で、インドネシア国内でのEVエコシステム強化やサプライチェーン拡大に大きな影響を与えると期待されている。"
 category: "business"
-tags: ["BYD", "電気自動車", "スバン", "西ジャワ", "自動車産業"]
+tags: ["EV"]
 pubDate: 2026-09-03
 source: "Antara"
 sourceUrl: "https://otomotif.antaranews.com/berita/5724273/pabrik-byd-di-subang-resmi-beroperasi-dan-serap-5000-pekerja-lokal"
@@ -25,6 +25,6 @@ draft: true
 ---
 **情報ソース:** [Antara](https://otomotif.antaranews.com/berita/5724273/pabrik-byd-di-subang-resmi-beroperasi-dan-serap-5000-pekerja-lokal)
 **カテゴリ:** 経済・ビジネス
-**タグ:** BYD, 電気自動車, スバン, 西ジャワ, 自動車産業
+**タグ:** EV
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

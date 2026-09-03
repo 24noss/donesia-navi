@@ -2,7 +2,7 @@
 title: "補助金付き燃料（BBM）の価格据え置きが2026年末まで確定"
 description: "インドネシア政府が補助金付き燃料（Pertalite・Solar）の価格を2026年末まで据え置くと明言。中東情勢による原油高騰の中、在住者の家計への影響を解説します。"
 category: "business"
-tags: ["燃料価格", "BBM", "燃料補助金", "物価", "生活費"]
+tags: ["物価", "インドネシア経済"]
 pubDate: 2026-04-06
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/04/06/122729226/purbaya-jamin-harga-bbm-subsidi-tak-naik-hingga-akhir-2026"

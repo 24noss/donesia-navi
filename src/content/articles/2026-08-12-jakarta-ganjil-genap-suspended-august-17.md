@@ -2,7 +2,7 @@
 title: "8月17日のインドネシア独立記念日、ジャカルタの奇数偶数規制が一時解除"
 description: "ジャカルタ警視庁は、8月17日のインドネシア独立記念日の祝日に伴い、ジャカルタ市内の主要道路で実施されている奇数偶数（Ganjil-Genap）車両通行規制を実施しないと発表した。"
 category: "safety"
-tags: ["ジャカルタ", "奇数偶数規制", "独立記念日", "交通規制"]
+tags: ["ジャカルタ", "交通規制", "独立記念日"]
 pubDate: 2026-08-12
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8614795/catat-ganjil-genap-jakarta-ditiadakan-saat-hut-ri-17-agustus"
@@ -21,6 +21,6 @@ Detikの報道によると、ジャカルタ警視庁交通局は8月17日のイ
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8614795/catat-ganjil-genap-jakarta-ditiadakan-saat-hut-ri-17-agustus)
 **カテゴリ:** 安全・災害
-**タグ:** ジャカルタ, 奇数偶数規制, 独立記念日, 交通規制
+**タグ:** ジャカルタ, 交通規制, 独立記念日
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "コモド島・パダール島への観光船航路が一時閉鎖、8月8日まで閉鎖継続へ"
 description: "コモド国立公園の主要観光地であるコモド島およびパダール島を結ぶ観光船の航路が、悪天候や安全上の理由から8月8日まで一時閉鎖された。旅行者は最新の運航情報の確認が必要だ。"
 category: "travel"
-tags: ["コモド島", "パダール島", "観光船", "運休", "渡航注意"]
+tags: ["観光", "フライト情報", "注意喚起"]
 pubDate: 2026-08-05
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/05/182245327/pelayaran-ke-pulau-komodo-dan-pulau-padar-ditutup-hingga-8-agustus"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/05/182245327/pelayaran-ke-pulau-komodo-dan-pulau-padar-ditutup-hingga-8-agustus)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** コモド島, パダール島, 観光船, 運休, 渡航注意
+**タグ:** 観光, フライト情報, 注意喚起
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

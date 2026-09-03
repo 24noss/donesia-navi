@@ -2,7 +2,7 @@
 title: "ロンボク島の人気観光地「サデ伝統村」で大規模火災 ササック族の伝統家屋が多数焼失"
 description: "ロンボク島中部のササック族伝統集落「サデ村」で大規模火災が発生し、貴重な伝統家屋が多数焼失しました。人的被害は報告されていませんが、今後の観光や復興に向けた支援が進められています。"
 category: "safety"
-tags: ["ロンボク島", "サデ村", "火災", "観光地", "安全情報"]
+tags: ["火災", "観光", "防災"]
 pubDate: 2026-08-23
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/23/085720227/desa-sade-lombok-kebakaran-rumah-tradisional-dan-warisan-budaya-tak-tersisa?source=headline"
@@ -25,6 +25,6 @@ KompasおよびAntara各社の報道によると、西ヌサ・トゥンガラ�
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/23/085720227/desa-sade-lombok-kebakaran-rumah-tradisional-dan-warisan-budaya-tak-tersisa?source=headline)
 **カテゴリ:** 安全・災害
-**タグ:** ロンボク島, サデ村, 火災, 観光地, 安全情報
+**タグ:** 火災, 観光, 防災
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "航空トランスヌサ、ジャカルタ・バリ発タイ行きの直行便を新設"
 description: "インドネシアの航空会社トランスヌサは、ジャカルタおよびバリ島からタイを結ぶ直行便を開設すると発表した。両国間のアクセス向上と観光・ビジネス需要の拡大が期待される。"
 category: "travel"
-tags: ["トランスヌサ", "航空便", "ジャカルタ", "バリ島", "タイ"]
+tags: ["フライト情報", "ジャカルタ", "バリ島"]
 pubDate: 2026-08-04
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/04/171508127/transnusa-terbang-langsung-dari-jakarta-dan-bali-ke-thailand"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/04/171508127/transnusa-terbang-langsung-dari-jakarta-dan-bali-ke-thailand)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** トランスヌサ, 航空便, ジャカルタ, バリ島, タイ
+**タグ:** フライト情報, ジャカルタ, バリ島
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

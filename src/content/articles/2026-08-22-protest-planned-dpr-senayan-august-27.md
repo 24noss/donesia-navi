@@ -2,7 +2,7 @@
 title: "8月27日にジャカルタの国会前で抗議デモ予定　一部参加者が既にテント設営を開始"
 description: "8月27日にジャカルタ中央部の国会議事堂（DPR）前で大規模な抗議デモが予定されており、中部ジャワ州などからの参加者が現地周辺に集まり始めている。周辺の交通混雑に注意が必要。"
 category: "safety"
-tags: ["治安", "デモ", "国会議事堂", "交通規制", "ジャカルタ"]
+tags: ["治安", "デモ", "交通規制", "ジャカルタ"]
 pubDate: 2026-08-22
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/22/07285121/warga-pati-berdatangan-ke-dpr-siapkan-aksi-27-agustus-bawa-2-tuntutan"
@@ -25,6 +25,6 @@ KompasおよびDetik各紙の報道によると、2026年8月27日（木）に�
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/22/07285121/warga-pati-berdatangan-ke-dpr-siapkan-aksi-27-agustus-bawa-2-tuntutan)
 **カテゴリ:** 安全・災害
-**タグ:** 治安, デモ, 国会議事堂, 交通規制, ジャカルタ
+**タグ:** 治安, デモ, 交通規制, ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

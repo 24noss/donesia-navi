@@ -2,7 +2,7 @@
 title: "プルタミナが8月1日よりガソリン価格を改定、「ペルタマックス」は1リットル15,950ルピアに値下げ"
 description: "インドネシア国営石油プルタミナは2026年8月1日より非補助金燃料の価格改定を実施しました。「ペルタマックス」などの一部ガソリン銘柄が値下げとなり、在住日本人の移動コストにも影響がありそうです。"
 category: "lifestyle"
-tags: ["プルタミナ", "ガソリン価格", "ペルタマックス", "生活情報", "ジャカルタ"]
+tags: ["プルタミナ", "物価", "生活情報", "ジャカルタ"]
 pubDate: 2026-07-31
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMiugFBVV95cUxNT1ZnZEUwbkpadW1nLTJsUTBDNWsza3VjYnUzaEZ2OHN3cnVJS21EdzlXLWlYNnAtdGNDQU8wSXlwVDFLLTVRSmlLQUpuQWVFYk5rcWw5RFlyOEd4dXRiZDhZd2VxVWJLQzYzc0djbDB0T2FMdGZoeUlRYjFuUURwRElfUzllVXE4SzFLS1RNOHZYOWRlaVNwSWtycVZYRWFPWVdsaHNucmx2djV6a2tvY1VrNU5KZWZ2ZVE?oc=5"
@@ -25,6 +25,6 @@ Kompas各紙の報道によると、インドネシア国営石油会社プル�
 ---
 **情報ソース:** [Kompas](https://news.google.com/rss/articles/CBMiugFBVV95cUxNT1ZnZEUwbkpadW1nLTJsUTBDNWsza3VjYnUzaEZ2OHN3cnVJS21EdzlXLWlYNnAtdGNDQU8wSXlwVDFLLTVRSmlLQUpuQWVFYk5rcWw5RFlyOEd4dXRiZDhZd2VxVWJLQzYzc0djbDB0T2FMdGZoeUlRYjFuUURwRElfUzllVXE4SzFLS1RNOHZYOWRlaVNwSWtycVZYRWFPWVdsaHNucmx2djV6a2tvY1VrNU5KZWZ2ZVE?oc=5)
 **カテゴリ:** 生活・グルメ
-**タグ:** プルタミナ, ガソリン価格, ペルタマックス, 生活情報, ジャカルタ
+**タグ:** プルタミナ, 物価, 生活情報, ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

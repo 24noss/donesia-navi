@@ -2,7 +2,7 @@
 title: "ボゴール警察、8月17日の祝日にプンチャック通りで一方通行規制を実施へ"
 description: "ボゴール県警察交通局は、8月17日の独立記念日の祝日に伴う行楽渋滞を緩和するため、人気避暑地プンチャックへ至る幹線道路で時間帯に応じた一方通行（ワンウェイ）規制を実施する。"
 category: "safety"
-tags: ["交通規制", "プンチャック", "ボゴール", "渋滞情報", "ワンウェイ"]
+tags: ["交通規制", "ボゴール"]
 pubDate: 2026-08-15
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8620361/polisi-siapkan-rekayasa-one-way-saat-17-agustus-di-puncak-bogor"
@@ -21,6 +21,6 @@ Detikの報道によると、西ジャワ州ボゴール県警察交通局は、
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8620361/polisi-siapkan-rekayasa-one-way-saat-17-agustus-di-puncak-bogor)
 **カテゴリ:** 安全・災害
-**タグ:** 交通規制, プンチャック, ボゴール, 渋滞情報, ワンウェイ
+**タグ:** 交通規制, ボゴール
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

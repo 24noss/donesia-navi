@@ -2,7 +2,7 @@
 title: "中央ジャカルタ・ガンビルで大規模火災　住宅114棟が延焼し880人が被災"
 description: "中央ジャカルタのガンビル地区で大規模火災が発生し、住宅など114棟が延焼。880人が被災し避難所が開設されました。乾季の火災リスクに注意が必要です。"
 category: "safety"
-tags: ["火災事故", "中央ジャカルタ", "ガンビル", "防災", "治安注意"]
+tags: ["火災", "中央ジャカルタ", "防災", "治安"]
 pubDate: 2026-08-31
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8642421/114-rumah-terdampak-kebakaran-di-gambir-jakpus-tim-forensik-diterjunkan"
@@ -25,6 +25,6 @@ Detikの報道によると、中央ジャカルタ・ガンビル地区の密集
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8642421/114-rumah-terdampak-kebakaran-di-gambir-jakpus-tim-forensik-diterjunkan)
 **カテゴリ:** 安全・災害
-**タグ:** 火災事故, 中央ジャカルタ, ガンビル, 防災, 治安注意
+**タグ:** 火災, 中央ジャカルタ, 防災, 治安
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

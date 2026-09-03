@@ -2,7 +2,7 @@
 title: "インドネシア16州で「車両税特例免除」が8月開始 延滞金免除や名義変更手数料が無料に"
 description: "インドネシア全国16州で2026年8月より車両税（PKB）の特例免除措置（Pemutihan）が順次開始される。延滞利息の免除や名義変更手数料の無料化が行われ、車やバイクを所有する在住者や企業にとって確認すべき機会となる。"
 category: "regulation"
-tags: ["車両税", "Pemutihan", "インドネシア生活", "名義変更", "節税"]
+tags: ["生活情報"]
 pubDate: 2026-08-02
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPV2x4S2xEVnVwNUhnVXFua09iaGpESFA5RldDRVJGOUEyZ0RwTjFjaEVqeGNXSFp6QUkyQlhqbjZ5aGpEVkgxeGs2LURaQWowU0RZUF9hRndkTm5NeUVBZFhBWnRKeGc0Q0sxSUZ2MllXczVDX29HOFY5S19tMTRYT3dUcnVEeC1UZUZfV2VYVTVIWEVRMGlzNHFYbGVrRXZqeV9oWmNldEd5ZjdQTVpPU3Vwc1BhVDNCYmQ4OU52V3ZYRGUxOG5IWNIByAFBVV95cUxOLUg1REd2NDZBODBLUVFXdUc5N1A5MEpJR2N0ZTJaQzdDQ2NhM0xjcVNNOGtCb2ZPbGZwZndBdkhQWkdzUjk0SlJaZm5lX3BFZFgwaFFIRGlyeGh0OXzecnpuOExxOEIxdTFCZk9felFTTXFaQnNseFE0VFczQXdmclczTnA2a0dmZjJ6RkZLWlVHWndjc3RxS3RWa0RsSTJIaF81NVNsR0RsZVB5amp2S1oxam1kV2tvMUdwVFowQ2hqb3gtWFVoUA?oc=5"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、インドネシアの16州において2026年8�
 ---
 **情報ソース:** [Kompas](https://news.google.com/rss/articles/CBMiyAFBVV95cUxPV2x4S2xEVnVwNUhnVXFua09iaGpESFA5RldDRVJGOUEyZ0RwTjFjaEVqeGNXSFp6QUkyQlhqbjZ5aGpEVkgxeGs2LURaQWowU0RZUF9hRndkTm5NeUVBZFhBWnRKeGc0Q0sxSUZ2MllXczVDX29HOFY5S19tMTRYT3dUcnVEeC1UZUZfV2VYVTVIWEVRMGlzNHFYbGVrRXZqeV9oWmNldEd5ZjdQTVpPU3Vwc1BhVDNCYmQ4OU52V3ZYRGUxOG5IWNIByAFBVV95cUxOLUg1REd2NDZBODBLUVFXdUc5N1A5MEpJR2N0ZTJaQzdDQ2NhM0xjcVNNOGtCb2ZPbGZwZndBdkhQWkdzUjk0SlJaZm5lX3BFZFgwaFFIRGlyeGh0OXzecnpuOExxOEIxdTFCZk9felFTTXFaQnNseFE0VFczQXdmclczTnA2a0dmZjJ6RkZLWlVHWndjc3RxS3RWa0RsSTJIaF81NVNsR0RsZVB5amp2S1oxam1kV2tvMUdwVFowQ2hqb3gtWFVoUA?oc=5)
 **カテゴリ:** 規制・法務
-**タグ:** 車両税, Pemutihan, インドネシア生活, 名義変更, 節税
+**タグ:** 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

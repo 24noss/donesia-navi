@@ -2,7 +2,7 @@
 title: "マルク諸島で地震発生——現地の状況と在住者が確認すべきこと"
 description: "2026年4月2日、マルク州（Maluku）で地震が発生。在住者向けに現時点で分かっている情報と確認事項をまとめた。"
 category: "safety"
-tags: ["地震", "マルク", "防災", "BMKG", "安全情報"]
+tags: ["地震", "防災", "BMKG"]
 pubDate: 2026-04-02
 source: "Kompas"
 sourceUrl: "https://bola.kompas.com/read/2026/04/02/20344938/gempa-maluku-terjadi-malut-united-tetap-jaga-fokus-hadapi-arema-fc"
@@ -31,6 +31,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://bola.kompas.com/read/2026/04/02/20344938/gempa-maluku-terjadi-malut-united-tetap-jaga-fokus-hadapi-arema-fc)
 **カテゴリ:** 安全・災害
-**タグ:** 地震, マルク, 防災, BMKG, 安全情報
+**タグ:** 地震, 防災, BMKG
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

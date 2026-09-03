@@ -2,7 +2,7 @@
 title: "インドネシアの7月物価指数は0.14％のデフレ　食品価格下落が主因、BPS発表"
 description: "中央統計庁（BPS）は8月3日、2026年7月の消費者物価指数（CPI）が前月比で0.14％下落しデフレとなったと発表した。食品や調味料の値下がりが影響した一方、交通費や貴金属類は上昇傾向が続いている。"
 category: "business"
-tags: ["インフレ率", "BPS", "物価", "インドネシア経済", "デフレ"]
+tags: ["インドネシア経済", "物価"]
 pubDate: 2026-08-03
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5677247/bps-indonesia-catat-deflasi-bulanan-014-persen-pada-juli-2026"
@@ -25,6 +25,6 @@ Antara通信の報道によると、インドネシア中央統計庁（BPS）�
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5677247/bps-indonesia-catat-deflasi-bulanan-014-persen-pada-juli-2026)
 **カテゴリ:** 経済・ビジネス
-**タグ:** インフレ率, BPS, 物価, インドネシア経済, デフレ
+**タグ:** インドネシア経済, 物価
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

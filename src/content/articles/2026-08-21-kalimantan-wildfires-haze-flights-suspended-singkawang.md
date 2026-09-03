@@ -2,7 +2,7 @@
 title: "カリマンタン等で森林火災の煙霧が悪化、シンカワン空港などで欠航や運航停止"
 description: "インドネシアのカリマンタン島などで乾季に伴う森林・原野火災（山火事）が深刻化し、発生した濃い煙霧（ヘイズ）により視程が悪化、西カリマンタン州のシンカワン空港で全便の運航が停止されるなど航空交通に影響が出ています。"
 category: "safety"
-tags: ["森林火災", "ヘイズ", "航空情報", "カリマンタン", "乾季"]
+tags: ["防災", "大気汚染", "フライト情報", "BMKG"]
 pubDate: 2026-08-21
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/21/194309727/karhutla-kalimantan-semua-penerbangan-di-bandara-singkawang-dihentikan"
@@ -25,6 +25,6 @@ Kompas、Antara、Detik各紙の報道によると、インドネシアのカリ
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/21/194309727/karhutla-kalimantan-semua-penerbangan-di-bandara-singkawang-dihentikan)
 **カテゴリ:** 安全・災害
-**タグ:** 森林火災, ヘイズ, 航空情報, カリマンタン, 乾季
+**タグ:** 防災, 大気汚染, フライト情報, BMKG
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

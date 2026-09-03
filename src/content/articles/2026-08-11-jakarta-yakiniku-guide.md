@@ -2,7 +2,7 @@
 title: "ジャカルタの焼肉店5選【2026年版】"
 description: "和牛オマカセの名店から食べ放題まで、在住日本人に人気のジャカルタ焼肉店を厳選紹介。接待からファミリーまでシーン別に選べる"
 category: "gourmet"
-tags: ["焼肉", "日本食", "ジャカルタ", "グルメ", "和牛", "レストラン"]
+tags: ["焼肉", "日本食", "ジャカルタ", "グルメ", "和牛"]
 pubDate: 2026-08-11
 source: "WebSearch"
 sourceUrl: "https://www.tripadvisor.com/Restaurants-g294229-zfd11735-Jakarta_Java-Yakiniku_Japanese_BBQ.html"

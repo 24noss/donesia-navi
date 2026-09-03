@@ -2,7 +2,7 @@
 title: "OJKが中東紛争によるインフレ加速を警告、在住者の家計への影響は"
 description: "金融庁（OJK）が中東紛争の影響でインフレが加速する可能性を警告。インドネシア在住者の生活コストへの影響を解説します。"
 category: "business"
-tags: ["インフレ", "OJK", "中東情勢", "物価", "金融"]
+tags: ["インドネシア経済", "両替・金融", "物価"]
 pubDate: 2026-04-06
 source: "Detik"
 sourceUrl: "https://finance.detik.com/berita-ekonomi-bisnis/d-8431270/ojk-wanti-wanti-inflasi-meroket-dampak-perang-timur-tengah"
@@ -42,6 +42,6 @@ OJKは金融機関に対し、リスク管理の強化を求めるとともに�
 ---
 **情報ソース:** [Detik Finance — OJK Wanti-wanti Inflasi Meroket Dampak Perang Timur Tengah](https://finance.detik.com/berita-ekonomi-bisnis/d-8431270/ojk-wanti-wanti-inflasi-meroket-dampak-perang-timur-tengah)
 **カテゴリ:** 経済・ビジネス
-**タグ:** インフレ、OJK、中東情勢、物価、金融
+**タグ:** インドネシア経済, 両替・金融, 物価
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

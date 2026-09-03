@@ -2,7 +2,7 @@
 title: "ジャカルタのイタリアンレストラン5選【2026年版】"
 description: "接待から記念日、家族の食事まで。ジャカルタで本格イタリアンを楽しめるおすすめ5店を厳選紹介。"
 category: "gourmet"
-tags: ["イタリアン", "レストラン", "ジャカルタ", "グルメ", "パスタ", "ピザ"]
+tags: ["イタリアン", "レストラン", "ジャカルタ", "グルメ"]
 pubDate: 2026-08-11
 source: "WebSearch"
 sourceUrl: "https://www.google.com/maps"

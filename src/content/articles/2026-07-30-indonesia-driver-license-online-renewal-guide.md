@@ -2,7 +2,7 @@
 title: "インドネシアの運転免許証（SIM）オンライン更新　アプリでの最新手続き手順"
 description: "国家警察交通局はアプリ「Digital Korlantas」による運転免許証（SIM A・C）のオンライン更新手続き手順を案内している。期限切れ前のスムーズな申請が推奨される。"
 category: "regulation"
-tags: ["運転免許証", "SIM更新", "DigitalKorlantas", "手続き指南"]
+tags: ["生活情報"]
 pubDate: 2026-07-30
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5673636/cara-perpanjang-sim-online-2026-syarat-biaya-dan-panduan-lengkap-lewat-digital-korlantas"
@@ -25,6 +25,6 @@ Antara通信の報道によると、インドネシア国家警察交通局（Ko
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5673636/cara-perpanjang-sim-online-2026-syarat-biaya-dan-panduan-lengkap-lewat-digital-korlantas)
 **カテゴリ:** 規制・法務
-**タグ:** 運転免許証, SIM更新, DigitalKorlantas, 手続き指南
+**タグ:** 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

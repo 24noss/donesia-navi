@@ -14,6 +14,8 @@ import {
   geminiApiUrl,
   GEMINI_MODEL_PRIMARY,
   GEMINI_MODEL_FALLBACK,
+  filterTagsByVocabulary,
+  TAG_VOCABULARY,
 } from './crawl-and-draft.mjs';
 
 describe('escapeYaml', () => {
@@ -83,6 +85,62 @@ describe('validateArticle', () => {
     const problems = validateArticle(article);
     assert.ok(problems.some((p) => p.includes('tags')));
     assert.ok(problems.some((p) => p.includes('keyPoints')));
+  });
+});
+
+describe('filterTagsByVocabulary (タグ統制: 語彙外タグの機械的フィルタ)', () => {
+  test('語彙内のタグは維持される', () => {
+    const result = filterTagsByVocabulary(['グルメ', '日本食'], 'gourmet');
+    assert.deepEqual(result, ['グルメ', '日本食']);
+  });
+
+  test('語彙外のタグ（固有名詞等）は除去される', () => {
+    const result = filterTagsByVocabulary(['グルメ', 'AkiraBack', '日本食'], 'gourmet');
+    assert.deepEqual(result, ['グルメ', '日本食']);
+  });
+
+  test('フィルタ後に0個になった場合はカテゴリ別デフォルトタグを1個付与する', () => {
+    assert.deepEqual(filterTagsByVocabulary(['店名A', '店名B'], 'gourmet'), ['グルメ']);
+    assert.deepEqual(filterTagsByVocabulary([], 'safety'), ['注意喚起']);
+    assert.deepEqual(filterTagsByVocabulary(['固有名詞'], 'business'), ['インドネシア経済']);
+    assert.deepEqual(filterTagsByVocabulary(['固有名詞'], 'travel'), ['観光']);
+    assert.deepEqual(filterTagsByVocabulary(['固有名詞'], 'visa'), ['ビザ']);
+    assert.deepEqual(filterTagsByVocabulary(['固有名詞'], 'lifestyle'), ['生活情報']);
+    assert.deepEqual(filterTagsByVocabulary(['固有名詞'], 'society'), ['生活情報']);
+    assert.deepEqual(filterTagsByVocabulary(['固有名詞'], 'regulation'), ['生活情報']);
+  });
+
+  test('未知のカテゴリでフィルタ後0個の場合はデフォルトタグを付与せず空配列のまま', () => {
+    assert.deepEqual(filterTagsByVocabulary(['固有名詞'], 'not-a-category'), []);
+  });
+
+  test('重複タグは除去される', () => {
+    const result = filterTagsByVocabulary(['ジャカルタ', 'ジャカルタ', 'グルメ'], 'gourmet');
+    assert.deepEqual(result, ['ジャカルタ', 'グルメ']);
+  });
+
+  test('5個を超える場合は先頭から5個に切り詰める', () => {
+    const result = filterTagsByVocabulary(
+      ['ジャカルタ', 'グルメ', '日本食', 'レストラン', '南ジャカルタ', '和牛'],
+      'gourmet'
+    );
+    assert.equal(result.length, 5);
+    assert.deepEqual(result, ['ジャカルタ', 'グルメ', '日本食', 'レストラン', '南ジャカルタ']);
+  });
+
+  test('tagsがnull/undefinedでも例外を投げない', () => {
+    assert.deepEqual(filterTagsByVocabulary(null, 'gourmet'), ['グルメ']);
+    assert.deepEqual(filterTagsByVocabulary(undefined, 'safety'), ['注意喚起']);
+  });
+
+  test('vocabulary引数を明示的に渡した場合はそちらを使う（デフォルトのTAG_VOCABULARYを使わない）', () => {
+    const result = filterTagsByVocabulary(['カスタムタグ'], 'gourmet', new Set(['カスタムタグ']));
+    assert.deepEqual(result, ['カスタムタグ']);
+  });
+
+  test('TAG_VOCABULARY は空でない配列としてエクスポートされている', () => {
+    assert.ok(Array.isArray(TAG_VOCABULARY));
+    assert.ok(TAG_VOCABULARY.length > 0);
   });
 });
 

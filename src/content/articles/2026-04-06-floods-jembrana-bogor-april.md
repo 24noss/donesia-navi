@@ -2,7 +2,7 @@
 title: "バリ島ジュンブラナからボゴールまで各地で洪水、数百世帯が被害"
 description: "この1週間でバリ島西部ジュンブラナから西ジャワのボゴールまで広範囲で洪水が発生。在住者向け注意情報をまとめました。"
 category: "safety"
-tags: ["洪水", "バリ島", "ボゴール", "雨季", "防災"]
+tags: ["洪水", "バリ島", "ボゴール", "BMKG", "防災"]
 pubDate: 2026-04-06
 source: "Kompas"
 sourceUrl: "https://nasional.kompas.com/read/2026/04/06/14270451/banjir-terjang-sejumlah-wilayah-sepekan-terakhir-dari-jembrana-hingga-bogor"
@@ -43,6 +43,6 @@ Kompasの報道によると、この1週間（3月末〜4月初旬）で、イ�
 ---
 **情報ソース:** [Kompas — Banjir Terjang Sejumlah Wilayah Sepekan Terakhir, dari Jembrana hingga Bogor](https://nasional.kompas.com/read/2026/04/06/14270451/banjir-terjang-sejumlah-wilayah-sepekan-terakhir-dari-jembrana-hingga-bogor)
 **カテゴリ:** 安全・災害
-**タグ:** 洪水、バリ島、ボゴール、雨季、防災
+**タグ:** 洪水, バリ島, ボゴール, BMKG, 防災
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

@@ -2,7 +2,7 @@
 title: "ボゴール周辺で11日に大雨の恐れ、BMKGが冠水や土砂災害に警戒呼びかけ"
 description: "インドネシア気象気候高等蜂起庁（BMKG）は、8月11日にボゴール地域で中程度から激しい雨が降る可能性があるとして注意報を出した。乾季の最中だが、局地的な大雨に伴う道路冠水や土砂崩れへの警戒が必要となる。"
 category: "safety"
-tags: ["BMKG", "ボゴール", "気象警報", "大雨", "防災"]
+tags: ["BMKG", "ボゴール", "防災"]
 pubDate: 2026-08-10
 source: "Kompas"
 sourceUrl: "http://megapolitan.kompas.com/read/2026/08/10/19463731/bmkg-waspada-hujan-sedang-lebat-di-bogor-selasa-11-agustus-2026"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](http://megapolitan.kompas.com/read/2026/08/10/19463731/bmkg-waspada-hujan-sedang-lebat-di-bogor-selasa-11-agustus-2026)
 **カテゴリ:** 安全・災害
-**タグ:** BMKG, ボゴール, 気象警報, 大雨, 防災
+**タグ:** BMKG, ボゴール, 防災
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

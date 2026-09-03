@@ -2,7 +2,7 @@
 title: "8月17日の独立記念日、KRLコミューターラインが「全線8ルピア」に　特別プロモ実施"
 description: "インドネシア独立記念日の8月17日、首都圏を走るKRLコミューターラインで運賃が8ルピアとなる特別プロモーションが実施される。無条件で適用され、当日の利用者の利便性を高める。"
 category: "lifestyle"
-tags: ["KRL", "コミューターライン", "独立記念日", "特別運賃", "ジャカルタ交通"]
+tags: ["KRL", "独立記念日", "鉄道", "交通"]
 pubDate: 2026-08-13
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/13/112031627/promo-17-agustus-2026-naik-krl-cuma-rp-8-tanpa-syarat"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/13/112031627/promo-17-agustus-2026-naik-krl-cuma-rp-8-tanpa-syarat)
 **カテゴリ:** 生活情報
-**タグ:** KRL, コミューターライン, 独立記念日, 特別運賃, ジャカルタ交通
+**タグ:** KRL, 独立記念日, 鉄道, 交通
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

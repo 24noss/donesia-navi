@@ -2,7 +2,7 @@
 title: "ルピア相場が対米ドルで下落、1米ドル＝18,111ルピアを記録"
 description: "米連邦準備制度理事会（FRB）の政策金利据え置き発表を受け、ルピア相場が1米ドル＝18,111ルピアまで下落した。在住日本人の生活費や企業活動への影響が懸念される。"
 category: "business"
-tags: ["ルピア", "為替", "インドネシア経済", "米ドル"]
+tags: ["両替・金融", "インドネシア経済"]
 pubDate: 2026-07-30
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQMzdHRm40Y3MzWU5HdjdlM0xGOFlGY2pYNDROMEZZUmNwSGphcmVjZXNER1Ytd0FtN0xwRlBfcm4zYlc5NzhjYmN6ajNTendBOXo0YVB4WGhkQmx3VmxZTTUxa0tXZkFWeGRxQUxTZ19LVFNZRGdGZW44V016d2RSZnNYb0FOSzlNUXl0c1BnRnBVdkVpNGc0eUNLYUExSXNWZWhIX1hDY3FsWEtvM2FmSjJURlBaeVB4dVBmeEl5c3llazA?oc=5"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、外国為替市場でインドネシア・ル�
 ---
 **情報ソース:** [Kompas](https://news.google.com/rss/articles/CBMiwwFBVV95cUxQMzdHRm40Y3MzWU5HdjdlM0xGOFlGY2pYNDROMEZZUmNwSGphcmVjZXNER1Ytd0FtN0xwRlBfcm4zYlc5NzhjYmN6ajNTendBOXo0YVB4WGhkQmx3VmxZTTUxa0tXZkFWeGRxQUxTZ19LVFNZRGdGZW44V016d2RSZnNYb0FOSzlNUXl0c1BnRnBVdkVpNGc0eUNLYUExSXNWZWhIX1hDY3FsWEtvM2FmSjJURlBaeVB4dVBmeEl5c3llazA?oc=5)
 **カテゴリ:** 経済・ビジネス
-**タグ:** ルピア, 為替, インドネシア経済, 米ドル
+**タグ:** 両替・金融, インドネシア経済
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "ジャカルタで大気汚染が悪化、乾燥による「雲不足」で人工降雨も難航"
 description: "ジャカルタ首都特別州で乾季の乾燥に伴い大気汚染が悪化しています。州政府は大気改善のための天候改変（人工降雨）を試みているものの、雨雲が不足しており散布が困難な状況が続いています。"
 category: "safety"
-tags: ["ジャカルタ", "大気汚染", "乾季", "健康管理"]
+tags: ["ジャカルタ", "大気汚染", "BMKG", "医療"]
 pubDate: 2026-08-16
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8620703/pramono-ungkap-modifikasi-cuaca-untuk-tekan-polusi-terhambat-tak-ada-awan"
@@ -25,6 +25,6 @@ DetikやKompasの報道によると、ジャカルタ首都特別州では乾季
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8620703/pramono-ungkap-modifikasi-cuaca-untuk-tekan-polusi-terhambat-tak-ada-awan)
 **カテゴリ:** 安全・災害
-**タグ:** ジャカルタ, 大気汚染, 乾季, 健康管理
+**タグ:** ジャカルタ, 大気汚染, BMKG, 医療
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

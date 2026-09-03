@@ -2,7 +2,7 @@
 title: "タナアバン駅周辺でスリや恐喝が多発　警察とジャカルタ中央市が合同パトロール強化へ"
 description: "ジャカルタ中央区のタナアバン駅周辺でスリや不当な金銭要求などの被害が相次いでいることを受け、警察とジャカルタ中央市政府は合同パトロールを強化する方針を発表した。利用者に注意を呼びかけている。"
 category: "safety"
-tags: ["ジャカルタ治安", "タナアバン駅", "注意喚起", "防犯", "スリ被害"]
+tags: ["治安", "中央ジャカルタ", "注意喚起"]
 pubDate: 2026-08-12
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/12/22553241/marak-copet-dan-pemalakan-polisi-dan-pemkot-jakpus-bakal-patroli-di"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/12/22553241/marak-copet-dan-pemalakan-polisi-dan-pemkot-jakpus-bakal-patroli-di)
 **カテゴリ:** 安全・災害
-**タグ:** ジャカルタ治安, タナアバン駅, 注意喚起, 防犯, スリ被害
+**タグ:** 治安, 中央ジャカルタ, 注意喚起
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

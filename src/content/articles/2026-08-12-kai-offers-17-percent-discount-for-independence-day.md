@@ -2,7 +2,7 @@
 title: "国鉄KAI、独立記念日を祝し長距離列車で17％割引プロモを実施"
 description: "インドネシア国鉄（KAI）は、第81回独立記念日を記念して長距離列車チケットが17％引きとなる特別割引プロモーションを8月中旬に乗車する便を対象に実施する。"
 category: "travel"
-tags: ["KAI", "鉄道", "独立記念日", "割引キャンペーン"]
+tags: ["鉄道", "独立記念日", "キャンペーン・プロモ"]
 pubDate: 2026-08-12
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8614793/spesial-hut-ri-ada-diskon-tiket-kereta-api-jarak-jauh-simak-ketentuannya"
@@ -21,6 +21,6 @@ Detik、Kompas各紙の報道によると、インドネシア国鉄（PT KAI）
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8614793/spesial-hut-ri-ada-diskon-tiket-kereta-api-jarak-jauh-simak-ketentuannya)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** KAI, 鉄道, 独立記念日, 割引キャンペーン
+**タグ:** 鉄道, 独立記念日, キャンペーン・プロモ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

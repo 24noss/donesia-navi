@@ -2,7 +2,7 @@
 title: "アチェ州ロクスマウェ、洪水で5,000頭超が死亡——地元畜産業の復興に注力"
 description: "昨年11月の大洪水で5,000頭以上の家畜が死亡したアチェ州ロクスマウェ市が、地元産畜産物の優先活用で経済回復を目指していると報じられている。"
 category: "safety"
-tags: ["洪水", "アチェ", "畜産業", "災害復興", "ロクスマウェ"]
+tags: ["洪水", "防災"]
 pubDate: 2026-04-02
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/video/5508333/lhokseumawe-prioritaskan-ternak-lokal-untuk-pulihkan-ekonomi-peternak"
@@ -27,6 +27,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/video/5508333/lhokseumawe-prioritaskan-ternak-lokal-untuk-pulihkan-ekonomi-peternak)
 **カテゴリ:** 安全・災害
-**タグ:** 洪水, アチェ, 畜産業, 災害復興, ロクスマウェ
+**タグ:** 洪水, 防災
 
 *この記事はAIが生成し、人間の編集者がレビューしています。*

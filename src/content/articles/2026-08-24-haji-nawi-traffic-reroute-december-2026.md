@@ -2,7 +2,7 @@
 title: "南ジャカルタのハジナビ通りで工事に伴う交通規制　2026年12月まで実施へ"
 description: "南ジャカルタのハジナビ通りでインフラ工事に伴う交通規制が開始された。迂回路の設定や車線規制が実施されており、規制は2026年12月まで続く予定。MRTハジナビ駅周辺など近隣を利用する在住者は渋滞に注意が必要だ。"
 category: "safety"
-tags: ["ジャカルタ", "交通規制", "ハジナビ", "南ジャカルタ", "渋滞"]
+tags: ["ジャカルタ", "交通規制", "南ジャカルタ", "渋滞"]
 pubDate: 2026-08-24
 source: "Kompas"
 sourceUrl: "https://otomotif.kompas.com/read/2026/08/24/062200015/ada-proyek-rekayasa-lalin-di-haji-nawi-berlaku-hingga-desember-2026"
@@ -21,6 +21,6 @@ Kompasの報道によると、南ジャカルタの主要道路の一つであ�
 ---
 **情報ソース:** [Kompas](https://otomotif.kompas.com/read/2026/08/24/062200015/ada-proyek-rekayasa-lalin-di-haji-nawi-berlaku-hingga-desember-2026)
 **カテゴリ:** 安全・災害
-**タグ:** ジャカルタ, 交通規制, ハジナビ, 南ジャカルタ, 渋滞
+**タグ:** ジャカルタ, 交通規制, 南ジャカルタ, 渋滞
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

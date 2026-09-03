@@ -2,7 +2,7 @@
 title: "ジャカルタの大気汚染が世界4位の悪化水準に　乾季の影響でPM2.5高水準"
 description: "7月31日朝、ジャカルタの大気質指数（AQI）が世界第4位の悪化水準を記録した。本格的な乾季の影響もあり呼吸器系への影響が懸念され、屋外活動時の注意が呼びかけられている。"
 category: "safety"
-tags: ["ジャカルタ", "大気汚染", "健康管理", "AQI"]
+tags: ["ジャカルタ", "大気汚染", "医療"]
 pubDate: 2026-07-31
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5673671/udara-jakarta-terburuk-keempat-di-dunia-pada-jumat-pagi"
@@ -25,6 +25,6 @@ Antara通信の報道によると、2026年7月31日金曜日の早朝、ジャ�
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5673671/udara-jakarta-terburuk-keempat-di-dunia-pada-jumat-pagi)
 **カテゴリ:** 安全・災害
-**タグ:** ジャカルタ, 大気汚染, 健康管理, AQI
+**タグ:** ジャカルタ, 大気汚染, 医療
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

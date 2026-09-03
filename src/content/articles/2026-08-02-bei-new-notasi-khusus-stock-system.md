@@ -2,7 +2,7 @@
 title: "インドネシア証券取引所（BEI）、8月3日より上場株の「特別表記（Notasi Khusus）」運用を開始"
 description: "インドネシア証券取引所（BEI）は2026年8月3日より、上場企業の財務状況やコンプライアンス状態を示す「特別表記（Notasi Khusus）」の運用ルールを刷新する。投資家に対する情報開示と保護を強化する狙いがある。"
 category: "business"
-tags: ["インドネシア株式", "BEI", "資産運用", "株式投資", "金融規制"]
+tags: ["両替・金融"]
 pubDate: 2026-08-02
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMitwFBVV95cUxNOW5UNTlncVVFN1NGbHB6MEdvNFRvd1JfcTVSMURfekpob0cyUjJ4TnVWdnIycjc4M2Z0elNjUXVwTjRhbnk2TDRqaTFMQ3JiOXV2UkxiWWZhR2JlWVJXSUdTanpPMzZZMGJkSE5hc0VWOFVmS21FWnRhdUI1bUI3ckVaXzNLMmlTWmhzYjdNanNmazEzSmRYWVI3a2Y3YXZXUEZnTTRacEJ1RTVCaTJ5V3QtRzNWeTg?oc=5"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、インドネシア証券取引所（BEI）は20
 ---
 **情報ソース:** [Kompas](https://news.google.com/rss/articles/CBMitwFBVV95cUxNOW5UNTlncVVFN1NGbHB6MEdvNFRvd1JfcTVSMURfekpob0cyUjJ4TnVWdnIycjc4M2Z0elNjUXVwTjRhbnk2TDRqaTFMQ3JiOXV2UkxiWWZhR2JlWVJXSUdTanpPMzZZMGJkSE5hc0VWOFVmS21FWnRhdUI1bUI3ckVaXzNLMmlTWmhzYjdNanNmazEzSmRYWVI3a2Y3YXZXUEZnTTRacEJ1RTVCaTJ5V3QtRzNWeTg?oc=5)
 **カテゴリ:** 経済・ビジネス
-**タグ:** インドネシア株式, BEI, 資産運用, 株式投資, 金融規制
+**タグ:** 両替・金融
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

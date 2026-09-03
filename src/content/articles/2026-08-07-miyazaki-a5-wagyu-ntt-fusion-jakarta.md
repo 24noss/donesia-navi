@@ -2,7 +2,7 @@
 title: "ハラール認証の宮崎県産A5和牛とNTT伝統料理が融合　ジャカルタのレストランで話題に"
 description: "ジャカルタのレストランにて、ハラール認証を取得した最高級の日本産「宮崎A5和牛」とインドネシア東ヌサ・トゥンガラ州（NTT）の伝統料理を融合させた特別メニューが登場しました。"
 category: "gourmet"
-tags: ["ジャカルタグルメ", "和牛", "宮崎牛", "ハラールフード"]
+tags: ["グルメ", "和牛", "ハラル"]
 pubDate: 2026-08-07
 source: "publika.id"
 sourceUrl: "https://www.publika.id/restoran-jakarta-padukan-wagyu-a5-kuliner-ntt"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [publika.id](https://www.publika.id/restoran-jakarta-padukan-wagyu-a5-kuliner-ntt)
 **カテゴリ:** グルメ・レストラン
-**タグ:** ジャカルタグルメ, 和牛, 宮崎牛, ハラールフード
+**タグ:** グルメ, 和牛, ハラル
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

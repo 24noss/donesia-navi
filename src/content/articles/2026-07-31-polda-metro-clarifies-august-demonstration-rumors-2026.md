@@ -2,7 +2,7 @@
 title: "8月にジャカルタで「大規模デモ」の噂、ジャカルタ警視庁が冷静な対応を呼びかけ"
 description: "2026年8月にジャカルタ市内で大規模なデモが予定されているとの噂がSNS等で拡散した件で、ジャカルタ警視庁は情報の真偽を説明し、在住者や市民に対してSNSの不確定な情報に流されないよう警戒と冷静な対応を呼びかけました。"
 category: "safety"
-tags: ["ジャカルタ", "デモ", "治安情報", "警察", "安全対策"]
+tags: ["ジャカルタ", "デモ", "治安", "注意喚起"]
 pubDate: 2026-07-31
 source: "Kompas"
 sourceUrl: "https://news.google.com/rss/articles/CBMixAFBVV95cUxPWm5TS3QyRWlJZWFLZlk4RXZYaFJlTUtTRFJkcDF4c3l2b1B4UzluZFVxbk1VeUVBMnA2ZGh3SnU1ZTk0S3FzXzktcnh2VUVwRk1Md0tNbDJ6UXQ4NHpUR0Z1eDJJMmI2aDBrWTI4RFBJZGI5TzVaRlcyYTE0MjIzUUJ2V2xfWXhjbDh1U21zWXBBNGJJdVcyR1RIOWNVdUd2ZjQ0d0VDTkltdmtnTzg5em1VaW5wbXVZbmZpbEIza1RZZWJF?oc=5"
@@ -25,6 +25,6 @@ Kompasの報道によると、2026年8月にジャカルタ市内で大規模な
 ---
 **情報ソース:** [Kompas](https://news.google.com/rss/articles/CBMixAFBVV95cUxPWm5TS3QyRWlJZWFLZlk4RXZYaFJlTUtTRFJkcDF4c3l2b1B4UzluZFVxbk1VeUVBMnA2ZGh3SnU1ZTk0S3FzXzktcnh2VUVwRk1Md0tNbDJ6UXQ4NHpUR0Z1eDJJMmI2aDBrWTI4RFBJZGI5TzVaRlcyYTE0MjIzUUJ2V2xfWXhjbDh1U21zWXBBNGJJdVcyR1RIOWNVdUd2ZjQ0d0VDTkltdmtnTzg5em1VaW5wbXVZbmZpbEIza1RZZWJF?oc=5)
 **カテゴリ:** 安全・災害
-**タグ:** ジャカルタ, デモ, 治安情報, 警察, 安全対策
+**タグ:** ジャカルタ, デモ, 治安, 注意喚起
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

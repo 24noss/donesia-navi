@@ -2,7 +2,7 @@
 title: "南ジャカルタ・クマンのコスで麻酔薬入り違法Vape密造拠点を摘発"
 description: "国家警察犯罪捜査局は、南ジャカルタ・クマンのコス（アパート）で麻酔薬エトミデートを混ぜた違法な電子タバコ（Vape）リキッドを製造していた拠点を摘発した。外国人や在住者が多いエリアだけに警戒が呼びかけられている。"
 category: "safety"
-tags: ["クマン", "南ジャカルタ", "治安", "薬物摘発", "警察"]
+tags: ["クマン", "南ジャカルタ", "治安"]
 pubDate: 2026-08-08
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8610310/bareskrim-bongkar-pabrik-vape-etomidate-di-kamar-kos-kemang"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8610310/bareskrim-bongkar-pabrik-vape-etomidate-di-kamar-kos-kemang)
 **カテゴリ:** 安全・災害
-**タグ:** クマン, 南ジャカルタ, 治安, 薬物摘発, 警察
+**タグ:** クマン, 南ジャカルタ, 治安
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

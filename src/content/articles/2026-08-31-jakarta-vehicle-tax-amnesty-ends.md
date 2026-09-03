@@ -2,7 +2,7 @@
 title: "ジャカルタ州の車両税滞納ペナルティ免除プログラム、8月31日で終了"
 description: "ジャカルタ首都特別州政府が実施していた車両税（PKB）および名義変更手数料（BBNKB）の延滞金免除プログラムが2026年8月31日をもって終了します。対象者は期日内の納付手続きが必要です。"
 category: "regulation"
-tags: ["車両税", "交通行政", "ジャカルタ", "税金"]
+tags: ["生活情報", "交通規制", "ジャカルタ"]
 pubDate: 2026-08-31
 source: "Kompas"
 sourceUrl: "https://otomotif.kompas.com/read/2026/08/31/063908515/jangan-terlewat-pemutihan-pajak-kendaraan-jakarta-berakhir-hari-ini"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、ジャカルタ首都特別州歳入庁（Bapen
 ---
 **情報ソース:** [Kompas](https://otomotif.kompas.com/read/2026/08/31/063908515/jangan-terlewat-pemutihan-pajak-kendaraan-jakarta-berakhir-hari-ini)
 **カテゴリ:** 規制・法務
-**タグ:** 車両税, 交通行政, ジャカルタ, 税金
+**タグ:** 生活情報, 交通規制, ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

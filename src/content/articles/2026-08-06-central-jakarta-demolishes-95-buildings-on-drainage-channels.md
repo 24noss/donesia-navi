@@ -2,7 +2,7 @@
 title: "中央ジャカルタ政府、浸水対策で排水路上の不法建築物95棟を徹底撤去"
 description: "中央ジャカルタ行政区政府は、地域内の雨水氾濫や冠水被害を未然に防ぐため、補助排水路上に建てられていた不法建造物95棟の解体・撤去作業を実施した。都市インフラの排水機能改善を図る。"
 category: "society"
-tags: ["中央ジャカルタ", "冠水対策", "排水路", "都市インフラ", "ジャカルタ州政府"]
+tags: ["中央ジャカルタ", "洪水", "インフラ", "生活情報"]
 pubDate: 2026-08-06
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/06/12391961/atasi-masalah-genangan-95-bangunan-di-atas-saluran-phb-di-jakpus"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/06/12391961/atasi-masalah-genangan-95-bangunan-di-atas-saluran-phb-di-jakpus)
 **カテゴリ:** 社会・政治
-**タグ:** 中央ジャカルタ, 冠水対策, 排水路, 都市インフラ, ジャカルタ州政府
+**タグ:** 中央ジャカルタ, 洪水, インフラ, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

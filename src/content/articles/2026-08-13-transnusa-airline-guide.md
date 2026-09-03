@@ -2,7 +2,7 @@
 title: "トランスヌサ航空の利用ガイド【2026年版】路線・予約・手荷物を徹底解説"
 description: "ジャカルタ在住日本人向けに、LCCトランスヌサ航空(TransNusa)の路線網・予約方法・手荷物規定・当日の流れ・遅延対応・他社比較をまとめた保存版ガイド。バリ島など国内移動や、日本からの家族の周遊にも役立つ実践情報を紹介する。"
 category: "travel"
-tags: ["トランスヌサ", "TransNusa", "国内線", "LCC", "航空券", "バリ島"]
+tags: ["フライト情報", "バリ島"]
 pubDate: 2026-08-13
 source: "WebSearch"
 sourceUrl: "https://www.transnusa.co.id/"

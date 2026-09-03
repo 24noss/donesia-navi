@@ -2,7 +2,7 @@
 title: "西ジャカルタの高級ホテル「プルマン」で火災が発生、電気系統のショートが原因か"
 description: "西ジャカルタ・グロゴルにある高級ホテル「プルマン」で8月1日早朝、火災が発生した。消防隊員75名が出動し鎮火。電気系統のショートが原因とみられている。"
 category: "safety"
-tags: ["火災", "プルマンホテル", "西ジャカルタ", "安全情報", "事故"]
+tags: ["火災", "西ジャカルタ", "防災", "交通規制"]
 pubDate: 2026-08-01
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8599697/kebakaran-di-hotel-pullman-padam-diduga-dipicu-korsleting"
@@ -25,6 +25,6 @@ Detik、Antara各紙の報道によると、2026年8月1日早朝、西ジャカ
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8599697/kebakaran-di-hotel-pullman-padam-diduga-dipicu-korsleting)
 **カテゴリ:** 安全・災害
-**タグ:** 火災, プルマンホテル, 西ジャカルタ, 安全情報, 事故
+**タグ:** 火災, 西ジャカルタ, 防災, 交通規制
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

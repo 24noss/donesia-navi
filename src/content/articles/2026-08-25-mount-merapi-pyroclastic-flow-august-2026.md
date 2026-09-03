@@ -2,7 +2,7 @@
 title: "中部ジャワ・ムラピ山で火砕流が発生　南西方向に2,000メートル流出、警戒呼びかけ"
 description: "中部ジャワ州とジョグジャカルタ特別州にまたがるムラピ山で、2,000メートルに及ぶ火砕流が観測された。地質災害技術研究開発センター（BPPTKG）は警戒レベル3（Siaga）を維持し、危険区域への立ち入り禁止を呼びかけている。"
 category: "safety"
-tags: ["ムラピ山", "火山噴火", "火砕流", "ジョグジャカルタ", "防災"]
+tags: ["ジョグジャカルタ", "防災"]
 pubDate: 2026-08-25
 source: "Kompas"
 sourceUrl: "http://yogyakarta.kompas.com/read/2026/08/25/200900978/selasa-siang-gunung-merapi-luncurkan-awan-panas-sejauh-2000-meter?source=terkini_artikel"
@@ -25,6 +25,6 @@ BPPTKGによると、今回の火砕流発生時の地震動は振幅40ミリ、
 ---
 **情報ソース:** [Kompas](http://yogyakarta.kompas.com/read/2026/08/25/200900978/selasa-siang-gunung-merapi-luncurkan-awan-panas-sejauh-2000-meter?source=terkini_artikel)
 **カテゴリ:** 安全・災害
-**タグ:** ムラピ山, 火山噴火, 火砕流, ジョグジャカルタ, 防災
+**タグ:** ジョグジャカルタ, 防災
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

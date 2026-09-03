@@ -2,7 +2,7 @@
 title: "チペテの飲食店「Tori Makashi」が新メニュー提供　特製ネギ葉ライムサンバルが好評"
 description: "南ジャカルタ・チペテの人気店「Tori Makashi」が新メニューを公開。ネギとコブミカンの葉を合わせた「サンバル・バワン・ダウン・ジェルック」が食通の間で人気を集めています。"
 category: "gourmet"
-tags: ["ジャカルタグルメ", "チペテ", "Tori Makashi", "新メニュー"]
+tags: ["グルメ", "南ジャカルタ", "日本食"]
 pubDate: 2026-08-13
 source: "Radar Bogor"
 sourceUrl: "https://radarbogor.jawapos.com/kuliner/2608130003/bella-kuku-tanesia-cicipi-menu-baru-tori-makashi-cipete-sambal-bawang-daun-jeruk-jadi-favorit"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Radar Bogor](https://radarbogor.jawapos.com/kuliner/2608130003/bella-kuku-tanesia-cicipi-menu-baru-tori-makashi-cipete-sambal-bawang-daun-jeruk-jadi-favorit)
 **カテゴリ:** グルメ・レストラン
-**タグ:** ジャカルタグルメ, チペテ, Tori Makashi, 新メニュー
+**タグ:** グルメ, 南ジャカルタ, 日本食
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

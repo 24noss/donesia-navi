@@ -2,7 +2,7 @@
 title: "SEFASグループ、インドネシアの「シェル」ガソリンスタンド事業を100％買収"
 description: "インドネシアのエネルギー・潤滑油流通大手SEFASグループが、国内で展開するシェル（Shell）のガソリンスタンド（SPBU）事業を100％買収したことが分かった。店舗網の運営は引き継がれる見込み。"
 category: "business"
-tags: ["シェル", "ガソリンスタンド", "SEFAS", "エネルギー", "企業買収"]
+tags: ["インドネシア経済"]
 pubDate: 2026-08-19
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/19/143816826/sefas-group-akuisisi-100-persen-bisnis-spbu-shell-di-indonesia"
@@ -25,6 +25,6 @@ KompasおよびAntaraの報道によると、インドネシアの大手エネ�
 ---
 **情報ソース:** [Kompas](https://money.kompas.com/read/2026/08/19/143816826/sefas-group-akuisisi-100-persen-bisnis-spbu-shell-di-indonesia)
 **カテゴリ:** 経済・ビジネス
-**タグ:** シェル, ガソリンスタンド, SEFAS, エネルギー, 企業買収
+**タグ:** インドネシア経済
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

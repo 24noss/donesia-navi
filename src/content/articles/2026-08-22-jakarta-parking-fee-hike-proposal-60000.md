@@ -2,7 +2,7 @@
 title: "ジャカルタの駐車料金、最大1時間6万ルピアに引き上げ検討　セノパティやPIKなど混雑地域対象"
 description: "ジャカルタ州政府が渋滞緩和と公共交通利用促進を目的に、セノパティやクマン、PIKなどの混雑エリアで駐車料金を最大1時間6万ルピアに引き上げる方針を検討している。"
 category: "society"
-tags: ["ジャカルタ", "駐車料金", "交通政策", "渋滞対策"]
+tags: ["ジャカルタ", "生活情報", "交通規制"]
 pubDate: 2026-08-22
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/22/06295271/tarif-parkir-jakarta-diusulkan-naik-hingga-rp-60000-per-jam-ini-alasan"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、ジャカルタ州政府は市内の交通渋�
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/22/06295271/tarif-parkir-jakarta-diusulkan-naik-hingga-rp-60000-per-jam-ini-alasan)
 **カテゴリ:** 社会・政治
-**タグ:** ジャカルタ, 駐車料金, 交通政策, 渋滞対策
+**タグ:** ジャカルタ, 生活情報, 交通規制
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

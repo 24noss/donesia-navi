@@ -2,7 +2,7 @@
 title: "ジャカルタ南部や南タンゲランで3日朝に大規模停電　PLNが原因調査と復旧進める"
 description: "8月3日朝、ジャカルタ南部および南タンゲランの複数地域で大規模な停電が発生した。電力公社（PLN）によると電力供給の障害が原因で、午前7時過ぎから順次復旧作業が進められている。"
 category: "society"
-tags: ["ジャカルタ南部", "停電", "PLN", "インフラ", "南タンゲラン"]
+tags: ["南ジャカルタ", "インフラ", "物価"]
 pubDate: 2026-08-03
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8601614/pln-ungkap-penyebab-jaksel-tangsel-mati-listrik-kini-mulai-kembali-normal"
@@ -25,6 +25,6 @@ Detikの報道によると、国営電力会社（PLN）は今回の停電につ
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8601614/pln-ungkap-penyebab-jaksel-tangsel-mati-listrik-kini-mulai-kembali-normal)
 **カテゴリ:** 社会・政治
-**タグ:** ジャカルタ南部, 停電, PLN, インフラ, 南タンゲラン
+**タグ:** 南ジャカルタ, インフラ, 物価
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

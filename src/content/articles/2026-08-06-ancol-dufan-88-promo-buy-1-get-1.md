@@ -2,7 +2,7 @@
 title: "アンコールが「8.8」特別プロモ実施、Dufanチケット購入で1枚無料に"
 description: "ジャカルタ北部の複合レジャー施設アンコールが「8.8」プロモーションを発表。8月8日限定でテーマパーク「Dufan」のチケットを1枚購入すると1枚無料になるお得な割引が提供される。"
 category: "lifestyle"
-tags: ["アンコール", "Dufan", "プロモーション", "ジャカルタ生活", "8.8セール"]
+tags: ["生活情報", "キャンペーン・プロモ"]
 pubDate: 2026-08-06
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/06/194500427/daftar-promo-8.8-di-ancol-beli-1-gratis-1-tiket-dufan?page=all"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/06/194500427/daftar-promo-8.8-di-ancol-beli-1-gratis-1-tiket-dufan?page=all)
 **カテゴリ:** 生活・グルメ
-**タグ:** アンコール, Dufan, プロモーション, ジャカルタ生活, 8.8セール
+**タグ:** 生活情報, キャンペーン・プロモ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

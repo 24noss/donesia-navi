@@ -2,7 +2,7 @@
 title: "インドネシア警察、電子取り締まり「ETLE」に顔認証システム導入　ナンバー違反など多数検知"
 description: "インドネシア国家警察交通局は電子交通取り締まり（ETLE）に顔認証技術を統合した。偽造ナンバープレートの使用や名義変更未実施などの違反1万6000件以上をすでに記録し、監視体制を強化している。"
 category: "regulation"
-tags: ["ETLE", "交通取り締まり", "顔認証", "ジャカルタ交通", "インドネシア警察"]
+tags: ["交通規制", "交通", "治安"]
 pubDate: 2026-08-04
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8604374/korlantas-pakai-sistem-face-recognition-16-ribu-pelanggaran-pelat-nomor-terekam-etle"
@@ -21,6 +21,6 @@ Detikの報道によると、インドネシア国家警察交通局（Korlantas
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8604374/korlantas-pakai-sistem-face-recognition-16-ribu-pelanggaran-pelat-nomor-terekam-etle)
 **カテゴリ:** 規制・法務
-**タグ:** ETLE, 交通取り締まり, 顔認証, ジャカルタ交通, インドネシア警察
+**タグ:** 交通規制, 交通, 治安
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

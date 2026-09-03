@@ -2,7 +2,7 @@
 title: "バンテン州沖でM5.8の地震発生　津波の心配なし、首都圏周辺でも揺れ"
 description: "インドネシア気象気候地球物理庁（BMKG）によると、22日未明にバンテン州スムール南西沖でM5.8の地震が発生した。震源の深さは10kmで津波の心配はない。"
 category: "safety"
-tags: ["地震", "防災", "バンテン州", "ジャカルタ"]
+tags: ["地震", "防災", "ジャカルタ"]
 pubDate: 2026-08-22
 source: "BMKG"
 sourceUrl: "https://www.bmkg.go.id/gempabumi/gempa-dirasakan.bmkg#2026-08-21T17%3A41%3A43%2B00%3A00"
@@ -25,6 +25,6 @@ BMKGはこの地震による津波の心配はないと発表しています。D
 ---
 **情報ソース:** [BMKG](https://www.bmkg.go.id/gempabumi/gempa-dirasakan.bmkg#2026-08-21T17%3A41%3A43%2B00%3A00)
 **カテゴリ:** 安全・災害
-**タグ:** 地震, 防災, バンテン州, ジャカルタ
+**タグ:** 地震, 防災, ジャカルタ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

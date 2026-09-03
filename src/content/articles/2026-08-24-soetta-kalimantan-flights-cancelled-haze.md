@@ -2,7 +2,7 @@
 title: "スカルノ・ハッタ空港発カリマンタン行き43便が欠航　森林火災の煙霧影響で"
 description: "スカルノ・ハッタ国際空港からカリマンタン各地へ向かう航空便43便が欠航となりました。現地で多発している森林火災（森林・泥炭地火災）に伴う深刻な煙霧（ヘイズ）による視界不良が原因です。"
 category: "travel"
-tags: ["スカルノハッタ空港", "フライト情報", "欠航", "煙霧", "カリマンタン"]
+tags: ["スカルノハッタ空港", "フライト情報", "大気汚染", "防災"]
 pubDate: 2026-08-24
 source: "Kompas"
 sourceUrl: "http://megapolitan.kompas.com/read/2026/08/24/19294671/43-penerbangan-tujuan-kalimantan-dari-bandara-soetta-dibatalkan-akibat?source=terkini_artikel"
@@ -21,6 +21,6 @@ Kompas紙の報道によると、ジャカルタのスカルノ・ハッタ国�
 ---
 **情報ソース:** [Kompas](http://megapolitan.kompas.com/read/2026/08/24/19294671/43-penerbangan-tujuan-kalimantan-dari-bandara-soetta-dibatalkan-akibat?source=terkini_artikel)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** スカルノハッタ空港, フライト情報, 欠航, 煙霧, カリマンタン
+**タグ:** スカルノハッタ空港, フライト情報, 大気汚染, 防災
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

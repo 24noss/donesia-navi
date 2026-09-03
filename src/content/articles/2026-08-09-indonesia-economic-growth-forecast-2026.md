@@ -2,7 +2,7 @@
 title: "2026年のインドネシア経済成長率は5％前後か、経済アナリストが保守的予測"
 description: "経済アナリストらは、2026年のインドネシア実質GDP成長率が約5％にとどまるとの予測を示している。世界的な不透明感や国内消費の伸び悩みが背景にあり、現地で事業を展開する日系企業の今後の見通しにも影響を与えそうだ。"
 category: "business"
-tags: ["インドネシア経済", "GDP成長率", "経済予測", "ビジネス"]
+tags: ["インドネシア経済"]
 pubDate: 2026-08-09
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/09/072600626/kenapa-ekonom-masih-ramal-ekonomi-indonesia-2026-hanya-sekitar-5-persen-"
@@ -21,6 +21,6 @@ Kompasの報道によると、多くの経済アナリストは2026年のイン�
 ---
 **情報ソース:** [Kompas](https://money.kompas.com/read/2026/08/09/072600626/kenapa-ekonom-masih-ramal-ekonomi-indonesia-2026-hanya-sekitar-5-persen-)
 **カテゴリ:** 経済・ビジネス
-**タグ:** インドネシア経済, GDP成長率, 経済予測, ビジネス
+**タグ:** インドネシア経済
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "インドネシア高速鉄道「Whoosh」、8月〜9月に運賃20％割引プロモを実施"
 description: "ジャカルタとバンドンを結ぶ高速鉄道「Whoosh」は、2026年8月から9月にかけて乗車券が20％割引となる特別プロモーションを実施しています。バンドンへの出張や週末の小旅行がお得に利用できます。"
 category: "travel"
-tags: ["高速鉄道", "Whoosh", "バンドン", "割引プロモ", "鉄道"]
+tags: ["鉄道", "バンドン", "キャンペーン・プロモ"]
 pubDate: 2026-08-21
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/21/183600327/diskon-whoosh-20-persen-pada-agustus-september-2026-ini-syaratnya"
@@ -25,6 +25,6 @@ Kompas紙の報道によると、ジャカルタとバンドンを結ぶ東南�
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/21/183600327/diskon-whoosh-20-persen-pada-agustus-september-2026-ini-syaratnya)
 **カテゴリ:** 旅行・お出かけ
-**タグ:** 高速鉄道, Whoosh, バンドン, 割引プロモ, 鉄道
+**タグ:** 鉄道, バンドン, キャンペーン・プロモ
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

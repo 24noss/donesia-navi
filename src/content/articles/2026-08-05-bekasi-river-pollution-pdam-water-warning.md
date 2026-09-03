@@ -2,7 +2,7 @@
 title: "ブカシ川で深刻な水質汚染、PDAM水道水の飲用・調理利用を控えるよう呼びかけ"
 description: "ブカシ川の水質が黒く変色し悪臭を放つ深刻な汚染が発生しており、同川を水源とするPDAM水道水について、地元環境局が飲食・調理への使用を控えるよう注意を呼びかけている。"
 category: "safety"
-tags: ["ブカシ", "水質汚染", "水道水", "生活情報", "注意喚起"]
+tags: ["注意喚起", "生活情報"]
 pubDate: 2026-08-05
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/08/05/18114921/kali-bekasi-menghitam-dan-berbau-warga-diminta-tak-gunakan-air-pdam-untuk"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://megapolitan.kompas.com/read/2026/08/05/18114921/kali-bekasi-menghitam-dan-berbau-warga-diminta-tak-gunakan-air-pdam-untuk)
 **カテゴリ:** 安全・災害
-**タグ:** ブカシ, 水質汚染, 水道水, 生活情報, 注意喚起
+**タグ:** 注意喚起, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

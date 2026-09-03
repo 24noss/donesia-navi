@@ -2,7 +2,7 @@
 title: "国税総局、住宅賃貸への課税は「新税ではない」と強調　既存の最終所得税を適用"
 description: "財務省国税総局（DJP）は、住宅賃貸にかかる税金について新たな課税項目ではないと説明した。土地・建物の賃貸収入には従来通り10％の最終所得税（PPh Final）が適用される旨を改めて周知している。"
 category: "regulation"
-tags: ["国税総局", "DJP", "不動産賃貸", "所得税", "税務"]
+tags: ["生活情報"]
 pubDate: 2026-08-10
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/08/10/135503226/djp-tegaskan-pajak-rumah-kontrakan-bukan-pajak-baru"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://money.kompas.com/read/2026/08/10/135503226/djp-tegaskan-pajak-rumah-kontrakan-bukan-pajak-baru)
 **カテゴリ:** 規制・法務
-**タグ:** 国税総局, DJP, 不動産賃貸, 所得税, 税務
+**タグ:** 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

@@ -2,7 +2,7 @@
 title: "ロンボク島リンジャニ山で山火事が発生し鎮火　30ヘクタール被害"
 description: "ロンボク島の人気観光地・リンジャニ山で山火事が発生し、合同チームにより鎮火された。約30ヘクタールが焼失し、警察や防災当局が監視と再発防止対策を続けている。"
 category: "safety"
-tags: ["リンジャニ山", "ロンボク", "山火事", "観光注意", "防災"]
+tags: ["防災", "観光", "注意喚起"]
 pubDate: 2026-08-10
 source: "Kompas"
 sourceUrl: "https://regional.kompas.com/read/2026/08/10/065325278/kebakaran-di-rinjani-padam-tim-gabungan-sisir-30-hektare-terdampak-cegah"
@@ -21,6 +21,6 @@ Kompasの報道によると、西ヌサトゥンガラ州ロンボク島のリ�
 ---
 **情報ソース:** [Kompas](https://regional.kompas.com/read/2026/08/10/065325278/kebakaran-di-rinjani-padam-tim-gabungan-sisir-30-hektare-terdampak-cegah)
 **カテゴリ:** 安全・災害
-**タグ:** リンジャニ山, ロンボク, 山火事, 観光注意, 防災
+**タグ:** 防災, 観光, 注意喚起
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

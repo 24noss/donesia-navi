@@ -2,7 +2,7 @@
 title: "北ジャカルタ・クラパガディンで1.3ヘクタールの緑地公園建設が進行中"
 description: "北ジャカルタ市公園・森林局は、クラパガディン地区の1.3ヘクタールの敷地に新たな緑地公園「ブキット・ガディン公園」を整備している。地域住民の憩いの場となるほか、環境改善や治水対策の一環としても期待を集めている。"
 category: "lifestyle"
-tags: ["ジャカルタ", "クラパガディン", "公園整備", "生活環境"]
+tags: ["ジャカルタ", "クラパガディン", "インフラ", "生活情報"]
 pubDate: 2026-08-09
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5686313/pemkot-jakut-bangun-ruang-hijau-13-hektare-di-kelapa-gading"
@@ -21,6 +21,6 @@ Antara通信の報道によると、北ジャカルタ市行政の公園・森�
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5686313/pemkot-jakut-bangun-ruang-hijau-13-hektare-di-kelapa-gading)
 **カテゴリ:** 生活・グルメ
-**タグ:** ジャカルタ, クラパガディン, 公園整備, 生活環境
+**タグ:** ジャカルタ, クラパガディン, インフラ, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

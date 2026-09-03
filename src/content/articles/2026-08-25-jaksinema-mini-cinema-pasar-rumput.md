@@ -2,7 +2,7 @@
 title: "南ジャカルタ・パサールルンプットにミニ映画館「Jaksinema」が開設　1回1.5万ルピア"
 description: "南ジャカルタのパサール・ルンプット市場内に、格安で映画が楽しめるコミュニティシアター「Jaksinema」がオープンした。入場料は1回1万5,000ルピアで、独立系作品や短編映画などを上映し、地域の新たな文化発信地として注目を集めている。"
 category: "lifestyle"
-tags: ["パサールルンプット", "ジャカルタ", "映画館", "Jaksinema", "ライフスタイル"]
+tags: ["イベント", "ジャカルタ", "生活情報"]
 pubDate: 2026-08-25
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/26/060700227/bioskop-mini-jaksinema-pasar-rumput-hadir-di-jaksel-tiket-rp-15.000"
@@ -25,6 +25,6 @@ Jaksinemaの入場チケットは1回あたり1万5,000ルピアと非常にリ�
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/26/060700227/bioskop-mini-jaksinema-pasar-rumput-hadir-di-jaksel-tiket-rp-15.000)
 **カテゴリ:** 生活情報
-**タグ:** パサールルンプット, ジャカルタ, 映画館, Jaksinema, ライフスタイル
+**タグ:** イベント, ジャカルタ, 生活情報
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

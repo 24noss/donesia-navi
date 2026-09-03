@@ -2,7 +2,7 @@
 title: "国会年次総会と大統領演説に伴いジャカルタで交通規制　8,000人規模の警備態勢"
 description: "ジャカルタ警視庁は、8月14日のMPR/DPR年次総会および大統領施政方針演説に合わせ、スナヤン国会周辺を中心に交通規制を実施。警察・軍など約8,000人を動員し、ガトット・スブロト通りなどで状況に応じた迂回措置を行います。"
 category: "safety"
-tags: ["交通規制", "ジャカルタ", "大統領演説", "スナヤン", "治安警備"]
+tags: ["交通規制", "ジャカルタ", "デモ", "治安"]
 pubDate: 2026-08-14
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5693499/polisi-siapkan-pengalihan-arus-lalin-saat-pidato-kenegaraan-presiden"
@@ -25,6 +25,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5693499/polisi-siapkan-pengalihan-arus-lalin-saat-pidato-kenegaraan-presiden)
 **カテゴリ:** 安全・災害
-**タグ:** 交通規制, ジャカルタ, 大統領演説, スナヤン, 治安警備
+**タグ:** 交通規制, ジャカルタ, デモ, 治安
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*
