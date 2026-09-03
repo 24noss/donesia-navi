@@ -36,7 +36,21 @@ const CATEGORY_SET = new Set(Object.keys(CATEGORY_NAMES));
 
 // Gemini free tier(gemini-flash-latest)を使用。ai-report-biz/pipeline/enrich.pyの
 // call_llm()と同じ呼び出し方式（プレーンプロンプト+テキストからJSON抽出）を踏襲する。
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent';
+//
+// 2026年9月時点、直近2日で定期実行が複数回「Gemini API error 503 (high demand)」で失敗した
+// （実測ではスパイクは数分単位で収まり、2分後の再試行は503のままだが5〜10分後の再試行は成功する傾向）。
+// そのためGemini呼び出しに指数バックオフ付きリトライと、無料枠内の別モデルへのフォールバックを実装する
+// （課金が必要なモデル・APIは使わない）。フォールバック先のgemini-flash-lite-latestは無料枠対応・
+// structured output(responseSchema)対応を確認済み
+// （参照: https://ai.google.dev/gemini-api/docs/models , https://ai.google.dev/gemini-api/docs/pricing ,
+//   https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite ）。
+export const GEMINI_MODEL_PRIMARY = 'gemini-flash-latest';
+export const GEMINI_MODEL_FALLBACK = 'gemini-flash-lite-latest';
+const GEMINI_API_URL_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
+
+export function geminiApiUrl(model) {
+  return `${GEMINI_API_URL_BASE}/${model}:generateContent`;
+}
 
 const ARTICLE_SCHEMA_DESCRIPTION = `
 各記事オブジェクトのフィールド:
@@ -341,6 +355,7 @@ function buildFoodPrompt(trimmed, recentTitles) {
 # ルール
 - 対象は次のいずれかに該当するものに限る: 新規オープン、閉店・移転、話題の飲食店、フードフェス・グルメイベント、季節限定情報
 - ジャカルタ首都圏在住の日本人にとって有用な情報を優先すること（日本食、接待・会食向き、家族向き、話題の新店など）
+- 読者は「何料理を食べたいか」「どんな用途か（会食・接待、デート、大人数の宴会、子連れ、作業できるカフェ等）」を起点に店を探す。候補の選定では用途が明確なものを優先し、本文でも「どんな用途・シーンに向くか」を候補ニュースに書かれた事実から判断できる範囲で必ず1文以上言及すること（根拠のない用途の創作は不可）
 - 店名・住所・価格・営業時間などの事実情報は、候補ニュース一覧（title/snippet）に実際に書かれている内容のみを使用すること。書かれていない情報を推測・創作してはならない
 - category は原則 "gourmet" を選ぶこと
 - 直近${RECENT_DEDUPE_DAYS}日以内に既に扱った以下のトピックと重複する内容は選ばない: ${recentTitles.length ? recentTitles.join(' / ') : '(なし)'}
@@ -357,18 +372,20 @@ ${ARTICLE_SCHEMA_DESCRIPTION}
 ${JSON.stringify(trimmed, null, 2)}`;
 }
 
-async function draftArticles(candidates, recentTitles, lane = 'news') {
-  const trimmed = candidates.map((c) => ({
-    title: c.title,
-    snippet: (c.snippet || '').slice(0, 300),
-    source: c.source,
-    link: c.link,
-    pubDate: c.pubDate,
-  }));
+function defaultSleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-  const prompt = lane === 'food' ? buildFoodPrompt(trimmed, recentTitles) : buildNewsPrompt(trimmed, recentTitles);
+// 429・5xx（サーバ側の一時的な過負荷）とネットワークエラーはリトライ対象。
+// 400系（429以外）はプロンプト・リクエスト自体の問題である可能性が高いためリトライしない。
+function isRetryableStatus(status) {
+  return status === 429 || status >= 500;
+}
 
-  const res = await fetch(GEMINI_API_URL, {
+// Gemini APIを1回呼び出す（リトライなし）。レスポンスがエラーの場合は status プロパティ付きの
+// Errorをthrowする（呼び出し元でリトライ可否を判定するため）。
+async function callGeminiOnce(model, prompt) {
+  const res = await fetch(geminiApiUrl(model), {
     method: 'POST',
     headers: {
       'x-goog-api-key': process.env.GEMINI_API_KEY,
@@ -384,10 +401,81 @@ async function draftArticles(candidates, recentTitles, lane = 'news') {
   });
 
   if (!res.ok) {
-    throw new Error(`Gemini API error ${res.status}: ${await res.text()}`);
+    const err = new Error(`Gemini API error ${res.status}: ${await res.text()}`);
+    err.status = res.status;
+    throw err;
   }
 
-  const data = await res.json();
+  return res.json();
+}
+
+// プライマリモデルで最大3回、フォールバックモデルで最大2回試行する。待機秒数は実測の障害復旧傾向
+// （数分単位で収まり、5〜10分後の再試行は成功する）を踏まえたおおよその指数バックオフ。
+// プライマリ→フォールバックの切り替え自体は待機なしで即実行する（フォールバックは別モデル・別クォータのため、
+// プライマリの過負荷の影響を受けにくいと考えられる）。
+const GEMINI_PRIMARY_MAX_ATTEMPTS = 3;
+const GEMINI_FALLBACK_MAX_ATTEMPTS = 2;
+const GEMINI_PRIMARY_RETRY_DELAYS_SEC = [30, 90]; // 1回目失敗後/2回目失敗後の待機秒数（3回目失敗時はフォールバックへ即切替）
+const GEMINI_FALLBACK_RETRY_DELAYS_SEC = [180]; // フォールバック1回目失敗後の待機秒数
+
+// Gemini呼び出しをリトライ+モデルフォールバック付きで実行する。
+// 429/5xx/ネットワークエラーはリトライし、400系(429以外)は即throwする。全試行が尽きたら最後のエラーをthrowする。
+// sleep はテストから注入可能（省略時は実際に待機するdefaultSleepを使う。実時間待機したくないテストは
+// { sleep: async () => {} } のような即時解決関数を渡すこと）。
+export async function callGeminiApi(prompt, { sleep = defaultSleep } = {}) {
+  const plan = [
+    { model: GEMINI_MODEL_PRIMARY, maxAttempts: GEMINI_PRIMARY_MAX_ATTEMPTS, delays: GEMINI_PRIMARY_RETRY_DELAYS_SEC },
+    { model: GEMINI_MODEL_FALLBACK, maxAttempts: GEMINI_FALLBACK_MAX_ATTEMPTS, delays: GEMINI_FALLBACK_RETRY_DELAYS_SEC },
+  ];
+  const totalAttempts = plan.reduce((sum, p) => sum + p.maxAttempts, 0);
+
+  let lastError;
+  let attemptNumber = 0;
+
+  for (const { model, maxAttempts, delays } of plan) {
+    for (let i = 0; i < maxAttempts; i += 1) {
+      attemptNumber += 1;
+      try {
+        return await callGeminiOnce(model, prompt);
+      } catch (err) {
+        lastError = err;
+        const status = err.status; // ネットワークエラー(fetch reject)等はundefined
+        if (status !== undefined && !isRetryableStatus(status)) throw err; // 400系(429以外)は即throw
+
+        const statusLabel = status === undefined ? 'network error' : status;
+        const isLastAttemptOverall = attemptNumber >= totalAttempts;
+
+        if (isLastAttemptOverall) {
+          console.warn(`Gemini API呼び出し失敗（${attemptNumber}/${totalAttempts}回目, model=${model}, status=${statusLabel}）。リトライ上限に達しました。`);
+          break;
+        }
+
+        const delaySec = delays[i];
+        if (delaySec !== undefined) {
+          console.warn(`Gemini API呼び出し失敗（${attemptNumber}/${totalAttempts}回目, model=${model}, status=${statusLabel}）。${delaySec}秒後に再試行します。`);
+          await sleep(delaySec * 1000);
+        } else {
+          console.warn(`Gemini API呼び出し失敗（${attemptNumber}/${totalAttempts}回目, model=${model}, status=${statusLabel}）。0秒後にフォールバックモデル(${GEMINI_MODEL_FALLBACK})へ切り替えて再試行します。`);
+        }
+      }
+    }
+  }
+
+  throw lastError;
+}
+
+async function draftArticles(candidates, recentTitles, lane = 'news', { sleep } = {}) {
+  const trimmed = candidates.map((c) => ({
+    title: c.title,
+    snippet: (c.snippet || '').slice(0, 300),
+    source: c.source,
+    link: c.link,
+    pubDate: c.pubDate,
+  }));
+
+  const prompt = lane === 'food' ? buildFoodPrompt(trimmed, recentTitles) : buildNewsPrompt(trimmed, recentTitles);
+
+  const data = await callGeminiApi(prompt, { sleep });
   const text = data.candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('') || '';
   return parseGeminiArticlesResponse(text);
 }

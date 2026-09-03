@@ -10,6 +10,10 @@ import {
   fetchOpenPrDedupeData,
   resolveLane,
   isDryRun,
+  callGeminiApi,
+  geminiApiUrl,
+  GEMINI_MODEL_PRIMARY,
+  GEMINI_MODEL_FALLBACK,
 } from './crawl-and-draft.mjs';
 
 describe('escapeYaml', () => {
@@ -207,6 +211,124 @@ describe('parseGeminiArticlesResponse (D-5: 構造化出力パース強化)', ()
 
   test('パースできても配列でなければ例外を投げる', () => {
     assert.throws(() => parseGeminiArticlesResponse('{"not":"array"}'));
+  });
+});
+
+describe('callGeminiApi (リトライ+指数バックオフ+フォールバックモデル)', () => {
+  const jsonResponse = (text) => ({
+    ok: true,
+    json: async () => ({ candidates: [{ content: { parts: [{ text }] } }] }),
+  });
+  const errorResponse = (status, body = 'error') => ({
+    ok: false,
+    status,
+    text: async () => body,
+  });
+  const fakeSleep = (log) => async (ms) => {
+    log.push(ms);
+  };
+
+  test('503が2回続いた後に成功したらプライマリモデル内でリトライして結果を返す', async () => {
+    const originalFetch = globalThis.fetch;
+    const calledUrls = [];
+    let callCount = 0;
+    globalThis.fetch = async (url) => {
+      calledUrls.push(String(url));
+      callCount += 1;
+      if (callCount <= 2) return errorResponse(503, 'high demand');
+      return jsonResponse('[{"title":"ok"}]');
+    };
+    const sleeps = [];
+    try {
+      const data = await callGeminiApi('prompt', { sleep: fakeSleep(sleeps) });
+      assert.equal(callCount, 3);
+      assert.ok(calledUrls.every((u) => u === geminiApiUrl(GEMINI_MODEL_PRIMARY)));
+      assert.deepEqual(sleeps, [30000, 90000]);
+      assert.equal(data.candidates[0].content.parts[0].text, '[{"title":"ok"}]');
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  test('プライマリモデルが3回とも失敗したらフォールバックモデルのURLで呼び出される', async () => {
+    const originalFetch = globalThis.fetch;
+    const calledUrls = [];
+    globalThis.fetch = async (url) => {
+      const u = String(url);
+      calledUrls.push(u);
+      if (u === geminiApiUrl(GEMINI_MODEL_PRIMARY)) return errorResponse(503, 'high demand');
+      return jsonResponse('[{"title":"fallback-ok"}]');
+    };
+    const sleeps = [];
+    try {
+      const data = await callGeminiApi('prompt', { sleep: fakeSleep(sleeps) });
+      const primaryCalls = calledUrls.filter((u) => u === geminiApiUrl(GEMINI_MODEL_PRIMARY)).length;
+      const fallbackCalls = calledUrls.filter((u) => u === geminiApiUrl(GEMINI_MODEL_FALLBACK)).length;
+      assert.equal(primaryCalls, 3);
+      assert.equal(fallbackCalls, 1);
+      assert.equal(data.candidates[0].content.parts[0].text, '[{"title":"fallback-ok"}]');
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  test('プライマリ・フォールバックとも全滅したら最後のエラーをthrowする', async () => {
+    const originalFetch = globalThis.fetch;
+    let callCount = 0;
+    globalThis.fetch = async () => {
+      callCount += 1;
+      return errorResponse(503, 'high demand');
+    };
+    const sleeps = [];
+    try {
+      await assert.rejects(
+        () => callGeminiApi('prompt', { sleep: fakeSleep(sleeps) }),
+        /Gemini API error 503/
+      );
+      assert.equal(callCount, 5); // プライマリ3回 + フォールバック2回
+      assert.deepEqual(sleeps, [30000, 90000, 180000]);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  test('400エラー(429以外)は即座にthrowしリトライしない', async () => {
+    const originalFetch = globalThis.fetch;
+    let callCount = 0;
+    globalThis.fetch = async () => {
+      callCount += 1;
+      return errorResponse(400, 'bad request');
+    };
+    const sleepCalled = { value: false };
+    const sleep = async () => {
+      sleepCalled.value = true;
+    };
+    try {
+      await assert.rejects(() => callGeminiApi('prompt', { sleep }), /Gemini API error 400/);
+      assert.equal(callCount, 1);
+      assert.equal(sleepCalled.value, false);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  test('ネットワークエラー(fetch reject)はリトライ対象になる', async () => {
+    const originalFetch = globalThis.fetch;
+    let callCount = 0;
+    globalThis.fetch = async () => {
+      callCount += 1;
+      if (callCount === 1) throw new TypeError('fetch failed');
+      return jsonResponse('[{"title":"network-retry-ok"}]');
+    };
+    const sleeps = [];
+    try {
+      const data = await callGeminiApi('prompt', { sleep: fakeSleep(sleeps) });
+      assert.equal(callCount, 2);
+      assert.deepEqual(sleeps, [30000]);
+      assert.equal(data.candidates[0].content.parts[0].text, '[{"title":"network-retry-ok"}]');
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
   });
 });
 
