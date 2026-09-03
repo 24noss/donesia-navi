@@ -6,7 +6,7 @@ tags: ["ボゴール", "抗議デモ", "交通規制", "アンコット", "渋�
 pubDate: 2026-09-03
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/03/06482661/sopir-angkot-demo-di-balai-kota-bogor-hari-ini-rekayasa-lalu-lintas"
-draft: true
+draft: false
 ---
 
 ## ボゴール市役所周辺でアンコット運転手がデモ、警察が交通規制を実施
