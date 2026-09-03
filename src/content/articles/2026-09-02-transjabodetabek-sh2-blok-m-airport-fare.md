@@ -6,7 +6,7 @@ tags: ["交通", "スカルノハッタ空港", "バス", "ブロックM"]
 pubDate: 2026-09-02
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/09/02/204756327/tarif-transjabodetabek-sh2-blok-m-bandara-jadi-rp-15000-ini-alasannya"
-draft: true
+draft: false
 ---
 
 ## 南ジャカルタ・ブロックMと空港を結ぶ直通バスSH2、運賃1.5万ルピアで運行中
