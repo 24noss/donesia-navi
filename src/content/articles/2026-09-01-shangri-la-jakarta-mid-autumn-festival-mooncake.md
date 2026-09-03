@@ -6,7 +6,7 @@ tags: ["シャングリ・ラ ジャカルタ", "中秋節", "月餅", "ホテ�
 pubDate: 2026-09-01
 source: "Fimela"
 sourceUrl: "https://www.fimela.com/amp/8282213/mooncake-rendah-gula-hingga-cahaya-lampion-hangatkan-perayaan-mid-autumn-festival-di-shangri-la-jakarta"
-draft: true
+draft: false
 ---
 
 ## シャングリ・ラ ジャカルタから低糖仕様の中秋節月餅が登場
