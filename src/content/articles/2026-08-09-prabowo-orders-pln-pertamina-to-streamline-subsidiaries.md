@@ -2,7 +2,7 @@
 title: "プラボウォ大統領、国営電力PLNと石油プルタミナに子会社・孫会社の統合削減を命じる"
 description: "プラボウォ大統領は国営電力会社PLNと国営石油会社プルタミナに対し、経営の効率化と透明性向上のため、肥大化した子会社や孫会社の整理削減を即座に実施するよう命じた。事業のスリム化が期待される。"
 category: "business"
-tags: ["プラボウォ大統領", "プルタミナ", "PLN", "国営企業", "BUMN"]
+tags: ["インドネシア経済", "プルタミナ", "物価"]
 pubDate: 2026-08-09
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5687000/prabowo-perintahkan-pln-dan-pertamina-segera-pangkas-anak-cucu-perusahaan"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Antara](https://www.antaranews.com/berita/5687000/prabowo-perintahkan-pln-dan-pertamina-segera-pangkas-anak-cucu-perusahaan)
 **カテゴリ:** 経済・ビジネス
-**タグ:** プラボウォ大統領, プルタミナ, PLN, 国営企業, BUMN
+**タグ:** インドネシア経済, プルタミナ, 物価
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*

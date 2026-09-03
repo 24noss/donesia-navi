@@ -2,7 +2,7 @@
 title: "8月17日の独立記念日、ジャカルタのMRT・LRT・トランスジャカルタが「1ルピア」に"
 description: "2026年8月17日のインドネシア独立記念日に合わせ、ジャカルタ州政府はMRT、LRT、トランスジャカルタの運賃を1ルピアとするプロモーションを実施する。当日の公共交通機関の利用促進と混雑緩和を図る。"
 category: "lifestyle"
-tags: ["ジャカルタ", "公共交通機関", "MRT", "トランスジャカルタ", "独立記念日"]
+tags: ["ジャカルタ", "交通", "トランスジャカルタ", "独立記念日"]
 pubDate: 2026-08-10
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/08/10/081110427/promo-17-agustus-2026-naik-mrt-lrt-dan-transjakarta-cuma-rp-1"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Kompas](https://travel.kompas.com/read/2026/08/10/081110427/promo-17-agustus-2026-naik-mrt-lrt-dan-transjakarta-cuma-rp-1)
 **カテゴリ:** 生活・グルメ
-**タグ:** ジャカルタ, 公共交通機関, MRT, トランスジャカルタ, 独立記念日
+**タグ:** ジャカルタ, 交通, トランスジャカルタ, 独立記念日
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*
