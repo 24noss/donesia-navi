@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "ジャカルタデザートウィーク", "スイー�
 pubDate: 2026-09-02
 source: "Detik"
 sourceUrl: "https://food.detik.com/berita-boga/d-8645175/jakarta-dessert-week-2026-hadir-menggoyang-lidah-penikmat-kudapan-manis"
-draft: true
+draft: false
 ---
 
 ## スイーツの祭典「ジャカルタ・デザート・ウィーク2026」がスタート
