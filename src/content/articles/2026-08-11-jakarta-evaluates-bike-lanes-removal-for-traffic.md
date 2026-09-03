@@ -2,7 +2,7 @@
 title: "ジャカルタ主要道路の自転車専用レーン撤去を検討へ 知事「渋滞緩和へ特別協議」"
 description: "ジャカルタ特別州のプラモノ知事は、主要幹線道路に設置された自転車専用レーンの撤去を求める要望が多数届いていることを受け、特別協議を行って見直しを進める方針を明らかにした。慢性的な交通渋滞の緩和を図る目的がある。"
 category: "safety"
-tags: ["ジャカルタ", "交通渋滞", "自転車専用レーン", "道路交通"]
+tags: ["ジャカルタ", "交通規制"]
 pubDate: 2026-08-11
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8614156/pramono-terima-banyak-masukan-jalur-sepeda-dihapus-akan-dibahas-khusus"
@@ -21,6 +21,6 @@ draft: false
 ---
 **情報ソース:** [Detik](https://news.detik.com/berita/d-8614156/pramono-terima-banyak-masukan-jalur-sepeda-dihapus-akan-dibahas-khusus)
 **カテゴリ:** 安全・災害
-**タグ:** ジャカルタ, 交通渋滞, 自転車専用レーン, 道路交通
+**タグ:** ジャカルタ, 交通規制
 
 *この記事はAIが生成し、公開前に人間の編集者がレビューします。*
