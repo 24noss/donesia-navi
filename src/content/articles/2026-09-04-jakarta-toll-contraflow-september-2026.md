@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通", "渋滞", "交通規制", "注意喚起"]
 pubDate: 2026-09-04
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/04/07511721/lalu-lintas-tol-jakarta-jumat-pagi-ada-contraflow-di-tol-dalam-kota-dan"
-draft: true
+draft: false
 ---
 
 ## 金曜朝の通勤ラッシュ緩和のため主要高速道路で交通規制
