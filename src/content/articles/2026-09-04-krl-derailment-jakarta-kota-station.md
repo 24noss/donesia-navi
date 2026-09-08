@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "KRL", "鉄道", "交通", "注意喚起"]
 pubDate: 2026-09-04
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/04/11473811/krl-anjlok-di-jakarta-kota-penumpang-ke-bogor-tetap-dilayani-6-perjalanan"
-draft: true
+draft: false
 ---
 
 ## ジャカルタコタ駅でKRLが脱線、ボゴール線等で運行区間変更などの影響
