@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "北ジャカルタ", "クラパガディン", "イン
 pubDate: 2026-09-01
 source: "Popbela"
 sourceUrl: "https://www.popbela.com/lifestyle/food/akira-back-jakarta-00-9z5cw-wrl0gq"
-draft: true
+draft: false
 ---
 
 ## インドネシアの多彩な味を楽しめる大型グルメイベント
