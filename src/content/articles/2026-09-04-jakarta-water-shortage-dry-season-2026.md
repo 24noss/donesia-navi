@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "生活情報", "注意喚起", "インフラ", "渋�
 pubDate: 2026-09-04
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/04/11134361/sejumlah-wilayah-jakarta-siaga-kekeringan-hingga-10-september-warga"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ首都圏で乾季の影響による水不足の懸念、当局が節水を要請
