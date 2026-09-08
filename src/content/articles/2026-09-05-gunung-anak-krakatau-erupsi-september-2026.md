@@ -6,7 +6,7 @@ tags: ["防災", "注意喚起", "BMKG", "イベント"]
 pubDate: 2026-09-05
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8649278/gunung-anak-krakatau-erupsi-sejak-tengah-malam-keluarkan-lava-and-dentuman"
-draft: true
+draft: false
 ---
 
 ## Gunung Anak Krakatau erupsi terus-menerus, warga laporkan suara dentuman keras
