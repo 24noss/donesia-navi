@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "スカルノハッタ空港", "フライト情報", "
 pubDate: 2026-09-08
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/09/08/091939427/imigrasi-bebaskan-biaya-overstay-wna-yang-terdampak-erupsi-anak-krakatau"
-draft: true
+draft: false
 ---
 
 ## アナクラカタウ山噴火による空港閉鎖、入管がオーバーステイ料金の免除を発表
