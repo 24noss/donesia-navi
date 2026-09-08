@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "スカルノハッタ空港", "フライト情報", "
 pubDate: 2026-09-06
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/09/06/064644627/bandara-soetta-ditutup-sampai-0930-wib-imbas-erupsi-anak-krakatau"
-draft: true
+draft: false
 ---
 
 ## アナクラカタウ山の噴火に伴う空港閉鎖とフライトへの影響について
