@@ -6,7 +6,7 @@ tags: ["中央ジャカルタ", "火災", "注意喚起", "防災"]
 pubDate: 2026-09-04
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/04/21271531/detik-detik-wna-jepang-terjebak-kebakaran-apartemen-pavilion-lari-ke"
-draft: true
+draft: false
 ---
 
 ## タナアバンのパビリオン・アパートで火災、日本人居住者含む住民らを救助
