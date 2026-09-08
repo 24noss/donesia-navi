@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通規制", "渋滞", "注意喚起", "イベン�
 pubDate: 2026-09-04
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/04/21081691/isoplus-run-jakarta-digelar-minggu-14-ruas-jalan-bakal-direkayasa"
-draft: true
+draft: false
 ---
 
 ## 「ISOPLUS Run」開催に伴いジャカルタ市内14路線で日曜日に交通規制
