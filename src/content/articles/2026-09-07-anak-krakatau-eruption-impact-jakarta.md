@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "スカルノハッタ空港", "注意喚起", "生活
 pubDate: 2026-09-07
 source: "Kompas"
 sourceUrl: "https://nasional.kompas.com/read/2026/09/07/07174681/erupsi-anak-krakatau-bandara-terganggu-5-provinsi-terdampak-abu-vulkanik"
-draft: true
+draft: false
 ---
 
 ## アナクラカタウ山の噴火でジャカルタ首都圏に火山灰が到達し、交通や教育活動に影響
