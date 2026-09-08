@@ -6,7 +6,7 @@ tags: ["南ジャカルタ", "ビザ", "生活情報"]
 pubDate: 2026-09-05
 source: "Antara"
 sourceUrl: "https://www.antaran.com/berita/5727295/imigrasi-jaksel-immigration-lounge-pim-selalu-penuhi-kuota-50-pemohon"
-draft: true
+draft: false
 ---
 
 ## Layanan paspor di Immigration Lounge Pondok Indah Mall diminati masyarakat
