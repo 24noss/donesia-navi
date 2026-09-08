@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "タイ料理", "新店オープン", "レストラン
 pubDate: 2026-09-01
 source: "Liputan6"
 sourceUrl: "https://www.liputan6.com/lifestyle/read/8282235/restoran-thailand-baru-di-jakarta-tawarkan-kuliner-autentik-hingga-teh-premium-dari-chiang-rai"
-draft: true
+draft: false
 ---
 
 ## ジャカルタに本格タイ料理の新店が登場
