@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "韓国料理", "新店オープン", "レストラン
 pubDate: 2026-09-05
 source: "Kabar DKI"
 sourceUrl: "https://dki.pikiran-rakyat.com/lifestyle/pr-30910434140/palgakdo-buka-gerai-pertamanya-di-indonesia-hadirkan-perpaduan-korean-char-grilled-chicken-bbq"
-draft: true
+draft: false
 ---
 
 ## 韓国の人気チャコール焼き鳥BBQ店がインドネシア初進出
