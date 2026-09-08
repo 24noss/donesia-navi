@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "スカルノハッタ空港", "注意喚起", "防災
 pubDate: 2026-09-06
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8650702/abu-anak-krakatau-menyebar-ke-jakarta-pramono-imbau-warga-lakukan-5m"
-draft: true
+draft: false
 ---
 
 ## アナクラカタウ山の噴火による火山灰がジャカルタ首都圏に飛来
