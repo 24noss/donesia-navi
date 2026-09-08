@@ -6,7 +6,7 @@ tags: ["ボゴール", "KRL", "交通", "鉄道", "注意喚起"]
 pubDate: 2026-09-07
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8651524/12-perjalanan-krl-bogor-hari-ini-dibatalkan"
-draft: true
+draft: false
 ---
 
 ## KRLボゴール線で計12本が運休、運行状況の確認を
