@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "中央ジャカルタ", "治安", "注意喚起"]
 pubDate: 2026-09-06
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8651345/penjambret-samsung-s25-milik-turis-india-di-menteng-ditangkap"
-draft: true
+draft: false
 ---
 
 ## メンテン地区で外国人狙いのひったくり発生、路上での貴重品管理に警戒を
