@@ -6,7 +6,7 @@ tags: ["KRL", "交通", "生活情報"]
 pubDate: 2026-09-05
 source: "Kompas"
 sourceUrl: "https://nasional.kompas.com/read/2026/09/05/09371571/kai-perkuat-integrasi-stasiun-karet-sudirman-baru-siapkan-travelator-untuk"
-draft: true
+draft: false
 ---
 
 ## KAI siapkan fasilitas travelator untuk integrasi Stasiun Karet dan Sudirman baru
