@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "中央ジャカルタ", "デモ", "交通規制", "�
 pubDate: 2026-09-07
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/07/10065091/warga-diminta-cari-jalur-alternatif-ada-3-demo-di-jakarta-hari-ini"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ中心部で複数のデモ行進が行われ、警察が交通渋滞への注意を喚起
