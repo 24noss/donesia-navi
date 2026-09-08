@@ -6,7 +6,7 @@ tags: ["インドネシア経済", "インフラ", "生活情報"]
 pubDate: 2026-09-06
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/infografik/5729027/distribusi-b50-nasional-capai-80-persen"
-draft: true
+draft: false
 ---
 
 ## バイオディーゼルB50の配備が全国給油所の80％を達成
