@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "KRL", "交通", "渋滞", "生活情報"]
 pubDate: 2026-09-09
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/09/13353481/12-perjalanan-krl-jakarta-bogor-dikurangi-demi-keselamatan-penumpang"
-draft: true
+draft: false
 ---
 
 ## KRLボゴール線で減便ダイヤが実施、通勤通学の混雑と遅延に注意
