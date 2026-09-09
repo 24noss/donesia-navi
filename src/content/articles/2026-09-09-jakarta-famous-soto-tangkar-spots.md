@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "グルメ", "インドネシア料理", "レストラ
 pubDate: 2026-09-09
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/food/read/2026/09/09/075435375/dari-cideng-hingga-palmerah-ini-5-kedai-soto-tangkar-di-jakarta"
-draft: true
+draft: false
 ---
 
 ## スパイスと牛リブの旨味が溶け込むジャカルタのソウルフード、名店5選
