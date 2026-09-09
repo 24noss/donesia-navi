@@ -6,7 +6,7 @@ tags: ["生活情報", "物価", "ジャカルタ"]
 pubDate: 2026-09-09
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/09/08184061/stok-beras-premium-langka-di-retail-modern-ini-penjelasan-aprindo"
-draft: true
+draft: false
 ---
 
 ## 首都圏の近代的小売店でプレミアム米が品薄に、流通遅延が主な要因
