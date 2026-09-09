@@ -6,7 +6,7 @@ tags: ["バリ島", "ビザ", "生活情報", "注意喚起"]
 pubDate: 2026-09-08
 source: "Kompas"
 sourceUrl: "http://denpasar.kompas.com/read/2026/09/08/221409678/penyalahgunaan-izin-tinggal-wna-china-pengawas-proyek-di-bali-dideportasi?source=terkini_artikel"
-draft: true
+draft: false
 ---
 
 ## バリ入管が不法就労の外国人を送還処分、滞在資格の適正管理を再徹底
