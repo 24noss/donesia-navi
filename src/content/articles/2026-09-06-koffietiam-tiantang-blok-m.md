@@ -6,7 +6,7 @@ tags: ["ブロックM", "南ジャカルタ", "カフェ", "グルメ", "イン�
 pubDate: 2026-09-06
 source: "Detik"
 sourceUrl: "https://food.detik.com/foto-kuliner/d-8650328/sedap-di-blok-m-ada-kopitiam-heritage-yang-sajikan-rawon-hingga-kopi-butter"
-draft: true
+draft: false
 ---
 
 ## ブロックMで楽しむヘリテージ風コピティアム「Koffietiam Tiantang」
