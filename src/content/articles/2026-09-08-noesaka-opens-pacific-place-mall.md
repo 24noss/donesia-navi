@@ -6,7 +6,7 @@ tags: ["南ジャカルタ", "インドネシア料理", "レストラン", "新
 pubDate: 2026-09-08
 source: "Detik"
 sourceUrl: "https://food.detik.com/resto-dan-kafe/d-8653523/spesial-restoran-indonesia-baru-ini-gandeng-martin-praja-racik-menu-rumahan"
-draft: true
+draft: false
 ---
 
 ## SCBDのパシフィック・プレイスに「Noesaka」新店が登場
