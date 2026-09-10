@@ -6,7 +6,7 @@ tags: ["グルメ", "スイーツ", "カフェ", "新店オープン"]
 pubDate: 2026-09-07
 source: "Detik"
 sourceUrl: "https://food.detik.com/resto-dan-kafe/d-8652436/the-little-bakery-bakery-baru-di-bekasi-ini-punya-lebih-dari-20-salt-bread-unik"
-draft: true
+draft: false
 ---
 
 ## ブカシに新ベーカリー「The Little Bakery」が登場、多彩な塩パンに注目
