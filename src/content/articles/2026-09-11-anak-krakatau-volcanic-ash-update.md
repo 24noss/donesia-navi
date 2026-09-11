@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "スカルノハッタ空港", "防災", "BMKG", "フ�
 pubDate: 2026-09-11
 source: "Kompas"
 sourceUrl: "https://nasional.kompas.com/read/2026/09/10/16582581/bmkg-sebut-tak-ada-lagi-abu-vulkanik-anak-krakatau-di-ri-sudah-menjauh-ke"
-draft: true
+draft: false
 ---
 
 ## アナクラカタウ山噴火：首都圏の火山灰の影響はほぼ解消
