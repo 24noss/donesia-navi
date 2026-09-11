@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "KRL", "交通", "インフラ"]
 pubDate: 2026-09-11
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/10/14273781/loh-kok-modelnya-kayak-gini-penumpang-kaget-krl-tanjung-priok-jakarta?page=all&utm_source=Google&utm_medium=Newstand&utm_campaign=partner"
-draft: true
+draft: false
 ---
 
 ## KRLタンジュング・プリオック線に空港鉄道の車両が登場
