@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "中央ジャカルタ", "生活情報", "交通", "�
 pubDate: 2026-09-10
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/10/16552761/rute-baru-lrt-jakarta-velodrome-manggarai-mulai-beroperasi-ini-5"
-draft: true
+draft: false
 ---
 
 ## LRTジャカルタの新路線が開業、ヴェロドロームからマンガライまでの区間で運行開始
