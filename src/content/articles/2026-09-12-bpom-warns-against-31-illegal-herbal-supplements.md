@@ -6,7 +6,7 @@ tags: ["生活情報", "注意喚起", "医療"]
 pubDate: 2026-09-12
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/09/12/070700526/bpom-temukan-31-obat-herbal-dan-suplemen-ilegal-simak-daftarnya"
-draft: true
+draft: false
 ---
 
 ## 未承認の伝統薬やサプリに有害成分、BPOMが31品目を摘発・回収へ
