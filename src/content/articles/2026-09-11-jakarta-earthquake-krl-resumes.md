@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "地震", "防災", "KRL", "交通"]
 pubDate: 2026-09-11
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8659316/sempat-berhenti-imbas-gempa-perjalanan-krl-kembali-normal"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ沖で深発地震が発生、KRL一時見合わせも点検終え運行再開
