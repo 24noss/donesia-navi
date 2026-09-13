@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通規制", "渋滞", "注意喚起", "治安"]
 pubDate: 2026-09-11
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8658997/simak-ini-rekayasa-lalin-sekitar-gbk-saat-persija-vs-persib-besok"
-draft: true
+draft: false
 ---
 
 ## スナヤンGBK周辺で交通規制を実施、サッカー伝統の一戦で大規模警備
