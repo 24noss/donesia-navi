@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "EV", "交通", "インドネシア経済"]
 pubDate: 2026-09-12
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/09/12/123000926/bluebird-tambah-300-taksi-hybrid-di-jakarta-capex-2026-capai-rp-1-9-triliun"
-draft: true
+draft: false
 ---
 
 ## ブルーバードが環境対応車両を拡充、2026年にハイブリッド車300台を投入
