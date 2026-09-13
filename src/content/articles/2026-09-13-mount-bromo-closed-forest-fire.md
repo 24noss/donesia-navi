@@ -6,7 +6,7 @@ tags: ["観光", "注意喚起", "火災", "生活情報"]
 pubDate: 2026-09-13
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8660388/kebakaran-meluas-wisata-gunung-bromo-ditutup-total"
-draft: true
+draft: false
 ---
 
 ## ブロモ山国立公園が9月12日から全面閉鎖　消火活動が難航
