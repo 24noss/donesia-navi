@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通", "生活情報", "注意喚起", "鉄道"]
 pubDate: 2026-09-12
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/12/09574041/penumpang-marah-dilarang-minum-di-lrt-jabodebek-larangan-juga-berlaku-di"
-draft: true
+draft: false
 ---
 
 ## 首都圏の鉄道・バス車内は飲食厳禁、水分補給を含む利用マナーに注意
