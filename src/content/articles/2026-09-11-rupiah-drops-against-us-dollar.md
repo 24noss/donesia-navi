@@ -6,7 +6,7 @@ tags: ["インドネシア経済", "両替・金融", "物価", "生活情報"]
 pubDate: 2026-09-11
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/09/11/154753626/rupiah-akhiri-pekan-merah-dollar-as-kembali-tembus-rp-17600-minyak-jadi-biang"
-draft: true
+draft: false
 ---
 
 ## ルピアが対米ドルで下落、世界的な原油高が輸入コスト増への懸念呼ぶ
