@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通規制", "生活情報", "大気汚染"]
 pubDate: 2026-09-13
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/13/10121911/usulan-cfd-jakarta-sabtu-minggu-pramono-rasuna-said-atau-sudirman-thamrin"
-draft: true
+draft: false
 ---
 
 ## 週末の運動機会拡充と大気汚染抑制へ　土曜日の追加実施を本格検討
