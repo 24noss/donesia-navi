@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "インドネシア料理", "グルメ", "レストラ
 pubDate: 2026-09-13
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/food/read/2026/09/13/140000275/5-rekomendasi-rumah-makan-padang-di-jakarta-pilihan-untuk-makan-siang"
-draft: true
+draft: false
 ---
 
 ## 濃厚なスパイスと豊富な惣菜　ジャカルタで訪れたいパダン料理の名店
