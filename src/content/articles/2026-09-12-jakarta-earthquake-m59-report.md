@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "防災", "地震", "注意喚起"]
 pubDate: 2026-09-12
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/12/13455311/pemprov-dki-pastikan-tak-ada-kerusakan-dan-korban-akibat-gempa-m-65"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ首都圏でM5.9の地震観測、州政府が被害確認と警戒呼びかけ
