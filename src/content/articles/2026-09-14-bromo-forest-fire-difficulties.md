@@ -6,7 +6,7 @@ tags: ["防災", "注意喚起", "観光"]
 pubDate: 2026-09-14
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5739963/asap-tebal-jadi-tantangan-pemadaman-karhutla-di-gunung-bromo-dan-butak"
-draft: true
+draft: false
 ---
 
 ## ブロモ山の森林火災で消火が難航、強風と煙により当局が警戒を強化
