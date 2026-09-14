@@ -6,7 +6,7 @@ tags: ["インドネシア経済", "両替・金融", "物価"]
 pubDate: 2026-09-14
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/09/14/100204026/rupiah-melemah-ke-rp-17614-cek-kurs-dollar-as-di-5-bank-besar"
-draft: true
+draft: false
 ---
 
 ## 国際原油高を背景にルピアが急落、主要銀行のドル円・ドルルピア為替に警戒感
