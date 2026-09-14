@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通規制", "生活情報"]
 pubDate: 2026-09-14
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8661990/pramono-tak-mau-buru-buru-putuskan-cfd-digelar-sabtu-dan-minggu-di-jakarta"
-draft: true
+draft: false
 ---
 
 ## ジャカルタのカーフリーデー週2日化、プラモノ州知事が拙速な決定を回避
