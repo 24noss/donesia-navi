@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "KRL", "交通", "鉄道", "注意喚起"]
 pubDate: 2026-09-17
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8666313/muncul-asap-di-gerbong-krl-stasiun-rawa-buntu-ternyata-dari-hp-penumpang"
-draft: true
+draft: false
 ---
 
 ## KRLスルポン線の車内でスマホから発煙騒ぎ、乗客が一時避難しホーム混雑
