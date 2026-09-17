@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通", "インフラ", "鉄道", "生活情報"]
 pubDate: 2026-09-17
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/17/09211811/lrt-jabodebek-uji-coba-jadwal-lebih-pagi-mulai-hari-ini-cek-jadwal-dan"
-draft: true
+draft: false
 ---
 
 ## LRTジャボデベックが早朝運行の試験運用を開始、始発時間が繰り上げに
