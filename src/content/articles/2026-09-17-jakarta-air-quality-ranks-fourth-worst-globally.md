@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "大気汚染", "注意喚起", "生活情報"]
 pubDate: 2026-09-17
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/tren/read/2026/09/17/070000065/kualitas-udara-jakarta-peringkat-4-terburuk-di-dunia-pakar-ungkap-penyebab"
-draft: true
+draft: false
 ---
 
 ## ジャカルタの大気汚染レベルが世界ワースト4位に、健康管理への注意呼びかけ
