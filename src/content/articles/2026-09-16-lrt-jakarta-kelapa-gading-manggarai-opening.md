@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "中央ジャカルタ", "北ジャカルタ", "鉄道
 pubDate: 2026-09-16
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8665361/lrt-kelapa-gading-manggarai-rp-8-selama-8-hari-usai-diresmikan-prabowo"
-draft: true
+draft: false
 ---
 
 ## LRTジャカルタの延伸区間が開業、プラボワ大統領が視察
