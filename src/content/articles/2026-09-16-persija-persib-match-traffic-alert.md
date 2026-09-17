@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通規制", "渋滞", "イベント", "注意喚�
 pubDate: 2026-09-16
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5743051/marc-klok-pastikan-persib-bandung-siap-tempur-hadapi-fc-seoul"
-draft: true
+draft: false
 ---
 
 ## GBKでのサッカー試合開催に伴う交通混雑と厳戒警備への注意
