@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "生活情報", "イベント", "インフラ"]
 pubDate: 2026-09-18
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/17/12095521/ada-pemadaman-lampu-serentak-di-jakarta-19-september-ini-jadwal-dan"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ首都圏で9月19日に一斉消灯が実施
