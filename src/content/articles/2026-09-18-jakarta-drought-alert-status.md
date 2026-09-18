@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "防災", "生活情報", "注意喚起"]
 pubDate: 2026-09-18
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/18/06200581/kekeringan-mengintai-jakarta-lima-wilayah-berstatus-awas-warga-diminta"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ首都圏で干ばつ警戒レベルが上昇
