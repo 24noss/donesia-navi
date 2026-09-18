@@ -6,7 +6,7 @@ tags: ["観光", "注意喚起", "イベント"]
 pubDate: 2026-09-18
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/09/18/150822127/wisata-bromo-dibuka-lagi-mulai-19-september-2026-ini-aturannya"
-draft: true
+draft: false
 ---
 
 ## ブロモ山の観光営業が9月19日より再開へ
