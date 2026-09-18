@@ -6,7 +6,7 @@ tags: ["南ジャカルタ", "カフェ", "作業カフェ", "新店オープン
 pubDate: 2026-09-14
 source: "Detik"
 sourceUrl: "https://food.detik.com/berita-boga/d-8661896/coffee-shop-baru-di-dharmawangsa-ini-punya-pasta-dan-crush-series-segar"
-draft: true
+draft: false
 ---
 
 ## バリ発の注目コーヒー店がダルマワンサに新店を出店
