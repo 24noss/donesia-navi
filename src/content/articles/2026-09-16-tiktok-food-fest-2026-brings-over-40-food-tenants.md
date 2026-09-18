@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "インドネシア料理", "イベント", "グルメ
 pubDate: 2026-09-16
 source: "Detik"
 sourceUrl: "https://food.detik.com/berita-boga/d-8665119/meriah-lebih-dari-40-tenant-kuliner-umkm-diboyong-di-tiktok-food-fest-2026"
-draft: true
+draft: false
 ---
 
 ## SNSで話題のローカル料理が集結する人気フードイベント
