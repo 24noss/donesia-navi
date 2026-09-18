@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "中華料理", "カフェ", "新店オープン", "�
 pubDate: 2026-09-16
 source: "Detik"
 sourceUrl: "https://food.detik.com/resto-dan-kafe/d-8665151/su-wah-nikmatnya-bakmi-kepiting-hingga-egg-tart-durian-di-kafe-ala-hong-kong"
-draft: true
+draft: false
 ---
 
 ## Agora Mallに香港の大衆カフェ文化を体験できる新店が登場
