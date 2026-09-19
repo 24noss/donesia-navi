@@ -6,7 +6,7 @@ tags: ["スカルノハッタ空港", "インフラ", "交通", "観光"]
 pubDate: 2026-09-19
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5748632/bandara-soetta-raih-dua-penghargaan-internasional-aci"
-draft: true
+draft: false
 ---
 
 ## 国際空港評議会の評価で2冠達成 スカルノハッタ空港のサービス改善が評価
