@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "南ジャカルタ", "治安", "注意喚起", "生�
 pubDate: 2026-09-19
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/19/06340301/babak-baru-kasus-wanita-ditendang-di-sency-pelaku-ditangkap-4-saksi"
-draft: true
+draft: false
 ---
 
 ## スナヤン・シティでの無差別暴行事件、警察が容疑者の男を逮捕
