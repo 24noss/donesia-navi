@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "インドネシア料理", "グルメ", "レストラ
 pubDate: 2026-09-18
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/food/read/2026/09/18/140542675/5-tempat-makan-bakso-terkenal-di-jakarta-ada-yang-berusia-35-tahun?page=all"
-draft: true
+draft: false
 ---
 
 ## ジャカルタで楽しむ本格牛肉団子スープ 地元で愛される名店5選
