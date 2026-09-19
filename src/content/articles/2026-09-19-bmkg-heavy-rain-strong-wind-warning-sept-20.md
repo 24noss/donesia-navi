@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "防災", "注意喚起", "BMKG", "渋滞"]
 pubDate: 2026-09-19
 source: "Kompas"
 sourceUrl: "https://www.kompas.com/tren/read/2026/09/19/150000065/bmkg-peringatkan-hujan-lebat-dan-angin-kencang-besok-20-september-2026"
-draft: true
+draft: false
 ---
 
 ## BMKGが各地で大雨と強風を警告、外出時の安全確保を
