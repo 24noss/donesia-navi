@@ -6,7 +6,7 @@ tags: ["地震", "防災", "注意喚起", "BMKG"]
 pubDate: 2026-09-18
 source: "Kompas"
 sourceUrl: "https://regional.kompas.com/read/2026/09/18/225112778/gempa-52-guncang-bayah-banten-bpbd-lebak-tak-berpotensi-tsunami?source=terkini_artikel"
-draft: true
+draft: false
 ---
 
 ## バンテン州バヤ南西沖でM5.2の地震 津波の発生なしと発表
