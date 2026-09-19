@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "中央ジャカルタ", "交通", "インフラ", "�
 pubDate: 2026-09-19
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/19/11555841/mrt-thamrin-kwitang-segera-dibangun-pemprov-dki-mulai-data-lokasi"
-draft: true
+draft: false
 ---
 
 ## MRT東西線タムリン〜クウィタン区間の建設準備が本格化
