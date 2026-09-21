@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "レストラン", "会食・接待", "キャンペー
 pubDate: 2026-09-20
 source: "Suara"
 sourceUrl: "https://www.suara.com/bri/2026/09/20/200745/pakai-brimo-nikmati-diskon-50-persen-di-restoran-the-langham-jakarta"
-draft: true
+draft: false
 ---
 
 ## ザ・ランガム・ジャカルタ、BRImo決済でレストランが半額になる大型優待
