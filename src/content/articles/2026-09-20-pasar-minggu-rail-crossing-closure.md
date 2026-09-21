@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "南ジャカルタ", "交通規制", "渋滞", "交�
 pubDate: 2026-09-20
 source: "Detik"
 sourceUrl: "https://news.detik.com/foto-news/d-8670468/perlintasan-rel-simpang-pasar-minggu-akan-ditutup"
-draft: true
+draft: false
 ---
 
 ## 南ジャカルタのボトルネック、ボルボ踏切が側道整備完了に伴い閉鎖へ
