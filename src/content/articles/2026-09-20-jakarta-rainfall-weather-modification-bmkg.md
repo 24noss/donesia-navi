@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "BMKG", "生活情報", "大気汚染"]
 pubDate: 2026-09-20
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8670641/jakarta-dan-sekitarnya-diguyur-hujan-bmkg-ungkap-efek-modifikasi-cuaca"
-draft: true
+draft: false
 ---
 
 ## 気象庁の人工降雨によりジャカルタ各地で降雨を観測、雨季入りは10月中旬か
