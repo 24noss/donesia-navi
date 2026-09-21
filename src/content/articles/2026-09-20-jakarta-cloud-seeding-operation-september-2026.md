@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "BMKG", "防災", "生活情報", "大気汚染"]
 pubDate: 2026-09-20
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8671264/bpbd-dki-omc-di-jakarta-bakal-dilaksanakan-hingga-22-september"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ首都圏で気象改変（人工降雨）作戦を9月22日まで実施
