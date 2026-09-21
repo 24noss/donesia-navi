@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "ボゴール", "交通", "KRL", "鉄道"]
 pubDate: 2026-09-20
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/09/20/050500427/jadwal-krl-bogor-normal-kai-kembali-tambah-4-perjalanan-mulai-21-september"
-draft: true
+draft: false
 ---
 
 ## KAIコミューターがボゴール線の運行本数を追加、順次通常ダイヤへ
