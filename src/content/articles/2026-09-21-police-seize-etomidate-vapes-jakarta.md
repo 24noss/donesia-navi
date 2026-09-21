@@ -6,7 +6,7 @@ tags: ["北ジャカルタ", "治安", "注意喚起", "医療"]
 pubDate: 2026-09-21
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5751095/polres-jakbar-ungkap-peredaran-narkoba-etomidate-di-kelapa-gading"
-draft: true
+draft: false
 ---
 
 ## 麻酔薬エトミデート混入カートリッジが首都圏で流通、警察が摘発
