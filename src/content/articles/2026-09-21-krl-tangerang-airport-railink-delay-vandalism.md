@@ -6,7 +6,7 @@ tags: ["KRL", "交通", "スカルノハッタ空港", "注意喚起", "鉄道"]
 pubDate: 2026-09-21
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8671749/krl-tangerang-duri-dan-ka-bandara-terganggu-imbas-vandalisme"
-draft: true
+draft: false
 ---
 
 ## タンゲラン線とスカルノハッタ空港線で遅延発生 線路設備トラブルの影響
