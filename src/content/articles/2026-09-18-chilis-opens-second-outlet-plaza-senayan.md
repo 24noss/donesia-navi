@@ -6,7 +6,7 @@ tags: ["中央ジャカルタ", "新店オープン", "ファミリー", "グル
 pubDate: 2026-09-18
 source: "kontan.co.id"
 sourceUrl: "https://momsmoney.kontan.co.id/news/chilis-buka-gerai-kedua-di-plaza-senayan-ada-paket-menu-mulai-rp-99000"
-draft: true
+draft: false
 ---
 
 ## 人気米系ダイナー「Chili’s」がプラザ・スナヤンに進出、手頃なセットメニューも展開
