@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "中華料理", "スイーツ", "会食・接待", "�
 pubDate: 2026-09-21
 source: "CNN Indonesia"
 sourceUrl: "https://www.cnnindonesia.com/ekonomi/20260921095004-625-1406198/rayakan-mid-autumn-jw-marriott-jakarta-hadirkan-7-koleksi-mooncake"
-draft: true
+draft: false
 ---
 
 ## 中秋の名月を彩る上質な味、JWマリオット・ジャカルタが特製月餅7種を展開
