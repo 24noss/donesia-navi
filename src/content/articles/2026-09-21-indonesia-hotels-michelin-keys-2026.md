@@ -6,7 +6,7 @@ tags: ["バリ島", "ジャカルタ", "観光", "生活情報"]
 pubDate: 2026-09-21
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/09/21/083417627/47-hotel-dan-resor-indonesia-masuk-michelin-keys-2026-ini-daftarnya"
-draft: true
+draft: false
 ---
 
 ## 世界的なホテル指標「ミシュラン・キーズ」に国内47軒が選出
