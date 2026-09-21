@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通", "インフラ", "注意喚起"]
 pubDate: 2026-09-21
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8671927/lrt-jabodebek-tiba-tiba-mati-di-cikunir-ternyata-ini-penyebabnya"
-draft: true
+draft: false
 ---
 
 ## チクニール付近で給電トラブルが発生、通勤時間帯に一時遅れ
