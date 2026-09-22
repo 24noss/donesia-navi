@@ -6,7 +6,7 @@ tags: ["中央ジャカルタ", "火災", "注意喚起", "交通"]
 pubDate: 2026-09-22
 source: "Antara"
 sourceUrl: "https://antaranews.com/foto/5752047/kebakaran-pasar-mobil-kemayoran-22-mobil-damkar-dikerahkan-padamkan-api"
-draft: true
+draft: false
 ---
 
 ## クマヨランの自動車パーツ市場で火災、消防車両22台が出動し消火
