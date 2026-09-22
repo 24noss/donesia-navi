@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "鉄道", "交通", "観光", "生活情報"]
 pubDate: 2026-09-22
 source: "Kompas"
 sourceUrl: "https://regional.kompas.com/read/2026/09/22/070500278/argo-muria-sindoro-dan-merbabu-jadi-ka-muria-mulai-1-oktober-2026"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ〜スマラン間の移動がより分かりやすく、全席エグゼクティブで1日12便運行
