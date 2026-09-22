@@ -6,7 +6,7 @@ tags: ["鉄道", "KRL", "インフラ", "交通", "生活情報"]
 pubDate: 2026-09-22
 source: "Kompas"
 sourceUrl: "https://regional.kompas.com/read/2026/09/21/203646078/krl-green-line-bakal-diperpanjang-hingga-merak-pemprov-banten-sebut-butuh"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ首都圏KRL、西ジャワ西端メラック港方面への延伸計画が浮上
