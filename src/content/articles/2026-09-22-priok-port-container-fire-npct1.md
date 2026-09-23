@@ -6,7 +6,7 @@ tags: ["北ジャカルタ", "火災", "インフラ", "注意喚起"]
 pubDate: 2026-09-22
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/22/10574051/51-iso-tank-container-ludes-terbakar-di-npct1-jakut-api-muncul-dari"
-draft: true
+draft: false
 ---
 
 ## 北ジャカルタの主要港湾ターミナルで大規模火災、爆発音も
