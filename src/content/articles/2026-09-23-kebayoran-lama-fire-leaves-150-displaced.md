@@ -6,7 +6,7 @@ tags: ["南ジャカルタ", "火災", "生活情報", "注意喚起"]
 pubDate: 2026-09-23
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8674933/150-orang-terdampak-kebakaran-di-kebayoran-lama-kerugian-capai-rp-1-2-m"
-draft: true
+draft: false
 ---
 
 ## 住宅密集地で22棟が全焼、漏電による出火と推定
