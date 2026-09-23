@@ -6,7 +6,7 @@ tags: ["物価", "生活情報", "プルタミナ"]
 pubDate: 2026-09-23
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5754577/airlangga-pastikan-harga-bbm-tidak-naik-hingga-akhir-2026"
-draft: true
+draft: false
 ---
 
 ## 国際情勢の変動下でも補助金燃料の価格維持を明言、備蓄も確保
