@@ -6,7 +6,7 @@ tags: ["インドネシア経済", "両替・金融", "ジャカルタ"]
 pubDate: 2026-09-23
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/09/23/143556026/bi-rate-ditahan-di-level-575-persen?source=nowtrending_artikel"
-draft: true
+draft: false
 ---
 
 ## 中銀が政策金利を現状維持、為替安定化とインフレ抑制に注力
