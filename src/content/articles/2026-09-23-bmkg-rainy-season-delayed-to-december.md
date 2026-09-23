@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "BMKG", "生活情報", "注意喚起", "大気汚染"
 pubDate: 2026-09-23
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8674752/el-nino-bikin-musim-hujan-mundur-ke-bulan-desember"
-draft: true
+draft: false
 ---
 
 ## エルニーニョの影響で雨季開始が12月〜来年2月に後退、期間も短縮へ
