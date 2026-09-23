@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "生活情報"]
 pubDate: 2026-09-22
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/22/18122301/warga-jakarta-kini-diminta-sampaikan-keluhan-lewat-jaki-yustinus-prastowo"
-draft: true
+draft: false
 ---
 
 ## 州知事特別補佐官のSNS窓口終了に伴い、公式アプリ利用を呼びかけ
