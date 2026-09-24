@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "レストラン", "新店オープン"]
 pubDate: 2026-09-22
 source: "olenka.id"
 sourceUrl: "https://olenka.id/chilis-buka-gerai-kedua-di-plaza-senayan-ada-fried-mozzarella-hingga-triple-dipper/amp"
-draft: true
+draft: false
 ---
 
 ## プラザ・スナヤンにオープンしたChili’sの2号店
