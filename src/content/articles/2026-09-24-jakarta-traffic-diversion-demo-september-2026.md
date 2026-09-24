@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通規制", "注意喚起", "渋滞", "デモ"]
 pubDate: 2026-09-24
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8676547/bakal-ada-demo-di-dpr-dan-monas-hari-ini-ini-rute-alternatifnya"
-draft: true
+draft: false
 ---
 
 ## 本日ジャカルタでデモ実施、警察が迂回ルートを設定し混雑への注意を呼びかけ
