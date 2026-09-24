@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "カフェ", "新店オープン"]
 pubDate: 2026-09-22
 source: "SWA.co.id"
 sourceUrl: "https://swa.co.id/read/477610/sakura-blue-caf-hadir-di-kemayoran-dengan-konsep-neighborhood-caf"
-draft: true
+draft: false
 ---
 
 ## ケマヨランエリアに誕生した新しいネイバーフッドカフェ
