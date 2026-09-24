@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "中央ジャカルタ", "交通規制", "注意喚起
 pubDate: 2026-09-24
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8677352/massa-buruh-bubar-polisi-pastikan-lalin-jalan-sudirman-normal-lagi"
-draft: true
+draft: false
 ---
 
 ## ジャカルタ中心部のデモによる交通規制と今後の警戒について
