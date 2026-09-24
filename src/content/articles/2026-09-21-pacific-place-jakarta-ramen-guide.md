@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "ラーメン", "日本食"]
 pubDate: 2026-09-21
 source: "nibble.id"
 sourceUrl: "https://www.nibble.id/ramen-di-pacific-place-jakarta/"
-draft: true
+draft: false
 ---
 
 ## パシフィック・プレイスで味わうバラエティ豊かなラーメン店
