@@ -6,7 +6,7 @@ tags: ["インドネシア経済", "物価", "両替・金融"]
 pubDate: 2026-09-24
 source: "Kompas"
 sourceUrl: "http://money.kompas.com/read/2026/09/23/173845126/bi-tahan-suku-bunga-575-persen-andalkan-hedging-dan-lct-untuk-jaga-rupiyah?source=terkini_artikel"
-draft: true
+draft: false
 ---
 
 ## インドネシア中央銀行が政策金利を5.75％で維持、為替安定と物価抑制を重視
