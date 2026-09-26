@@ -6,7 +6,7 @@ tags: ["観光", "火災", "注意喚起"]
 pubDate: 2026-09-26
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5759655/twa-kawah-ijen-dibuka-kembali-awal-pekan-depan-pascakebakaran"
-draft: true
+draft: false
 ---
 
 ## 東ジャワの名所イジェン火山、山火事被害を乗り越え来週初めから再開
