@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "生活情報", "医療", "注意喚起"]
 pubDate: 2026-09-25
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/25/12161571/dinkes-dki-ungkap-usia-pasien-cuci-darah-makin-muda-20-tahun-sudah-banyak"
-draft: true
+draft: false
 ---
 
 ## ジャカルタで若年層の透析患者が増加、保健局が安易な服薬に警鐘
