@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通規制", "イベント", "注意喚起", "渋�
 pubDate: 2026-09-25
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/24/20372591/gbk-diprediksi-padat-akhir-pekan-ini-ada-sejumlah-acara-besar-ring-road"
-draft: true
+draft: false
 ---
 
 ## GBK周辺で大規模イベントが開催、週末の混雑と交通規制に警戒を
