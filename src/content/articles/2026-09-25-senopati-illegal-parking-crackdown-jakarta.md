@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "南ジャカルタ", "セノパティ", "交通規制
 pubDate: 2026-09-25
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8679229/parkir-liar-di-senopati-kena-sidak-motor-motor-diangkut-dishub"
-draft: true
+draft: false
 ---
 
 ## 人気飲食店街のセノパティで歩道占有・違法駐車の取り締まりを強化
