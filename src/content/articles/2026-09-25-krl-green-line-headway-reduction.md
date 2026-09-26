@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "KRL", "鉄道", "交通", "生活情報"]
 pubDate: 2026-09-25
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8678141/headway-krl-green-line-bakal-dipangkas-karena-penumpang-membeludak"
-draft: true
+draft: false
 ---
 
 ## 混雑緩和へ、KRLグリーン線の運行間隔が従来の10〜15分から大幅短縮へ
