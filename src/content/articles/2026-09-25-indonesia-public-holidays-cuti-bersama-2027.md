@@ -6,7 +6,7 @@ tags: ["生活情報", "イベント", "観光"]
 pubDate: 2026-09-25
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/09/25/123841826/kalender-2027-resmi-ditetapkan-cek-26-hari-libur-nasional-dan-cuti-bersama"
-draft: true
+draft: false
 ---
 
 ## 2027年の公的休日カレンダーが確定、長期連休の配置が明らかに
