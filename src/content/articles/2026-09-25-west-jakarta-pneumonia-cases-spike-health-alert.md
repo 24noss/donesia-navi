@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "西ジャカルタ", "医療", "生活情報", "注�
 pubDate: 2026-09-25
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/25/15381111/kasus-pneumonia-di-jakbar-melonjak-tembus-15998-kasus-pada-triwulan-iii?source=wp_terkini"
-draft: true
+draft: false
 ---
 
 ## 乾燥期の大気環境下で呼吸器疾患が増加、早期受診を呼びかけ
