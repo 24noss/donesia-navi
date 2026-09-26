@@ -6,7 +6,7 @@ tags: ["鉄道", "ジョグジャカルタ", "交通", "観光", "生活情報"]
 pubDate: 2026-09-26
 source: "Kompas"
 sourceUrl: "https://travel.kompas.com/read/2026/09/26/063100727/peralihan-pengelola-penumpang-kereta-bandara-yia-diminta-pesan-tiket-melalui"
-draft: true
+draft: false
 ---
 
 ## ジョグジャカルタ空港鉄道、チケット購入アプリが「C-Access」へ変更
