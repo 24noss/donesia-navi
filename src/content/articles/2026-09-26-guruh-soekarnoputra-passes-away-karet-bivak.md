@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "中央ジャカルタ", "生活情報"]
 pubDate: 2026-09-26
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8680142/diantar-megawati-jenazah-guruh-soekarnoputra-tiba-di-tpu-karet-bivak"
-draft: true
+draft: false
 ---
 
 ## 初代大統領の末男で著名芸術家のグロー・スカルノプトラ氏が逝去、政財界要人が追悼
