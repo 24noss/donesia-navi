@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "南ジャカルタ", "火災", "注意喚起", "防�
 pubDate: 2026-09-25
 source: "Antara"
 sourceUrl: "https://www.antaranews.com/berita/5757711/kerugian-kebakaran-gudang-di-karet-kuningan-capai-rp1-miliar"
-draft: true
+draft: false
 ---
 
 ## クニンガンのオフィス・住宅街近接エリアで火災、電気ショートに注意喚起
