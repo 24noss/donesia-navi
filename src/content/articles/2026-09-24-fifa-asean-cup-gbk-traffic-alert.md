@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通規制", "渋滞", "注意喚起", "イベン�
 pubDate: 2026-09-24
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8677796/fifa-asean-cup-dimulai-besok-pengendara-diimbau-hindari-kawasan-gbk"
-draft: true
+draft: false
 ---
 
 ## スナヤンGBK周辺で混雑予想、警察が迂回路や公共交通機関の利用を推奨
