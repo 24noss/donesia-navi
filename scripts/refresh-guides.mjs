@@ -36,6 +36,8 @@ import {
   assembleArticleFile,
   buildRefreshPrompt,
   extractGeminiText,
+  extractUrlsFromTexts,
+  formatRemovedUrlReport,
   parseArticleFile,
   parseGeminiObject,
   setFrontmatterDate,
@@ -189,6 +191,7 @@ export async function runRefresh({ args, deps = {} }) {
       const output = parseGeminiObject(extractGeminiText(data));
       validated = validateRefreshOutput(output, {
         allowedUrls: t.urls,
+        extraAllowedUrls: extractUrlsFromTexts(included.map((x) => x.text)),
         minChars: Math.min(MIN_BODY_CHARS, Math.floor(oldBody.length * 0.6)),
       });
     } catch (err) {
@@ -225,7 +228,7 @@ export async function runRefresh({ args, deps = {} }) {
         '',
         '## 改訂の要約(AIによる)',
         validated.changeSummary,
-        ...(validated.removedUrls.length ? ['', `注意: 資料に無い外部URLを本文から除去しました: ${validated.removedUrls.join(', ')}`] : []),
+        ...(validated.removedDetails.length ? ['', formatRemovedUrlReport(validated.removedDetails)] : []),
         '',
         '`updatedDate` と `lastVerified` を当日に更新し、出典のスナップショット(`src/data/guide-source-snapshots/${t.topic.id}.json`)を更新しています。',
       ].join('\n'),

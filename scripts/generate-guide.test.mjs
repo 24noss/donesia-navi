@@ -201,3 +201,26 @@ describe('先頭トピックが失敗したら次の候補へ進む(自動選択
   });
 });
 
+describe('runGenerate(資料本文に出現するURLの許可)', () => {
+  test('資料本文にあるURLは本文に残り、無いURLは除去されて removedUrlReport に出る', async () => {
+    const { args, deps } = await setup();
+    const OFFICIAL = 'https://official.example/apply';
+    const baseFetch = deps.fetchImpl;
+    deps.fetchImpl = async (url, init) => {
+      const res = await baseFetch(url, init);
+      if (!String(url).endsWith('/entry-procedure')) return res;
+      const html = await res.text();
+      return new Response(html.replace('</body>', `<p>申請は ${OFFICIAL} から行います。</p></body>`), { status: 200, headers: { 'content-type': 'text/html; charset=utf-8' } });
+    };
+    const resp = JSON.parse(await readFile(path.join(FIX, 'gemini-guide-response.json'), 'utf-8'));
+    resp.body = resp.body.replace('## よくある質問', `公式サイト（${OFFICIAL}）またはアプリから申請します。詳細は税関サイト（https://evil.example/customs）(出典: 資料)。\n\n## よくある質問`);
+    deps.callGemini = async () => ({ candidates: [{ content: { parts: [{ text: JSON.stringify(resp) }] } }] });
+    const r = await runGenerate({ args, deps });
+    assert.equal(r.status, 'generated');
+    assert.ok(r.markdown.includes(`公式サイト（${OFFICIAL}）またはアプリから申請します。`));
+    assert.ok(r.markdown.includes('税関サイト(出典: 資料)。'));
+    assert.ok(!r.markdown.includes('evil.example'));
+    assert.match(r.removedUrlReport, /evil\.example\/customs/);
+    assert.ok(!r.removedUrlReport.includes('official.example/apply`,'));
+  });
+});
