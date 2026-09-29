@@ -5,6 +5,7 @@ category: "regulation"
 tags: ["生活情報", "両替・金融"]
 pubDate: 2026-04-04
 draft: false
+hasAffiliate: true
 ---
 
 ## インドネシアで法人設立する手順と費用 — PT PMAの設立を完全ガイド
@@ -157,6 +158,8 @@ NIBとNPWPを持ってインドネシアの銀行で法人口座を開設し、�
 - 主要銀行: Bank Mandiri、BCA、BNI、CIMB Niagaなど
 - 口座開設には取締役の本人確認（パスポート・KITAS）が必要
 - **資本金は入金後12か月間引き出し不可**（事業使用は可）
+
+日本から資本金を送る手段としては、銀行の海外送金のほか、<a href="https://wise.com/invite/dic/shogon67" target="_blank" rel="sponsored noopener" data-affiliate="wise" data-placement="article-body">Wise</a>のようなオンライン送金サービスも選択肢になる。Wiseは日本円からインドネシアルピア（IDR）への送金に対応しており、インドネシアの銀行口座や事業者宛ての送金も案内されている。ただし、資本金の払込には公証人・銀行・BKPMへの証憑が関わるため、**送金方法や送金元の証憑要件は、事前に公証人や取引銀行に確認すること。**
 
 ### ステップ8: 追加許認可の取得（業種による）
 

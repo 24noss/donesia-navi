@@ -5,6 +5,7 @@ category: "lifestyle"
 tags: ["医療", "ジャカルタ"]
 pubDate: 2026-04-04
 draft: false
+ymyl: true
 ---
 
 ## ジャカルタで日本語が通じる病院・クリニック一覧【2026年版】

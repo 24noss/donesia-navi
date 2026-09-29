@@ -9,6 +9,7 @@ import RestaurantMap from '../../components/RestaurantMap.astro';
 import { categories, formatDate } from '../../lib/categories';
 import { shouldIncludeDrafts } from '../../lib/draftVisibility';
 import { getRelatedArticles } from '../../lib/related';
+import { isYmyl, resolveVerificationDisplay } from '../../lib/ymyl.mjs';
 import { getVisiblePlaces, placeToMapPoint } from '../../lib/places';
 
 export async function getStaticPaths() {
@@ -34,6 +35,11 @@ const newArticles = [...allArticles]
 // note for evergreen guide articles whose id has no date prefix.
 const isGuideArticle = !/^\d{4}-\d{2}-\d{2}-/.test(article.id);
 const lastReviewed = article.data.updatedDate ?? article.data.pubDate;
+
+// YMYL記事の「情報の確認について」ボックス(最終確認日はlastVerifiedがある場合のみ表記)
+const showYmylBox = isYmyl(article.data);
+const verification = resolveVerificationDisplay(article.data);
+const references = article.data.references ?? [];
 
 // This article's own store map (places whose sourceArticles include this article's id).
 // getVisiblePlaces needs the FULL article set (including drafts) to resolve sourceArticles
@@ -103,7 +109,7 @@ const articlePlaces = getVisiblePlaces(allPlaces, allArticlesIncludingDrafts)
         )}
       </div>
       {isGuideArticle && (
-        <p class="freshness-note">この記事は定期的に内容を見直しています（最終確認: {formatDate(lastReviewed)}）</p>
+        <p class="freshness-note">この記事は定期的に内容を見直しています（{showYmylBox ? `${verification.label}: ${verification.date ? formatDate(verification.date) : '—'}` : `最終確認: ${formatDate(lastReviewed)}`}）</p>
       )}
     </div>
 
@@ -139,6 +145,27 @@ const articlePlaces = getVisiblePlaces(allPlaces, allArticlesIncludingDrafts)
           <div class="article-source">
             <div class="article-source-title">情報ソース</div>
             <p><a href={article.data.sourceUrl} target="_blank" rel="noopener noreferrer">{article.data.source || '原文'}</a></p>
+          </div>
+        )}
+
+        <!-- YMYL: 情報の確認について -->
+        {showYmylBox && (
+          <div class="article-source ymyl-box">
+            <div class="article-source-title">情報の確認について</div>
+            {verification.date && (
+              <p>{verification.label}: {formatDate(verification.date)}</p>
+            )}
+            {references.length > 0 && (
+              <>
+                <p class="ymyl-refs-title">出典</p>
+                <ul class="ymyl-refs">
+                  {references.map((ref) => (
+                    <li><a href={ref.url} target="_blank" rel="noopener noreferrer">{ref.title}</a></li>
+                  ))}
+                </ul>
+              </>
+            )}
+            <p class="ymyl-note">ビザ・税制・治安などの情報は変更されることがあります。手続きの前に必ず公的機関の最新情報をご確認ください。</p>
           </div>
         )}
 
@@ -264,6 +291,11 @@ const articlePlaces = getVisiblePlaces(allPlaces, allArticlesIncludingDrafts)
 </Base>
 
 <style>
+  .ymyl-box p { margin: 0 0 6px; line-height: 1.7; }
+  .ymyl-box .ymyl-refs-title { margin-top: 8px; font-weight: 600; color: var(--text); }
+  .ymyl-box .ymyl-refs { margin: 0 0 8px; padding-left: 20px; }
+  .ymyl-box .ymyl-note { margin: 8px 0 0; color: var(--text-muted); }
+
   /* Freshness note for evergreen guide articles (B-3) */
   .freshness-note {
     margin-top: 12px;
