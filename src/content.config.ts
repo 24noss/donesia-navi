@@ -27,6 +27,13 @@ const articles = defineCollection({
     sourceUrl: z.string().url().optional(),
     draft: z.boolean().default(false),
     hasAffiliate: z.boolean().default(false),
+    // YMYL(ビザ・税・治安・医療など)記事向け。判定は src/lib/ymyl.mjs。
+    // lastVerified: 人が内容を公的情報と照合した日(未確認の記事には書かない)。
+    lastVerified: z.coerce.date().optional(),
+    // 出典(公的機関等)。あれば記事ページの「情報の確認について」に一覧表示する。
+    references: z.array(z.object({ title: z.string(), url: z.string().url() })).optional(),
+    // category が visa/safety/regulation 以外でYMYL扱いにしたい記事に true。
+    ymyl: z.boolean().optional(),
   }),
 });
 

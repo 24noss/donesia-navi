@@ -1,0 +1,47 @@
+name: Check YMYL Freshness
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # 毎月1日 00:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Detect stale YMYL articles
+        run: npm run --silent check-ymyl > ymyl-report.md
+
+      - name: Create issue if needed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cat ymyl-report.md
+          # 検出行(先頭が "- `")が無ければ何もしない
+          if ! grep -q '^- `' ymyl-report.md; then
+            echo "再確認が必要な記事はありません。"
+            exit 0
+          fi
+          TITLE="YMYL記事の再確認($(date -u +%Y-%m))"
+          EXISTING=$(gh issue list --state open --limit 100 --search "\"$TITLE\" in:title" --json title --jq "[.[] | select(.title == \"$TITLE\")] | length")
+          if [ "$EXISTING" != "0" ]; then
+            echo "同名の open issue が既にあるため作成しません: $TITLE"
+            exit 0
+          fi
+          gh issue create --title "$TITLE" --body-file ymyl-report.md

@@ -16,6 +16,8 @@
 | `docs/news-pipeline.md` | ニュース生成エンジンの内部仕様 |
 | `docs/categories/*.md` | カテゴリ別(8種)の情報源・品質チューニング箇所 |
 | `docs/improvement-roadmap.md` | 改善ロードマップ(優先度・状態つき) |
+| `docs/monetization/` | 収益化: アフィリエイト候補、月次の収益・コスト・PV記録(`docs/monetization/revenue-log.csv`、`npm run revenue`) |
+| `docs/strategy/` | 方針検討の調査メモ(読者拡大・韓国語展開など) |
 | `DESIGN_STRATEGY.md` | デザイン戦略(1269行。必要な節だけ読む。コピーしない) |
 | `src/content/articles/` | 記事本体(`draft: true` は本番非表示) |
 | `src/data/tag-vocabulary.json` | タグ統制語彙(71語) |
