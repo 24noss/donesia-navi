@@ -1,0 +1,1145 @@
+{
+  "version": 1,
+  "topics": [
+    {
+      "id": "bali-entry-checklist",
+      "title": "バリ島入国チェックリスト【2026年版】e-VOA・到着カード・観光税",
+      "audience": [
+        "tourist"
+      ],
+      "category": "travel",
+      "tags": [
+        "バリ島",
+        "観光",
+        "ビザ"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 入国 必要なもの",
+        "バリ 入国カード",
+        "バリ 入国 手続き"
+      ],
+      "outline": [
+        "出発前に準備するもの(パスポート残存期間・ビザ)",
+        "All Indonesia到着カードと税関申告",
+        "e-VOAの申請",
+        "バリ観光税の支払い",
+        "空港到着後の流れ",
+        "よくある詐欺サイトへの注意"
+      ],
+      "sourceThemes": [
+        "entry",
+        "tourist-levy",
+        "visa-on-arrival",
+        "customs"
+      ],
+      "extraReferences": [],
+      "affiliate": [
+        "trip.com",
+        "klook"
+      ],
+      "priority": 1,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-tourist-levy-guide",
+      "title": "バリ島の外国人観光税(15万ルピア)の払い方と支払い証明【最新】",
+      "audience": [
+        "tourist"
+      ],
+      "category": "travel",
+      "tags": [
+        "バリ島",
+        "観光",
+        "両替・金融"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 観光税 払い方",
+        "バリ 観光税 15万ルピア",
+        "Love Bali 観光税"
+      ],
+      "outline": [
+        "観光税とは(対象・金額・回数)",
+        "支払い方法(Love Bali・空港カウンター)",
+        "支払いのタイミングと証明",
+        "免除の対象",
+        "未払いの場合の扱い",
+        "税収の使途"
+      ],
+      "sourceThemes": [
+        "tourist-levy",
+        "entry"
+      ],
+      "extraReferences": [],
+      "affiliate": [
+        "trip.com",
+        "klook"
+      ],
+      "priority": 1,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-evoa-application-guide",
+      "title": "バリ島のe-VOA申請ガイド:料金・滞在日数・有効期間・手順",
+      "audience": [
+        "tourist"
+      ],
+      "category": "visa",
+      "tags": [
+        "バリ島",
+        "ビザ",
+        "観光"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "e-VOA 申請 バリ",
+        "バリ 到着ビザ 料金",
+        "インドネシア e-VOA 日本人"
+      ],
+      "outline": [
+        "e-VOAとは(到着ビザとの違い)",
+        "対象者・滞在日数・有効期間",
+        "申請の手順",
+        "料金と支払い",
+        "申請時の注意(公式サイトの見分け方)",
+        "空港での入国審査"
+      ],
+      "sourceThemes": [
+        "visa-on-arrival",
+        "entry"
+      ],
+      "extraReferences": [],
+      "affiliate": [
+        "trip.com",
+        "klook"
+      ],
+      "priority": 1,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-all-indonesia-arrival-card",
+      "title": "All Indonesia到着カードの書き方:入国審査・税関申告・検疫をまとめて登録",
+      "audience": [
+        "tourist"
+      ],
+      "category": "travel",
+      "tags": [
+        "バリ島",
+        "観光",
+        "注意喚起"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "All Indonesia 到着カード",
+        "インドネシア 入国カード オンライン",
+        "バリ 税関申告"
+      ],
+      "outline": [
+        "All Indonesiaとは",
+        "登録できる時期と入力項目",
+        "税関申告(e-CD)の内容",
+        "QRコードの提示",
+        "偽サイト・仲介業者への注意",
+        "入力ミスの対処"
+      ],
+      "sourceThemes": [
+        "entry",
+        "customs"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 1,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-stay-extension-overstay",
+      "title": "バリ島の滞在延長とオーバーステイ:VoA・訪問ビザの延長ルールと罰則",
+      "audience": [
+        "tourist"
+      ],
+      "category": "visa",
+      "tags": [
+        "バリ島",
+        "ビザ",
+        "注意喚起"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 滞在延長",
+        "バリ オーバーステイ 罰金",
+        "VoA 延長 バリ"
+      ],
+      "outline": [
+        "VoAとVKW(訪問ビザ)の滞在日数の違い",
+        "延長できる回数と上限",
+        "延長の手続き(オンライン・入管事務所)",
+        "オーバーステイの罰金と措置",
+        "延長できないケース",
+        "長期滞在ビザへの切り替え"
+      ],
+      "sourceThemes": [
+        "visa-on-arrival",
+        "long-stay-visa",
+        "entry"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 1,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-international-license-invalid",
+      "title": "日本の国際免許はインドネシアで無効:バリでバイク・車を運転する前に知ること",
+      "audience": [
+        "tourist"
+      ],
+      "category": "safety",
+      "tags": [
+        "バリ島",
+        "交通",
+        "注意喚起"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 国際免許 無効",
+        "バリ レンタバイク 免許",
+        "インドネシア 運転 国際免許証"
+      ],
+      "outline": [
+        "ジュネーブ条約とウィーン条約の違い",
+        "日本の免許・翻訳文では運転できない理由",
+        "インドネシアで免許を取得する方法",
+        "無免許・保険が使えない場合のリスク",
+        "州知事通達での交通ルール",
+        "代わりの移動手段"
+      ],
+      "sourceThemes": [
+        "driving-license",
+        "safety"
+      ],
+      "extraReferences": [],
+      "affiliate": [
+        "klook"
+      ],
+      "priority": 1,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-long-stay-visa-comparison",
+      "title": "バリ島に長期滞在するビザ比較:訪問ビザ・E33(セカンドホーム)・E33G・投資家ビザ",
+      "audience": [
+        "prospective-resident"
+      ],
+      "category": "visa",
+      "tags": [
+        "バリ島",
+        "ビザ",
+        "生活情報"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 長期滞在 ビザ",
+        "バリ 移住 ビザ 種類",
+        "インドネシア セカンドホームビザ"
+      ],
+      "outline": [
+        "滞在目的別のビザ早見表",
+        "訪問ビザ(C1・D1)",
+        "セカンドホームビザ(E33)",
+        "リモートワーカー(E33G)",
+        "高齢者向け(E33E・E33F)",
+        "投資家ビザ(E28A)",
+        "選び方のポイント"
+      ],
+      "sourceThemes": [
+        "long-stay-visa",
+        "second-home-visa",
+        "retirement-visa",
+        "digital-nomad-visa",
+        "visa-on-arrival"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 1,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-e33g-remote-worker-visa",
+      "title": "E33Gリモートワーカービザ(デジタルノマド)の要件・費用・手順【バリ島】",
+      "audience": [
+        "prospective-resident"
+      ],
+      "category": "visa",
+      "tags": [
+        "バリ島",
+        "ビザ",
+        "生活情報"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "E33G ビザ",
+        "バリ デジタルノマド ビザ",
+        "インドネシア リモートワーカー ビザ"
+      ],
+      "outline": [
+        "E33Gとは",
+        "収入要件と必要書類",
+        "費用と滞在期間",
+        "申請手順と処理期間",
+        "できること・できないこと",
+        "延長と他の滞在許可への変更"
+      ],
+      "sourceThemes": [
+        "digital-nomad-visa",
+        "long-stay-visa"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-second-home-visa-e33",
+      "title": "E33セカンドホームビザとは:5年滞在の条件・費用・保証金要件",
+      "audience": [
+        "prospective-resident"
+      ],
+      "category": "visa",
+      "tags": [
+        "バリ島",
+        "ビザ"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "セカンドホームビザ インドネシア",
+        "E33 ビザ 条件",
+        "バリ 5年 ビザ"
+      ],
+      "outline": [
+        "E33の概要",
+        "滞在期間と費用",
+        "移民保証(資金・不動産)の要件",
+        "スポンサー・申請の流れ",
+        "家族の帯同",
+        "義務とペナルティ"
+      ],
+      "sourceThemes": [
+        "second-home-visa",
+        "long-stay-visa"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 3,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-retirement-visa-e33e",
+      "title": "バリ島でリタイアメント:55歳以上のE33E・E33Fビザの条件と費用",
+      "audience": [
+        "prospective-resident"
+      ],
+      "category": "visa",
+      "tags": [
+        "バリ島",
+        "ビザ",
+        "生活情報"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ リタイアメントビザ",
+        "E33E ビザ",
+        "インドネシア 退職ビザ 55歳"
+      ],
+      "outline": [
+        "対象年齢と滞在期間(E33E 5年・E33F 1年)",
+        "必要書類・資金要件",
+        "費用(ITAS・再入国許可)",
+        "スポンサー不要の条件",
+        "できる活動",
+        "家族の帯同"
+      ],
+      "sourceThemes": [
+        "retirement-visa",
+        "long-stay-visa"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 3,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-golden-visa-guide",
+      "title": "インドネシアのゴールデンビザ:投資額・滞在期間とGlobal Citizenとの違い",
+      "audience": [
+        "prospective-resident"
+      ],
+      "category": "visa",
+      "tags": [
+        "バリ島",
+        "ビザ"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "インドネシア ゴールデンビザ",
+        "ゴールデンビザ 投資額",
+        "Global Citizen of Indonesia"
+      ],
+      "outline": [
+        "ゴールデンビザとは",
+        "個人投資家・法人投資家の投資額と滞在期間",
+        "資金を預ける・購入する形態",
+        "Global Citizen of Indonesiaとの違い",
+        "申請の流れ"
+      ],
+      "sourceThemes": [
+        "golden-visa",
+        "long-stay-visa"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 4,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-itas-extension-guide",
+      "title": "バリ島在住者向け:ITAS(KITAS)延長と訪問ビザからのITAS変更の流れ",
+      "audience": [
+        "resident"
+      ],
+      "category": "visa",
+      "tags": [
+        "バリ島",
+        "ビザ",
+        "生活情報"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "ITAS 延長 手続き",
+        "KITAS 更新 バリ",
+        "訪問ビザ ITAS 変更"
+      ],
+      "outline": [
+        "ITASの延長を申請できる時期",
+        "訪問滞在許可からITASへの変更",
+        "オンライン申請の流れ",
+        "延長中のオーバーステイ扱い",
+        "家族(配偶者)のビザ",
+        "申請時の注意"
+      ],
+      "sourceThemes": [
+        "residence-permit",
+        "long-stay-visa"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 3,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-driver-license-residents",
+      "title": "バリ島在住者の運転免許:インドネシアのSIM取得・更新とオンライン手続き",
+      "audience": [
+        "resident"
+      ],
+      "category": "lifestyle",
+      "tags": [
+        "バリ島",
+        "交通",
+        "生活情報"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 運転免許 取得",
+        "インドネシア SIM 外国人",
+        "SIM 更新 オンライン"
+      ],
+      "outline": [
+        "日本の免許が使えない理由",
+        "インドネシアのSIMの種類",
+        "オンライン申請(Digital Korlantas)",
+        "更新と海外からの手続き",
+        "無免許運転のリスク"
+      ],
+      "sourceThemes": [
+        "driving-license",
+        "residence-permit"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 3,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-airport-to-city-transport",
+      "title": "バリ空港(ングラ・ライ)から市内への移動:タクシー・バス・配車の注意点",
+      "audience": [
+        "tourist"
+      ],
+      "category": "travel",
+      "tags": [
+        "バリ島",
+        "交通",
+        "観光"
+      ],
+      "ymyl": false,
+      "keywords": [
+        "バリ 空港 から 市内",
+        "ングラライ空港 タクシー",
+        "バリ 空港 送迎"
+      ],
+      "outline": [
+        "空港到着後の流れ",
+        "公式タクシーカウンター",
+        "公共バス(Trans Sarbagita)",
+        "シャトルサービス",
+        "配車アプリ利用時の安全確認",
+        "夜間到着時の注意"
+      ],
+      "sourceThemes": [
+        "transport-airport",
+        "safety"
+      ],
+      "extraReferences": [],
+      "affiliate": [
+        "klook",
+        "trip.com"
+      ],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-money-changer-scam-guide",
+      "title": "バリ島の両替所で騙されない方法:正規業者の見分け方とQR決済(JPQR)",
+      "audience": [
+        "tourist"
+      ],
+      "category": "safety",
+      "tags": [
+        "バリ島",
+        "両替・金融",
+        "注意喚起"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 両替 詐欺",
+        "バリ 両替所 正規",
+        "バリ 両替 おすすめ"
+      ],
+      "outline": [
+        "両替の基本(空港・銀行・両替所)",
+        "許可業者(KUPVA)のマーク",
+        "よくある手口",
+        "ATM・クレジットカードの使い方",
+        "QRIS/JPQR Globalでの支払い",
+        "被害に遭ったときの相談先"
+      ],
+      "sourceThemes": [
+        "money-exchange",
+        "safety"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-cashless-qris-jpqr",
+      "title": "バリ島でのキャッシュレス:QRISと日本のJPQR Global、クレジットカード事情",
+      "audience": [
+        "tourist"
+      ],
+      "category": "travel",
+      "tags": [
+        "バリ島",
+        "両替・金融",
+        "観光"
+      ],
+      "ymyl": false,
+      "keywords": [
+        "バリ QRIS 日本",
+        "JPQR Global バリ",
+        "バリ クレジットカード JCB"
+      ],
+      "outline": [
+        "現金とキャッシュレスの使い分け",
+        "QRIS Antarnegaraの仕組み",
+        "日本のアプリで支払う流れ",
+        "クレジットカード(JCBなど)の対応",
+        "注意点"
+      ],
+      "sourceThemes": [
+        "money-exchange"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 3,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-sim-imei-preparation",
+      "title": "バリ島のSIM・スマホ準備:IMEI登録の90日ルールと空港での手順",
+      "audience": [
+        "tourist"
+      ],
+      "category": "travel",
+      "tags": [
+        "バリ島",
+        "観光",
+        "生活情報"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ IMEI 登録",
+        "バリ SIM 空港 手続き",
+        "インドネシア SIM 外国人"
+      ],
+      "outline": [
+        "IMEI登録とは",
+        "90日以内・90日超の手続きの違い",
+        "海外SIM・ローミングの場合",
+        "空港でのSIM購入と本人登録",
+        "トラブル時の対処"
+      ],
+      "sourceThemes": [
+        "telecom",
+        "entry"
+      ],
+      "extraReferences": [],
+      "affiliate": [
+        "klook"
+      ],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-weather-seasons-2026",
+      "title": "バリ島の雨季・乾季と2026-27年の見通し:エルニーニョの影響",
+      "audience": [
+        "tourist"
+      ],
+      "category": "travel",
+      "tags": [
+        "バリ島",
+        "観光",
+        "防災"
+      ],
+      "ymyl": false,
+      "keywords": [
+        "バリ 雨季 乾季",
+        "バリ ベストシーズン",
+        "バリ 2026 天気"
+      ],
+      "outline": [
+        "雨季と乾季の時期",
+        "季節ごとの過ごし方",
+        "BMKGの2026年乾季予測",
+        "2026/27年雨季の見通し",
+        "服装・持ち物",
+        "高波・大雨の注意"
+      ],
+      "sourceThemes": [
+        "weather-season",
+        "disaster"
+      ],
+      "extraReferences": [],
+      "affiliate": [
+        "trip.com",
+        "klook"
+      ],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-temple-dress-etiquette",
+      "title": "バリ島の寺院参拝と服装・マナー:入れる場所・入れない場所",
+      "audience": [
+        "tourist"
+      ],
+      "category": "travel",
+      "tags": [
+        "バリ島",
+        "観光",
+        "注意喚起"
+      ],
+      "ymyl": false,
+      "keywords": [
+        "バリ 寺院 服装",
+        "バリ 寺院 マナー",
+        "バリ 神聖な場所 立ち入り"
+      ],
+      "outline": [
+        "寺院で求められる服装",
+        "立ち入りできない区域と条件",
+        "儀式・供物への配慮",
+        "撮影・SNS投稿のマナー",
+        "州の通達での禁止事項",
+        "ガイド同行のすすめ"
+      ],
+      "sourceThemes": [
+        "culture-etiquette"
+      ],
+      "extraReferences": [],
+      "affiliate": [
+        "klook"
+      ],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-foreign-tourist-rules-2025",
+      "title": "バリ島の外国人観光客ルール(州知事通達2025年第7号):義務・禁止事項・罰則",
+      "audience": [
+        "tourist"
+      ],
+      "category": "regulation",
+      "tags": [
+        "バリ島",
+        "観光",
+        "注意喚起"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 観光客 ルール",
+        "バリ 州知事通達 2025",
+        "バリ 外国人 禁止事項"
+      ],
+      "outline": [
+        "通達の概要",
+        "観光客の義務",
+        "禁止事項",
+        "観光税を払わない場合の扱い",
+        "違反時の措置",
+        "通報窓口"
+      ],
+      "sourceThemes": [
+        "culture-etiquette",
+        "tourist-levy",
+        "safety"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-nyepi-guide",
+      "title": "バリ島のニュピ(静寂の日)の過ごし方:空港閉鎖・外出禁止・前後の行事",
+      "audience": [
+        "tourist"
+      ],
+      "category": "travel",
+      "tags": [
+        "バリ島",
+        "観光",
+        "注意喚起"
+      ],
+      "ymyl": false,
+      "keywords": [
+        "バリ ニュピ 過ごし方",
+        "ニュピ 空港 閉鎖",
+        "バリ 静寂の日 旅行"
+      ],
+      "outline": [
+        "ニュピとは",
+        "当日の制限(空港・道路・店)",
+        "前日・翌日の行事",
+        "旅行日程の組み方",
+        "ホテルでの過ごし方",
+        "VATリファンド窓口の休業"
+      ],
+      "sourceThemes": [
+        "nyepi",
+        "tax-refund"
+      ],
+      "extraReferences": [],
+      "affiliate": [
+        "trip.com"
+      ],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-safety-scams-crime",
+      "title": "バリ島の治安と詐欺・犯罪対策:外務省が示す注意点",
+      "audience": [
+        "tourist"
+      ],
+      "category": "safety",
+      "tags": [
+        "バリ島",
+        "治安",
+        "注意喚起"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 治安",
+        "バリ 詐欺 手口",
+        "バリ ひったくり"
+      ],
+      "outline": [
+        "犯罪発生状況",
+        "スリ・置き引き・ひったくり",
+        "SNS・チケット詐欺",
+        "タクシー・配車アプリの安全確認",
+        "水難事故",
+        "緊急連絡先"
+      ],
+      "sourceThemes": [
+        "safety",
+        "transport-airport"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-medical-insurance-guide",
+      "title": "バリ島で病気・ケガをしたら:病院の探し方と海外旅行保険の必要性",
+      "audience": [
+        "tourist"
+      ],
+      "category": "lifestyle",
+      "tags": [
+        "バリ島",
+        "医療",
+        "観光"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 病院 日本語",
+        "バリ 海外旅行保険",
+        "バリ 病院 保証金"
+      ],
+      "outline": [
+        "インドネシアの医療事情",
+        "バリの日本語対応医療機関",
+        "受診時の保証金",
+        "旅行保険で確認すべき点",
+        "緊急時の連絡先",
+        "帰国後の体調不良"
+      ],
+      "sourceThemes": [
+        "health-medical",
+        "safety"
+      ],
+      "extraReferences": [],
+      "affiliate": [
+        "trip.com"
+      ],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-dengue-rabies-prevention",
+      "title": "バリ島のデング熱・狂犬病対策:予防接種・虫よけ・咬まれたときの対応",
+      "audience": [
+        "tourist"
+      ],
+      "category": "safety",
+      "tags": [
+        "バリ島",
+        "医療",
+        "注意喚起"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ デング熱",
+        "バリ 狂犬病",
+        "バリ 予防接種"
+      ],
+      "outline": [
+        "バリで注意すべき感染症",
+        "デング熱の症状と予防",
+        "狂犬病のリスクと咬まれたとき",
+        "渡航前に検討するワクチン",
+        "マラリア・その他",
+        "帰国後の受診"
+      ],
+      "sourceThemes": [
+        "health-medical"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-drug-laws-warning",
+      "title": "バリ島の薬物規制:外国人も死刑対象になる法律と巻き込まれないための注意",
+      "audience": [
+        "tourist"
+      ],
+      "category": "regulation",
+      "tags": [
+        "バリ島",
+        "治安",
+        "注意喚起"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 薬物 死刑",
+        "インドネシア 大麻 違法",
+        "バリ 麻薬 逮捕"
+      ],
+      "outline": [
+        "インドネシアの薬物規制",
+        "外国人も例外でない罰則",
+        "運び屋に利用されないために",
+        "繁華街・クラブでの注意",
+        "入国時の税関",
+        "何かあったときの連絡先"
+      ],
+      "sourceThemes": [
+        "narcotics-law",
+        "customs",
+        "safety"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-customs-allowance-prohibited",
+      "title": "インドネシア入国時の免税範囲と持ち込み禁止品:酒・たばこ・現金・薬",
+      "audience": [
+        "tourist"
+      ],
+      "category": "regulation",
+      "tags": [
+        "バリ島",
+        "観光",
+        "注意喚起"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "インドネシア 免税範囲",
+        "インドネシア 持ち込み禁止",
+        "バリ 税関 酒 たばこ"
+      ],
+      "outline": [
+        "免税範囲(個人携帯品・酒・たばこ)",
+        "持ち込み禁止品",
+        "現金の申告",
+        "電子税関申告",
+        "開披検査",
+        "違反時の措置"
+      ],
+      "sourceThemes": [
+        "customs",
+        "narcotics-law",
+        "entry"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-return-japan-customs",
+      "title": "バリ島から帰国するときの免税範囲と税関申告:Visit Japan Web・申告書",
+      "audience": [
+        "tourist"
+      ],
+      "category": "travel",
+      "tags": [
+        "バリ島",
+        "観光",
+        "注意喚起"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "帰国 免税範囲",
+        "携帯品・別送品申告書",
+        "バリ 帰国 税関"
+      ],
+      "outline": [
+        "日本の免税範囲(酒・たばこ・20万円)",
+        "携帯品・別送品申告書の出し方",
+        "電子申告ゲート",
+        "持ち込めないもの",
+        "お土産の注意"
+      ],
+      "sourceThemes": [
+        "japan-customs",
+        "japan-quarantine"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-souvenir-meat-quarantine",
+      "title": "バリ島のお土産と動植物検疫:肉製品は日本に持ち込めない",
+      "audience": [
+        "tourist"
+      ],
+      "category": "regulation",
+      "tags": [
+        "バリ島",
+        "観光",
+        "注意喚起"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ お土産 持ち込み禁止",
+        "肉製品 持ち込み 日本",
+        "バクテ 帰国 検疫"
+      ],
+      "outline": [
+        "肉製品が持ち込めない理由",
+        "動物検疫カウンターでの手続き",
+        "持ち込めないお土産の例",
+        "罰則",
+        "迷ったときの問い合わせ先"
+      ],
+      "sourceThemes": [
+        "japan-quarantine",
+        "japan-customs"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 3,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-vat-refund-airport",
+      "title": "バリ島のVATリファンド(免税払い戻し)の条件と手順:ングラ・ライ空港",
+      "audience": [
+        "tourist"
+      ],
+      "category": "travel",
+      "tags": [
+        "バリ島",
+        "観光",
+        "両替・金融"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ VAT リファンド",
+        "インドネシア 免税 払い戻し",
+        "ングラライ空港 タックスリファンド"
+      ],
+      "outline": [
+        "対象者(滞在60日以内など)",
+        "対象店舗と最低金額",
+        "空港カウンターの営業時間",
+        "払い戻し方法",
+        "必要書類とアプリ申請",
+        "ニュピ休業日"
+      ],
+      "sourceThemes": [
+        "tax-refund",
+        "nyepi"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 3,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-earthquake-tsunami-volcano",
+      "title": "バリ島の地震・津波・火山への備え:BMKG・MAGMAの情報の見方",
+      "audience": [
+        "tourist"
+      ],
+      "category": "safety",
+      "tags": [
+        "バリ島",
+        "地震",
+        "防災"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 地震",
+        "バリ 津波",
+        "バリ アグン山 噴火"
+      ],
+      "outline": [
+        "バリの災害リスク",
+        "BMKG・InaTEWSで確認する",
+        "MAGMAで火山レベルを確認",
+        "旅行前後の備え",
+        "緊急連絡先"
+      ],
+      "sourceThemes": [
+        "disaster",
+        "safety"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 3,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    },
+    {
+      "id": "bali-emergency-contacts-guide",
+      "title": "バリ島の緊急連絡先まとめ:警察・救急・日本語対応病院・総領事館",
+      "audience": [
+        "tourist",
+        "resident"
+      ],
+      "category": "safety",
+      "tags": [
+        "バリ島",
+        "治安",
+        "医療"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 緊急連絡先",
+        "バリ 救急車",
+        "バリ クライシスセンター"
+      ],
+      "outline": [
+        "緊急時に最初にすること",
+        "警察・救急・消防",
+        "バリ・クライシス・センター",
+        "日本語対応の医療機関",
+        "総領事館",
+        "事前に登録しておくもの"
+      ],
+      "sourceThemes": [
+        "safety",
+        "health-medical"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 3,
+      "status": "queued",
+      "addedAt": "2026-09-29"
+    }
+  ]
+}

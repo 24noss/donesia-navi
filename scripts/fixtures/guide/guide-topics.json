@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "topics": [
+    {
+      "id": "fixture-bali-entry-checklist",
+      "title": "バリ島入国前のチェックリスト(フィクスチャ)",
+      "audience": [
+        "tourist",
+        "prospective-resident"
+      ],
+      "category": "visa",
+      "tags": [
+        "ビザ",
+        "バリ島"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 入国",
+        "バリ 観光税"
+      ],
+      "outline": [
+        "パスポートと到着ビザ",
+        "入国カードの電子申請",
+        "観光税の支払い"
+      ],
+      "sourceThemes": [
+        "entry"
+      ],
+      "extraReferences": [
+        {
+          "title": "観光税の案内(テスト用サンプル)",
+          "url": "https://example.org/fixture/tourist-levy"
+        }
+      ],
+      "affiliate": [],
+      "priority": 2,
+      "status": "queued",
+      "addedAt": "2026-09-01"
+    },
+    {
+      "id": "fixture-bali-hold",
+      "title": "保留中トピック(選ばれてはいけない)",
+      "audience": [
+        "resident"
+      ],
+      "category": "lifestyle",
+      "tags": [
+        "生活情報"
+      ],
+      "ymyl": false,
+      "keywords": [
+        "バリ 保留"
+      ],
+      "outline": [],
+      "sourceThemes": [
+        "health"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 1,
+      "status": "on-hold",
+      "addedAt": "2026-08-01"
+    },
+    {
+      "id": "fixture-bali-hospital",
+      "title": "バリ島の医療機関の使い方(フィクスチャ)",
+      "audience": [
+        "resident"
+      ],
+      "category": "lifestyle",
+      "tags": [
+        "医療",
+        "バリ島"
+      ],
+      "ymyl": true,
+      "keywords": [
+        "バリ 病院"
+      ],
+      "outline": [
+        "受診の流れ"
+      ],
+      "sourceThemes": [
+        "health"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 3,
+      "status": "queued",
+      "addedAt": "2026-09-05"
+    },
+    {
+      "id": "fixture-bali-broken",
+      "title": "取得失敗の確認用(フィクスチャ)",
+      "audience": [
+        "resident"
+      ],
+      "category": "lifestyle",
+      "tags": [
+        "医療"
+      ],
+      "ymyl": false,
+      "keywords": [
+        "バリ 取得失敗"
+      ],
+      "outline": [],
+      "sourceThemes": [
+        "health"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 4,
+      "status": "queued",
+      "addedAt": "2026-09-10"
+    }
+  ]
+}

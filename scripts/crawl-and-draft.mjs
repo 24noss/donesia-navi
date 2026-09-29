@@ -23,7 +23,7 @@ export function isDryRun(argv = []) {
   return argv.includes('--dry-run');
 }
 
-const CATEGORY_NAMES = {
+export const CATEGORY_NAMES = {
   safety: '安全・災害',
   society: '社会・政治',
   business: '経済・ビジネス',
@@ -428,7 +428,7 @@ function isRetryableStatus(status) {
 
 // Gemini APIを1回呼び出す（リトライなし）。レスポンスがエラーの場合は status プロパティ付きの
 // Errorをthrowする（呼び出し元でリトライ可否を判定するため）。
-async function callGeminiOnce(model, prompt) {
+async function callGeminiOnce(model, prompt, responseSchema = ARTICLE_RESPONSE_SCHEMA) {
   const res = await fetch(geminiApiUrl(model), {
     method: 'POST',
     headers: {
@@ -439,7 +439,7 @@ async function callGeminiOnce(model, prompt) {
       contents: [{ parts: [{ text: prompt }] }],
       generationConfig: {
         responseMimeType: 'application/json',
-        responseSchema: ARTICLE_RESPONSE_SCHEMA,
+        responseSchema,
       },
     }),
   });
@@ -466,7 +466,8 @@ const GEMINI_FALLBACK_RETRY_DELAYS_SEC = [180]; // フォールバック1回目�
 // 429/5xx/ネットワークエラーはリトライし、400系(429以外)は即throwする。全試行が尽きたら最後のエラーをthrowする。
 // sleep はテストから注入可能（省略時は実際に待機するdefaultSleepを使う。実時間待機したくないテストは
 // { sleep: async () => {} } のような即時解決関数を渡すこと）。
-export async function callGeminiApi(prompt, { sleep = defaultSleep } = {}) {
+// responseSchema を省略するとニュース記事用スキーマ(ARTICLE_RESPONSE_SCHEMA)を使う(ガイド生成など別用途は明示指定する)。
+export async function callGeminiApi(prompt, { sleep = defaultSleep, responseSchema } = {}) {
   const plan = [
     { model: GEMINI_MODEL_PRIMARY, maxAttempts: GEMINI_PRIMARY_MAX_ATTEMPTS, delays: GEMINI_PRIMARY_RETRY_DELAYS_SEC },
     { model: GEMINI_MODEL_FALLBACK, maxAttempts: GEMINI_FALLBACK_MAX_ATTEMPTS, delays: GEMINI_FALLBACK_RETRY_DELAYS_SEC },
@@ -480,7 +481,7 @@ export async function callGeminiApi(prompt, { sleep = defaultSleep } = {}) {
     for (let i = 0; i < maxAttempts; i += 1) {
       attemptNumber += 1;
       try {
-        return await callGeminiOnce(model, prompt);
+        return await callGeminiOnce(model, prompt, responseSchema);
       } catch (err) {
         lastError = err;
         const status = err.status; // ネットワークエラー(fetch reject)等はundefined

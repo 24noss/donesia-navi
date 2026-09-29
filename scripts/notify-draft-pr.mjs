@@ -1,4 +1,5 @@
 import { parse as parseYaml } from 'yaml';
+import { buildRefreshBlocks, buildTopicsBlocks, detectNotifyKind } from './lib/guide-notify.mjs';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
@@ -30,7 +31,8 @@ async function githubApi(path, opts = {}) {
   return res.json();
 }
 
-async function loadDraftArticles(prNumber, headSha) {
+// requireDraft=false は公開済み記事の改訂PR(draft:false のまま)用。
+async function loadDraftArticles(prNumber, headSha, { requireDraft = true } = {}) {
   const files = await githubApi(`/repos/${REPO}/pulls/${prNumber}/files?per_page=100`);
   const articleFiles = files.filter(
     (f) => f.filename.startsWith('src/content/articles/') && f.filename.endsWith('.md') && f.status !== 'removed'
@@ -49,7 +51,7 @@ async function loadDraftArticles(prNumber, headSha) {
     } catch {
       continue;
     }
-    if (!fm.draft) continue;
+    if (requireDraft && !fm.draft) continue;
 
     articles.push({
       path: f.filename,
@@ -138,8 +140,26 @@ function buildBlocks(pr, articles, previewUrl) {
   return blocks;
 }
 
-async function postSlackMessage(pr, articles, previewUrl) {
-  const blocks = buildBlocks(pr, articles, previewUrl);
+// 月次改訂PRが触るスナップショットファイル(src/data/guide-source-snapshots/<id>.json)の記事 id 一覧。
+async function loadSnapshotIds(prNumber) {
+  const files = await githubApi(`/repos/${REPO}/pulls/${prNumber}/files?per_page=100`);
+  return files
+    .map((f) => /^src\/data\/guide-source-snapshots\/([a-z0-9-]+)\.json$/.exec(f.filename)?.[1])
+    .filter(Boolean);
+}
+
+async function postSlackMessage(pr, articles, previewUrl, kind = 'draft', extra = {}) {
+  let blocks;
+  let fallbackText = `新しいドラフト記事があります: PR #${pr.number}`;
+  if (kind === 'topics') {
+    blocks = buildTopicsBlocks(pr, REPO);
+    fallbackText = `ガイドのトピック提案があります: PR #${pr.number}`;
+  } else if (kind === 'refresh') {
+    blocks = buildRefreshBlocks(pr, articles, previewUrl, REPO, extra);
+    fallbackText = `ガイド記事の改訂・出典確認PRがあります: PR #${pr.number}`;
+  } else {
+    blocks = buildBlocks(pr, articles, previewUrl);
+  }
   const res = await fetch('https://slack.com/api/chat.postMessage', {
     method: 'POST',
     headers: {
@@ -148,7 +168,7 @@ async function postSlackMessage(pr, articles, previewUrl) {
     },
     body: JSON.stringify({
       channel: SLACK_CHANNEL_ID,
-      text: `新しいドラフト記事があります: PR #${pr.number}`,
+      text: fallbackText,
       blocks,
     }),
   });
@@ -169,16 +189,33 @@ async function main() {
   }
 
   const pr = await githubApi(`/repos/${REPO}/pulls/${prNumber}`);
-  const articles = await loadDraftArticles(prNumber, pr.head.sha);
+  const kind = detectNotifyKind(pr.head.ref);
 
-  if (articles.length === 0) {
-    console.log('draft:true の記事変更が見つかりませんでした。通知をスキップします。');
+  // ガイドのトピック提案PR(台帳のみ)は記事ファイルが無いため、プレビューを待たずに通知する。
+  if (kind === 'topics') {
+    await postSlackMessage(pr, [], null, 'topics');
     return;
   }
 
-  console.log(`${articles.length}件のdraft記事を検知。プレビューURLを待機します...`);
+  const articles = await loadDraftArticles(prNumber, pr.head.sha, { requireDraft: kind !== 'refresh' });
+
+  // 月次改訂の「ベースライン記録のみ」PRは記事ファイルが変わらないが、通知は出す(対象 id を列挙する)。
+  if (kind === 'refresh' && articles.length === 0) {
+    const snapshotIds = await loadSnapshotIds(prNumber);
+    if (snapshotIds.length > 0) {
+      await postSlackMessage(pr, [], null, 'refresh', { snapshotIds });
+      return;
+    }
+  }
+
+  if (articles.length === 0) {
+    console.log(kind === 'refresh' ? '記事変更が見つかりませんでした。通知をスキップします。' : 'draft:true の記事変更が見つかりませんでした。通知をスキップします。');
+    return;
+  }
+
+  console.log(`${articles.length}件の${kind === 'refresh' ? '記事変更' : 'draft記事'}を検知。プレビューURLを待機します...`);
   const previewUrl = await pollPreviewUrl(pr.head.sha);
-  await postSlackMessage(pr, articles, previewUrl);
+  await postSlackMessage(pr, articles, previewUrl, kind, kind === 'refresh' ? { snapshotIds: await loadSnapshotIds(prNumber) } : {});
 }
 
 main().catch((err) => {

@@ -147,10 +147,13 @@ async function publishPr({ env, repo, prNumber, responseUrl, clickedBy }) {
 
     await mergeWithRetry(env, repo, prNumber);
 
-    await updateSlackMessage(
-      responseUrl,
-      `✅ *${clickedBy}* さんが承認し、PR #${prNumber} を公開しました(${publishedCount}件の記事がdraft:falseになりmergeされました)。`
-    );
+    // draft:true の記事が無いPR(ガイドのトピック提案=台帳のみ、公開済み記事の改訂=draft:falseのまま)は
+    // 書き換え対象が0件のまま merge だけを行う。
+    const doneText =
+      publishedCount > 0
+        ? `PR #${prNumber} を公開しました(${publishedCount}件の記事がdraft:falseになりmergeされました)。`
+        : `PR #${prNumber} をmergeしました(draft:true の記事は無かったため、記事の書き換えは行っていません)。`;
+    await updateSlackMessage(responseUrl, `✅ *${clickedBy}* さんが承認し、${doneText}`);
   } catch (err) {
     console.error('publishPr failed:', err);
     await updateSlackMessage(

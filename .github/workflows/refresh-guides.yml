@@ -1,0 +1,93 @@
+name: Refresh Guide Articles
+
+on:
+  schedule:
+    - cron: '0 3 1 * *' # 毎月1日 10:00 WIB (UTC+7)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  checks: read
+
+concurrency:
+  group: refresh-guides
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # 出典を再取得して比較し、PR単位の変更ファイル一式を $RUNNER_TEMP/guide-refresh に書き出す(gitは触らない)。
+      - name: Check sources and prepare revisions
+        id: refresh
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node scripts/refresh-guides.mjs --out-dir="$RUNNER_TEMP/guide-refresh"
+
+      # グループ(変化なしの一括 / 記事ごとの改訂)ごとに、main から切ったブランチへファイルを置いてPRを作る。
+      # GITHUB_TOKEN 作成のPRは pull_request イベントを発火しないため、ここでSlack通知まで行う。
+      - name: Create pull requests
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ vars.SLACK_CHANNEL_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          RESULT="$RUNNER_TEMP/guide-refresh/result.json"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          BASE_SHA=$(git rev-parse HEAD)
+          COUNT=$(jq '.groups | length' "$RESULT")
+          echo "PR候補: $COUNT グループ"
+          for i in $(seq 0 $((COUNT - 1))); do
+            BRANCH=$(jq -r ".groups[$i].branch" "$RESULT")
+            TITLE=$(jq -r ".groups[$i].title" "$RESULT")
+            DIR=$(jq -r ".groups[$i].dir" "$RESULT")
+            git switch -C "$BRANCH" "$BASE_SHA"
+            cp -R "$DIR/files/." .
+            jq -r ".groups[$i].files[]" "$RESULT" | xargs git add --
+            git commit -m "$TITLE"
+            git push --force origin "$BRANCH"
+            if gh pr view "$BRANCH" --json number,state --jq 'select(.state=="OPEN") | .number' | grep -q .; then
+              gh pr edit "$BRANCH" --title "$TITLE" --body-file "$DIR/body.md"
+            else
+              gh pr create --base main --head "$BRANCH" --title "$TITLE" --body-file "$DIR/body.md"
+            fi
+            PR_NUMBER=$(gh pr view "$BRANCH" --json number --jq .number)
+            node scripts/notify-draft-pr.mjs --pr="$PR_NUMBER"
+            git switch --detach "$BASE_SHA"
+          done
+
+      # 取得・改訂に失敗した記事は更新せず、Issueで知らせる(同名のopenなIssueが既にあれば作らない)。
+      - name: Report failures as issue
+        run: |
+          set -euo pipefail
+          RESULT="$RUNNER_TEMP/guide-refresh/result.json"
+          if [ "$(jq -r .hasIssue "$RESULT")" != "true" ]; then
+            echo "失敗した記事はありません。"
+            exit 0
+          fi
+          TITLE=$(jq -r .issueTitle "$RESULT")
+          EXISTING=$(gh issue list --state open --limit 100 --search "\"$TITLE\" in:title" --json title --jq "[.[] | select(.title == \"$TITLE\")] | length")
+          if [ "$EXISTING" != "0" ]; then
+            echo "同名の open issue が既にあるため作成しません: $TITLE"
+            exit 0
+          fi
+          gh issue create --title "$TITLE" --body-file "$RUNNER_TEMP/guide-refresh/issue-body.md"

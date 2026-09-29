@@ -14,6 +14,9 @@
     "crawl:food": "node scripts/crawl-and-draft.mjs --lane=food",
     "discover-restaurants": "node scripts/discover-restaurants.mjs",
     "suggest-guides": "node scripts/suggest-guide-topics.mjs",
+    "generate-guide": "node scripts/generate-guide.mjs",
+    "suggest-bali-topics": "node scripts/suggest-bali-topics.mjs",
+    "refresh-guides": "node scripts/refresh-guides.mjs",
     "check-ymyl": "node scripts/check-ymyl-freshness.mjs",
     "revenue": "node scripts/revenue-summary.mjs",
     "test": "node --test 'scripts/**/*.test.mjs'"
