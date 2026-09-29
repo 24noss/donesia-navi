@@ -101,6 +101,47 @@ describe('normalizeProposals', () => {
     const reserved = run([{ ...many[0], id: 'topics-x', keywords: ['別語彙'] }]);
     assert.equal(reserved.added[0].id, 'bali-topics-x');
   });
+  test('role/hub/primaryKeyword: spoke は既存 hub の id だけ有効、不明な hub は role hub に落として注意を残す', () => {
+    const esim = r.added.find((t) => t.id === 'bali-esim-guide');
+    const rain = r.added.find((t) => t.id === 'bali-rainy-season-clothes');
+    assert.deepEqual([esim.role, esim.hub, esim.primaryKeyword], ['spoke', 'fixture-bali-entry-checklist', 'バリ esim']);
+    assert.deepEqual([rain.role, rain.hub], ['hub', undefined]);
+    assert.ok(r.notes['bali-rainy-season-clothes'].includes('no-such-hub'));
+    assert.ok(esim.keywords.includes('バリ esim')); // primaryKeyword は keywords に含まれる
+  });
+  test('primaryKeyword が既存台帳の primaryKeyword と(正規化後)一致する案は除外', () => {
+    const rr = run([{ ...rawProposals[1], id: 'bali-dup-pk', primaryKeyword: '　バリ  入国 ', keywords: ['別語彙A'] }]);
+    assert.equal(rr.added.length, 0);
+    assert.match(rr.skipped[0].reason, /primaryKeyword .* fixture-bali-entry-checklist/);
+  });
+  test('keywords に既存の primaryKeyword を含む案は除外', () => {
+    const rr = run([{ ...rawProposals[1], id: 'bali-kw-pk', primaryKeyword: 'バリ 新語彙', keywords: ['バリ 新語彙', 'バリ 入国'] }]);
+    assert.equal(rr.added.length, 0);
+    assert.match(rr.skipped[0].reason, /keywords の "バリ 入国" が fixture-bali-entry-checklist の primaryKeyword/);
+  });
+  test('既存トピックの keywords と2語以上一致する案は除外(1語だけなら別ルール)', () => {
+    const led = { ...ledger, topics: ledger.topics.map((t) => (t.id === 'fixture-bali-hospital' ? { ...t, keywords: ['バリ 病院', '病院 保証金', '病院 日本語'] } : t)) };
+    const base = { ...rawProposals[1], id: 'bali-overlap', primaryKeyword: 'バリ 病院 新', title: 'まったく別のタイトル' };
+    const two = run([{ ...base, keywords: ['バリ 病院 新', '病院 保証金', '病院 日本語'] }], { ledgerTopics: led.topics });
+    assert.equal(two.added.length, 0);
+    assert.match(two.skipped[0].reason, /fixture-bali-hospital と keywords が2語以上一致/);
+  });
+  test('同じバッチ内で primaryKeyword が重複する案は後の方を除外し、最終台帳は検証を通る', () => {
+    const a = { ...rawProposals[1], id: 'bali-a', primaryKeyword: 'バリ 新A', keywords: ['バリ 新A'], title: '案A' };
+    const b = { ...a, id: 'bali-b', title: '案B', primaryKeyword: ' バリ　新a ', keywords: ['別語彙B'] };
+    const rr = run([a, b]);
+    assert.deepEqual(rr.added.map((t) => t.id), ['bali-a']);
+    assert.equal(rr.skipped[0].id, 'bali-b');
+    assert.deepEqual(validateGuideTopics(appendTopics(ledger, rr.added), { sourceThemeKeys: themeKeys }), []);
+  });
+  test('プロンプトに既存の主キーワードと hub の id が入り、PR本文に role/primaryKeyword が出る', () => {
+    const p = buildTopicsPrompt({ suggestGroups: groups, gscQueries: gsc, existingTopics: ledger.topics, themes: sources.themes });
+    assert.ok(p.includes('バリ 入国 | バリ 入国') || p.includes('[バリ 入国 |'));
+    assert.ok(p.includes('# 既存の hub') && p.includes('- fixture-bali-entry-checklist:'));
+    const body = buildPrBody({ ...r, today: '2026-09-29', gscUsed: true });
+    assert.ok(body.includes('primaryKeyword: バリ esim / role: spoke (hub: `fixture-bali-entry-checklist`)'));
+    assert.ok(body.includes('注意: spoke として提案された'));
+  });
   test('プロンプトに出典テーマのキー・語彙・既存トピックが入る', () => {
     const p = buildTopicsPrompt({ suggestGroups: groups, gscQueries: gsc, existingTopics: ledger.topics, themes: sources.themes });
     assert.ok(p.includes('entry:') && p.includes('バリ島') && p.includes('fixture-bali-entry-checklist') && p.includes('bali esim'));

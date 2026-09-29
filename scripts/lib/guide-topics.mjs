@@ -25,6 +25,8 @@ export const ARTICLES_DIR = path.join(ROOT, 'src/content/articles');
 export const ARTICLE_CATEGORIES = ['safety', 'society', 'business', 'gourmet', 'lifestyle', 'travel', 'visa', 'regulation'];
 export const AUDIENCES = ['tourist', 'prospective-resident', 'resident'];
 export const TOPIC_STATUSES = ['queued', 'on-hold'];
+// hub = クラスタの総合ガイド / spoke = 個別ガイド(hub に所属)。キーワード競合(カニバリゼーション)対策。
+export const TOPIC_ROLES = ['hub', 'spoke'];
 export const TAG_VOCABULARY_SET = new Set(tagVocabularyData.vocabulary.map((v) => v.tag));
 
 export const TOPIC_ID_PATTERN = /^[a-z0-9-]{1,60}$/;
@@ -54,6 +56,18 @@ function isValidYmd(v) {
   if (typeof v !== 'string' || !YMD.test(v)) return false;
   const d = new Date(`${v}T00:00:00Z`);
   return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === v;
+}
+
+/**
+ * キーワード比較用の正規化: 前後空白除去・連続空白を1つ・全角空白→半角・小文字化。
+ * primaryKeyword の一意性・keywords との衝突判定に使う(週次提案の重複判定でも共用)。
+ */
+export function normalizeKeyword(s) {
+  return String(s ?? '').normalize('NFKC')
+    .replace(/\u3000/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
 }
 
 // ---------------------------------------------------------------- 読み込み
@@ -157,6 +171,9 @@ export function validateGuideTopics(data, { sourceThemeKeys = new Set(), vocabul
       }
     }
     if (!isNonEmptyString(t?.title)) problems.push(`${label}: title が空`);
+    if (!isNonEmptyString(t?.primaryKeyword)) problems.push(`${label}: primaryKeyword が空(このトピックが主に狙う検索語が必要)`);
+    if (!TOPIC_ROLES.includes(t?.role)) problems.push(`${label}: role が不正 (${t?.role}。${TOPIC_ROLES.join('/')} のみ)`);
+    if (t?.holdReason !== undefined && !isNonEmptyString(t.holdReason)) problems.push(`${label}: holdReason は空でない文字列にしてください`);
     if (!Array.isArray(t?.audience) || t.audience.length === 0 || !t.audience.every((a) => AUDIENCES.includes(a))) {
       problems.push(`${label}: audience が不正(${AUDIENCES.join('/')} のみ、1つ以上)`);
     }
@@ -195,6 +212,35 @@ export function validateGuideTopics(data, { sourceThemeKeys = new Set(), vocabul
       const hasThemes = Array.isArray(t.sourceThemes) && t.sourceThemes.length > 0;
       const hasExtra = Array.isArray(t.extraReferences) && t.extraReferences.length > 0;
       if (!hasThemes && !hasExtra) problems.push(`${label}: queued だが sourceThemes / extraReferences が両方空(生成できません)`);
+    }
+  });
+
+  // --- キーワード設計(hub/spoke・primaryKeyword一意・keywords との衝突)
+  const byId = new Map(data.topics.filter((t) => typeof t?.id === 'string').map((t) => [t.id, t]));
+  const primaryOwner = new Map(); // 正規化した primaryKeyword → 最初の topic id
+  data.topics.forEach((t, i) => {
+    const label = `topics[${i}](${t?.id})`;
+    if (isNonEmptyString(t?.primaryKeyword)) {
+      const key = normalizeKeyword(t.primaryKeyword);
+      if (primaryOwner.has(key)) problems.push(`${label}: primaryKeyword "${t.primaryKeyword}" が ${primaryOwner.get(key)} と重複しています(台帳全体で一意)`);
+      else primaryOwner.set(key, t.id);
+    }
+    if (t?.role === 'hub') {
+      if (t.hub !== undefined) problems.push(`${label}: role が hub のトピックに hub は指定できません`);
+    } else if (t?.role === 'spoke') {
+      if (!isNonEmptyString(t.hub)) problems.push(`${label}: role が spoke のトピックには hub(所属 hub の id)が必要です`);
+      else if (t.hub === t.id) problems.push(`${label}: hub に自分自身は指定できません`);
+      else if (!byId.has(t.hub)) problems.push(`${label}: hub "${t.hub}" が台帳にありません`);
+      else if (byId.get(t.hub).role !== 'hub') problems.push(`${label}: hub "${t.hub}" の role が hub ではありません`);
+    }
+  });
+  data.topics.forEach((t, i) => {
+    const label = `topics[${i}](${t?.id})`;
+    if (!Array.isArray(t?.keywords)) return;
+    for (const kw of t.keywords) {
+      if (!isNonEmptyString(kw)) continue;
+      const owner = primaryOwner.get(normalizeKeyword(kw));
+      if (owner !== undefined && owner !== t.id) problems.push(`${label}: keywords の "${kw}" が ${owner} の primaryKeyword と同一です(競合)`);
     }
   });
   return problems;

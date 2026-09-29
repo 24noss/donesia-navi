@@ -11,6 +11,8 @@ import { shouldIncludeDrafts } from '../../lib/draftVisibility';
 import { getRelatedArticles } from '../../lib/related';
 import { isYmyl, resolveVerificationDisplay } from '../../lib/ymyl.mjs';
 import { getVisiblePlaces, placeToMapPoint } from '../../lib/places';
+import { getRelatedGuides, isEmptyRelatedGuides } from '../../lib/relatedGuides.mjs';
+import guideTopics from '../../data/guide-topics.json';
 
 export async function getStaticPaths() {
   const includeDrafts = shouldIncludeDrafts();
@@ -52,6 +54,17 @@ const allArticlesIncludingDrafts = await getCollection('articles');
 const articlePlaces = getVisiblePlaces(allPlaces, allArticlesIncludingDrafts)
   .filter((place) => place.data.category === 'restaurant' && place.data.sourceArticles.includes(article.id))
   .map(placeToMapPoint);
+
+// 関連ガイド(hub/spoke。キーワード競合対策)。台帳に id がある記事だけ。公開済み(draft:false)の記事だけを出し、
+// プレビューデプロイ(shouldIncludeDrafts)ではページが生成される draft も含める(getStaticPaths と同じ考え方)。
+const guideVisible = allArticlesIncludingDrafts.filter((a) => !a.data.draft || shouldIncludeDrafts());
+const relatedGuides = getRelatedGuides({
+  id: article.id,
+  ledger: guideTopics,
+  publishedIds: new Set(guideVisible.map((a) => a.id)),
+  titleById: new Map(guideVisible.map((a) => [a.id, a.data.title])),
+});
+const hasRelatedGuides = !isEmptyRelatedGuides(relatedGuides);
 ---
 <Base
   title={article.data.title}
@@ -139,6 +152,41 @@ const articlePlaces = getVisiblePlaces(allPlaces, allArticlesIncludingDrafts)
         <div class="article-body" id="article-content" data-pagefind-body>
           <Content />
         </div>
+
+        <!-- 関連ガイド(hub/spoke) -->
+        {hasRelatedGuides && (
+          <nav class="article-source related-guides" aria-label="関連ガイド">
+            <div class="article-source-title">関連ガイド</div>
+            {relatedGuides.hub && (
+              <>
+                <p class="related-guides-label">総合ガイド</p>
+                <ul class="related-guides-list">
+                  <li><a href={`/articles/${relatedGuides.hub.id}/`}>{relatedGuides.hub.title}</a></li>
+                </ul>
+              </>
+            )}
+            {relatedGuides.children.length > 0 && (
+              <>
+                <p class="related-guides-label">詳しく知りたい方へ(個別ガイド)</p>
+                <ul class="related-guides-list">
+                  {relatedGuides.children.map((g) => (
+                    <li><a href={`/articles/${g.id}/`}>{g.title}</a></li>
+                  ))}
+                </ul>
+              </>
+            )}
+            {relatedGuides.siblings.length > 0 && (
+              <>
+                <p class="related-guides-label">あわせて読みたい個別ガイド</p>
+                <ul class="related-guides-list">
+                  {relatedGuides.siblings.map((g) => (
+                    <li><a href={`/articles/${g.id}/`}>{g.title}</a></li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </nav>
+        )}
 
         <!-- Source -->
         {article.data.sourceUrl && (
@@ -295,6 +343,9 @@ const articlePlaces = getVisiblePlaces(allPlaces, allArticlesIncludingDrafts)
   .ymyl-box .ymyl-refs-title { margin-top: 8px; font-weight: 600; color: var(--text); }
   .ymyl-box .ymyl-refs { margin: 0 0 8px; padding-left: 20px; }
   .ymyl-box .ymyl-note { margin: 8px 0 0; color: var(--text-muted); }
+
+  .related-guides .related-guides-label { margin: 10px 0 4px; font-weight: 600; color: var(--text); }
+  .related-guides .related-guides-list { margin: 0 0 4px; padding-left: 20px; line-height: 1.8; }
 
   /* Freshness note for evergreen guide articles (B-3) */
   .freshness-note {

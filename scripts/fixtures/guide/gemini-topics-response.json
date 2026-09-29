@@ -2,6 +2,9 @@
   {
     "id": "Bali eSIM Guide",
     "title": "バリ島のeSIMの選び方と設定",
+    "primaryKeyword": "バリ esim",
+    "role": "spoke",
+    "hub": "fixture-bali-entry-checklist",
     "audience": [
       "tourist"
     ],
@@ -31,6 +34,9 @@
   {
     "id": "bali-rainy-season-clothes",
     "title": "バリ島の雨季の服装と持ち物",
+    "primaryKeyword": "バリ 雨季 服装",
+    "role": "spoke",
+    "hub": "no-such-hub",
     "audience": [
       "tourist"
     ],
@@ -61,6 +67,8 @@
   {
     "id": "fixture-bali-entry-checklist",
     "title": "入国チェックリスト(重複)",
+    "primaryKeyword": "別の語",
+    "role": "hub",
     "audience": [
       "tourist"
     ],
@@ -86,6 +94,8 @@
   {
     "id": "bali-entry-card-duplicate",
     "title": "バリ入国カードの書き方",
+    "primaryKeyword": "バリ 入国",
+    "role": "hub",
     "audience": [
       "tourist"
     ],

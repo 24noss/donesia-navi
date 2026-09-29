@@ -11,6 +11,7 @@ import {
   TAG_VOCABULARY_SET,
   fetchOpenGuidePrState,
   fetchRejectedTopicIds,
+  normalizeKeyword,
   listArticleIds,
   loadGuideTopics,
   loadOfficialSources,
@@ -31,7 +32,7 @@ const themeKeys = new Set(Object.keys(fixSources.themes));
 
 function topic(overrides = {}) {
   return {
-    id: 'bali-x', title: 't', audience: ['tourist'], category: 'travel', tags: ['観光'], ymyl: false,
+    id: 'bali-x', title: 't', role: 'hub', primaryKeyword: 'バリ x', audience: ['tourist'], category: 'travel', tags: ['観光'], ymyl: false,
     keywords: ['k'], outline: ['o'], sourceThemes: ['entry'], extraReferences: [], affiliate: [], priority: 3,
     status: 'queued', addedAt: '2026-09-01', ...overrides,
   };
@@ -114,6 +115,57 @@ describe('validateGuideTopics', () => {
   test('queued なのに出典が無い', () => check(topic({ sourceThemes: [], extraReferences: [] }), '生成できません'));
   test('on-hold は出典が無くてもよい', () => {
     assert.deepEqual(validateGuideTopics({ version: 1, topics: [topic({ status: 'on-hold', sourceThemes: [] })] }, ctx), []);
+  });
+});
+
+describe('キーワード設計(primaryKeyword / role / hub)', () => {
+  const ctx = { sourceThemeKeys: themeKeys };
+  const validate = (topics) => validateGuideTopics({ version: 1, topics }, ctx);
+  const has = (topics, needle) => {
+    const problems = validate(topics);
+    assert.ok(problems.some((p) => p.includes(needle)), `${needle} を含む問題が無い: ${problems.join(' | ')}`);
+  };
+  const hub = () => topic({ id: 'bali-hub', primaryKeyword: 'バリ ハブ', keywords: ['バリ ハブ'] });
+  const spoke = (o = {}) => topic({ id: 'bali-spoke', role: 'spoke', hub: 'bali-hub', primaryKeyword: 'バリ スポーク', keywords: ['バリ スポーク'], ...o });
+
+  test('normalizeKeyword: 前後空白除去・連続空白1つ・全角空白→半角・小文字化', () => {
+    assert.equal(normalizeKeyword('  Bali\u3000  eSIM  '), 'bali esim');
+    assert.equal(normalizeKeyword('バリ　入国'), normalizeKeyword('バリ 入国'));
+  });
+  test('hub + spoke の正常な組は合格', () => assert.deepEqual(validate([hub(), spoke()]), []));
+  test('primaryKeyword / role が無いと不合格', () => {
+    const { primaryKeyword, ...noPk } = topic();
+    has([noPk], 'primaryKeyword が空');
+    has([topic({ role: 'boss' })], 'role が不正');
+    has([topic({ role: undefined })], 'role が不正');
+  });
+  test('primaryKeyword は台帳全体で一意(正規化後で比較)', () => {
+    has([hub(), spoke({ primaryKeyword: '  バリ　ハブ ', keywords: [] })], '重複');
+    has([topic({ id: 'a', primaryKeyword: 'Bali eSIM' }), topic({ id: 'b', primaryKeyword: 'bali  esim' })], '重複');
+  });
+  test('keywords に他トピックの primaryKeyword と同一のものがあると不合格(自分のは可)', () => {
+    has([hub(), spoke({ keywords: ['バリ スポーク', 'バリ　ハブ'] })], 'primaryKeyword と同一');
+    assert.deepEqual(validate([hub(), spoke({ keywords: ['バリ スポーク', 'バリ 別の語'] })]), []);
+  });
+  test('spoke は hub が必須・存在・role hub・自己参照不可。hub に hub は指定不可', () => {
+    has([hub(), spoke({ hub: undefined })], 'hub(所属 hub の id)が必要');
+    has([hub(), spoke({ hub: 'nothing' })], '台帳にありません');
+    has([hub(), spoke({ hub: 'bali-spoke' })], '自分自身');
+    has([hub(), spoke(), spoke({ id: 'bali-spoke2', primaryKeyword: 'バリ 2', keywords: [], hub: 'bali-spoke' })], 'role が hub ではありません');
+    has([hub(), topic({ id: 'bali-h2', primaryKeyword: 'バリ h2', hub: 'bali-hub' })], 'hub は指定できません');
+  });
+  test('holdReason は任意の文字列(空文字は不可)', () => {
+    assert.deepEqual(validate([hub(), spoke({ status: 'on-hold', holdReason: 'hubに統合' })]), []);
+    has([hub(), spoke({ status: 'on-hold', holdReason: '' })], 'holdReason');
+  });
+  test('実台帳: spoke の hub は role hub、hub 配下の spoke が1本以上ある hub が存在する', { skip: !existsSync(GUIDE_TOPICS_PATH) && 'guide-topics.json が未作成のためskip' }, async () => {
+    const { topics } = await loadGuideTopics();
+    const hubs = new Set(topics.filter((t) => t.role === 'hub').map((t) => t.id));
+    assert.ok(hubs.size > 0);
+    for (const t of topics.filter((x) => x.role === 'spoke')) assert.ok(hubs.has(t.hub), `${t.id} の hub ${t.hub}`);
+    assert.ok(topics.some((t) => t.role === 'spoke'));
+    const keys = topics.map((t) => normalizeKeyword(t.primaryKeyword));
+    assert.equal(new Set(keys).size, keys.length);
   });
 });
 
