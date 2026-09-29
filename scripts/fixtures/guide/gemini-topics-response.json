@@ -1,0 +1,113 @@
+[
+  {
+    "id": "Bali eSIM Guide",
+    "title": "バリ島のeSIMの選び方と設定",
+    "audience": [
+      "tourist"
+    ],
+    "category": "travel",
+    "tags": [
+      "観光"
+    ],
+    "ymyl": false,
+    "keywords": [
+      "バリ esim",
+      "バリ SIM"
+    ],
+    "outline": [
+      "概要",
+      "注意点",
+      "よくある質問"
+    ],
+    "sourceThemes": [
+      "entry"
+    ],
+    "priority": 2,
+    "evidenceQueries": [
+      "バリ esim おすすめ",
+      "bali esim"
+    ]
+  },
+  {
+    "id": "bali-rainy-season-clothes",
+    "title": "バリ島の雨季の服装と持ち物",
+    "audience": [
+      "tourist"
+    ],
+    "category": "travel",
+    "tags": [
+      "観光",
+      "独自タグ"
+    ],
+    "ymyl": false,
+    "keywords": [
+      "バリ 雨季 服装"
+    ],
+    "outline": [
+      "概要",
+      "注意点",
+      "よくある質問"
+    ],
+    "sourceThemes": [
+      "weather"
+    ],
+    "priority": 3,
+    "evidenceQueries": [
+      "バリ 雨季 服装",
+      "バリ島 雨季 服装",
+      "存在しない語"
+    ]
+  },
+  {
+    "id": "fixture-bali-entry-checklist",
+    "title": "入国チェックリスト(重複)",
+    "audience": [
+      "tourist"
+    ],
+    "category": "visa",
+    "tags": [
+      "ビザ"
+    ],
+    "ymyl": false,
+    "keywords": [
+      "別の語"
+    ],
+    "outline": [
+      "概要",
+      "注意点",
+      "よくある質問"
+    ],
+    "sourceThemes": [
+      "entry"
+    ],
+    "priority": 1,
+    "evidenceQueries": []
+  },
+  {
+    "id": "bali-entry-card-duplicate",
+    "title": "バリ入国カードの書き方",
+    "audience": [
+      "tourist"
+    ],
+    "category": "visa",
+    "tags": [
+      "ビザ"
+    ],
+    "ymyl": false,
+    "keywords": [
+      "バリ 入国"
+    ],
+    "outline": [
+      "概要",
+      "注意点",
+      "よくある質問"
+    ],
+    "sourceThemes": [
+      "entry"
+    ],
+    "priority": 1,
+    "evidenceQueries": [
+      "バリ 入国 カード"
+    ]
+  }
+]

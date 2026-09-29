@@ -2,6 +2,8 @@
 
 > 各カテゴリの情報源・更新方式の一覧は [`CONTENT-SOURCES.md`](./CONTENT-SOURCES.md) を参照してください。このドキュメントはセットアップ手順・運用コマンドが中心です。生成エンジンの内部仕様は [`docs/news-pipeline.md`](./docs/news-pipeline.md)、カテゴリごとの情報源・品質チューニング箇所は [`docs/categories/`](./docs/categories/) の各ファイル（後述の「カテゴリ別詳細ドキュメント」節）を参照してください。
 
+> バリ向けエバーグリーン記事の半自動生成(週次トピック提案 → 日次生成 → 月次改訂)は本書の末尾「ガイド記事パイプライン」節と [`docs/guide-pipeline.md`](./docs/guide-pipeline.md) を参照してください。
+
 2026年4月に存在した「複数メディアをクロール→事実確認しながら記事化→Slackで承認」という運用（当時は`CLAUDE.md`/`soul.md`という人間向け運用指示書＋手動Claude Codeセッションで回していた）を、正式なアプリケーションコードとして再実装したもの。
 
 ## カテゴリ別詳細ドキュメント
@@ -337,3 +339,19 @@ Search Console APIは無料（課金対象外）。外部依存パッケージ�
 - **（2026-09〜）エリア単体トピックは全廃止した**。「エリア名では誰も検索しない」というオーナー判断による。代わりに追加した用途軸トピック（会食・接待/子連れ・ファミリー/デート・記念日/大人数・宴会/作業・ノマド/個室あり）は`cuisine`/`area`を持たないため候補店舗数を算出できず、「算出対象外(用途軸)」と表示する仕様（要ディスカバリー注記も付けない）
 - Googleサジェスト・GSC連携はいずれも「本番実行（Slack投稿）時のみ」動作する参考情報であり、未カバートピックの判定ロジック自体（カバレッジ判定・優先度順ソート）には影響しない
 
+---
+
+# ガイド記事パイプライン(バリ向けエバーグリーン記事)
+
+ニュース記事(上記)や飲食店ガイドとは別に、バリ島向けの「ガイド記事」(日付のつかないエバーグリーン記事)を、**公的機関・一次情報の公開ページだけを根拠に**半自動で作り、公開後も定期的に出典と照合して更新する仕組み。全体像・データファイル・事実ルール・却下の仕方・トピック/出典の追加方法は [`docs/guide-pipeline.md`](./docs/guide-pipeline.md) にまとめてある。
+
+| 段階 | ワークフロー | 頻度 | 出力 |
+|---|---|---|---|
+| トピック提案 | `.github/workflows/suggest-bali-topics.yml` → `scripts/suggest-bali-topics.mjs` | 毎週月曜 08:30 WIB | 台帳 `src/data/guide-topics.json` への追記PR(`auto/guide-topics-YYYYMMDD`)+ Slack承認(mergeのみ) |
+| 記事生成 | `.github/workflows/generate-guide.yml` → `scripts/generate-guide.mjs` | 毎日 08:30 WIB(+手動でトピック指定) | `draft: true` の記事PR(`auto/guide-<id>`)+ Slack承認(draft:falseにしてmerge) |
+| 月次改訂 | `.github/workflows/refresh-guides.yml` → `scripts/refresh-guides.mjs` | 毎月1日 10:00 WIB | 変化なしまとめPR / 変化あり記事ごとの改訂PR(`auto/guide-refresh-*`)+ 取得失敗のIssue |
+
+- 台帳(`guide-topics.json`)・出典一覧(`official-sources.json`)・出典スナップショット(記事ごとの `src/data/guide-source-snapshots/<id>.json`)の3種類が状態のすべて。
+- 生成PRをcloseするとそのトピックは再生成されない(却下)。
+- 動作確認は `npm run generate-guide -- --dry-run`(Gemini・出典取得・GitHub照会なし、フィクスチャ使用)。
+- ニュース記事とは根拠の取り方が違う(ニュースはRSSの見出し・要約のみ、ガイドは登録済みの公的出典の本文を取得)。AGENTS.md の絶対ルール4を参照。

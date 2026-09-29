@@ -1,0 +1,62 @@
+name: Suggest Bali Guide Topics
+
+on:
+  schedule:
+    - cron: '30 1 * * 1' # 毎週月曜 08:30 WIB (UTC+7)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+concurrency:
+  group: suggest-bali-topics
+  cancel-in-progress: false
+
+jobs:
+  suggest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # 提案が0件(未カバー候補なし・採用可能な案なし・未処理の提案PRあり)の週は count=0 で正常終了し、PRを作らない。
+      - name: Suggest topics (append to ledger)
+        id: suggest
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GSC_SERVICE_ACCOUNT_KEY: ${{ secrets.GSC_SERVICE_ACCOUNT_KEY }}
+          GSC_SITE_URL: ${{ vars.GSC_SITE_URL }}
+        run: npm run suggest-bali-topics
+
+      - name: Create pull request
+        if: steps.suggest.outputs.count != '' && steps.suggest.outputs.count != '0'
+        id: cpr
+        uses: peter-evans/create-pull-request@v8
+        with:
+          add-paths: src/data/guide-topics.json
+          commit-message: 'Add guide topic proposals (${{ steps.suggest.outputs.date }})'
+          branch: auto/guide-topics-${{ steps.suggest.outputs.date }}
+          title: 'ガイドトピック提案 (${{ steps.suggest.outputs.date }}): ${{ steps.suggest.outputs.count }}件'
+          body-path: ${{ steps.suggest.outputs.body_path }}
+
+      - name: Notify Slack (topic proposal + approve button)
+        if: steps.cpr.outputs.pull-request-number != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ vars.SLACK_CHANNEL_ID }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/notify-draft-pr.mjs --pr=${{ steps.cpr.outputs.pull-request-number }}

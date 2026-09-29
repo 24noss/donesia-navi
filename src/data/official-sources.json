@@ -1,0 +1,629 @@
+{
+  "version": 1,
+  "themes": {
+    "entry": {
+      "label": "入国手続き",
+      "sources": [
+        {
+          "title": "インドネシア 安全対策基礎データ(犯罪・入国・税関・医療・免許・緊急連絡先)",
+          "url": "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html",
+          "publisher": "外務省 海外安全ホームページ",
+          "lang": "ja"
+        },
+        {
+          "title": "e-VOA(Visitor Visa)案内と料金・滞在条件",
+          "url": "https://evisa.imigrasi.go.id/front/info/evoa",
+          "publisher": "インドネシア入国管理総局(公式e-Visaサイト)",
+          "lang": "en"
+        },
+        {
+          "title": "All Indonesia(到着カード)旅行者向けガイド",
+          "url": "https://www.indonesia.travel/gb/en/general-information/all-indonesia-app",
+          "publisher": "インドネシア政府観光局(Wonderful Indonesia)",
+          "lang": "en"
+        },
+        {
+          "title": "ビザ・入国の基本情報(2026年版)",
+          "url": "https://www.indonesia.travel/gb/en/general-information/visa-immigration",
+          "publisher": "インドネシア政府観光局(Wonderful Indonesia)",
+          "lang": "en"
+        },
+        {
+          "title": "電子税関申告(e-CD)",
+          "url": "https://ecd.beacukai.go.id/cdonline.html?type=ekiosk",
+          "publisher": "インドネシア関税総局",
+          "lang": "id"
+        }
+      ]
+    },
+    "tourist-levy": {
+      "label": "バリ外国人観光税",
+      "sources": [
+        {
+          "title": "Love Bali FAQ(観光税の金額・支払い方法)",
+          "url": "https://lovebali.baliprov.go.id/faq",
+          "publisher": "バリ州政府(Love Bali)",
+          "lang": "en"
+        },
+        {
+          "title": "外国人観光客への観光税導入(公式発表)",
+          "url": "https://lovebali.baliprov.go.id/article/detail/1695794247752/bali-will-apply-tourism-fee-for-foreign-tourists",
+          "publisher": "バリ州政府(Love Bali)",
+          "lang": "en"
+        },
+        {
+          "title": "外国人観光税(PWA)の使途に関する公式発表",
+          "url": "https://lovebali.baliprov.go.id/article/detail/1763384309132/official-release-utilization-of-the-foreign-tourist-levy-(pwa)-for-the-preservation-of-balinese-culture-and-natural-environment",
+          "publisher": "バリ州政府(Love Bali)",
+          "lang": "en"
+        }
+      ]
+    },
+    "visa-on-arrival": {
+      "label": "到着ビザ・e-VOA・短期滞在",
+      "sources": [
+        {
+          "title": "e-VOA(Visitor Visa)案内と料金・滞在条件",
+          "url": "https://evisa.imigrasi.go.id/front/info/evoa",
+          "publisher": "インドネシア入国管理総局(公式e-Visaサイト)",
+          "lang": "en"
+        },
+        {
+          "title": "VKW(訪問ビザ)とVoAの違い",
+          "url": "https://www.imigrasi.go.id/berita/jangan-salah-pilih-ini-beda-visa-kunjungan-wisata-dan-visa-on-arrival",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        },
+        {
+          "title": "How To Get Visa On Arrival in Indonesia?",
+          "url": "https://www.imigrasi.go.id/berita/2022/07/20/how-to-get-visa-on-arrival-in-indonesia",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "en"
+        },
+        {
+          "title": "C1 訪問ビザ(観光・商談)",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/C1",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        }
+      ]
+    },
+    "long-stay-visa": {
+      "label": "長期滞在ビザ(全体像)",
+      "sources": [
+        {
+          "title": "ビザ一覧(Daftar Visa Indonesia)",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        },
+        {
+          "title": "E33 セカンドホームビザ",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        },
+        {
+          "title": "E33E 高齢者向けセカンドホーム(5年)",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33E",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        },
+        {
+          "title": "E33G リモートワーカー向けセカンドホーム",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33G",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        },
+        {
+          "title": "D1 複数回入国の訪問ビザ",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/D1",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        },
+        {
+          "title": "E28A 投資家ビザ",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E28A",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        }
+      ]
+    },
+    "second-home-visa": {
+      "label": "セカンドホームビザ(E33)",
+      "sources": [
+        {
+          "title": "E33 セカンドホームビザ",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        },
+        {
+          "title": "Type of Visa E33(費用・滞在期間・条件)",
+          "url": "https://evisa.imigrasi.go.id/front/faq/34723b14-5760-42e9-8aa8-73f54deb572f",
+          "publisher": "インドネシア入国管理総局(公式e-Visaサイト)",
+          "lang": "en"
+        }
+      ]
+    },
+    "retirement-visa": {
+      "label": "リタイアメント(高齢者)ビザ",
+      "sources": [
+        {
+          "title": "E33E 高齢者向けセカンドホーム(5年)",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33E",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        },
+        {
+          "title": "E33F 高齢者向けセカンドホーム(1年)",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33F",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        }
+      ]
+    },
+    "digital-nomad-visa": {
+      "label": "リモートワーカービザ(E33G)",
+      "sources": [
+        {
+          "title": "E33G リモートワーカー向けセカンドホーム",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33G",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        },
+        {
+          "title": "Type of Visa E33G(収入要件・費用)",
+          "url": "https://evisa.imigrasi.go.id/front/faq/e076131c-0d39-469b-afaf-75fc66aff923",
+          "publisher": "インドネシア入国管理総局(公式e-Visaサイト)",
+          "lang": "en"
+        }
+      ]
+    },
+    "golden-visa": {
+      "label": "ゴールデンビザ",
+      "sources": [
+        {
+          "title": "Regulation on Golden Visa Launched(投資額・滞在期間)",
+          "url": "https://www.imigrasi.go.id/siaran_pers/2023/09/02/aturan-hukum-golden-visa-disahkan-tarik-orang-asing-berkualitas-untuk-berinvestasi?lang=en-US",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "en"
+        },
+        {
+          "title": "Global Citizen of IndonesiaとGolden Visaの違い",
+          "url": "https://imigrasi.go.id/siaran_pers/mengenal-perbedaan-global-citizen-of-indonesia-dan-golden-visa-indonesia",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        }
+      ]
+    },
+    "residence-permit": {
+      "label": "滞在許可(ITAS/KITAS)の延長・変更",
+      "sources": [
+        {
+          "title": "ITAS延長・ITAP延長の手続き",
+          "url": "https://www.imigrasi.go.id/wna/izin-tinggal-keimigrasian/perpanjangan-izin-tinggal-tetap",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        },
+        {
+          "title": "ITAP延長",
+          "url": "https://www.imigrasi.go.id/wna/izin-tinggal-keimigrasian/perpanjangan-izin-tinggal-terbatas-2",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        },
+        {
+          "title": "訪問滞在許可からITASへの変更",
+          "url": "https://www.imigrasi.go.id/wna/izin-tinggal-keimigrasian/izin-tinggal-kunjungan-menjadi-izin-tinggal-terbatas",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        },
+        {
+          "title": "E31B ITAS/ITAP保持者の配偶者ビザ",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E31B",
+          "publisher": "インドネシア入国管理総局",
+          "lang": "id"
+        }
+      ]
+    },
+    "customs": {
+      "label": "インドネシア入国時の税関・持ち込み",
+      "sources": [
+        {
+          "title": "旅客携帯品の免税範囲(酒・たばこ・USD500)",
+          "url": "https://soetta.beacukai.go.id/mandatory/barang-penumpang.html",
+          "publisher": "インドネシア関税総局(スカルノハッタ空港税関)",
+          "lang": "id"
+        },
+        {
+          "title": "旅客携帯品のFAQ(免税枠・課税)",
+          "url": "https://kanwilaceh.beacukai.go.id/mandatory/faq-barang-penumpang.html",
+          "publisher": "インドネシア関税総局",
+          "lang": "id"
+        },
+        {
+          "title": "電子税関申告(e-CD)",
+          "url": "https://ecd.beacukai.go.id/cdonline.html?type=ekiosk",
+          "publisher": "インドネシア関税総局",
+          "lang": "id"
+        },
+        {
+          "title": "インドネシア 安全対策基礎データ(犯罪・入国・税関・医療・免許・緊急連絡先)",
+          "url": "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html",
+          "publisher": "外務省 海外安全ホームページ",
+          "lang": "ja"
+        }
+      ]
+    },
+    "narcotics-law": {
+      "label": "薬物規制と刑罰",
+      "sources": [
+        {
+          "title": "インドネシア 安全対策基礎データ(犯罪・入国・税関・医療・免許・緊急連絡先)",
+          "url": "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html",
+          "publisher": "外務省 海外安全ホームページ",
+          "lang": "ja"
+        },
+        {
+          "title": "麻薬犯罪者への死刑について",
+          "url": "https://bnn.go.id/hukuman-mati-bagi-bandar-narkoba-melindungi-dan-menyelamatkan-bangsa-indonesia-dari-bahaya-penyalahgunaan-narkoba/",
+          "publisher": "インドネシア国家麻薬対策庁(BNN)",
+          "lang": "id"
+        },
+        {
+          "title": "インドネシアの法律(賭博・薬物・運転など)",
+          "url": "https://www.indonesia.travel/gb/en/general-information/local-law",
+          "publisher": "インドネシア政府観光局(Wonderful Indonesia)",
+          "lang": "en"
+        }
+      ]
+    },
+    "health-medical": {
+      "label": "医療・感染症",
+      "sources": [
+        {
+          "title": "インドネシア 安全対策基礎データ(犯罪・入国・税関・医療・免許・緊急連絡先)",
+          "url": "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html",
+          "publisher": "外務省 海外安全ホームページ",
+          "lang": "ja"
+        },
+        {
+          "title": "インドネシアの感染症・予防接種情報",
+          "url": "https://www.forth.go.jp/destinations/country/indonesia.html",
+          "publisher": "厚生労働省検疫所(FORTH)",
+          "lang": "ja"
+        },
+        {
+          "title": "デング熱",
+          "url": "https://www.forth.go.jp/useful/infectious/name/name33.html",
+          "publisher": "厚生労働省検疫所(FORTH)",
+          "lang": "ja"
+        },
+        {
+          "title": "狂犬病",
+          "url": "https://www.forth.go.jp/moreinfo/topics/name47.html",
+          "publisher": "厚生労働省検疫所(FORTH)",
+          "lang": "ja"
+        },
+        {
+          "title": "海外渡航のためのワクチン",
+          "url": "https://www.forth.go.jp/moreinfo/topics/useful_vaccination.html",
+          "publisher": "厚生労働省検疫所(FORTH)",
+          "lang": "ja"
+        },
+        {
+          "title": "マラリアについて",
+          "url": "https://www.forth.go.jp/useful/malaria.html",
+          "publisher": "厚生労働省検疫所(FORTH)",
+          "lang": "ja"
+        },
+        {
+          "title": "Dengue and severe dengue",
+          "url": "https://www.who.int/news-room/fact-sheets/detail/dengue-and-severe-dengue",
+          "publisher": "世界保健機関(WHO)",
+          "lang": "en"
+        },
+        {
+          "title": "Rabies",
+          "url": "https://www.who.int/news-room/fact-sheets/detail/rabies",
+          "publisher": "世界保健機関(WHO)",
+          "lang": "en"
+        }
+      ]
+    },
+    "safety": {
+      "label": "治安・犯罪・事故",
+      "sources": [
+        {
+          "title": "インドネシア 安全対策基礎データ(犯罪・入国・税関・医療・免許・緊急連絡先)",
+          "url": "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html",
+          "publisher": "外務省 海外安全ホームページ",
+          "lang": "ja"
+        },
+        {
+          "title": "インドネシアの法律と安全(Local Law)",
+          "url": "https://www.indonesia.travel/gb/en/general-information/local-law",
+          "publisher": "インドネシア政府観光局(Wonderful Indonesia)",
+          "lang": "en"
+        },
+        {
+          "title": "バリ州 外国人観光客に対する取締り強化(州知事通達)",
+          "url": "https://lovebali.baliprov.go.id/article/detail/1742819770564/bali-cracks-down-on-unruly-tourists:-governor-koster-issues-new-regulations",
+          "publisher": "バリ州政府(Love Bali)",
+          "lang": "en"
+        }
+      ]
+    },
+    "disaster": {
+      "label": "地震・津波・火山",
+      "sources": [
+        {
+          "title": "InaTEWS(地震・津波早期警報)",
+          "url": "https://inatews.bmkg.go.id/",
+          "publisher": "インドネシア気象気候地球物理庁(BMKG)",
+          "lang": "id"
+        },
+        {
+          "title": "BMKG デンパサール地球物理観測所",
+          "url": "https://stageof-bali.bmkg.go.id/",
+          "publisher": "インドネシア気象気候地球物理庁(BMKG)",
+          "lang": "id"
+        },
+        {
+          "title": "MAGMA Indonesia(火山活動レベル)",
+          "url": "https://magma.esdm.go.id/",
+          "publisher": "インドネシア地質庁(PVMBG)",
+          "lang": "id"
+        },
+        {
+          "title": "インドネシア 安全対策基礎データ(犯罪・入国・税関・医療・免許・緊急連絡先)",
+          "url": "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html",
+          "publisher": "外務省 海外安全ホームページ",
+          "lang": "ja"
+        }
+      ]
+    },
+    "transport-airport": {
+      "label": "空港から市内への移動",
+      "sources": [
+        {
+          "title": "Bali Ngurah Rai Airport(タクシー・バス・シャトル)",
+          "url": "https://www.indonesia.travel/us/en/destination/bali-nusa-tenggara/bali/denpasar---bali-ngurah-rai-airport",
+          "publisher": "インドネシア政府観光局(Wonderful Indonesia)",
+          "lang": "en"
+        },
+        {
+          "title": "Trans Sarbagita 空港路線の開通",
+          "url": "https://dishub.baliprov.go.id/gubernur-bali-resmikan-rute-trans-sarbagita-ke-bandara-ngurah-rai/",
+          "publisher": "バリ州運輸局",
+          "lang": "id"
+        },
+        {
+          "title": "インドネシア 安全対策基礎データ(犯罪・入国・税関・医療・免許・緊急連絡先)",
+          "url": "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html",
+          "publisher": "外務省 海外安全ホームページ",
+          "lang": "ja"
+        }
+      ]
+    },
+    "money-exchange": {
+      "label": "両替・決済",
+      "sources": [
+        {
+          "title": "外貨売買の注意(KUPVA許可業者の見分け方)",
+          "url": "https://www.bi.go.id/id/edukasi/Pages/Penjualan-Valuta-Asing.aspx",
+          "publisher": "インドネシア中央銀行(BI)",
+          "lang": "id"
+        },
+        {
+          "title": "QRIS Antarnegara(海外旅行者のQR決済、JPQR Global対応)",
+          "url": "https://www.bi.go.id/id/fungsi-utama/sistem-pembayaran/ritel/kanal-layanan/QRIS/QRIS-Antarnegara/default.aspx",
+          "publisher": "インドネシア中央銀行(BI)",
+          "lang": "id"
+        },
+        {
+          "title": "通貨・両替・ATM",
+          "url": "https://www.indonesia.travel/gb/en/general-information/currency",
+          "publisher": "インドネシア政府観光局(Wonderful Indonesia)",
+          "lang": "en"
+        },
+        {
+          "title": "クレジットカードと決済",
+          "url": "https://www.indonesia.travel/gb/en/general-information/payment-system",
+          "publisher": "インドネシア政府観光局(Wonderful Indonesia)",
+          "lang": "en"
+        }
+      ]
+    },
+    "telecom": {
+      "label": "通信・SIM・IMEI",
+      "sources": [
+        {
+          "title": "IMEI登録(外国人旅行者の90日ルール)",
+          "url": "https://ngurahrai.beacukai.go.id/mandatory/registrasi-imei.html",
+          "publisher": "インドネシア関税総局(ングラ・ライ空港税関)",
+          "lang": "id"
+        },
+        {
+          "title": "WiFi・SIM・通信",
+          "url": "https://www.indonesia.travel/gb/en/general-information/wifi-connectivity",
+          "publisher": "インドネシア政府観光局(Wonderful Indonesia)",
+          "lang": "en"
+        }
+      ]
+    },
+    "weather-season": {
+      "label": "天候・雨季乾季",
+      "sources": [
+        {
+          "title": "天候・気候・季節",
+          "url": "https://www.indonesia.travel/gb/en/general-information/weather-climate-seasons",
+          "publisher": "インドネシア政府観光局(Wonderful Indonesia)",
+          "lang": "en"
+        },
+        {
+          "title": "2026年乾季予測",
+          "url": "https://www.bmkg.go.id/iklim/prediksi-musim/prediksi-musim-kemarau-tahun-2026-di-indonesia",
+          "publisher": "インドネシア気象気候地球物理庁(BMKG)",
+          "lang": "id"
+        },
+        {
+          "title": "乾季ピークとエルニーニョ(2026年8月)",
+          "url": "https://www.bmkg.go.id/siaran-pers/bmkg-puncak-musim-kemarau-agustus-2026-perkuat-kesiapan-hadapi-dampak-el-nino",
+          "publisher": "インドネシア気象気候地球物理庁(BMKG)",
+          "lang": "id"
+        },
+        {
+          "title": "2026/2027年雨季予測",
+          "url": "https://www.bmkg.go.id/siaran-pers/bmkg-el-nino-sangat-kuat-sedang-terjadi-musim-hujan-2026-2027-diprediksi-datang-lebih-lambat",
+          "publisher": "インドネシア気象気候地球物理庁(BMKG)",
+          "lang": "id"
+        }
+      ]
+    },
+    "culture-etiquette": {
+      "label": "文化・マナー・州通達",
+      "sources": [
+        {
+          "title": "Do and Don't カード(外国人観光客向け)",
+          "url": "https://lovebali.baliprov.go.id/article/detail/1686289659500/the-provincial-government-of-bali-issued-an-official-%E2%80%9Cdo-and-don%E2%80%99t%E2%80%9D-card-for-foreign-tourist-while-in-bali",
+          "publisher": "バリ州政府(Love Bali)",
+          "lang": "en"
+        },
+        {
+          "title": "外国人観光客への取締り強化と新ルール(2025年)",
+          "url": "https://lovebali.baliprov.go.id/article/detail/1742819770564/bali-cracks-down-on-unruly-tourists:-governor-koster-issues-new-regulations",
+          "publisher": "バリ州政府(Love Bali)",
+          "lang": "en"
+        },
+        {
+          "title": "州知事通達2025年第7号(外国人観光客の義務と禁止事項)",
+          "url": "https://bmc.baliprov.go.id/news/title/tertibkan-turis-asing-yang-berulah-di-bali-gubernur-koster-keluarkan-se-nomor-7-tahun-2025",
+          "publisher": "バリ州政府広報",
+          "lang": "id"
+        },
+        {
+          "title": "インドネシア 安全対策基礎データ(犯罪・入国・税関・医療・免許・緊急連絡先)",
+          "url": "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html",
+          "publisher": "外務省 海外安全ホームページ",
+          "lang": "ja"
+        }
+      ]
+    },
+    "nyepi": {
+      "label": "ニュピ(静寂の日)",
+      "sources": [
+        {
+          "title": "Nyepi, Balinese New Year: Day of Silence",
+          "url": "https://lovebali.baliprov.go.id/article/detail/1710312976791/nyepi,-balinese-new-year:-day-of-silence",
+          "publisher": "バリ州政府(Love Bali)",
+          "lang": "en"
+        },
+        {
+          "title": "NYEPI – THE DAY OF SILENCE",
+          "url": "https://lovebali.baliprov.go.id/event/detail/1741571083104/nyepi-%E2%80%93-the-day-of-silence",
+          "publisher": "バリ州政府(Love Bali)",
+          "lang": "en"
+        }
+      ]
+    },
+    "driving-license": {
+      "label": "運転免許・国際免許",
+      "sources": [
+        {
+          "title": "インドネシア 安全対策基礎データ(犯罪・入国・税関・医療・免許・緊急連絡先)",
+          "url": "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html",
+          "publisher": "外務省 海外安全ホームページ",
+          "lang": "ja"
+        },
+        {
+          "title": "SIM(運転免許)のオンライン手続き FAQ",
+          "url": "https://digitalkorlantas.polri.go.id/sim/",
+          "publisher": "インドネシア国家警察交通局(Korlantas)",
+          "lang": "id"
+        },
+        {
+          "title": "外国人観光客の交通ルール(州知事通達)",
+          "url": "https://lovebali.baliprov.go.id/article/detail/1742819770564/bali-cracks-down-on-unruly-tourists:-governor-koster-issues-new-regulations",
+          "publisher": "バリ州政府(Love Bali)",
+          "lang": "en"
+        }
+      ]
+    },
+    "tax-refund": {
+      "label": "外国人旅行者の付加価値税(VAT)払い戻し",
+      "sources": [
+        {
+          "title": "Tax Refund for Tourists",
+          "url": "https://www.pajak.go.id/id/vat-refund",
+          "publisher": "インドネシア国税総局",
+          "lang": "en"
+        },
+        {
+          "title": "Tax Refund for Tourists(制度概要)",
+          "url": "https://pajak.go.id/en/node/34252",
+          "publisher": "インドネシア国税総局",
+          "lang": "en"
+        },
+        {
+          "title": "VAT-REFUND Ngurah Rai 営業時間・ニュピ休業",
+          "url": "https://pajak.go.id/en/node/116378",
+          "publisher": "インドネシア国税総局",
+          "lang": "id"
+        }
+      ]
+    },
+    "japan-customs": {
+      "label": "日本帰国時の税関",
+      "sources": [
+        {
+          "title": "海外旅行者の免税範囲",
+          "url": "https://www.customs.go.jp/kaigairyoko/menzei.htm",
+          "publisher": "税関(財務省)",
+          "lang": "ja"
+        },
+        {
+          "title": "携帯品・別送品申告書の提出",
+          "url": "https://www.customs.go.jp/kaigairyoko/shinkokusho.htm",
+          "publisher": "税関(財務省)",
+          "lang": "ja"
+        },
+        {
+          "title": "税関検査場電子申告ゲート",
+          "url": "https://www.customs.go.jp/kaigairyoko/egate.htm",
+          "publisher": "税関(財務省)",
+          "lang": "ja"
+        },
+        {
+          "title": "日本へ持ち込めないもの(輸入禁止・規制品)",
+          "url": "https://www.customs.go.jp/mizugiwa/kinshi.htm",
+          "publisher": "税関(財務省)",
+          "lang": "ja"
+        }
+      ]
+    },
+    "japan-quarantine": {
+      "label": "日本帰国時の動植物検疫(お土産)",
+      "sources": [
+        {
+          "title": "肉製品などのおみやげについて",
+          "url": "https://www.maff.go.jp/aqs/tetuzuki/product/aq2.html",
+          "publisher": "農林水産省 動物検疫所",
+          "lang": "ja"
+        },
+        {
+          "title": "海外から日本への畜産物の持ち込みQ&A",
+          "url": "https://www.maff.go.jp/aqs/tetuzuki/qanda/souvenir.html",
+          "publisher": "農林水産省 動物検疫所",
+          "lang": "ja"
+        },
+        {
+          "title": "海外旅行者向け(動物検疫)",
+          "url": "https://www.customs.go.jp/tetsuzuki/c-answer/sonota/9006_jr.htm",
+          "publisher": "税関(財務省)",
+          "lang": "ja"
+        }
+      ]
+    }
+  }
+}

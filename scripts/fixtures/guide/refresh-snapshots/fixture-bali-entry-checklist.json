@@ -1,0 +1,10 @@
+{
+  "https://example.org/fixture/entry-procedure": {
+    "sha256": "894eea881d9511d90f5da321d3baf63cf1fa85a15f5361c2723f3a828094c608",
+    "fetchedAt": "2026-08-29T00:00:00.000Z"
+  },
+  "https://example.org/fixture/entry-visa": {
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "fetchedAt": "2026-08-29T00:00:00.000Z"
+  }
+}

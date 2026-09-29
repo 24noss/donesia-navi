@@ -16,6 +16,8 @@
 | `docs/news-pipeline.md` | ニュース生成エンジンの内部仕様 |
 | `docs/categories/*.md` | カテゴリ別(8種)の情報源・品質チューニング箇所 |
 | `docs/improvement-roadmap.md` | 改善ロードマップ(優先度・状態つき) |
+| `docs/guide-pipeline.md` | バリ向けガイド記事の半自動生成(週次提案→台帳→日次生成→月次改訂)の運用正本 |
+| `src/data/guide-topics.json` / `src/data/official-sources.json` | ガイドのトピック台帳 / テーマ別の公的出典一覧(`src/data/guide-source-snapshots/<id>.json` は出典の変更検知用で自動更新) |
 | `docs/monetization/` | 収益化: アフィリエイト候補、月次の収益・コスト・PV記録(`docs/monetization/revenue-log.csv`、`npm run revenue`) |
 | `docs/strategy/` | 方針検討の調査メモ(読者拡大・韓国語展開など) |
 | `DESIGN_STRATEGY.md` | デザイン戦略(1269行。必要な節だけ読む。コピーしない) |
@@ -30,16 +32,17 @@
 
 - `./verify` : 完了判定の単一入口。exit 0 = 合格。`npm test` → `npm run build`。所要時間: 約30秒
 - `./verify --fast` : `npm test` のみ(約5秒)
+- `npm run generate-guide -- --dry-run` : ガイド生成の動作確認(Gemini・出典取得・GitHub照会なし。フィクスチャで最後まで通し、一時ディレクトリに書き出す)
 - 個別コマンド: `npm test`(`node --test 'scripts/**/*.test.mjs'`)、`npm run build`(`astro build && npx pagefind --site dist`、`dist/` は gitignore)
 - CI(`.github/workflows/test.yml`)は `npm ci` → `npm test`
-- `npm run crawl` / `crawl:food` / `discover-restaurants` / `suggest-guides` は外部API(Gemini・Places・Slack)を呼ぶため verify には含めない
+- `npm run crawl` / `crawl:food` / `discover-restaurants` / `suggest-guides` / `generate-guide`(--dry-run なし) / `suggest-bali-topics` / `refresh-guides` は外部API(Gemini・Places・Slack)を呼ぶため verify には含めない
 
 ## 絶対ルール
 
 1. 記事ドラフトは必ず PR として作成する。レストランガイド等を手動追加する場合も main へ直接 commit しない(Cloudflare Pages のプレビュー・merge 対象にするため。出典: `AUTOMATION.md`)
 2. 公開はドラフトの `draft: true` を Slack の「承認して公開」ボタンで `draft: false` にして PR を merge する経路。本番・ローカルビルドでは draft 記事は表示されない(`src/lib/draftVisibility.ts`)
 3. 記事の `tags` と本文末尾の `**タグ:**` 行は `src/data/tag-vocabulary.json` の語彙から選ぶ。新規タグが必要なら語彙ファイルへの追加・既存タグへの統合を先に検討する(タグ増殖の再発防止)
-4. 本文はRSSの見出し・要約をもとに生成し、全文スクレイピングはしない(ペイウォール・利用規約リスク回避)
+4. ニュース本文はRSSの見出し・要約をもとに生成し、全文スクレイピングはしない(ペイウォール・利用規約リスク回避)。ガイド記事の生成・改訂では `src/data/official-sources.json` と台帳(`src/data/guide-topics.json`)に登録した公的機関・一次情報の公開ページのみ本文を取得してよい
 5. 飲食店ガイドでハラール・酒類は確認できなければ「要確認」と書く。エリア単体トピックは新規追加しない(オーナー判断)
 6. Google Places 用キーは perth-web-biz の既存キーを流用しない(専用キーを新規発行)
 7. `git add -A` / `git commit -a` / `git push --force` は使わない (hook化済み)

@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "themes": {
+    "entry": {
+      "label": "入国手続き(フィクスチャ)",
+      "sources": [
+        {
+          "title": "入国手続きの概要(テスト用サンプル)",
+          "url": "https://example.org/fixture/entry-procedure",
+          "publisher": "サンプル出入国管理局",
+          "lang": "ja"
+        },
+        {
+          "title": "到着ビザと滞在期間(テスト用サンプル)",
+          "url": "https://example.org/fixture/entry-visa",
+          "publisher": "サンプル出入国管理局",
+          "lang": "ja"
+        },
+        {
+          "title": "存在しないページ(取得失敗の確認用)",
+          "url": "https://example.org/fixture/missing",
+          "publisher": "サンプル出入国管理局",
+          "lang": "ja"
+        }
+      ]
+    },
+    "health": {
+      "label": "医療・健康(フィクスチャ)",
+      "sources": [
+        {
+          "title": "医療機関の利用案内(テスト用サンプル)",
+          "url": "https://example.org/fixture/health-info",
+          "publisher": "サンプル保健当局",
+          "lang": "ja"
+        }
+      ]
+    }
+  }
+}
