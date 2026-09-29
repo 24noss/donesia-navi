@@ -29,3 +29,6 @@ data/restaurant-candidates.json
 
 # jetbrains setting folder
 .idea/
+
+# Claude Code worktrees
+.claude/worktrees/
