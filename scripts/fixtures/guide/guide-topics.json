@@ -6,6 +6,7 @@
       "title": "バリ島入国前のチェックリスト(フィクスチャ)",
       "role": "hub",
       "primaryKeyword": "バリ 入国",
+      "label": "入国準備",
       "audience": [
         "tourist",
         "prospective-resident"
@@ -44,6 +45,7 @@
       "title": "保留中トピック(選ばれてはいけない)",
       "role": "hub",
       "primaryKeyword": "バリ 保留",
+      "label": "保留トピック",
       "audience": [
         "resident"
       ],
@@ -70,6 +72,7 @@
       "title": "バリ島の医療機関の使い方(フィクスチャ)",
       "role": "hub",
       "primaryKeyword": "バリ 病院",
+      "label": "医療機関",
       "audience": [
         "resident"
       ],
@@ -99,6 +102,7 @@
       "title": "取得失敗の確認用(フィクスチャ)",
       "role": "hub",
       "primaryKeyword": "バリ 取得失敗",
+      "label": "取得失敗",
       "audience": [
         "resident"
       ],
@@ -126,6 +130,7 @@
       "role": "spoke",
       "hub": "fixture-bali-entry-checklist",
       "primaryKeyword": "バリ 観光税 15万ルピア",
+      "label": "観光税",
       "audience": [
         "tourist"
       ],

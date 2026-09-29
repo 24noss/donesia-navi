@@ -3,7 +3,7 @@
 
 import { parse as parseYaml } from 'yaml';
 import { CATEGORY_NAMES } from '../crawl-and-draft.mjs';
-import { ARTICLE_CATEGORIES, TAG_VOCABULARY_SET, isHttpUrl, normalizeUrl } from './guide-topics.mjs';
+import { ARTICLE_CATEGORIES, TAG_VOCABULARY_SET, isHttpUrl, normalizeKeyword, normalizeUrl } from './guide-topics.mjs';
 
 export const MIN_BODY_CHARS = 2500;
 export const AUDIENCE_LABELS = {
@@ -82,48 +82,53 @@ function renderSources(sources) {
 /**
  * hub/spoke の役割分けの指示(キーワード競合対策)。role が無いトピック(旧形式)には空文字を返す。
  * hub: 総合ガイド(サブトピックは要約し詳細は個別ガイドに譲る) / spoke: 主キーワードの検索意図だけに深く答える。
- * 台帳(ledgerTopics)から所属 spoke・hub・兄弟 spoke の title と primaryKeyword を引く。本文にURLリンクは書かせない。
+ * 台帳(ledgerTopics)から所属 spoke・hub・兄弟 spoke を引く。
+ * hub のプロンプトには spoke の title・primaryKeyword を出さない(見出しに転用され、spoke の検索語を奪うため)。
+ * spoke のプロンプトにも兄弟は label だけを渡す。hub の title は spoke にだけ渡す。本文にURLリンクは書かせない。
  * @param {object} topic
  * @param {object[]} ledgerTopics 台帳の topics 全体
  */
 export function buildRoleSection(topic, ledgerTopics = []) {
   if (topic.role !== 'hub' && topic.role !== 'spoke') return '';
   const pk = topic.primaryKeyword;
-  const line = (t) => `  - ${t.title}(主キーワード: ${t.primaryKeyword})`;
-  const titleRule = (others) =>
-    `- title と description には主キーワード「${pk}」を自然に含める。${others.length ? `他の記事の主キーワード(${others.map((t) => `「${t.primaryKeyword}」`).join('、')})は title に入れない(検索意図が競合するため)。` : ''}`;
+  const labelLine = (t) => `  - ${t.label}`;
   const noLinkRule = '- 本文に他の記事へのURLリンクは書かない(関連ガイドへのリンクはサイト側の「関連ガイド」欄で案内する)。';
 
   if (topic.role === 'hub') {
-    const spokes = ledgerTopics.filter((t) => t.role === 'spoke' && t.hub === topic.id && t.status !== 'on-hold');
+    const spokes = ledgerTopics.filter((t) => t.role === 'spoke' && t.hub === topic.id && t.status !== 'on-hold' && isLabel(t.label));
     return `# 記事の役割: 総合ガイド(hub)
 - 主キーワード: 「${pk}」。この記事はこのクラスタの総合ガイドで、読者が全体像をつかみ、必要な詳細ページへ進めるようにする。
 ${
   spokes.length
     ? `- 次の各サブトピックは、要点を2〜4文で要約し、詳細は個別ガイドに譲ること。細かい手順・金額表・長いチェックリストをここに書かない(個別ガイドと内容が重複して検索順位を奪い合うため)。サブトピックごとにH2見出しを立て、末尾に「詳しくは個別ガイドで」と案内する程度にとどめる。
-${spokes.map(line).join('\n')}
+${spokes.map(labelLine).join('\n')}
+- 各サブトピックの見出しは、上の呼び名程度の短い総称にすること。個別記事のタイトルや主キーワード(検索語そのもの)を見出しや title に使わない(個別ガイドの検索順位を奪うため)。
 - 文字数の下限(2,500字以上)は、サブトピックの詳述ではなく、全体の流れ・共通の注意点・確認先の公的機関などの総論で満たす。`
     : '- このクラスタにはまだ個別ガイドが無い。通常の総合ガイドとして書いてよいが、細かい手順を長々と書かない。'
 }
-${titleRule(spokes)}
+- title と description には主キーワード「${pk}」を自然に含める。個別ガイドのタイトル・主キーワードは title や見出しに入れない(検索意図が競合するため)。
 ${noLinkRule}
 `;
   }
 
   const hub = ledgerTopics.find((t) => t.id === topic.hub);
-  const siblings = ledgerTopics.filter((t) => t.role === 'spoke' && t.hub === topic.hub && t.id !== topic.id && t.status !== 'on-hold');
-  const others = [...(hub ? [hub] : []), ...siblings];
+  const siblings = ledgerTopics.filter((t) => t.role === 'spoke' && t.hub === topic.hub && t.id !== topic.id && t.status !== 'on-hold' && isLabel(t.label));
+  const hasOthers = Boolean(hub) || siblings.length > 0;
   return `# 記事の役割: 個別ガイド(spoke)
 - 主キーワード: 「${pk}」の検索意図だけに深く答える。この記事の主題以外に話を広げない。
 ${
-  others.length
+  hasOthers
     ? `- 次の記事の話題には、1文程度で触れるにとどめ、詳細を繰り返さない(それぞれ別の個別ガイド・総合ガイドで扱う)。
-${hub ? `  - 総合ガイド: ${hub.title}(主キーワード: ${hub.primaryKeyword})\n` : ''}${siblings.map(line).join('\n')}`
+${hub ? `  - 総合ガイド: ${hub.title}\n` : ''}${siblings.map(labelLine).join('\n')}`
     : ''
 }
-${titleRule(others)}
+- title と description には主キーワード「${pk}」を自然に含める。${hub ? `総合ガイドの主キーワード(「${hub.primaryKeyword}」)や` : ''}他の記事のタイトル・主キーワードは title や見出しに入れない(検索意図が競合するため)。
 ${noLinkRule}
 `;
+}
+
+function isLabel(v) {
+  return typeof v === 'string' && v.trim() !== '';
 }
 
 /**
@@ -324,10 +329,40 @@ function hasSection(body, keyword) {
 }
 
 /**
+ * 生成された title と全見出し(#〜######)が、同じ台帳の他トピックの検索語を奪っていないか調べる。
+ * 衝突 = 他トピックの title(正規化して部分一致) または primaryKeyword(正規化後、地名トークンを除いた2語以上の全トークンが含まれる)。
+ * 自分自身のトピックは除外。topic が無ければ検査しない。
+ * @returns {string[]} 問題の文言(該当の見出し/title と衝突トピック id を含む)
+ */
+const COMMON_PLACE_TOKENS = new Set(['バリ', 'バリ島', 'インドネシア']);
+
+export function findKeywordCollisions({ title, body }, topic, ledgerTopics = []) {
+  if (!topic?.id) return [];
+  const targets = [{ where: 'title', text: title }];
+  for (const m of String(body).matchAll(/^#{1,6}[ \t]+(.+?)[ \t]*#*[ \t]*$/gm)) targets.push({ where: '見出し', text: m[1] });
+  const problems = [];
+  for (const other of ledgerTopics) {
+    if (!other || other.id === topic.id) continue;
+    const otherTitle = normalizeKeyword(other.title);
+    // 地名(バリ等)はほぼ全記事に出るため判定から外す。残りが1語だけなら語による判定はしない(誤検知防止)
+    const tokens = normalizeKeyword(other.primaryKeyword).split(' ').filter((tk) => tk && !COMMON_PLACE_TOKENS.has(tk));
+    for (const { where, text } of targets) {
+      const n = normalizeKeyword(text);
+      if (otherTitle && n.includes(otherTitle)) {
+        problems.push(`${where}「${text}」が他トピック ${other.id} の title を含む(検索語の競合)`);
+      } else if (tokens.length >= 2 && tokens.every((tk) => n.includes(tk))) {
+        problems.push(`${where}「${text}」が他トピック ${other.id} の primaryKeyword「${other.primaryKeyword}」を含む(検索語の競合)`);
+      }
+    }
+  }
+  return problems;
+}
+
+/**
  * ガイド生成の応答を検証・整形する。
  * @returns {{ok:boolean, problems:string[], value?:{title,description,body,usedSourceUrls}, removedUrls:string[], droppedSourceUrls:string[]}}
  */
-export function validateGuideOutput(output, { allowedUrls, extraAllowedUrls = [], minChars = MIN_BODY_CHARS }) {
+export function validateGuideOutput(output, { allowedUrls, extraAllowedUrls = [], minChars = MIN_BODY_CHARS, topic, ledgerTopics = [] }) {
   const problems = [];
   const o = output && typeof output === 'object' ? output : {};
   const title = typeof o.title === 'string' ? o.title.trim() : '';
@@ -355,6 +390,7 @@ export function validateGuideOutput(output, { allowedUrls, extraAllowedUrls = []
   if (body.length < minChars) problems.push(`本文が短すぎる(${body.length}字 < ${minChars}字)`);
   if (!hasSection(body, 'この記事の要点')) problems.push('「この記事の要点」見出しがない');
   if (!hasSection(body, 'よくある質問')) problems.push('「よくある質問」見出しがない');
+  problems.push(...findKeywordCollisions({ title, body }, topic, ledgerTopics));
 
   return {
     ok: problems.length === 0,
