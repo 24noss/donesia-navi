@@ -29,13 +29,13 @@
 
 ## 次の一手
 
-1. [オーナー] `feat/monetization-remaining` の PR を確認・merge する。
-2. [オーナー] 読者拡大の方針を決める(観光客・移住検討者向けガイドの量産、韓国語展開の是非)。調査結果は `docs/strategy/audience-expansion-research-2026-09.md`。
-3. [オーナー] ASP に登録する: Trip.com → Klook(Wise はリファラルで提携済み。Agoda は後回し。保険・VPN は提携先要確認)。GA4 管理画面で `affiliate_click` の partner / placement をカスタムディメンション登録する。
-4. [エージェント] ASP 登録後、`docs/monetization/affiliate-candidates.md` の確度高・中の記事にリンク(`rel="sponsored"`)と `hasAffiliate: true` を入れる(Wise は税金・法人設立ガイドに実施済み)。
-5. [エージェント+オーナー確認] YMYL エバーグリーン4本(KITAS・税金・法人設立・病院)を公的情報と照合し `lastVerified` と `references` を記入する(`npm run check-ymyl` で検出。毎月1日に Issue 化)。
-6. [オーナー] 毎月 `docs/monetization/revenue-log.csv` に PV・収益・コストを記入し `npm run revenue` で連続月数を確認する。
-7. [要判断] EEA/英国以外の訪問者は広告 Cookie を既定で許可にするか(現状は同意するまで非パーソナライズ)。
+1. [エージェント] 観光客・移住検討者向けエバーグリーンガイドを増やす(オーナー決定 2026-09-29)。候補10本と競合状況は `docs/strategy/audience-expansion-research-2026-09.md`。最初に記事の型・公的出典の確認手順(`lastVerified`/`references` 必須)を決めてから量産。韓国語展開は日本語ガイドが軌道に乗った後に5〜10本で試験(未決定)。
+2. [オーナー] ASP に登録する: Trip.com → Klook(Wise はリファラルで提携済み。Agoda は後回し。保険・VPN は提携先要確認)。GA4 管理画面で `affiliate_click` の partner / placement をカスタムディメンション登録する。
+3. [エージェント] ASP 登録後、`docs/monetization/affiliate-candidates.md` の確度高・中の記事にリンク(`rel="sponsored"`)と `hasAffiliate: true` を入れる(Wise は税金・法人設立ガイドに実施済み)。
+4. [エージェント+オーナー確認] YMYL エバーグリーン4本(KITAS・税金・法人設立・病院)を公的情報と照合し `lastVerified` と `references` を記入する(`npm run check-ymyl` で検出。毎月1日に Issue 化)。
+5. [オーナー] 毎月 `docs/monetization/revenue-log.csv` に PV・収益・コストを記入し `npm run revenue` で連続月数を確認する。
+
+- 同意設定方針(オーナー決定 2026-09-29): 現地法(インドネシア UU PDP)に準拠する安全側として、広告・解析 Cookie は同意するまで denied のまま(全地域共通)。EEA/英国/スイスは Google CMP(3択)。
 
 ## 期限・日付つき事項
 
