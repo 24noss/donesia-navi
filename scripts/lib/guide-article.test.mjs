@@ -7,6 +7,8 @@ import {
   buildGuidePrompt,
   buildRefreshPrompt,
   extractGeminiText,
+  extractUrlsFromTexts,
+  formatRemovedUrlReport,
   parseArticleFile,
   parseGeminiObject,
   setFrontmatterDate,
@@ -193,5 +195,73 @@ describe('validateFrontmatterShape(content.config.ts の articles スキーマ�
     assert.ok(validateFrontmatterShape({ ...ok, references: [{ title: 'a', url: 'bad' }] }).some((p) => p.includes('references')));
     assert.ok(validateFrontmatterShape({ ...ok, pubDate: 'nope' }).some((p) => p.includes('pubDate')));
     assert.ok(validateFrontmatterShape({ ...ok, ymyl: 'yes' }).some((p) => p.includes('ymyl')));
+  });
+});
+
+// PR #124 (bali-entry-checklist) で壊れた箇所の再現。
+// 原因1: 全角括弧「）」や日本語の続きまでURLとして巻き込んで除去していた
+// 原因2: 許可リストが references のURLだけで、資料本文が案内する公式URLまで除去していた
+describe('PR #124 の再現(URL除去で文が壊れる)', () => {
+  const OFFICIAL = 'https://allindonesia.imigrasi.go.id';
+  const EVOA = 'https://evisa.imigrasi.go.id';
+
+  test('全角括弧で閉じた裸URLの除去で「）」や後続の日本語を巻き込まない', () => {
+    const r = stripDisallowedUrls('E-VOAは公式サイト（https://evil.example/x）またはAll Indonesiaから申請できます(出典: 外務省)。', [A]);
+    assert.equal(r.body, 'E-VOAは公式サイトまたはAll Indonesiaから申請できます(出典: 外務省)。');
+    assert.deepEqual(r.removed, ['https://evil.example/x']);
+  });
+  test('「サイト（URL）(出典…)」は空括弧が残らず「サイト(出典…)」になる', () => {
+    const r = stripDisallowedUrls('従来通り税関サイト（https://evil.example/c）(出典: 外務省 海外安全ホームページ)。', [A]);
+    assert.equal(r.body, '従来通り税関サイト(出典: 外務省 海外安全ホームページ)。');
+  });
+  test('値がURLだけの箇条書きは、ラベルと出典だけの行ごと落とす(除去情報には残る)', () => {
+    const r = stripDisallowedUrls('- 手順\n- **公式アクセスリンク**: https://evil.example/x (出典: 外務省)\n- **入力可能時期**: 3日前', [A]);
+    assert.equal(r.body, '- 手順\n- **入力可能時期**: 3日前');
+    assert.equal(r.details.length, 1);
+    assert.equal(r.details[0].after, null);
+    assert.match(r.details[0].before, /公式アクセスリンク/);
+  });
+  test('Markdownリンクは文字だけ残り、裸URLだけの箇条書きは記号ごと落ちる', () => {
+    const r = stripDisallowedUrls('[公式](https://evil.example/x)を参照\n- https://evil.example/y\n（https://evil.example/z）', [A]);
+    assert.equal(r.body, '公式を参照\n');
+  });
+  test('資料本文に出現するURLは、references に無くても残る(末尾の句読点・括弧・大文字ホスト・末尾スラッシュを吸収)', () => {
+    const extra = extractUrlsFromTexts(['公式サイトは https://AllIndonesia.imigrasi.go.id/ です。', `申請は (${EVOA}) から、詳細は www.example.go.id/info。`]);
+    const body = `公式サイト（${OFFICIAL}）またはE-VOA（${EVOA}）、${OFFICIAL}。詳細は www.example.go.id/info。`;
+    const r = stripDisallowedUrls(body, [A, ...extra]);
+    assert.equal(r.body, body);
+    assert.equal(r.removed.length, 0);
+    assert.equal(r.details.length, 0);
+  });
+  test('資料本文に無いURLは同じ本文でも除去される', () => {
+    const extra = extractUrlsFromTexts([`公式は ${OFFICIAL} です`]);
+    const r = stripDisallowedUrls(`公式（${OFFICIAL}）や（https://evil.example/q）で`, [A, ...extra]);
+    assert.equal(r.body, `公式（${OFFICIAL}）や で`.replace('や で', 'やで'));
+    assert.deepEqual(r.removed, ['https://evil.example/q']);
+  });
+  test('extractUrlsFromTexts: 日本語の続きや全角括弧は含めず、重複は1件', () => {
+    const urls = extractUrlsFromTexts([`（https://x.go.id/a）または https://X.go.id/a/ 、www.y.go.id。`]);
+    assert.deepEqual(urls, ['https://x.go.id/a', 'www.y.go.id']);
+  });
+  test('validateGuideOutput / validateRefreshOutput は extraAllowedUrls で許可URLを残し、removedDetails を返す', () => {
+    const body = goodBody(`\n公式（${OFFICIAL}）と（https://evil.example/x）(出典: 外務省)`);
+    const g = validateGuideOutput({ title: 'T', description: 'D', body, usedSourceUrls: [A] }, { allowedUrls: [A], extraAllowedUrls: [OFFICIAL] });
+    assert.equal(g.ok, true, g.problems.join());
+    assert.ok(g.value.body.includes(`（${OFFICIAL}）`));
+    assert.ok(g.value.body.includes('と(出典: 外務省)'));
+    assert.deepEqual(g.removedUrls, ['https://evil.example/x']);
+    assert.equal(g.removedDetails.length, 1);
+    const f = validateRefreshOutput({ needsRevision: true, changeSummary: 's', body }, { allowedUrls: [A], extraAllowedUrls: [OFFICIAL], minChars: 2000 });
+    assert.ok(f.body.includes(`（${OFFICIAL}）`));
+    assert.deepEqual(f.removedUrls, ['https://evil.example/x']);
+  });
+  test('formatRemovedUrlReport: 除去が無ければ null、あれば URL・元の行・整形後を含む', () => {
+    assert.equal(formatRemovedUrlReport([]), null);
+    const r = stripDisallowedUrls('- **リンク**: https://evil.example/x (出典: a)\n税関（https://evil.example/y）(出典: b)', [A]);
+    const md = formatRemovedUrlReport(r.details);
+    assert.match(md, /除去したURLと該当行/);
+    assert.match(md, /https:\/\/evil\.example\/x/);
+    assert.match(md, /行ごと削除/);
+    assert.match(md, /整形後: `税関\(出典: b\)`/);
   });
 });

@@ -48,6 +48,29 @@ jobs:
           GUIDE_TOPIC_ID: ${{ github.event.inputs.topic_id }}
         run: npm run generate-guide
 
+      # PR本文 = 固定文 + (URL除去が発生した場合のみ)除去したURLと該当行。レビュー時に目視できるようにする。
+      - name: Compose PR body
+        if: steps.gen.outputs.generated == 'true'
+        env:
+          TOPIC_ID: ${{ steps.gen.outputs.topic_id }}
+        run: |
+          {
+            cat <<'EOF' | sed "s/__TOPIC_ID__/$TOPIC_ID/"
+          バリ向けガイド記事の自動生成ドラフトです(トピックID: `__TOPIC_ID__`)。`draft: true` のため、マージしても公開されません。
+
+          - 本文は、台帳(`src/data/guide-topics.json`)と出典一覧(`src/data/official-sources.json`)に登録された公的機関・一次情報の公開ページだけを根拠に生成しています。
+          - 「要確認」と書かれた箇所は、資料に記載がない・資料間で矛盾する事項です。公的機関の最新情報で確認してから公開してください。
+          - `references` の各URLと本文の内容を照合してください。`lastVerified` は資料を取得・照合した日です。
+          - 却下する場合はこのPRを **close** してください(同じトピックは再生成されません)。
+
+          Slackの「承認して公開」で `draft: false` にしてmergeできます。
+          EOF
+            if [ -f "$RUNNER_TEMP/guide-removed-urls.md" ]; then
+              echo
+              cat "$RUNNER_TEMP/guide-removed-urls.md"
+            fi
+          } > "$RUNNER_TEMP/guide-pr-body.md"
+
       - name: Create pull request
         if: steps.gen.outputs.generated == 'true'
         id: cpr
@@ -59,15 +82,7 @@ jobs:
           commit-message: 'Add guide draft: ${{ steps.gen.outputs.topic_id }}'
           branch: auto/guide-${{ steps.gen.outputs.topic_id }}
           title: 'ガイド記事ドラフト: ${{ steps.gen.outputs.title }}'
-          body: |
-            バリ向けガイド記事の自動生成ドラフトです(トピックID: `${{ steps.gen.outputs.topic_id }}`)。`draft: true` のため、マージしても公開されません。
-
-            - 本文は、台帳(`src/data/guide-topics.json`)と出典一覧(`src/data/official-sources.json`)に登録された公的機関・一次情報の公開ページだけを根拠に生成しています。
-            - 「要確認」と書かれた箇所は、資料に記載がない・資料間で矛盾する事項です。公的機関の最新情報で確認してから公開してください。
-            - `references` の各URLと本文の内容を照合してください。`lastVerified` は資料を取得・照合した日です。
-            - 却下する場合はこのPRを **close** してください(同じトピックは再生成されません)。
-
-            Slackの「承認して公開」で `draft: false` にしてmergeできます。
+          body-path: ${{ runner.temp }}/guide-pr-body.md
 
       # GITHUB_TOKENで作成したPRは pull_request イベントを発火しないため、crawl-articles.yml と同様にここでSlack通知する。
       - name: Notify Slack (draft article review + approve button)

@@ -41,6 +41,8 @@ import {
   buildGuideMarkdown,
   buildGuidePrompt,
   extractGeminiText,
+  extractUrlsFromTexts,
+  formatRemovedUrlReport,
   parseArticleFile,
   parseGeminiObject,
   validateFrontmatterShape,
@@ -172,8 +174,11 @@ export async function runGenerate({ args, deps = {} }) {
       throw new TopicSkipError(`生成結果を解釈できませんでした(${topic.id}): ${err.message}`);
     }
     const allowedUrls = included.map((s) => s.url);
-    const validated = validateGuideOutput(output, { allowedUrls });
+    // 許可リスト = 渡した references URL ∪ 資料本文に文字列として出現するURL(公的ページが案内する公式URL)
+    const extraAllowedUrls = extractUrlsFromTexts(included.map((s) => s.text));
+    const validated = validateGuideOutput(output, { allowedUrls, extraAllowedUrls });
     if (validated.removedUrls.length) warnings.push(`資料に無い外部URLを本文から除去: ${validated.removedUrls.join(', ')}`);
+    const removedUrlReport = formatRemovedUrlReport(validated.removedDetails);
     if (validated.droppedSourceUrls.length) warnings.push(`usedSourceUrls のうち渡していないURLを除去: ${validated.droppedSourceUrls.join(', ')}`);
     if (!validated.ok) throw new TopicSkipError(`生成結果の検証に失敗しました(${topic.id}): ${validated.problems.join(' / ')}`);
 
@@ -206,7 +211,7 @@ export async function runGenerate({ args, deps = {} }) {
     await mkdir(path.dirname(snapshotsPath), { recursive: true });
     await writeFile(snapshotsPath, serializeSnapshots(snapshots), 'utf-8');
 
-    return { status: 'generated', topic, filePath, snapshotsPath, markdown, usedSourceUrls: validated.value.usedSourceUrls, title: validated.value.title, warnings };
+    return { status: 'generated', topic, filePath, snapshotsPath, markdown, usedSourceUrls: validated.value.usedSourceUrls, title: validated.value.title, warnings, removedUrlReport };
   }
 }
 
@@ -283,6 +288,14 @@ async function main() {
     return;
   }
   for (const w of result.warnings) console.warn(`警告: ${w}`);
+  if (result.removedUrlReport) {
+    console.warn(result.removedUrlReport);
+    // CI: PR本文に追記できるようファイルに出す(generate-guide.yml の「Compose PR body」が読む)。job summary にも残す。
+    if (process.env.GITHUB_OUTPUT) {
+      await writeFile(path.join(process.env.RUNNER_TEMP || os.tmpdir(), 'guide-removed-urls.md'), `${result.removedUrlReport}\n`, 'utf-8');
+      if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `${result.removedUrlReport}\n`);
+    }
+  }
   console.log(`作成: ${result.filePath}`);
   console.log(`スナップショット更新: ${result.snapshotsPath}`);
   if (args.dryRun) {

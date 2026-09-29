@@ -153,44 +153,117 @@ ${renderSources(sources)}`;
 const TRAILING_PUNCT = /[.,;:!?、。）」』】]+$/;
 
 // URL本体: スキーム付き、またはスキーム無しの www. 始まり。括弧は1段のバランスまで許す(例: /p(1))。
-const URL_BODY = String.raw`(?:https?:\/\/|www\.)(?:[^\s()<>"'\]]|\([^\s()]*\))+`;
+// ASCII以外(全角括弧「）」や日本語の続き文字)はURLに含めない。含めると「（https://x.go.id）または…」の
+// 「）または」まで巻き込んで除去され、文が壊れる(PR #124 の原因)。日本語URLは percent-encode 済みで書かれる前提。
+const URL_BODY = String.raw`(?:https?:\/\/|www\.)(?:[^\s()<>"'\]\u0080-￿]|\([^\s()\u0080-￿]*\))+`;
 // 1回の走査で3種類のトークンを処理する(許可済みリンクは1トークンとして丸ごと消費されるので、二重処理・取りこぼしが無い)
 //  1) [text](url "title")  2) <url>  3) 裸のURL
 const URL_TOKEN_RE = new RegExp(
   String.raw`\[([^\]]*)\]\(\s*<?(${URL_BODY})>?(?:\s+(?:"[^"]*"|'[^']*'))?\s*\)|<(${URL_BODY})>|(${URL_BODY})`,
   'gi'
 );
+const BARE_URL_RE = new RegExp(URL_BODY, 'gi');
+
+/** 許可判定用の正規化(www. 始まりは https:// を補う。末尾の句読点は除く。ホストの大文字小文字・末尾スラッシュ・#以降は normalizeUrl が吸収)。 */
+function urlKey(u) {
+  const cleaned = String(u).replace(TRAILING_PUNCT, '');
+  return normalizeUrl(/^www\./i.test(cleaned) ? `https://${cleaned}` : cleaned);
+}
+
+/**
+ * 資料本文(テキスト)に文字列として出現する http(s):// および www. のURLを抽出する(末尾の句読点は除く)。
+ * 生成・改訂の許可リストに「渡した references URL」に加えて使う(公的ページ本文が案内する公式URLを本文に書くのは正当なため)。
+ * @param {string[]} texts
+ * @returns {string[]} 重複除去済み(正規化キーで判定、最初の表記を採用)
+ */
+export function extractUrlsFromTexts(texts) {
+  const seen = new Map();
+  for (const t of texts) {
+    for (const m of String(t ?? '').matchAll(BARE_URL_RE)) {
+      const u = m[0].replace(TRAILING_PUNCT, '');
+      const key = urlKey(u);
+      if (!seen.has(key)) seen.set(key, u);
+    }
+  }
+  return [...seen.values()];
+}
+
+/** 除去で壊れうる1行を整形する。行ごと不要になったら null(空値だけのラベル行・記号だけの箇条書き)。 */
+function cleanupBrokenLine(line) {
+  let s = line;
+  s = s.replace(/\[([^\]]*)\]\(\s*\)/g, '$1'); // [text]() → text
+  s = s.replace(/[（(]\s*[)）]/g, ''); // 空の括弧
+  s = s.replace(/[（(]\s*[（(]/g, '('); // 二重の開き括弧(「（(出典」→「(出典」)
+  s = s.replace(/(\S) {2,}/g, '$1 ').trimEnd();
+  if (s.trim() === '') return '';
+  if (/^\s*(?:[-*+]|\d+\.)\s*$/.test(s)) return null; // 記号だけ残った箇条書き
+  // 「- **ラベル**: (出典: …)」のように値が消えて出典だけ残った行は、行ごと落とす
+  if (/^\s*(?:[-*+]|\d+\.)?\s*(?:\*\*[^*]*\*\*|[^:：]{0,30})\s*[:：]\s*(?:[(（]出典[^)）]*[)）])?[。.]?\s*$/.test(s)) return null;
+  return s;
+}
 
 /**
  * 本文中の外部URLのうち allowedUrls に無いものを除去する。全URLを一律に許可リストで判定する。
  *  - Markdownリンク [text](url "title") → text だけ残す
  *  - <url> / 裸のURL(スキーム無しの www.〜 を含む) → 削除(末尾の句読点は残す)
+ *  - 除去が起きた行だけ、空の括弧・二重括弧・値の消えたラベル行を整形する
  * 判断: 失敗にはせず除去する(1つの余計なURLで記事全体を捨てるより、除去して人間レビューに回す方が安全なため)。
- * @returns {{body:string, removed:string[]}}
+ * 整形で壊れ方を網羅するのは難しいため、除去した行は details に「元の行/整形後の行」で返し、PR本文に出して目視させる。
+ * @returns {{body:string, removed:string[], details:Array<{urls:string[], before:string, after:string|null}>}}
  */
 export function stripDisallowedUrls(body, allowedUrls) {
-  const allowed = new Set(allowedUrls.map(normalizeUrl));
+  const allowed = new Set(allowedUrls.map(urlKey));
   const removed = [];
-  const isAllowed = (u) => {
-    const cleaned = u.replace(TRAILING_PUNCT, '');
-    return allowed.has(normalizeUrl(/^www\./i.test(cleaned) ? `https://${cleaned}` : cleaned));
-  };
-  const out = String(body).replace(URL_TOKEN_RE, (m, mdText, mdUrl, autoUrl, bareUrl) => {
-    if (mdUrl !== undefined) {
-      if (isAllowed(mdUrl)) return m;
-      removed.push(mdUrl);
-      return mdText;
+  const details = [];
+  const outLines = [];
+  for (const line of String(body).split('\n')) {
+    const here = [];
+    let out = line.replace(URL_TOKEN_RE, (m, mdText, mdUrl, autoUrl, bareUrl) => {
+      if (mdUrl !== undefined) {
+        if (allowed.has(urlKey(mdUrl))) return m;
+        here.push(mdUrl);
+        return mdText;
+      }
+      if (autoUrl !== undefined) {
+        if (allowed.has(urlKey(autoUrl))) return m;
+        here.push(autoUrl);
+        return '';
+      }
+      if (allowed.has(urlKey(bareUrl))) return m;
+      here.push(bareUrl.replace(TRAILING_PUNCT, ''));
+      return bareUrl.match(TRAILING_PUNCT)?.[0] ?? '';
+    });
+    if (here.length) {
+      removed.push(...here);
+      const cleaned = cleanupBrokenLine(out);
+      details.push({ urls: here, before: line, after: cleaned });
+      if (cleaned === null) continue;
+      out = cleaned;
     }
-    if (autoUrl !== undefined) {
-      if (isAllowed(autoUrl)) return m;
-      removed.push(autoUrl);
-      return '';
-    }
-    if (isAllowed(bareUrl)) return m;
-    removed.push(bareUrl.replace(TRAILING_PUNCT, ''));
-    return bareUrl.match(TRAILING_PUNCT)?.[0] ?? '';
+    outLines.push(out);
+  }
+  return { body: outLines.join('\n'), removed, details };
+}
+
+/**
+ * 除去したURLの一覧と該当行のMarkdown(PR本文・ログ用)。details が空なら null。
+ * 各行は長すぎないよう切り詰める(PR本文の上限対策)。
+ */
+export function formatRemovedUrlReport(details) {
+  if (!details || details.length === 0) return null;
+  const clip = (t) => (t.length > 240 ? `${t.slice(0, 240)}…` : t);
+  const lines = [
+    '## 除去したURLと該当行(要目視)',
+    '',
+    '資料(渡したURL・資料本文)に無いURLを本文から除去しました。除去した行は文が不自然になっていないか、下の「整形後」を本文と見比べて確認してください。',
+    '',
+  ];
+  details.forEach((d, i) => {
+    lines.push(`${i + 1}. 除去: ${d.urls.map((u) => `\`${u}\``).join(', ')}`);
+    lines.push(`   - 元の行: \`${clip(d.before.trim()).replace(/`/g, "'")}\``);
+    lines.push(d.after === null ? '   - 整形後: (行ごと削除)' : `   - 整形後: \`${clip(d.after.trim()).replace(/`/g, "'")}\``);
   });
-  return { body: out, removed };
+  return lines.join('\n');
 }
 
 function demoteH1(body) {
@@ -205,7 +278,7 @@ function hasSection(body, keyword) {
  * ガイド生成の応答を検証・整形する。
  * @returns {{ok:boolean, problems:string[], value?:{title,description,body,usedSourceUrls}, removedUrls:string[], droppedSourceUrls:string[]}}
  */
-export function validateGuideOutput(output, { allowedUrls, minChars = MIN_BODY_CHARS }) {
+export function validateGuideOutput(output, { allowedUrls, extraAllowedUrls = [], minChars = MIN_BODY_CHARS }) {
   const problems = [];
   const o = output && typeof output === 'object' ? output : {};
   const title = typeof o.title === 'string' ? o.title.trim() : '';
@@ -228,7 +301,7 @@ export function validateGuideOutput(output, { allowedUrls, minChars = MIN_BODY_C
   if (used.length === 0) problems.push('usedSourceUrls が空(渡した資料のURLを1件も使っていない)');
 
   let body = typeof o.body === 'string' ? o.body.trim() : '';
-  const stripped = stripDisallowedUrls(demoteH1(body), allowedUrls);
+  const stripped = stripDisallowedUrls(demoteH1(body), [...allowedUrls, ...extraAllowedUrls]);
   body = stripped.body.replace(/[ \t]+\n/g, '\n').trim();
   if (body.length < minChars) problems.push(`本文が短すぎる(${body.length}字 < ${minChars}字)`);
   if (!hasSection(body, 'この記事の要点')) problems.push('「この記事の要点」見出しがない');
@@ -239,6 +312,7 @@ export function validateGuideOutput(output, { allowedUrls, minChars = MIN_BODY_C
     problems,
     value: problems.length === 0 ? { title, description, body, usedSourceUrls: used } : undefined,
     removedUrls: stripped.removed,
+    removedDetails: stripped.details,
     droppedSourceUrls: dropped,
   };
 }
@@ -247,20 +321,20 @@ export function validateGuideOutput(output, { allowedUrls, minChars = MIN_BODY_C
  * 改訂応答を検証・整形する。needsRevision=false なら body 検証はしない。
  * @returns {{ok:boolean, needsRevision:boolean, problems:string[], changeSummary:string, body?:string, removedUrls:string[]}}
  */
-export function validateRefreshOutput(output, { allowedUrls, minChars }) {
+export function validateRefreshOutput(output, { allowedUrls, extraAllowedUrls = [], minChars }) {
   const o = output && typeof output === 'object' ? output : {};
   const changeSummary = typeof o.changeSummary === 'string' ? o.changeSummary.trim() : '';
   if (o.needsRevision !== true) {
-    return { ok: true, needsRevision: false, problems: [], changeSummary, removedUrls: [] };
+    return { ok: true, needsRevision: false, problems: [], changeSummary, removedUrls: [], removedDetails: [] };
   }
   const problems = [];
-  const stripped = stripDisallowedUrls(demoteH1(typeof o.body === 'string' ? o.body.trim() : ''), allowedUrls);
+  const stripped = stripDisallowedUrls(demoteH1(typeof o.body === 'string' ? o.body.trim() : ''), [...allowedUrls, ...extraAllowedUrls]);
   const body = stripped.body.replace(/[ \t]+\n/g, '\n').trim();
   if (body.length < minChars) problems.push(`改訂後の本文が短すぎる(${body.length}字 < ${minChars}字)`);
   if (!hasSection(body, 'この記事の要点')) problems.push('改訂後の本文に「この記事の要点」見出しがない');
   if (!hasSection(body, 'よくある質問')) problems.push('改訂後の本文に「よくある質問」見出しがない');
   if (!changeSummary) problems.push('changeSummary が空');
-  return { ok: problems.length === 0, needsRevision: true, problems, changeSummary, body: problems.length === 0 ? body : undefined, removedUrls: stripped.removed };
+  return { ok: problems.length === 0, needsRevision: true, problems, changeSummary, body: problems.length === 0 ? body : undefined, removedUrls: stripped.removed, removedDetails: stripped.details };
 }
 
 // ---------------------------------------------------------------- Markdown 組み立て
