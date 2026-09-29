@@ -1,0 +1,26 @@
+{
+  "https://ecd.beacukai.go.id/cdonline.html?type=ekiosk": {
+    "sha256": "85416fb7a9e792c3ec975becb7204e8020630c395fbdc34e7bacd70f5252ca67",
+    "fetchedAt": "2026-09-29T16:18:22.913Z"
+  },
+  "https://kanwilaceh.beacukai.go.id/mandatory/faq-barang-penumpang.html": {
+    "sha256": "80599e46748bc90018bee66b75a5116425623801356f461389168b1e38cff589",
+    "fetchedAt": "2026-09-29T16:18:28.380Z"
+  },
+  "https://soetta.beacukai.go.id/mandatory/barang-penumpang.html": {
+    "sha256": "8bcbd3498b0b7dc4b0934e149be05a8bf48c334f9aaf784831576a1d3956bea9",
+    "fetchedAt": "2026-09-29T16:18:26.443Z"
+  },
+  "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html": {
+    "sha256": "1fff7cc83bded7f623cc5cf84e3c59960fa4c184a4db50e48040c1b3e256948e",
+    "fetchedAt": "2026-09-29T16:18:19.715Z"
+  },
+  "https://www.indonesia.travel/gb/en/general-information/all-indonesia-app": {
+    "sha256": "d55cc5a8c7f43ef5e7ad6f104659ef7f5e524632807f75866b4f59f70715ab91",
+    "fetchedAt": "2026-09-29T16:18:21.362Z"
+  },
+  "https://www.indonesia.travel/gb/en/general-information/visa-immigration": {
+    "sha256": "6b8049321df595970e196090702295bd3d3ba12b474643926da3309438af6440",
+    "fetchedAt": "2026-09-29T16:18:21.800Z"
+  }
+}
