@@ -4,6 +4,8 @@
     {
       "id": "fixture-bali-entry-checklist",
       "title": "バリ島入国前のチェックリスト(フィクスチャ)",
+      "role": "hub",
+      "primaryKeyword": "バリ 入国",
       "audience": [
         "tourist",
         "prospective-resident"
@@ -40,6 +42,8 @@
     {
       "id": "fixture-bali-hold",
       "title": "保留中トピック(選ばれてはいけない)",
+      "role": "hub",
+      "primaryKeyword": "バリ 保留",
       "audience": [
         "resident"
       ],
@@ -64,6 +68,8 @@
     {
       "id": "fixture-bali-hospital",
       "title": "バリ島の医療機関の使い方(フィクスチャ)",
+      "role": "hub",
+      "primaryKeyword": "バリ 病院",
       "audience": [
         "resident"
       ],
@@ -91,6 +97,8 @@
     {
       "id": "fixture-bali-broken",
       "title": "取得失敗の確認用(フィクスチャ)",
+      "role": "hub",
+      "primaryKeyword": "バリ 取得失敗",
       "audience": [
         "resident"
       ],
@@ -111,6 +119,38 @@
       "priority": 4,
       "status": "queued",
       "addedAt": "2026-09-10"
+    },
+    {
+      "id": "fixture-bali-levy-spoke",
+      "title": "バリ島の観光税の払い方(フィクスチャ)",
+      "role": "spoke",
+      "hub": "fixture-bali-entry-checklist",
+      "primaryKeyword": "バリ 観光税 15万ルピア",
+      "audience": [
+        "tourist"
+      ],
+      "category": "travel",
+      "tags": [
+        "観光",
+        "バリ島"
+      ],
+      "ymyl": false,
+      "keywords": [
+        "バリ 観光税 15万ルピア"
+      ],
+      "outline": [
+        "支払い方法",
+        "支払い証明"
+      ],
+      "sourceThemes": [
+        "entry"
+      ],
+      "extraReferences": [],
+      "affiliate": [],
+      "priority": 5,
+      "status": "on-hold",
+      "holdReason": "テスト用(明示指定でのみ生成)",
+      "addedAt": "2026-09-01"
     }
   ]
 }

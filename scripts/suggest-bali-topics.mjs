@@ -21,6 +21,8 @@ import {
   OFFICIAL_SOURCES_PATH,
   RESERVED_ID_PREFIXES,
   TOPIC_ID_PATTERN,
+  TOPIC_ROLES,
+  normalizeKeyword,
   fetchOpenGuidePrState,
   listArticleIds,
   loadGuideTopics,
@@ -108,6 +110,9 @@ export const TOPICS_RESPONSE_SCHEMA = {
     properties: {
       id: { type: 'STRING' },
       title: { type: 'STRING' },
+      primaryKeyword: { type: 'STRING' },
+      role: { type: 'STRING', enum: TOPIC_ROLES },
+      hub: { type: 'STRING' },
       audience: { type: 'ARRAY', items: { type: 'STRING', enum: AUDIENCES } },
       category: { type: 'STRING', enum: ARTICLE_CATEGORIES },
       tags: { type: 'ARRAY', items: { type: 'STRING' } },
@@ -118,8 +123,8 @@ export const TOPICS_RESPONSE_SCHEMA = {
       priority: { type: 'INTEGER' },
       evidenceQueries: { type: 'ARRAY', items: { type: 'STRING' } },
     },
-    required: ['id', 'title', 'audience', 'category', 'tags', 'ymyl', 'keywords', 'outline', 'sourceThemes', 'priority', 'evidenceQueries'],
-    propertyOrdering: ['id', 'title', 'audience', 'category', 'tags', 'ymyl', 'keywords', 'outline', 'sourceThemes', 'priority', 'evidenceQueries'],
+    required: ['id', 'title', 'primaryKeyword', 'role', 'audience', 'category', 'tags', 'ymyl', 'keywords', 'outline', 'sourceThemes', 'priority', 'evidenceQueries'],
+    propertyOrdering: ['id', 'title', 'primaryKeyword', 'role', 'hub', 'audience', 'category', 'tags', 'ymyl', 'keywords', 'outline', 'sourceThemes', 'priority', 'evidenceQueries'],
   },
 };
 
@@ -139,9 +144,14 @@ export function buildTopicsPrompt({ suggestGroups, gscQueries, existingTopics, t
 - priority は 1(最優先)〜5。需要が強く公的出典が揃うものを小さい数字にする。
 - evidenceQueries には、根拠にした「検索サジェスト」「GSC実クエリ」の語句を、下に示した表記のまま1〜5個入れる(創作しない)。
 - keywords は記事が狙う検索語(2〜5個)、outline は見出し案(3〜7個)。
+- primaryKeyword は、そのトピックが主に狙う検索語1つ(keywords の中から最も検索意図が明確なもの)。**下の既存トピックの主キーワード・keywords と同一・ほぼ同義のものは使わない**(同じ検索語を複数の記事で狙うと検索順位を奪い合う)。keywords にも、既存トピックの主キーワードを含めない。
+- role は "hub"(あるテーマの総合ガイド)か "spoke"(既存 hub の下位の個別ガイド)。既存の hub の下位テーマなら role を "spoke" にして hub に**下の「既存の hub」の id** を入れる。どの hub にも当てはまらなければ role は "hub" にして hub は省略する(存在しない id を作らない)。
 
-# 既存トピック(重複させない)
-${existingTopics.map((t) => `- ${t.id}: ${t.title} [${(t.keywords || []).join(', ')}]`).join('\n') || '(なし)'}
+# 既存トピック(重複させない。[主キーワード | keywords])
+${existingTopics.map((t) => `- ${t.id}: ${t.title} [${[t.primaryKeyword, ...(t.keywords || [])].filter(Boolean).join(' | ')}]`).join('\n') || '(なし)'}
+
+# 既存の hub(spoke の hub にはこの id だけを使う)
+${existingTopics.filter((t) => t.role === 'hub').map((t) => `- ${t.id}: ${t.title}`).join('\n') || '(なし)'}
 
 # 利用可能な出典テーマ
 ${themeLines}
@@ -180,18 +190,27 @@ function strList(v, max) {
  *  - sourceThemes は official-sources.json に存在するキーのみ。空になったら status:"on-hold"
  *  - extraReferences / affiliate は常に空(モデルにURLを創作させない。オーナーが後から足す)
  *  - 根拠(evidence)は、実際に収集した語句と一致するものだけを採用する
- * @returns {{added: object[], skipped: {id:string, reason:string}[], evidence: Record<string, {suggest:string[], gsc:object[]}>, holdReasons: Record<string,string>}}
+ *  - キーワード競合の除外(いずれも normalizeKeyword 後の比較):
+ *      primaryKeyword が既存台帳(または今回の他案)の primaryKeyword と一致 / keywords に既存の primaryKeyword を含む /
+ *      既存の1トピックの keywords と2語以上一致 → skipped
+ *  - role/hub: hub は既存の hub の id だけ有効。該当なし・不正なら role "hub"(hub なし)に落とし notes に理由を残す
+ * @returns {{added: object[], skipped: {id:string, reason:string}[], evidence: Record<string, {suggest:string[], gsc:object[]}>, holdReasons: Record<string,string>, notes: Record<string,string>}}
  */
 export function normalizeProposals({ raw, ledgerTopics, themeKeys, existingArticleIds, suggestGroups, gscQueries, today, max = MAX_PROPOSALS }) {
   const added = [];
   const skipped = [];
   const evidence = {};
   const holdReasons = {};
+  const notes = {};
   const usedIds = new Set([...ledgerTopics.map((t) => t.id), ...existingArticleIds]);
   const existingKw = new Set(ledgerTopics.flatMap((t) => (t.keywords || []).map(normalizePhrase)));
   const existingTitles = new Set(ledgerTopics.map((t) => normalizePhrase(t.title)));
   const suggestSet = new Map(suggestGroups.flatMap((g) => g.phrases.map((p) => [normalizePhrase(p), p])));
   const gscMap = new Map(gscQueries.map((q) => [normalizePhrase(q.query), q]));
+  // キーワード競合判定用: 正規化した primaryKeyword → 所有トピックid(今回の採用分も加える)
+  const primaryOwner = new Map(ledgerTopics.filter((t) => t.primaryKeyword).map((t) => [normalizeKeyword(t.primaryKeyword), t.id]));
+  const addedKeywordKeys = new Set(); // 今回採用した案の keywords(正規化)。後続案の primaryKeyword との衝突検出用
+  const hubIds = new Set(ledgerTopics.filter((t) => t.role === 'hub').map((t) => t.id));
 
   for (const r of Array.isArray(raw) ? raw : []) {
     if (added.length >= max) break;
@@ -209,7 +228,34 @@ export function normalizeProposals({ raw, ledgerTopics, themeKeys, existingArtic
       skipped.push({ id, reason: 'title が空' });
       continue;
     }
-    const keywords = strList(r.keywords, 8);
+    let keywords = strList(r.keywords, 8);
+    const primaryKeyword = (typeof r.primaryKeyword === 'string' ? r.primaryKeyword.trim() : '') || keywords[0] || '';
+    if (!primaryKeyword) {
+      skipped.push({ id, reason: 'primaryKeyword が空' });
+      continue;
+    }
+    // primaryKeyword は keywords に含める(「keywords の中から選ぶ」規約。既存 keywords との重複判定にも同じ経路を通す)
+    if (!keywords.some((k) => normalizeKeyword(k) === normalizeKeyword(primaryKeyword))) keywords = [primaryKeyword, ...keywords].slice(0, 8);
+    const pkKey = normalizeKeyword(primaryKeyword);
+    if (primaryOwner.has(pkKey)) {
+      skipped.push({ id, reason: `primaryKeyword "${primaryKeyword}" が ${primaryOwner.get(pkKey)} の primaryKeyword と重複` });
+      continue;
+    }
+    if (addedKeywordKeys.has(pkKey)) {
+      skipped.push({ id, reason: `primaryKeyword "${primaryKeyword}" が今回採用した別案の keywords と重複` });
+      continue;
+    }
+    const clashingPrimary = keywords.map((k) => [k, primaryOwner.get(normalizeKeyword(k))]).find(([, owner]) => owner !== undefined);
+    if (clashingPrimary) {
+      skipped.push({ id, reason: `keywords の "${clashingPrimary[0]}" が ${clashingPrimary[1]} の primaryKeyword と同一` });
+      continue;
+    }
+    const kwKeys = new Set(keywords.map(normalizeKeyword));
+    const overlapTopic = ledgerTopics.find((t) => (t.keywords || []).filter((k, i, arr) => arr.findIndex((x) => normalizeKeyword(x) === normalizeKeyword(k)) === i).filter((k) => kwKeys.has(normalizeKeyword(k))).length >= 2);
+    if (overlapTopic) {
+      skipped.push({ id, reason: `既存トピック ${overlapTopic.id} と keywords が2語以上一致` });
+      continue;
+    }
     if (existingTitles.has(normalizePhrase(title)) || keywords.some((k) => existingKw.has(normalizePhrase(k)))) {
       skipped.push({ id, reason: '既存トピックとタイトルまたはキーワードが重複' });
       continue;
@@ -229,14 +275,31 @@ export function normalizeProposals({ raw, ledgerTopics, themeKeys, existingArtic
       if (gscMap.has(key) && !ev.gsc.includes(gscMap.get(key))) ev.gsc.push(gscMap.get(key));
     }
 
+    let role = 'hub';
+    let hub;
+    if (r.role === 'spoke') {
+      const wanted = typeof r.hub === 'string' ? r.hub.trim() : '';
+      if (hubIds.has(wanted)) {
+        role = 'spoke';
+        hub = wanted;
+      } else {
+        notes[id] = `spoke として提案されたが hub "${wanted || '(未指定)'}" が既存の hub に無いため role を hub にした(所属させたい hub があれば手で直す)`;
+      }
+    }
+
     const status = sourceThemes.length > 0 ? 'queued' : 'on-hold';
     if (status === 'on-hold') holdReasons[id] = '該当する出典テーマが official-sources.json に無い(公的・一次情報の出典を追加してから queued にする)';
 
     usedIds.add(id);
+    primaryOwner.set(pkKey, id);
+    for (const k of kwKeys) addedKeywordKeys.add(k);
     evidence[id] = ev;
     added.push({
       id,
       title,
+      role,
+      ...(hub ? { hub } : {}),
+      primaryKeyword,
       audience: audience.length ? audience : ['tourist'],
       category,
       tags,
@@ -251,7 +314,7 @@ export function normalizeProposals({ raw, ledgerTopics, themeKeys, existingArtic
       addedAt: today,
     });
   }
-  return { added, skipped, evidence, holdReasons };
+  return { added, skipped, evidence, holdReasons, notes };
 }
 
 /** 台帳に追記した新しい台帳オブジェクトを返す(元は変更しない)。 */
@@ -264,7 +327,7 @@ export function serializeLedger(ledger) {
 }
 
 /** PR本文(Markdown)。 */
-export function buildPrBody({ added, evidence, holdReasons, skipped, today, gscUsed }) {
+export function buildPrBody({ added, evidence, holdReasons, notes = {}, skipped, today, gscUsed }) {
   const lines = [
     `バリ向けガイド記事のトピック提案です(${today})。マージすると \`src/data/guide-topics.json\` に追加され、\`status: "queued"\` のトピックは毎日の生成ワークフローが priority 順に1本ずつ下書き記事にします。`,
     '',
@@ -278,12 +341,14 @@ export function buildPrBody({ added, evidence, holdReasons, skipped, today, gscU
   for (const t of added) {
     const ev = evidence[t.id] || { suggest: [], gsc: [] };
     lines.push(`### ${t.title} (\`${t.id}\`) — ${t.status}`);
+    lines.push(`- primaryKeyword: ${t.primaryKeyword} / role: ${t.role}${t.hub ? ` (hub: \`${t.hub}\`)` : ''}`);
     lines.push(`- keywords: ${t.keywords.join(', ') || '(なし)'}`);
     lines.push(`- category: ${t.category} / ymyl: ${t.ymyl} / priority: ${t.priority} / audience: ${t.audience.join(', ')}`);
     lines.push(`- sourceThemes: ${t.sourceThemes.join(', ') || '(なし)'}`);
     lines.push(`- 根拠(サジェスト): ${ev.suggest.join(' / ') || '(なし)'}`);
     lines.push(`- 根拠(GSC): ${ev.gsc.map((g) => `${g.query}(表示${g.impressions}回/クリック${g.clicks}回)`).join(' / ') || '(なし)'}`);
     if (holdReasons[t.id]) lines.push(`- 保留の理由: ${holdReasons[t.id]}`);
+    if (notes[t.id]) lines.push(`- 注意: ${notes[t.id]}`);
     lines.push('');
   }
   if (skipped.length) {
@@ -358,7 +423,7 @@ export async function runSuggest({ args, deps = {} }) {
   const prompt = buildTopicsPrompt({ suggestGroups, gscQueries, existingTopics: ledger.topics, themes: sourcesData.themes });
   const data = await callGemini(prompt);
   const raw = parseGeminiArticlesResponse(extractGeminiText(data));
-  const { added, skipped, evidence, holdReasons } = normalizeProposals({
+  const { added, skipped, evidence, holdReasons, notes } = normalizeProposals({
     raw,
     ledgerTopics: ledger.topics,
     themeKeys,
@@ -380,7 +445,7 @@ export async function runSuggest({ args, deps = {} }) {
   const outLedgerPath = args.dryRun ? path.join(args.outDir, 'guide-topics.json') : ledgerPath;
   await mkdir(path.dirname(outLedgerPath), { recursive: true });
   await writeFile(outLedgerPath, serializeLedger(newLedger), 'utf-8');
-  const prBody = buildPrBody({ added, evidence, holdReasons, skipped, today, gscUsed });
+  const prBody = buildPrBody({ added, evidence, holdReasons, notes, skipped, today, gscUsed });
   return { status: 'proposed', added, prBody, ledgerPath: outLedgerPath, today };
 }
 

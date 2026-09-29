@@ -169,7 +169,7 @@ describe('先頭トピックが失敗したら次の候補へ進む(自動選択
   test('全候補が失敗したらエラー終了(skipped を持つ)。試行は最大3件', async () => {
     const { args, deps, outDir } = await setup();
     const ledger = JSON.parse(await readFile(args.topicsPath, 'utf-8'));
-    ledger.topics.push({ ...ledger.topics[0], id: 'fixture-extra-4', priority: 5, keywords: ['x'] });
+    ledger.topics.push({ ...ledger.topics[0], id: 'fixture-extra-4', primaryKeyword: 'バリ extra4', priority: 5, keywords: ['x'] });
     const p = path.join(outDir, 'ledger4.json');
     await writeFile(p, JSON.stringify(ledger));
     deps.fetchImpl = async () => new Response('x', { status: 500 });
@@ -222,5 +222,58 @@ describe('runGenerate(資料本文に出現するURLの許可)', () => {
     assert.ok(!r.markdown.includes('evil.example'));
     assert.match(r.removedUrlReport, /evil\.example\/customs/);
     assert.ok(!r.removedUrlReport.includes('official.example/apply`,'));
+  });
+});
+
+describe('hub / spoke で生成プロンプトが変わる(キーワード競合対策)', () => {
+  async function promptFor(topicId) {
+    const { args, deps, outDir } = await setup({ topicId });
+    // spoke が on-hold のままだと hub のプロンプトから外れる(統合済みの保留トピックを案内しないため)ので、queued にした台帳で試す
+    const ledger = JSON.parse(await readFile(args.topicsPath, 'utf-8'));
+    ledger.topics = ledger.topics.map((t) => (t.id === 'fixture-bali-levy-spoke' ? { ...t, status: 'queued' } : t));
+    args.topicsPath = path.join(outDir, 'ledger-queued-spoke.json');
+    await writeFile(args.topicsPath, JSON.stringify(ledger));
+    let prompt = '';
+    const inner = deps.callGemini;
+    deps.callGemini = async (p) => ((prompt = p), inner(p));
+    // 明示指定なので on-hold の spoke も生成できる。出典は台帳の entry テーマ(フィクスチャ)のまま
+    await runGenerate({ args, deps });
+    return prompt;
+  }
+
+  test('hub: 総合ガイド指示・spoke の title と primaryKeyword を渡し、要約に留める。URLリンク禁止', async () => {
+    const p = await promptFor('fixture-bali-entry-checklist');
+    assert.ok(p.includes('記事の役割: 総合ガイド(hub)'));
+    assert.ok(!p.includes('記事の役割: 個別ガイド(spoke)'));
+    assert.ok(p.includes('要点を2〜4文で要約し、詳細は個別ガイドに譲る'));
+    assert.ok(p.includes('バリ島の観光税の払い方(フィクスチャ)(主キーワード: バリ 観光税 15万ルピア)'));
+    assert.ok(p.includes('主キーワード「バリ 入国」'));
+    assert.ok(p.includes('他の記事の主キーワード(「バリ 観光税 15万ルピア」)は title に入れない'));
+    assert.ok(p.includes('URLリンクは書かない'));
+  });
+
+  test('spoke: 検索意図に絞る指示・hub の title を渡し、hub の話題は1文程度', async () => {
+    const p = await promptFor('fixture-bali-levy-spoke');
+    assert.ok(p.includes('記事の役割: 個別ガイド(spoke)'));
+    assert.ok(!p.includes('記事の役割: 総合ガイド(hub)'));
+    assert.ok(p.includes('検索意図だけに深く答える'));
+    assert.ok(p.includes('1文程度で触れるにとどめ'));
+    assert.ok(p.includes('総合ガイド: バリ島入国前のチェックリスト(フィクスチャ)(主キーワード: バリ 入国)'));
+    assert.ok(p.includes('他の記事の主キーワード(「バリ 入国」)は title に入れない'));
+    assert.ok(p.includes('URLリンクは書かない'));
+  });
+
+  test('on-hold の spoke は hub のプロンプトに出ない(統合済みトピックを案内しない)', async () => {
+    const { args, deps } = await setup({ topicId: 'fixture-bali-entry-checklist' });
+    let prompt = '';
+    const inner = deps.callGemini;
+    deps.callGemini = async (p) => ((prompt = p), inner(p));
+    await runGenerate({ args, deps });
+    assert.ok(prompt.includes('記事の役割: 総合ガイド(hub)'));
+    assert.ok(!prompt.includes('バリ 観光税 15万ルピア'));
+  });
+
+  test('hub と spoke でプロンプトは異なる', async () => {
+    assert.notEqual(await promptFor('fixture-bali-entry-checklist'), await promptFor('fixture-bali-levy-spoke'));
   });
 });

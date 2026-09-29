@@ -3,7 +3,9 @@
   "topics": [
     {
       "id": "bali-entry-checklist",
-      "title": "バリ島入国チェックリスト【2026年版】e-VOA・到着カード・観光税",
+      "title": "バリ島入国に必要なもの【2026年版】出発前から空港到着までのチェックリスト",
+      "role": "hub",
+      "primaryKeyword": "バリ 入国 必要なもの",
       "audience": [
         "tourist"
       ],
@@ -16,7 +18,6 @@
       "ymyl": true,
       "keywords": [
         "バリ 入国 必要なもの",
-        "バリ 入国カード",
         "バリ 入国 手続き"
       ],
       "outline": [
@@ -45,6 +46,9 @@
     {
       "id": "bali-tourist-levy-guide",
       "title": "バリ島の外国人観光税(15万ルピア)の払い方と支払い証明【最新】",
+      "role": "spoke",
+      "hub": "bali-entry-checklist",
+      "primaryKeyword": "バリ 観光税 払い方",
       "audience": [
         "tourist"
       ],
@@ -84,6 +88,9 @@
     {
       "id": "bali-evoa-application-guide",
       "title": "バリ島のe-VOA申請ガイド:料金・滞在日数・有効期間・手順",
+      "role": "spoke",
+      "hub": "bali-entry-checklist",
+      "primaryKeyword": "e-VOA 申請 バリ",
       "audience": [
         "tourist"
       ],
@@ -123,6 +130,9 @@
     {
       "id": "bali-all-indonesia-arrival-card",
       "title": "All Indonesia到着カードの書き方:入国審査・税関申告・検疫をまとめて登録",
+      "role": "spoke",
+      "hub": "bali-entry-checklist",
+      "primaryKeyword": "All Indonesia 到着カード",
       "audience": [
         "tourist"
       ],
@@ -153,12 +163,16 @@
       "extraReferences": [],
       "affiliate": [],
       "priority": 1,
-      "status": "queued",
+      "status": "on-hold",
+      "holdReason": "入国チェックリスト(hub)に統合",
       "addedAt": "2026-09-29"
     },
     {
       "id": "bali-stay-extension-overstay",
       "title": "バリ島の滞在延長とオーバーステイ:VoA・訪問ビザの延長ルールと罰則",
+      "role": "spoke",
+      "hub": "bali-entry-checklist",
+      "primaryKeyword": "バリ 滞在延長",
       "audience": [
         "tourist"
       ],
@@ -196,6 +210,8 @@
     {
       "id": "bali-international-license-invalid",
       "title": "日本の国際免許はインドネシアで無効:バリでバイク・車を運転する前に知ること",
+      "role": "hub",
+      "primaryKeyword": "バリ 国際免許 無効",
       "audience": [
         "tourist"
       ],
@@ -234,6 +250,8 @@
     {
       "id": "bali-long-stay-visa-comparison",
       "title": "バリ島に長期滞在するビザ比較:訪問ビザ・E33(セカンドホーム)・E33G・投資家ビザ",
+      "role": "hub",
+      "primaryKeyword": "バリ 長期滞在 ビザ",
       "audience": [
         "prospective-resident"
       ],
@@ -246,8 +264,7 @@
       "ymyl": true,
       "keywords": [
         "バリ 長期滞在 ビザ",
-        "バリ 移住 ビザ 種類",
-        "インドネシア セカンドホームビザ"
+        "バリ 移住 ビザ 種類"
       ],
       "outline": [
         "滞在目的別のビザ早見表",
@@ -274,6 +291,9 @@
     {
       "id": "bali-e33g-remote-worker-visa",
       "title": "E33Gリモートワーカービザ(デジタルノマド)の要件・費用・手順【バリ島】",
+      "role": "spoke",
+      "hub": "bali-long-stay-visa-comparison",
+      "primaryKeyword": "E33G ビザ",
       "audience": [
         "prospective-resident"
       ],
@@ -310,6 +330,9 @@
     {
       "id": "bali-second-home-visa-e33",
       "title": "E33セカンドホームビザとは:5年滞在の条件・費用・保証金要件",
+      "role": "spoke",
+      "hub": "bali-long-stay-visa-comparison",
+      "primaryKeyword": "セカンドホームビザ インドネシア",
       "audience": [
         "prospective-resident"
       ],
@@ -345,6 +368,9 @@
     {
       "id": "bali-retirement-visa-e33e",
       "title": "バリ島でリタイアメント:55歳以上のE33E・E33Fビザの条件と費用",
+      "role": "spoke",
+      "hub": "bali-long-stay-visa-comparison",
+      "primaryKeyword": "バリ リタイアメントビザ",
       "audience": [
         "prospective-resident"
       ],
@@ -381,6 +407,9 @@
     {
       "id": "bali-golden-visa-guide",
       "title": "インドネシアのゴールデンビザ:投資額・滞在期間とGlobal Citizenとの違い",
+      "role": "spoke",
+      "hub": "bali-long-stay-visa-comparison",
+      "primaryKeyword": "インドネシア ゴールデンビザ",
       "audience": [
         "prospective-resident"
       ],
@@ -415,6 +444,9 @@
     {
       "id": "bali-itas-extension-guide",
       "title": "バリ島在住者向け:ITAS(KITAS)延長と訪問ビザからのITAS変更の流れ",
+      "role": "spoke",
+      "hub": "bali-long-stay-visa-comparison",
+      "primaryKeyword": "ITAS 延長 手続き",
       "audience": [
         "resident"
       ],
@@ -451,6 +483,9 @@
     {
       "id": "bali-driver-license-residents",
       "title": "バリ島在住者の運転免許:インドネシアのSIM取得・更新とオンライン手続き",
+      "role": "spoke",
+      "hub": "bali-international-license-invalid",
+      "primaryKeyword": "バリ 運転免許 取得",
       "audience": [
         "resident"
       ],
@@ -486,6 +521,9 @@
     {
       "id": "bali-airport-to-city-transport",
       "title": "バリ空港(ングラ・ライ)から市内への移動:タクシー・バス・配車の注意点",
+      "role": "spoke",
+      "hub": "bali-safety-scams-crime",
+      "primaryKeyword": "バリ 空港 から 市内",
       "audience": [
         "tourist"
       ],
@@ -524,7 +562,10 @@
     },
     {
       "id": "bali-money-changer-scam-guide",
-      "title": "バリ島の両替所で騙されない方法:正規業者の見分け方とQR決済(JPQR)",
+      "title": "バリ島の両替方法と正規両替所の見分け方:レート・手数料・注意点",
+      "role": "spoke",
+      "hub": "bali-cashless-qris-jpqr",
+      "primaryKeyword": "バリ 両替所 正規",
       "audience": [
         "tourist"
       ],
@@ -536,16 +577,15 @@
       ],
       "ymyl": true,
       "keywords": [
-        "バリ 両替 詐欺",
         "バリ 両替所 正規",
-        "バリ 両替 おすすめ"
+        "バリ 両替 おすすめ",
+        "バリ 両替 方法"
       ],
       "outline": [
         "両替の基本(空港・銀行・両替所)",
         "許可業者(KUPVA)のマーク",
         "よくある手口",
-        "ATM・クレジットカードの使い方",
-        "QRIS/JPQR Globalでの支払い",
+        "ATMでの引き出しの注意点",
         "被害に遭ったときの相談先"
       ],
       "sourceThemes": [
@@ -560,7 +600,9 @@
     },
     {
       "id": "bali-cashless-qris-jpqr",
-      "title": "バリ島でのキャッシュレス:QRISと日本のJPQR Global、クレジットカード事情",
+      "title": "バリ島のお金事情:QRIS(JPQR)・クレジットカード・両替の使い分け",
+      "role": "hub",
+      "primaryKeyword": "バリ 支払い 方法",
       "audience": [
         "tourist"
       ],
@@ -572,6 +614,7 @@
       ],
       "ymyl": false,
       "keywords": [
+        "バリ 支払い 方法",
         "バリ QRIS 日本",
         "JPQR Global バリ",
         "バリ クレジットカード JCB"
@@ -595,6 +638,9 @@
     {
       "id": "bali-sim-imei-preparation",
       "title": "バリ島のSIM・スマホ準備:IMEI登録の90日ルールと空港での手順",
+      "role": "spoke",
+      "hub": "bali-entry-checklist",
+      "primaryKeyword": "バリ IMEI 登録",
       "audience": [
         "tourist"
       ],
@@ -607,8 +653,7 @@
       "ymyl": true,
       "keywords": [
         "バリ IMEI 登録",
-        "バリ SIM 空港 手続き",
-        "インドネシア SIM 外国人"
+        "バリ SIM 空港 手続き"
       ],
       "outline": [
         "IMEI登録とは",
@@ -632,6 +677,8 @@
     {
       "id": "bali-weather-seasons-2026",
       "title": "バリ島の雨季・乾季と2026-27年の見通し:エルニーニョの影響",
+      "role": "hub",
+      "primaryKeyword": "バリ 雨季 乾季",
       "audience": [
         "tourist"
       ],
@@ -671,6 +718,8 @@
     {
       "id": "bali-temple-dress-etiquette",
       "title": "バリ島の寺院参拝と服装・マナー:入れる場所・入れない場所",
+      "role": "hub",
+      "primaryKeyword": "バリ 寺院 服装",
       "audience": [
         "tourist"
       ],
@@ -708,6 +757,9 @@
     {
       "id": "bali-foreign-tourist-rules-2025",
       "title": "バリ島の外国人観光客ルール(州知事通達2025年第7号):義務・禁止事項・罰則",
+      "role": "spoke",
+      "hub": "bali-temple-dress-etiquette",
+      "primaryKeyword": "バリ 観光客 ルール",
       "audience": [
         "tourist"
       ],
@@ -745,6 +797,9 @@
     {
       "id": "bali-nyepi-guide",
       "title": "バリ島のニュピ(静寂の日)の過ごし方:空港閉鎖・外出禁止・前後の行事",
+      "role": "spoke",
+      "hub": "bali-temple-dress-etiquette",
+      "primaryKeyword": "バリ ニュピ 過ごし方",
       "audience": [
         "tourist"
       ],
@@ -769,8 +824,7 @@
         "VATリファンド窓口の休業"
       ],
       "sourceThemes": [
-        "nyepi",
-        "tax-refund"
+        "nyepi"
       ],
       "extraReferences": [],
       "affiliate": [
@@ -783,6 +837,8 @@
     {
       "id": "bali-safety-scams-crime",
       "title": "バリ島の治安と詐欺・犯罪対策:外務省が示す注意点",
+      "role": "hub",
+      "primaryKeyword": "バリ 治安",
       "audience": [
         "tourist"
       ],
@@ -819,6 +875,8 @@
     {
       "id": "bali-medical-insurance-guide",
       "title": "バリ島で病気・ケガをしたら:病院の探し方と海外旅行保険の必要性",
+      "role": "hub",
+      "primaryKeyword": "バリ 病院 日本語",
       "audience": [
         "tourist"
       ],
@@ -857,6 +915,9 @@
     {
       "id": "bali-dengue-rabies-prevention",
       "title": "バリ島のデング熱・狂犬病対策:予防接種・虫よけ・咬まれたときの対応",
+      "role": "spoke",
+      "hub": "bali-medical-insurance-guide",
+      "primaryKeyword": "バリ デング熱",
       "audience": [
         "tourist"
       ],
@@ -892,6 +953,9 @@
     {
       "id": "bali-drug-laws-warning",
       "title": "バリ島の薬物規制:外国人も死刑対象になる法律と巻き込まれないための注意",
+      "role": "spoke",
+      "hub": "bali-safety-scams-crime",
+      "primaryKeyword": "バリ 薬物 死刑",
       "audience": [
         "tourist"
       ],
@@ -929,6 +993,9 @@
     {
       "id": "bali-customs-allowance-prohibited",
       "title": "インドネシア入国時の免税範囲と持ち込み禁止品:酒・たばこ・現金・薬",
+      "role": "spoke",
+      "hub": "bali-entry-checklist",
+      "primaryKeyword": "インドネシア 免税範囲",
       "audience": [
         "tourist"
       ],
@@ -966,6 +1033,8 @@
     {
       "id": "bali-return-japan-customs",
       "title": "バリ島から帰国するときの免税範囲と税関申告:Visit Japan Web・申告書",
+      "role": "hub",
+      "primaryKeyword": "帰国 免税範囲",
       "audience": [
         "tourist"
       ],
@@ -1001,6 +1070,9 @@
     {
       "id": "bali-souvenir-meat-quarantine",
       "title": "バリ島のお土産と動植物検疫:肉製品は日本に持ち込めない",
+      "role": "spoke",
+      "hub": "bali-return-japan-customs",
+      "primaryKeyword": "バリ お土産 持ち込み禁止",
       "audience": [
         "tourist"
       ],
@@ -1036,6 +1108,9 @@
     {
       "id": "bali-vat-refund-airport",
       "title": "バリ島のVATリファンド(免税払い戻し)の条件と手順:ングラ・ライ空港",
+      "role": "spoke",
+      "hub": "bali-return-japan-customs",
+      "primaryKeyword": "バリ VAT リファンド",
       "audience": [
         "tourist"
       ],
@@ -1060,8 +1135,7 @@
         "ニュピ休業日"
       ],
       "sourceThemes": [
-        "tax-refund",
-        "nyepi"
+        "tax-refund"
       ],
       "extraReferences": [],
       "affiliate": [],
@@ -1072,6 +1146,9 @@
     {
       "id": "bali-earthquake-tsunami-volcano",
       "title": "バリ島の地震・津波・火山への備え:BMKG・MAGMAの情報の見方",
+      "role": "spoke",
+      "hub": "bali-safety-scams-crime",
+      "primaryKeyword": "バリ 地震",
       "audience": [
         "tourist"
       ],
@@ -1107,6 +1184,9 @@
     {
       "id": "bali-emergency-contacts-guide",
       "title": "バリ島の緊急連絡先まとめ:警察・救急・日本語対応病院・総領事館",
+      "role": "spoke",
+      "hub": "bali-medical-insurance-guide",
+      "primaryKeyword": "バリ 緊急連絡先",
       "audience": [
         "tourist",
         "resident"
@@ -1138,7 +1218,8 @@
       "extraReferences": [],
       "affiliate": [],
       "priority": 3,
-      "status": "queued",
+      "status": "on-hold",
+      "holdReason": "医療hub(バリ島で病気・ケガをしたら)に統合",
       "addedAt": "2026-09-29"
     }
   ]

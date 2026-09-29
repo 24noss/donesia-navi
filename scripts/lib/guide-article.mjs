@@ -80,10 +80,59 @@ function renderSources(sources) {
 }
 
 /**
- * ガイド記事生成のプロンプトを組み立てる。
- * @param {{topic: object, sources: Array<{url,title,publisher,lang,text}>, today: string}} p
+ * hub/spoke の役割分けの指示(キーワード競合対策)。role が無いトピック(旧形式)には空文字を返す。
+ * hub: 総合ガイド(サブトピックは要約し詳細は個別ガイドに譲る) / spoke: 主キーワードの検索意図だけに深く答える。
+ * 台帳(ledgerTopics)から所属 spoke・hub・兄弟 spoke の title と primaryKeyword を引く。本文にURLリンクは書かせない。
+ * @param {object} topic
+ * @param {object[]} ledgerTopics 台帳の topics 全体
  */
-export function buildGuidePrompt({ topic, sources, today }) {
+export function buildRoleSection(topic, ledgerTopics = []) {
+  if (topic.role !== 'hub' && topic.role !== 'spoke') return '';
+  const pk = topic.primaryKeyword;
+  const line = (t) => `  - ${t.title}(主キーワード: ${t.primaryKeyword})`;
+  const titleRule = (others) =>
+    `- title と description には主キーワード「${pk}」を自然に含める。${others.length ? `他の記事の主キーワード(${others.map((t) => `「${t.primaryKeyword}」`).join('、')})は title に入れない(検索意図が競合するため)。` : ''}`;
+  const noLinkRule = '- 本文に他の記事へのURLリンクは書かない(関連ガイドへのリンクはサイト側の「関連ガイド」欄で案内する)。';
+
+  if (topic.role === 'hub') {
+    const spokes = ledgerTopics.filter((t) => t.role === 'spoke' && t.hub === topic.id && t.status !== 'on-hold');
+    return `# 記事の役割: 総合ガイド(hub)
+- 主キーワード: 「${pk}」。この記事はこのクラスタの総合ガイドで、読者が全体像をつかみ、必要な詳細ページへ進めるようにする。
+${
+  spokes.length
+    ? `- 次の各サブトピックは、要点を2〜4文で要約し、詳細は個別ガイドに譲ること。細かい手順・金額表・長いチェックリストをここに書かない(個別ガイドと内容が重複して検索順位を奪い合うため)。サブトピックごとにH2見出しを立て、末尾に「詳しくは個別ガイドで」と案内する程度にとどめる。
+${spokes.map(line).join('\n')}
+- 文字数の下限(2,500字以上)は、サブトピックの詳述ではなく、全体の流れ・共通の注意点・確認先の公的機関などの総論で満たす。`
+    : '- このクラスタにはまだ個別ガイドが無い。通常の総合ガイドとして書いてよいが、細かい手順を長々と書かない。'
+}
+${titleRule(spokes)}
+${noLinkRule}
+`;
+  }
+
+  const hub = ledgerTopics.find((t) => t.id === topic.hub);
+  const siblings = ledgerTopics.filter((t) => t.role === 'spoke' && t.hub === topic.hub && t.id !== topic.id && t.status !== 'on-hold');
+  const others = [...(hub ? [hub] : []), ...siblings];
+  return `# 記事の役割: 個別ガイド(spoke)
+- 主キーワード: 「${pk}」の検索意図だけに深く答える。この記事の主題以外に話を広げない。
+${
+  others.length
+    ? `- 次の記事の話題には、1文程度で触れるにとどめ、詳細を繰り返さない(それぞれ別の個別ガイド・総合ガイドで扱う)。
+${hub ? `  - 総合ガイド: ${hub.title}(主キーワード: ${hub.primaryKeyword})\n` : ''}${siblings.map(line).join('\n')}`
+    : ''
+}
+${titleRule(others)}
+${noLinkRule}
+`;
+}
+
+/**
+ * ガイド記事生成のプロンプトを組み立てる。
+ * @param {{topic: object, sources: Array<{url,title,publisher,lang,text}>, today: string, ledgerTopics?: object[]}} p
+ *   ledgerTopics: 台帳の topics 全体(hub/spoke の関係を引くのに使う。省略時は役割の指示なし)
+ */
+export function buildGuidePrompt({ topic, sources, today, ledgerTopics = [] }) {
+  const roleSection = buildRoleSection(topic, ledgerTopics);
   const audience = (topic.audience || []).map((a) => AUDIENCE_LABELS[a] || a).join(' / ');
   return `あなたはドネシアナビ(インドネシア関連の日本語情報メディア)のガイド記事の執筆者です。バリ島に関する日本語のエバーグリーンなガイド記事を、下の資料だけを根拠に執筆してください。今日は ${today} です。
 
@@ -94,7 +143,7 @@ export function buildGuidePrompt({ topic, sources, today }) {
 - 見出し構成の参考(必要に応じて調整してよい): ${(topic.outline || []).join(' / ') || '(指定なし)'}
 - 検索キーワード(自然な形で見出し・本文に含める): ${(topic.keywords || []).join(', ') || '(指定なし)'}
 
-${FACT_RULES}
+${roleSection ? `${roleSection}\n` : ''}${FACT_RULES}
 
 # 構成ルール
 - 本文は Markdown。見出しは H2(##)以下のみ(H1は使わない。タイトルは title に入れる)。

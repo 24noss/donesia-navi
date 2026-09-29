@@ -165,7 +165,7 @@ export async function runGenerate({ args, deps = {} }) {
     log.log(`資料 ${included.length}件 / 合計 ${included.reduce((n, s) => n + s.text.length, 0)}字`);
 
     // --- Gemini(API失敗はそのまま例外。応答の中身の問題はトピック固有の失敗として扱う)
-    const prompt = buildGuidePrompt({ topic, sources: included, today });
+    const prompt = buildGuidePrompt({ topic, sources: included, today, ledgerTopics: ledger.topics });
     const data = await callGemini(prompt);
     let output;
     try {
