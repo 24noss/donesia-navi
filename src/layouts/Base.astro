@@ -56,12 +56,19 @@ const currentPath = Astro.url.pathname;
     function gtag(){dataLayer.push(arguments);}
     var storedConsent;
     try { storedConsent = localStorage.getItem('cookie_consent'); } catch (e) {}
+    var consentState = storedConsent === 'granted' ? 'granted' : 'denied';
     gtag('consent', 'default', {
-      'analytics_storage': storedConsent === 'granted' ? 'granted' : 'denied'
+      'analytics_storage': consentState,
+      'ad_storage': consentState,
+      'ad_user_data': consentState,
+      'ad_personalization': consentState
     });
     gtag('js', new Date());
     gtag('config', 'G-VB1WN7G9N2');
   </script>
+
+  <!-- Google AdSense -->
+  <script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4916493711379223" crossorigin="anonymous"></script>
 
   <meta name="description" content={description} />
   {noindex && <meta name="robots" content="noindex, follow" />}
@@ -228,7 +235,7 @@ const currentPath = Astro.url.pathname;
 
   <!-- COOKIE CONSENT BANNER -->
   <div class="consent-banner" id="consent-banner" role="region" aria-label="Cookie使用に関する同意">
-    <p class="consent-text">当サイトはアクセス解析のためCookieを使用します。詳しくは<a href="/policy/">ポリシー</a>をご確認ください。</p>
+    <p class="consent-text">当サイトはアクセス解析と広告配信のためCookieを使用します。詳しくは<a href="/policy/">ポリシー</a>をご確認ください。</p>
     <div class="consent-actions">
       <button type="button" class="consent-btn consent-decline" id="consent-decline">拒否</button>
       <button type="button" class="consent-btn consent-accept" id="consent-accept">同意する</button>
@@ -285,7 +292,7 @@ const currentPath = Astro.url.pathname;
           consentAccept.addEventListener('click', function(){
             try { localStorage.setItem('cookie_consent', 'granted'); } catch (e) {}
             if (typeof gtag === 'function') {
-              gtag('consent', 'update', { analytics_storage: 'granted' });
+              gtag('consent', 'update', { analytics_storage: 'granted', ad_storage: 'granted', ad_user_data: 'granted', ad_personalization: 'granted' });
             }
             consentBanner.classList.remove('show');
           });
