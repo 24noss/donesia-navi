@@ -6,6 +6,7 @@
       "title": "バリ島入国に必要なもの【2026年版】出発前から空港到着までのチェックリスト",
       "role": "hub",
       "primaryKeyword": "バリ 入国 必要なもの",
+      "label": "入国準備の全体像",
       "audience": [
         "tourist"
       ],
@@ -49,6 +50,7 @@
       "role": "spoke",
       "hub": "bali-entry-checklist",
       "primaryKeyword": "バリ 観光税 払い方",
+      "label": "観光税",
       "audience": [
         "tourist"
       ],
@@ -91,6 +93,7 @@
       "role": "spoke",
       "hub": "bali-entry-checklist",
       "primaryKeyword": "e-VOA 申請 バリ",
+      "label": "e-VOA",
       "audience": [
         "tourist"
       ],
@@ -133,6 +136,7 @@
       "role": "spoke",
       "hub": "bali-entry-checklist",
       "primaryKeyword": "All Indonesia 到着カード",
+      "label": "到着カード",
       "audience": [
         "tourist"
       ],
@@ -173,6 +177,7 @@
       "role": "spoke",
       "hub": "bali-entry-checklist",
       "primaryKeyword": "バリ 滞在延長",
+      "label": "滞在延長",
       "audience": [
         "tourist"
       ],
@@ -212,6 +217,7 @@
       "title": "日本の国際免許はインドネシアで無効:バリでバイク・車を運転する前に知ること",
       "role": "hub",
       "primaryKeyword": "バリ 国際免許 無効",
+      "label": "国際免許の扱い",
       "audience": [
         "tourist"
       ],
@@ -252,6 +258,7 @@
       "title": "バリ島に長期滞在するビザ比較:訪問ビザ・E33(セカンドホーム)・E33G・投資家ビザ",
       "role": "hub",
       "primaryKeyword": "バリ 長期滞在 ビザ",
+      "label": "長期滞在ビザの比較",
       "audience": [
         "prospective-resident"
       ],
@@ -294,6 +301,7 @@
       "role": "spoke",
       "hub": "bali-long-stay-visa-comparison",
       "primaryKeyword": "E33G ビザ",
+      "label": "リモートワーカー",
       "audience": [
         "prospective-resident"
       ],
@@ -333,6 +341,7 @@
       "role": "spoke",
       "hub": "bali-long-stay-visa-comparison",
       "primaryKeyword": "セカンドホームビザ インドネシア",
+      "label": "セカンドホーム",
       "audience": [
         "prospective-resident"
       ],
@@ -371,6 +380,7 @@
       "role": "spoke",
       "hub": "bali-long-stay-visa-comparison",
       "primaryKeyword": "バリ リタイアメントビザ",
+      "label": "リタイアメント",
       "audience": [
         "prospective-resident"
       ],
@@ -410,6 +420,7 @@
       "role": "spoke",
       "hub": "bali-long-stay-visa-comparison",
       "primaryKeyword": "インドネシア ゴールデンビザ",
+      "label": "ゴールデンビザ",
       "audience": [
         "prospective-resident"
       ],
@@ -447,6 +458,7 @@
       "role": "spoke",
       "hub": "bali-long-stay-visa-comparison",
       "primaryKeyword": "ITAS 延長 手続き",
+      "label": "ITAS延長",
       "audience": [
         "resident"
       ],
@@ -486,6 +498,7 @@
       "role": "spoke",
       "hub": "bali-international-license-invalid",
       "primaryKeyword": "バリ 運転免許 取得",
+      "label": "在住者の免許取得",
       "audience": [
         "resident"
       ],
@@ -524,6 +537,7 @@
       "role": "spoke",
       "hub": "bali-safety-scams-crime",
       "primaryKeyword": "バリ 空港 から 市内",
+      "label": "空港からの移動",
       "audience": [
         "tourist"
       ],
@@ -566,6 +580,7 @@
       "role": "spoke",
       "hub": "bali-cashless-qris-jpqr",
       "primaryKeyword": "バリ 両替所 正規",
+      "label": "両替所の選び方",
       "audience": [
         "tourist"
       ],
@@ -603,6 +618,7 @@
       "title": "バリ島のお金事情:QRIS(JPQR)・クレジットカード・両替の使い分け",
       "role": "hub",
       "primaryKeyword": "バリ 支払い 方法",
+      "label": "お金事情の全体像",
       "audience": [
         "tourist"
       ],
@@ -641,6 +657,7 @@
       "role": "spoke",
       "hub": "bali-entry-checklist",
       "primaryKeyword": "バリ IMEI 登録",
+      "label": "SIM・IMEI",
       "audience": [
         "tourist"
       ],
@@ -679,6 +696,7 @@
       "title": "バリ島の雨季・乾季と2026-27年の見通し:エルニーニョの影響",
       "role": "hub",
       "primaryKeyword": "バリ 雨季 乾季",
+      "label": "雨季と乾季",
       "audience": [
         "tourist"
       ],
@@ -720,6 +738,7 @@
       "title": "バリ島の寺院参拝と服装・マナー:入れる場所・入れない場所",
       "role": "hub",
       "primaryKeyword": "バリ 寺院 服装",
+      "label": "寺院参拝の作法",
       "audience": [
         "tourist"
       ],
@@ -760,6 +779,7 @@
       "role": "spoke",
       "hub": "bali-temple-dress-etiquette",
       "primaryKeyword": "バリ 観光客 ルール",
+      "label": "州知事通達",
       "audience": [
         "tourist"
       ],
@@ -800,6 +820,7 @@
       "role": "spoke",
       "hub": "bali-temple-dress-etiquette",
       "primaryKeyword": "バリ ニュピ 過ごし方",
+      "label": "ニュピ",
       "audience": [
         "tourist"
       ],
@@ -839,6 +860,7 @@
       "title": "バリ島の治安と詐欺・犯罪対策:外務省が示す注意点",
       "role": "hub",
       "primaryKeyword": "バリ 治安",
+      "label": "治安と詐欺対策",
       "audience": [
         "tourist"
       ],
@@ -877,6 +899,7 @@
       "title": "バリ島で病気・ケガをしたら:病院の探し方と海外旅行保険の必要性",
       "role": "hub",
       "primaryKeyword": "バリ 病院 日本語",
+      "label": "病院と保険",
       "audience": [
         "tourist"
       ],
@@ -918,6 +941,7 @@
       "role": "spoke",
       "hub": "bali-medical-insurance-guide",
       "primaryKeyword": "バリ デング熱",
+      "label": "デング熱・狂犬病",
       "audience": [
         "tourist"
       ],
@@ -956,6 +980,7 @@
       "role": "spoke",
       "hub": "bali-safety-scams-crime",
       "primaryKeyword": "バリ 薬物 死刑",
+      "label": "薬物規制",
       "audience": [
         "tourist"
       ],
@@ -996,6 +1021,7 @@
       "role": "spoke",
       "hub": "bali-entry-checklist",
       "primaryKeyword": "インドネシア 免税範囲",
+      "label": "免税範囲・持ち込み禁止品",
       "audience": [
         "tourist"
       ],
@@ -1035,6 +1061,7 @@
       "title": "バリ島から帰国するときの免税範囲と税関申告:Visit Japan Web・申告書",
       "role": "hub",
       "primaryKeyword": "帰国 免税範囲",
+      "label": "帰国時の税関",
       "audience": [
         "tourist"
       ],
@@ -1073,6 +1100,7 @@
       "role": "spoke",
       "hub": "bali-return-japan-customs",
       "primaryKeyword": "バリ お土産 持ち込み禁止",
+      "label": "お土産の検疫",
       "audience": [
         "tourist"
       ],
@@ -1111,6 +1139,7 @@
       "role": "spoke",
       "hub": "bali-return-japan-customs",
       "primaryKeyword": "バリ VAT リファンド",
+      "label": "VAT払い戻し",
       "audience": [
         "tourist"
       ],
@@ -1149,6 +1178,7 @@
       "role": "spoke",
       "hub": "bali-safety-scams-crime",
       "primaryKeyword": "バリ 地震",
+      "label": "地震・津波・火山",
       "audience": [
         "tourist"
       ],
@@ -1187,6 +1217,7 @@
       "role": "spoke",
       "hub": "bali-medical-insurance-guide",
       "primaryKeyword": "バリ 緊急連絡先",
+      "label": "緊急連絡先",
       "audience": [
         "tourist",
         "resident"

@@ -5,6 +5,8 @@ import {
   assembleArticleFile,
   buildGuideMarkdown,
   buildGuidePrompt,
+  buildRoleSection,
+  findKeywordCollisions,
   buildRefreshPrompt,
   extractGeminiText,
   extractUrlsFromTexts,
@@ -264,4 +266,82 @@ describe('PR #124 の再現(URL除去で文が壊れる)', () => {
     assert.match(md, /行ごと削除/);
     assert.match(md, /整形後: `税関\(出典: b\)`/);
   });
+});
+
+describe('見出しのキーワード競合検証(hub が spoke の検索語を奪う不具合)', () => {
+  const ledger = [
+    { id: 'hub-a', role: 'hub', title: 'バリ島入国に必要なもの【2026年版】チェックリスト', primaryKeyword: 'バリ 入国 必要なもの', label: '入国準備の全体像' },
+    { id: 'spoke-levy', role: 'spoke', hub: 'hub-a', title: 'バリ島の外国人観光税(15万ルピア)の払い方と支払い証明【最新】', primaryKeyword: 'バリ 観光税 払い方', label: '観光税' },
+    { id: 'spoke-evoa', role: 'spoke', hub: 'hub-a', title: 'バリ島のe-VOA申請ガイド:料金・滞在日数・有効期間・手順', primaryKeyword: 'e-VOA 申請 バリ', label: 'e-VOA' },
+    { id: 'spoke-hold', role: 'spoke', hub: 'hub-a', status: 'on-hold', title: '保留の記事', primaryKeyword: 'バリ 保留', label: '保留' },
+  ];
+  const hub = ledger[0];
+  const bodyWith = (...h2) => goodBody(h2.map((h) => `\n\n## ${h}\n\n要約です。`).join(''));
+  const run = (o, topic = hub) => validateGuideOutput(o, { allowedUrls: [A], topic, ledgerTopics: ledger });
+
+  test('PR #124 の見出し(spoke の title そのまま)は検証失敗。該当見出しと衝突トピック id を含む', () => {
+    const r = run({ title: 'バリ島入国に必要なもの', description: 'D', usedSourceUrls: [A],
+      body: bodyWith('バリ島の外国人観光税(15万ルピア)の払い方と支払い証明【最新】', 'バリ島のe-VOA申請ガイド:料金・滞在日数・有効期間・手順') });
+    assert.equal(r.ok, false);
+    const msg = r.problems.join('\n');
+    assert.match(msg, /バリ島の外国人観光税\(15万ルピア\)の払い方と支払い証明【最新】.*spoke-levy/);
+    assert.match(msg, /バリ島のe-VOA申請ガイド.*spoke-evoa/);
+  });
+  test('primaryKeyword の全トークンを含む見出しは失敗(全角/大文字小文字の揺れを正規化)', () => {
+    const r = run({ title: 'T', description: 'D', usedSourceUrls: [A], body: bodyWith('Ｅ-ＶＯＡ の申請手順(バリ)') });
+    assert.equal(r.ok, false);
+    assert.match(r.problems.join('\n'), /spoke-evoa.*primaryKeyword/);
+  });
+  test('生成 title が他トピックの title を含む場合も失敗', () => {
+    const r = run({ title: 'バリ島の外国人観光税(15万ルピア)の払い方と支払い証明【最新】まとめ', description: 'D', usedSourceUrls: [A], body: bodyWith('観光税') });
+    assert.equal(r.ok, false);
+    assert.match(r.problems.join('\n'), /title「.*」が他トピック spoke-levy/);
+  });
+  test('label だけの見出し(短い総称)は通る', () => {
+    const r = run({ title: 'バリ島入国に必要なもの', description: 'D', usedSourceUrls: [A], body: bodyWith('観光税', 'e-VOA', '入国準備の全体像') });
+    assert.deepEqual(r.problems, []);
+    assert.equal(r.ok, true);
+  });
+  test('自分自身の title・primaryKeyword は衝突扱いしない。topic 未指定なら検査しない', () => {
+    const spoke = ledger[1];
+    assert.deepEqual(findKeywordCollisions({ title: spoke.title, body: '## バリ 観光税 払い方' }, spoke, ledger), []);
+    assert.deepEqual(findKeywordCollisions({ title: spoke.title, body: '## x' }, undefined, ledger), []);
+  });
+  test('H3以下の見出しも検査する', () => {
+    const p = findKeywordCollisions({ title: 'T', body: '### e-VOA 申請 バリ' }, hub, ledger);
+    assert.equal(p.length, 1);
+  });
+});
+
+describe('buildRoleSection(label のみ渡す)', () => {
+  const ledger = [
+    { id: 'hub-a', role: 'hub', title: 'HUBタイトル', primaryKeyword: 'ハブ 検索語', label: 'ハブ呼称' },
+    { id: 's1', role: 'spoke', hub: 'hub-a', title: 'スポーク1のタイトル', primaryKeyword: 'スポーク 一', label: 'スポーク甲' },
+    { id: 's2', role: 'spoke', hub: 'hub-a', title: 'スポーク2のタイトル', primaryKeyword: 'スポーク 二', label: 'スポーク乙' },
+  ];
+  test('hub のプロンプトに spoke の title / primaryKeyword は出ず、label が出る', () => {
+    const p = buildRoleSection(ledger[0], ledger);
+    assert.ok(p.includes('スポーク甲') && p.includes('スポーク乙'));
+    for (const s of ['スポーク1のタイトル', 'スポーク2のタイトル', 'スポーク 一', 'スポーク 二']) assert.ok(!p.includes(s), s);
+    assert.ok(p.includes('個別記事のタイトルや主キーワード'));
+  });
+  test('spoke のプロンプトは兄弟を label で、hub は title で渡す(兄弟の title / primaryKeyword は出さない)', () => {
+    const p = buildRoleSection(ledger[1], ledger);
+    assert.ok(p.includes('HUBタイトル') && p.includes('スポーク乙'));
+    assert.ok(!p.includes('スポーク2のタイトル') && !p.includes('スポーク 二'));
+    assert.ok(!p.includes('スポーク甲')); // 自分は含めない
+  });
+});
+
+test('findKeywordCollisions: 地名を除いて1語になる primaryKeyword は語で判定しない(誤検知防止)', async () => {
+  const { findKeywordCollisions } = await import('./guide-article.mjs');
+  const ledger = [
+    { id: 'self', title: 'バリ空港から市内', primaryKeyword: 'バリ 空港 から 市内' },
+    { id: 'safety-hub', title: 'バリ島の治安と詐欺対策の総合ガイド', primaryKeyword: 'バリ 治安' },
+    { id: 'hospital-hub', title: '医療の総合', primaryKeyword: 'バリ 病院 日本語' },
+  ];
+  const ok = findKeywordCollisions({ title: 'x', body: '## バリ空港周辺の治安と注意点' }, ledger[0], ledger);
+  assert.deepEqual(ok, []);
+  const ng = findKeywordCollisions({ title: 'x', body: '## 日本語が通じるバリの病院' }, ledger[0], ledger);
+  assert.equal(ng.length, 1);
 });

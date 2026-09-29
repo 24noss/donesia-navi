@@ -172,6 +172,13 @@ export function validateGuideTopics(data, { sourceThemeKeys = new Set(), vocabul
     }
     if (!isNonEmptyString(t?.title)) problems.push(`${label}: title が空`);
     if (!isNonEmptyString(t?.primaryKeyword)) problems.push(`${label}: primaryKeyword が空(このトピックが主に狙う検索語が必要)`);
+    if (t?.label !== undefined) {
+      if (!isNonEmptyString(t.label)) problems.push(`${label}: label は空でない文字列にしてください`);
+      else if (t.label.length > 20) problems.push(`${label}: label は20文字以内の短い呼び名にしてください (${t.label.length}字)`);
+      else if (normalizeKeyword(t.label) === normalizeKeyword(t.title) || normalizeKeyword(t.label) === normalizeKeyword(t.primaryKeyword)) {
+        problems.push(`${label}: label は title・primaryKeyword と同一にできません`);
+      }
+    }
     if (!TOPIC_ROLES.includes(t?.role)) problems.push(`${label}: role が不正 (${t?.role}。${TOPIC_ROLES.join('/')} のみ)`);
     if (t?.holdReason !== undefined && !isNonEmptyString(t.holdReason)) problems.push(`${label}: holdReason は空でない文字列にしてください`);
     if (!Array.isArray(t?.audience) || t.audience.length === 0 || !t.audience.every((a) => AUDIENCES.includes(a))) {

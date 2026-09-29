@@ -176,7 +176,7 @@ export async function runGenerate({ args, deps = {} }) {
     const allowedUrls = included.map((s) => s.url);
     // 許可リスト = 渡した references URL ∪ 資料本文に文字列として出現するURL(公的ページが案内する公式URL)
     const extraAllowedUrls = extractUrlsFromTexts(included.map((s) => s.text));
-    const validated = validateGuideOutput(output, { allowedUrls, extraAllowedUrls });
+    const validated = validateGuideOutput(output, { allowedUrls, extraAllowedUrls, topic, ledgerTopics: ledger.topics });
     if (validated.removedUrls.length) warnings.push(`資料に無い外部URLを本文から除去: ${validated.removedUrls.join(', ')}`);
     const removedUrlReport = formatRemovedUrlReport(validated.removedDetails);
     if (validated.droppedSourceUrls.length) warnings.push(`usedSourceUrls のうち渡していないURLを除去: ${validated.droppedSourceUrls.join(', ')}`);

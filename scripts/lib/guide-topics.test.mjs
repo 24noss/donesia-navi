@@ -132,6 +132,13 @@ describe('キーワード設計(primaryKeyword / role / hub)', () => {
     assert.equal(normalizeKeyword('  Bali\u3000  eSIM  '), 'bali esim');
     assert.equal(normalizeKeyword('バリ　入国'), normalizeKeyword('バリ 入国'));
   });
+  test('label は任意。あれば短い呼び名で、title・primaryKeyword と同一は不可', () => {
+    assert.deepEqual(validate([hub(), spoke({ label: '観光税' })]), []);
+    has([hub(), spoke({ label: '' })], 'label は空でない');
+    has([hub(), spoke({ label: 'あ'.repeat(21) })], '20文字以内');
+    has([hub(), spoke({ label: 'バリ　スポーク' })], 'title・primaryKeyword と同一');
+    has([hub(), spoke({ label: spoke().title })], 'title・primaryKeyword と同一');
+  });
   test('hub + spoke の正常な組は合格', () => assert.deepEqual(validate([hub(), spoke()]), []));
   test('primaryKeyword / role が無いと不合格', () => {
     const { primaryKeyword, ...noPk } = topic();

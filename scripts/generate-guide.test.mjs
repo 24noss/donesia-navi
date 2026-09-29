@@ -246,9 +246,12 @@ describe('hub / spoke で生成プロンプトが変わる(キーワード競合
     assert.ok(p.includes('記事の役割: 総合ガイド(hub)'));
     assert.ok(!p.includes('記事の役割: 個別ガイド(spoke)'));
     assert.ok(p.includes('要点を2〜4文で要約し、詳細は個別ガイドに譲る'));
-    assert.ok(p.includes('バリ島の観光税の払い方(フィクスチャ)(主キーワード: バリ 観光税 15万ルピア)'));
+    assert.ok(p.includes('  - 観光税'));
     assert.ok(p.includes('主キーワード「バリ 入国」'));
-    assert.ok(p.includes('他の記事の主キーワード(「バリ 観光税 15万ルピア」)は title に入れない'));
+    assert.ok(p.includes('見出しは、上の呼び名程度の短い総称にすること'));
+    // spoke の title・primaryKeyword は hub のプロンプトに出さない(見出しに転用されるため)
+    assert.ok(!p.includes('バリ島の観光税の払い方(フィクスチャ)'));
+    assert.ok(!p.includes('バリ 観光税 15万ルピア'));
     assert.ok(p.includes('URLリンクは書かない'));
   });
 
@@ -258,8 +261,8 @@ describe('hub / spoke で生成プロンプトが変わる(キーワード競合
     assert.ok(!p.includes('記事の役割: 総合ガイド(hub)'));
     assert.ok(p.includes('検索意図だけに深く答える'));
     assert.ok(p.includes('1文程度で触れるにとどめ'));
-    assert.ok(p.includes('総合ガイド: バリ島入国前のチェックリスト(フィクスチャ)(主キーワード: バリ 入国)'));
-    assert.ok(p.includes('他の記事の主キーワード(「バリ 入国」)は title に入れない'));
+    assert.ok(p.includes('総合ガイド: バリ島入国前のチェックリスト(フィクスチャ)'));
+    assert.ok(p.includes('総合ガイドの主キーワード(「バリ 入国」)'));
     assert.ok(p.includes('URLリンクは書かない'));
   });
 

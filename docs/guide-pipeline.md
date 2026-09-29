@@ -56,7 +56,11 @@
 
 クラスタ(hub → spokes)の現状は `src/data/guide-topics.json` の `role` / `hub` を見る。
 
-**生成プロンプトの役割分け**(`buildRoleSection`、`scripts/lib/guide-article.mjs`): hub には所属 spoke の title と primaryKeyword を渡し、「各サブトピックは要点を2〜4文で要約し詳細は個別ガイドに譲る」よう指示する(`on-hold` の spoke は渡さない)。spoke には hub の title と兄弟 spoke を渡し、「primaryKeyword の検索意図だけに深く答え、hub・他 spoke の話題は1文程度」と指示する。どちらも title/description に primaryKeyword を含め、他記事の primaryKeyword を title に入れないよう指示し、本文に他記事へのURLリンクは書かせない。primaryKeyword が title に入っているかのコード側チェックはしていない(表記ゆれで誤検知するため。レビューで確認する)。
+**`label`(任意・台帳)**: そのトピックの短い呼び名(20文字以内。例「観光税」「e-VOA」「SIM・IMEI」)。title・primaryKeyword と同一にしない(正規化後の一致は検証エラー)。hub の見出しの元になるので、実台帳の全トピックに付ける。`label` が無い spoke は hub / 兄弟の一覧に載らない。
+
+**生成プロンプトの役割分け**(`buildRoleSection`、`scripts/lib/guide-article.mjs`): hub には所属 spoke を **`label` だけ**で渡し(title・primaryKeyword は hub のプロンプトに出さない。出すと spoke の title が H2 に転用され、hub が spoke の検索語を奪う。PR #124 で発生)、「各サブトピックは要点を2〜4文で要約し詳細は個別ガイドに譲る」「見出しは呼び名程度の短い総称にし、個別記事のタイトル・主キーワードを見出しや title に使わない」と指示する(`on-hold` の spoke は渡さない)。spoke には hub の title と、兄弟 spoke の `label`(兄弟の title・primaryKeyword は渡さない)を渡し、「primaryKeyword の検索意図だけに深く答え、hub・他 spoke の話題は1文程度」と指示する。どちらも title/description に自分の primaryKeyword を含めさせ、本文に他記事へのURLリンクは書かせない。
+
+**見出しの競合検証**(`findKeywordCollisions`、`validateGuideOutput` から呼ぶ): 生成された title と全見出し(`#`〜`######`)に、同じ台帳の他トピック(自分を除く。on-hold も含む)の **title(`normalizeKeyword` で正規化して部分一致)** または **primaryKeyword(正規化後、空白区切りの全トークンが含まれる)** があれば検証失敗。失敗理由に該当の title/見出しと衝突トピック id が入り、`TopicSkipError`(自動選択時は次の候補へ、`GUIDE_TOPIC_ID` 明示指定時はエラー終了)になる。primaryKeyword が自分の title に入っているかのコード側チェックはしていない(表記ゆれで誤検知するため。レビューで確認する)。
 
 **関連ガイド欄**: 記事ページ(`src/pages/articles/[...id].astro`)に、台帳に id がある記事だけ「関連ガイド」ボックスを出す。hub 記事には配下の spoke、spoke 記事には hub と兄弟 spoke。選択は純粋関数 `src/lib/relatedGuides.mjs`(`getRelatedGuides`)で、公開済み(`draft:false`。プレビューデプロイでは draft も含む)の記事だけを、記事の実タイトルで出す。0件なら非表示。hub の本文には他記事へのリンクを書かず、リンクはこの欄が担う。
 
