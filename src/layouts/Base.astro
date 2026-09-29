@@ -300,5 +300,32 @@ const currentPath = Astro.url.pathname;
     })();
   </script>
 
+  <script>
+    import { resolveAffiliateClick } from '../lib/affiliate.mjs';
+
+    // アフィリエイトリンクのクリックを GA4 に送る(イベント委譲。遷移は妨げない)
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+      const a = target.closest('a[href]');
+      if (!a) return;
+      const result = resolveAffiliateClick({
+        href: a.href,
+        dataAffiliate: a.getAttribute('data-affiliate'),
+        dataPlacement: a.getAttribute('data-placement'),
+        inArticleBody: !!a.closest('#article-content'),
+      });
+      if (!result) return;
+      const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+      if (typeof w.gtag !== 'function') return;
+      w.gtag('event', 'affiliate_click', {
+        partner: result.partner,
+        placement: result.placement,
+        link_url: result.link_url,
+        page_path: location.pathname,
+        transport_type: 'beacon',
+      });
+    });
+  </script>
 </body>
 </html>
