@@ -6,7 +6,7 @@ tags: ["生活情報", "医療"]
 pubDate: 2026-09-29
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8685118/putusan-mk-makanan-minuman-kemasan-wajib-cantumkan-kandungan-gula-garam-lemak"
-draft: true
+draft: false
 ---
 
 ## インドネシア憲法裁、加工食品・飲料への糖分・塩分・脂質ラベル表示を義務化
