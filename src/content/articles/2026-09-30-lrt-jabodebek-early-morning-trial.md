@@ -6,7 +6,7 @@ tags: ["交通", "イベント", "新店オープン", "キャンペーン・プ
 pubDate: 2026-09-30
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/30/12062311/lrt-jabodebek-uji-coba-keberangkatan-lebih-pagi-0530-wib-mulai-besok"
-draft: true
+draft: false
 ---
 
 ## LRTジャボデベックが早朝運行の試験運用をスタート
