@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "トランスジャカルタ", "交通", "インフラ
 pubDate: 2026-09-29
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/29/17324971/tarif-transjakarta-transjabodetabek-dan-lrt-jakarta-akan-naik-mulai-1?source=terkini_artikel"
-draft: true
+draft: false
 ---
 
 ## トランスジャカルタとLRTジャカルタ、2027年1月より運賃改定へ
