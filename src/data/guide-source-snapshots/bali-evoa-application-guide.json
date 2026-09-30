@@ -1,0 +1,10 @@
+{
+  "https://ecd.beacukai.go.id/cdonline.html?type=ekiosk": {
+    "sha256": "85416fb7a9e792c3ec975becb7204e8020630c395fbdc34e7bacd70f5252ca67",
+    "fetchedAt": "2026-09-30T06:57:17.486Z"
+  },
+  "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html": {
+    "sha256": "1fff7cc83bded7f623cc5cf84e3c59960fa4c184a4db50e48040c1b3e256948e",
+    "fetchedAt": "2026-09-30T06:57:13.904Z"
+  }
+}
