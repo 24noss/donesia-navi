@@ -6,7 +6,7 @@ tags: ["交通", "物価", "トランスジャカルタ", "生活情報"]
 pubDate: 2026-09-30
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/29/17323581/tarif-transjakarta-hingga-transjabodetabek-naik-1-januari-2027-subsidi-warga-mampu-dikurangi"
-draft: true
+draft: false
 ---
 
 ## ジャカルタの公共交通機関、2027年1月から運賃改定へ
