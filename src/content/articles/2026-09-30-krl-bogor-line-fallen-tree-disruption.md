@@ -6,7 +6,7 @@ tags: ["交通", "KRL", "鉄道", "注意喚起"]
 pubDate: 2026-09-30
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/30/15492051/pohon-tumbang-di-st-ui-ganggu-krl-bogor-perjalanan-cuma-lewat-satu-jalur?source=terkini_artikel"
-draft: true
+draft: false
 ---
 
 ## 倒木の影響でKRLボゴール線が一時単線運行に
