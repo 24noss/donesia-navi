@@ -24,6 +24,8 @@
 | `src/content/articles/` | 記事本体(`draft: true` は本番非表示) |
 | `src/data/tag-vocabulary.json` | タグ統制語彙(71語) |
 | `scripts/` | クロール・ドラフト生成・Slack通知・テスト(`*.test.mjs`) |
+| `scripts/local/` | Mac の launchd 用(`scripts/local/guide-launcher.sh` 固定ランチャー / `scripts/local/guide-job.sh` ジョブ本体 / `scripts/local/install-launchd.sh`) |
+| `ops/launchd/` | 上記ジョブの launchd plist(日次10:30・月次1日11:00) |
 | `functions/api/` | Cloudflare Pages Functions(Slack承認ボタンの受信) |
 | `.github/workflows/` | crawl-articles / notify-draft-pr / suggest-guide-topics / test |
 | `STATE.md` / `LESSONS.md` | 現在地 / 教訓ログ |
@@ -32,6 +34,7 @@
 
 - `./verify` : 完了判定の単一入口。exit 0 = 合格。`npm test` → `npm run build`。所要時間: 約30秒
 - `./verify --fast` : `npm test` のみ(約5秒)
+- `bash scripts/local/guide-job.sh generate --dry-run` : Mac 用ジョブの動作確認(専用 worktree 作成・フィクスチャ生成・commit/push/PR は「実行するはずのコマンド」をログに出すだけ。キーチェーン不要)
 - `npm run generate-guide -- --dry-run` : ガイド生成の動作確認(Gemini・出典取得・GitHub照会なし。フィクスチャで最後まで通し、一時ディレクトリに書き出す)
 - 個別コマンド: `npm test`(`node --test 'scripts/**/*.test.mjs'`)、`npm run build`(`astro build && npx pagefind --site dist`、`dist/` は gitignore)
 - CI(`.github/workflows/test.yml`)は `npm ci` → `npm test`
@@ -46,6 +49,10 @@
 5. 飲食店ガイドでハラール・酒類は確認できなければ「要確認」と書く。エリア単体トピックは新規追加しない(オーナー判断)
 6. Google Places 用キーは perth-web-biz の既存キーを流用しない(専用キーを新規発行)
 7. `git add -A` / `git commit -a` / `git push --force` は使わない (hook化済み)
+
+## 注意事項(ガイド生成の実行場所)
+
+- ガイドの日次生成・月次改訂は Mac の launchd(`ops/launchd/`)が実行する。plist は `~/Library/Application Support/donesia-navi-guide/bin/guide-launcher.sh`(`scripts/local/install-launchd.sh` が `scripts/local/guide-launcher.sh` をコピーして設置)を呼び、ランチャーが専用 worktree を origin/main に最新化して、worktree 内の `scripts/local/guide-job.sh`(常に origin/main 版)を実行する。このため本リポジトリの作業ツリーのブランチ切替は影響しない。ランチャー自体を変えたら `scripts/local/install-launchd.sh` を再実行する。GitHub Actions からは imigrasi.go.id 等が403で出典が欠けるため。詳細は `docs/guide-pipeline.md`「実行場所」
 
 ## 読む順番
 

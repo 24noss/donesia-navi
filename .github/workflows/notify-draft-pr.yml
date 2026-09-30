@@ -13,9 +13,11 @@ permissions:
 
 jobs:
   notify:
-    # auto/articles-* はcrawl-articles.yml側、auto/guide-*(ガイドの生成・トピック提案・月次改訂。
-    # auto/guide-topics-* / auto/guide-refresh-* を含む)は各ワークフロー側で既にSlack通知済みのため、二重送信を防ぐためスキップする
-    if: ${{ !startsWith(github.head_ref, 'auto/articles-') && !startsWith(github.head_ref, 'auto/guide-') }}
+    # auto/articles-* はcrawl-articles.yml側で通知済みのためスキップ。auto/guide-*(ガイドの生成・トピック提案・月次改訂。
+    # auto/guide-topics-* / auto/guide-refresh-* を含む)のうち github-actions[bot] が作ったPR(suggest-bali-topics.yml 等が
+    # ワークフロー側で通知済み)もスキップする。Mac の launchd(オーナーの gh)が作った auto/guide-* のPRは
+    # ワークフロー側の通知が無いので、ここで通知する
+    if: ${{ !startsWith(github.head_ref, 'auto/articles-') && !(startsWith(github.head_ref, 'auto/guide-') && github.event.pull_request.user.login == 'github-actions[bot]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

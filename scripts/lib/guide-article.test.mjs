@@ -11,6 +11,7 @@ import {
   extractGeminiText,
   extractUrlsFromTexts,
   formatRemovedUrlReport,
+  formatReplacedHeadingReport,
   parseArticleFile,
   parseGeminiObject,
   setFrontmatterDate,
@@ -279,20 +280,49 @@ describe('見出しのキーワード競合検証(hub が spoke の検索語を�
   const bodyWith = (...h2) => goodBody(h2.map((h) => `\n\n## ${h}\n\n要約です。`).join(''));
   const run = (o, topic = hub) => validateGuideOutput(o, { allowedUrls: [A], topic, ledgerTopics: ledger });
 
-  test('PR #124 の見出し(spoke の title そのまま)は検証失敗。該当見出しと衝突トピック id を含む', () => {
+  test('PR #124 の見出し(spoke の title そのまま)は、hub なら spoke の label に自動置換され通る', () => {
     const r = run({ title: 'バリ島入国に必要なもの', description: 'D', usedSourceUrls: [A],
       body: bodyWith('バリ島の外国人観光税(15万ルピア)の払い方と支払い証明【最新】', 'バリ島のe-VOA申請ガイド:料金・滞在日数・有効期間・手順') });
-    assert.equal(r.ok, false);
-    const msg = r.problems.join('\n');
-    assert.match(msg, /バリ島の外国人観光税\(15万ルピア\)の払い方と支払い証明【最新】.*spoke-levy/);
-    assert.match(msg, /バリ島のe-VOA申請ガイド.*spoke-evoa/);
+    assert.deepEqual(r.problems, []);
+    assert.equal(r.ok, true);
+    assert.deepEqual(r.replacedHeadings.map((x) => [x.after, x.spokeId]), [['観光税', 'spoke-levy'], ['e-VOA', 'spoke-evoa']]);
+    assert.match(r.value.body, /^## 観光税$/m);
+    assert.match(r.value.body, /^## e-VOA$/m);
+    assert.ok(!r.value.body.includes('払い方と支払い証明'));
   });
-  test('primaryKeyword の全トークンを含む見出しは失敗(全角/大文字小文字の揺れを正規化)', () => {
-    const r = run({ title: 'T', description: 'D', usedSourceUrls: [A], body: bodyWith('Ｅ-ＶＯＡ の申請手順(バリ)') });
+  test('本番ケース: 「e-VOAの申請」は spoke の label に置換。on-hold の spoke と衝突する見出しは対象外', () => {
+    const led = [...ledger, { id: 'spoke-arrival', role: 'spoke', hub: 'hub-a', status: 'on-hold', title: 'All Indonesia 到着カード', primaryKeyword: 'All Indonesia 到着カード', label: '到着カード' }];
+    const r = validateGuideOutput({ title: 'バリ島入国に必要なもの', description: 'D', usedSourceUrls: [A],
+      body: bodyWith('e-VOAの申請', 'All Indonesia到着カードと税関申告') }, { allowedUrls: [A], topic: hub, ledgerTopics: led });
+    assert.deepEqual(r.problems, []);
+    assert.deepEqual(r.replacedHeadings.map((x) => [x.before, x.after]), [['e-VOAの申請', 'e-VOA']]);
+    assert.match(r.value.body, /^## All Indonesia到着カードと税関申告$/m);
+    const md = formatReplacedHeadingReport(r.replacedHeadings);
+    assert.match(md, /自動置換した見出し/);
+    assert.match(md, /「e-VOAの申請」→「e-VOA」/);
+    assert.equal(formatReplacedHeadingReport([]), null);
+  });
+  test('on-hold トピックは衝突判定の対象外(spoke 記事でも)', () => {
+    assert.deepEqual(findKeywordCollisions({ title: 'T', body: '## 保留の記事 バリ 保留' }, ledger[1], ledger), []);
+  });
+  test('spoke 記事の見出しが兄弟 spoke / hub と衝突したら従来どおり失敗(置換しない)', () => {
+    const r = run({ title: 'T', description: 'D', usedSourceUrls: [A], body: bodyWith('e-VOAの申請') }, ledger[1]);
+    assert.equal(r.ok, false);
+    assert.match(r.problems.join('\n'), /spoke-evoa.*primaryKeyword/);
+    assert.deepEqual(r.replacedHeadings, []);
+  });
+  test('hub でも、自分の spoke ではない他トピックとの衝突は失敗のまま', () => {
+    const led = [...ledger, { id: 'other-hub', role: 'hub', title: '別ハブ', primaryKeyword: '別 ハブ 検索語', label: '別' }];
+    const r = validateGuideOutput({ title: 'T', description: 'D', usedSourceUrls: [A], body: bodyWith('別ハブ 検索語の話') }, { allowedUrls: [A], topic: hub, ledgerTopics: led });
+    assert.equal(r.ok, false);
+    assert.match(r.problems.join('\n'), /other-hub/);
+  });
+  test('primaryKeyword の全トークンを含む見出し(全角/大文字小文字の揺れ)は spoke 記事では失敗', () => {
+    const r = run({ title: 'T', description: 'D', usedSourceUrls: [A], body: bodyWith('Ｅ-ＶＯＡ の申請手順(バリ)') }, ledger[1]);
     assert.equal(r.ok, false);
     assert.match(r.problems.join('\n'), /spoke-evoa.*primaryKeyword/);
   });
-  test('生成 title が他トピックの title を含む場合も失敗', () => {
+  test('生成 title が自分の spoke の title を含む場合は hub でも失敗(title は置換しない)', () => {
     const r = run({ title: 'バリ島の外国人観光税(15万ルピア)の払い方と支払い証明【最新】まとめ', description: 'D', usedSourceUrls: [A], body: bodyWith('観光税') });
     assert.equal(r.ok, false);
     assert.match(r.problems.join('\n'), /title「.*」が他トピック spoke-levy/);

@@ -12,21 +12,33 @@
         ▼
    台帳 src/data/guide-topics.json(status: queued のトピック)
         │
-[日次] generate-guide.yml (毎日 08:30 WIB)
+[日次] Mac の launchd(毎日 10:30 JST)→ ランチャー → worktree 内の scripts/local/guide-job.sh generate
    priority 昇順 → addedAt 昇順で1件選ぶ → 出典ページを取得 → Gemini で執筆
    → draft:true の記事 + スナップショット の PR(auto/guide-<id>) → Slack「承認して公開」
         │ 承認(draft:false にして merge)
         ▼
    公開済みガイド記事
         │
-[月次] refresh-guides.yml (毎月1日 10:00 WIB)
+[月次] Mac の launchd(毎月1日 11:00 JST)→ ランチャー → worktree 内の scripts/local/guide-job.sh refresh
    references の URL を再取得 → スナップショット(sha256)と比較
    ├ 変化なし  → lastVerified を当日に更新する PR を1本にまとめる(auto/guide-refresh-unchanged-YYYYMM)
    ├ 変化あり  → 資料の変化に基づく改訂版を作る記事ごとの PR(auto/guide-refresh-<id>-YYYYMM)
    └ 取得失敗  → 更新せず Issue に一覧化
 ```
 
-すべて「PR にして人間が承認する」経路で、main へ直接 commit しない(AGENTS.md 絶対ルール1)。
+すべて「PR にして人間が承認する」経路で、main へ直接 commit しない(AGENTS.md 絶対ルール1)。日次・月次の実行場所は GitHub Actions ではなく Mac(理由は次節)。週次提案だけ Actions のまま。
+
+## 1.5 実行場所(Mac の launchd)
+
+- **理由**: GitHub Actions のランナーから `www.imigrasi.go.id` / `evisa.imigrasi.go.id` / `lovebali.baliprov.go.id` が HTTP 403(データセンターIPの遮断とみられる)になり、出典90件中32件が取れなかった。オーナーの Mac の回線からは取得できる。そこで日次生成と月次改訂を Mac の launchd で実行する。`generate-guide.yml` / `refresh-guides.yml` は `workflow_dispatch`(手動)だけ残してあるが、Actions から動かすと上記の出典が欠ける。
+- **構成**: `ops/launchd/com.shogonishino.donesia-guide-{generate,refresh}.plist`(generate=毎日10:30、refresh=毎月1日11:00)が固定ランチャー `~/Library/Application Support/donesia-navi-guide/bin/guide-launcher.sh <generate|refresh>` を実行する。ランチャーは `scripts/local/install-launchd.sh` がリポジトリの `scripts/local/guide-launcher.sh` をコピーして設置する(登録も同スクリプト: plist を `~/Library/LaunchAgents` にコピーし、`launchctl bootout` → `bootstrap gui/$(id -u)`。冪等)。ランチャーは専用 worktree を `git fetch` → `origin/main` に detach(未作成なら作成)してから、**worktree 内の** `scripts/local/guide-job.sh` を実行する。つまりジョブ本体は常に origin/main 版で、本リポジトリの作業ツリーでブランチを切り替えても影響しない。ランチャー自体(小さく固定)を変えたときだけ `install-launchd.sh` を再実行する。別ジョブ実行中はランチャーは worktree を触らない。
+- **作業場所**: 本リポジトリの作業ツリーには触れず、専用 git worktree `~/Library/Application Support/donesia-navi-guide/worktree` を使う。毎回 `git fetch` → `origin/main` に detach → `git clean -fdx -e node_modules` → `package-lock.json` が前回と違えば `npm ci`。実行するコードは常に origin/main のもの(このリポジトリで変更しても merge されるまで反映されない)。開発時の確認は `GUIDE_JOB_SKIP_SYNC=1`(ランチャー・ジョブ共通。worktree を origin/main に合わせない)で worktree に未マージの変更を置いて行う。
+- **Gemini API キー**: macOS キーチェーンから取得する(ファイル・環境変数には置かない)。登録: `security add-generic-password -s donesia-navi-gemini -a "$USER" -w`(キーは対話入力)。初回の launchd 実行でキーチェーンのアクセス許可ダイアログが出たら「常に許可」を選ぶ(ログイン中のGUIセッションが必要)。未登録ならログにこの登録手順を出して異常終了する。GitHub へは `gh auth token`(repo / workflow スコープでログイン済みであること)を使う。
+- **ログ**: `~/Library/Logs/donesia-navi-guide/<generate|refresh>-YYYYMMDD.log`(30日より古いものは実行時に削除)。launchd 自身の出力は同ディレクトリの `launchd-<job>.log` / `.err.log`。多重起動は `~/Library/Application Support/donesia-navi-guide/lock` で防ぐ。
+- **手動実行**: `bash scripts/local/guide-job.sh generate [--topic <id>] [--dry-run] [--force]` / `bash scripts/local/guide-job.sh refresh [--dry-run]`。`--dry-run` は Gemini・出典取得・GitHub 更新をせず(フィクスチャで最後まで通し)、commit / push / PR / Issue の代わりに「実行するはずのコマンド」をログに出す。キーチェーンも要求しない。
+- **PR の作り方**: ブランチは Actions と同じ `auto/guide-<id>` / `auto/guide-refresh-*`。リモートに同名ブランチがあれば、その上に通常の commit を積む(force push はしない)。既に open な PR があれば push だけで更新し、generate は `gh pr comment` で「再生成しました」と報告を残す。オーナーの gh が作る PR は `pull_request` イベントを発火するので、`notify-draft-pr.yml` が Slack 通知する(github-actions[bot] 作成の `auto/guide-*` だけスキップ)。
+- **同日に2回走った場合**: generate は最初に「今日(JST)作成された日次生成PR(`auto/guide-*`。topics / refresh を除く。close・merge 済みも含む)があれば何もしない」ガードを通る(`--topic` 指定・`--force` では無視)。ガードを外しても、トピック選択が open PR のあるトピックを除外するので、同じトピックで重複PRにはならない(次のトピックが生成される)。refresh は月次ブランチ名が一意で、同じ内容なら commit しない。
+- **Mac が長期間停止・スリープする場合**: launchd の `StartCalendarInterval` は、スリープ中に予定時刻を過ぎると復帰後に1回だけ実行される。電源オフ・不在が続いた日は実行されず(取り戻し実行もしない)、生成が遅れるだけで壊れない。長期不在の前は `launchctl bootout gui/$(id -u)/com.shogonishino.donesia-guide-generate` で止めておくか、遅れを許容する。月次改訂の1日を過ぎて復帰した場合は `guide-job.sh refresh` を手動で実行する。ネットワークが無いと出典取得に失敗し、生成は失敗トピックとして Issue になる(翌日再試行)。
 
 ## 2. データファイル
 
@@ -60,7 +72,7 @@
 
 **生成プロンプトの役割分け**(`buildRoleSection`、`scripts/lib/guide-article.mjs`): hub には所属 spoke を **`label` だけ**で渡し(title・primaryKeyword は hub のプロンプトに出さない。出すと spoke の title が H2 に転用され、hub が spoke の検索語を奪う。PR #124 で発生)、「各サブトピックは要点を2〜4文で要約し詳細は個別ガイドに譲る」「見出しは呼び名程度の短い総称にし、個別記事のタイトル・主キーワードを見出しや title に使わない」と指示する(`on-hold` の spoke は渡さない)。spoke には hub の title と、兄弟 spoke の `label`(兄弟の title・primaryKeyword は渡さない)を渡し、「primaryKeyword の検索意図だけに深く答え、hub・他 spoke の話題は1文程度」と指示する。どちらも title/description に自分の primaryKeyword を含めさせ、本文に他記事へのURLリンクは書かせない。
 
-**見出しの競合検証**(`findKeywordCollisions`、`validateGuideOutput` から呼ぶ): 生成された title と全見出し(`#`〜`######`)に、同じ台帳の他トピック(自分を除く。on-hold も含む)の **title(`normalizeKeyword` で正規化して部分一致)** または **primaryKeyword(正規化後、空白区切りの全トークンが含まれる)** があれば検証失敗。失敗理由に該当の title/見出しと衝突トピック id が入り、`TopicSkipError`(自動選択時は次の候補へ、`GUIDE_TOPIC_ID` 明示指定時はエラー終了)になる。primaryKeyword が自分の title に入っているかのコード側チェックはしていない(表記ゆれで誤検知するため。レビューで確認する)。
+**見出しの競合検証**(`findKeywordCollisions`、`validateGuideOutput` から呼ぶ): 生成された title と全見出し(`#`〜`######`)に、同じ台帳の他トピック(自分を除く。**`on-hold` は対象外**: hub に統合済みの内容を書くのは正しいため)の **title(`normalizeKeyword` で正規化して部分一致)** または **primaryKeyword(正規化後、空白区切りの全トークンが含まれる)** があれば検証失敗。失敗理由に該当の title/見出しと衝突トピック id が入り、`TopicSkipError`(自動選択時は次の候補へ、`GUIDE_TOPIC_ID` 明示指定時はエラー終了)になる。**例外(hub の見出し)**: hub 記事の**見出し**が自分の spoke(`hub` が自分・`label` あり・on-hold でない)と衝突した場合は失敗にせず、その見出しテキストを spoke の `label` に自動置換する(`replaceHubHeadingCollisions`)。置換した見出しは生成ログの警告と PR 本文の「自動置換した見出し(要目視)」に出る。title の衝突、spoke 記事での衝突、自分の spoke 以外との衝突は従来どおり検証失敗。primaryKeyword が自分の title に入っているかのコード側チェックはしていない(表記ゆれで誤検知するため。レビューで確認する)。
 
 **関連ガイド欄**: 記事ページ(`src/pages/articles/[...id].astro`)に、台帳に id がある記事だけ「関連ガイド」ボックスを出す。hub 記事には配下の spoke、spoke 記事には hub と兄弟 spoke。選択は純粋関数 `src/lib/relatedGuides.mjs`(`getRelatedGuides`)で、公開済み(`draft:false`。プレビューデプロイでは draft も含む)の記事だけを、記事の実タイトルで出す。0件なら非表示。hub の本文には他記事へのリンクを書かず、リンクはこの欄が担う。
 
@@ -138,17 +150,22 @@ npm test
 | `scripts/lib/guide-fetch.mjs` | 出典ページの取得とHTML→テキスト化、文字数上限、SHA-256 |
 | `scripts/lib/guide-article.mjs` | プロンプト、応答検証、Markdown組み立て、記事ファイルの部分更新 |
 | `scripts/lib/guide-notify.mjs` | トピック提案PR・改訂PRのSlackブロック |
-| `scripts/generate-guide.mjs` | 日次生成 |
+| `scripts/generate-guide.mjs` | 日次生成(`GUIDE_REPORT_DIR` を指定すると、失敗JSON・PR本文用の報告・結果JSONをそこに書く。CI は `RUNNER_TEMP`) |
 | `scripts/suggest-bali-topics.mjs` | 週次トピック提案 |
 | `scripts/refresh-guides.mjs` | 月次改訂(PR単位の変更ファイルを書き出す。gitは触らない) |
-| `.github/workflows/generate-guide.yml` / `suggest-bali-topics.yml` / `refresh-guides.yml` | 各cron + `workflow_dispatch` |
-| `.github/workflows/notify-draft-pr.yml` | `auto/guide-*` のPRは各ワークフロー側で通知済みのためスキップ |
+| `.github/workflows/suggest-bali-topics.yml` | 週次cron + `workflow_dispatch` |
+| `.github/workflows/generate-guide.yml` / `refresh-guides.yml` | `workflow_dispatch` のみ(定期実行は Mac の launchd。Actions からは一部の出典が403) |
+| `.github/workflows/notify-draft-pr.yml` | github-actions[bot] 作成の `auto/guide-*` はワークフロー側で通知済みのためスキップ。Mac(オーナーの gh)が作った PR は通知する |
+| `scripts/local/guide-launcher.sh` | launchd から呼ぶ固定ランチャー(install-launchd.sh が `~/Library/Application Support/donesia-navi-guide/bin/` に設置。worktree 同期 → worktree 内の guide-job.sh 実行) |
+| `scripts/local/guide-job.sh` | Mac 用ジョブ(generate / refresh。worktree 準備・キーチェーン・commit/push/PR/Issue) |
+| `scripts/local/install-launchd.sh` | `ops/launchd/*.plist` を登録する(冪等) |
+| `ops/launchd/*.plist` | 日次生成(10:30)・月次改訂(毎月1日11:00)の launchd 定義 |
 
 ## 9. 既知の制約
 
 - 日次生成は1日1本。自動選択で先頭のトピックが「出典本文0件」「検証失敗」(usedSourceUrls 空・文字数不足など)になったら、次の候補へ進む(最大3候補)。失敗したトピックの id と理由は job summary・アノテーション・Issue(「ガイド記事の生成に失敗: <id>」、同名のopenがあれば重複作成しない)に残る。全候補が失敗した日はワークフローが失敗になる。毎日同じトピックで失敗し続ける場合は、出典を直すか台帳で `on-hold` にする。Gemini API 自体の失敗(リトライ尽き)と `topic_id` 明示指定は、従来どおりそのままエラー終了する。
 - 月次改訂PRの「変化なし」まとめPRと、同じ記事の改訂PRが並ぶことはない(1記事は必ずどちらか一方)ため、スナップショット・記事ファイルは競合しない。ただし同じ記事について前月の改訂PRが未mergeのまま今月の改訂PRができた場合は、後からmergeする側でコンフリクトしうる(前月分をcloseしてから今月分をmergeする)。
-- `refresh-guides.yml` の `git push --force` は、CIが作る bot 専用ブランチ(`auto/guide-refresh-*`)に対してだけ行う(同名ブランチを毎回作り直すため)。人が作業するブランチや `main` には使わない。
+- `refresh-guides.yml`(手動実行時)の `git push --force` は、CIが作る bot 専用ブランチ(`auto/guide-refresh-*`)に対してだけ行う。Mac 版(`guide-job.sh`)は force push を使わず、既存ブランチには通常の commit を積む。人が作業するブランチや `main` には使わない。
 - 却下判定(クローズ済み未mergeのPRがあるトピックは再生成しない)は、直近500件のクローズ済みPR(100件×5ページ)までしか照会しない。それより古い却下は忘れられて再生成されうるので、長期に止めたいトピックは台帳で `status: "on-hold"` にする。
 - 台帳を機械で書き換える(週次提案)ときは `JSON.stringify(..., null, 2)` で整形し直す。手編集時も2スペースインデントに揃えると差分が小さい。
 - 週次提案が過去に却下された提案語を覚えていないため、同じ語が再び提案されうる(却下した案は台帳に `on-hold` で残す運用で回避できる)。

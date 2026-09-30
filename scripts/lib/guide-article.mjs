@@ -336,26 +336,76 @@ function hasSection(body, keyword) {
  */
 const COMMON_PLACE_TOKENS = new Set(['バリ', 'バリ島', 'インドネシア']);
 
-export function findKeywordCollisions({ title, body }, topic, ledgerTopics = []) {
+/**
+ * 衝突の構造化版。on-hold のトピック(hub に統合済みで、内容を書くのが正しい)は判定対象外。
+ * @returns {Array<{where:'title'|'見出し', text:string, other:object, kind:'title'|'primaryKeyword'}>}
+ */
+export function collectKeywordCollisions({ title, body }, topic, ledgerTopics = []) {
   if (!topic?.id) return [];
   const targets = [{ where: 'title', text: title }];
   for (const m of String(body).matchAll(/^#{1,6}[ \t]+(.+?)[ \t]*#*[ \t]*$/gm)) targets.push({ where: '見出し', text: m[1] });
-  const problems = [];
+  const found = [];
   for (const other of ledgerTopics) {
-    if (!other || other.id === topic.id) continue;
+    if (!other || other.id === topic.id || other.status === 'on-hold') continue;
     const otherTitle = normalizeKeyword(other.title);
     // 地名(バリ等)はほぼ全記事に出るため判定から外す。残りが1語だけなら語による判定はしない(誤検知防止)
     const tokens = normalizeKeyword(other.primaryKeyword).split(' ').filter((tk) => tk && !COMMON_PLACE_TOKENS.has(tk));
     for (const { where, text } of targets) {
       const n = normalizeKeyword(text);
-      if (otherTitle && n.includes(otherTitle)) {
-        problems.push(`${where}「${text}」が他トピック ${other.id} の title を含む(検索語の競合)`);
-      } else if (tokens.length >= 2 && tokens.every((tk) => n.includes(tk))) {
-        problems.push(`${where}「${text}」が他トピック ${other.id} の primaryKeyword「${other.primaryKeyword}」を含む(検索語の競合)`);
-      }
+      if (otherTitle && n.includes(otherTitle)) found.push({ where, text, other, kind: 'title' });
+      else if (tokens.length >= 2 && tokens.every((tk) => n.includes(tk))) found.push({ where, text, other, kind: 'primaryKeyword' });
     }
   }
-  return problems;
+  return found;
+}
+
+function describeCollision(c) {
+  return c.kind === 'title'
+    ? `${c.where}「${c.text}」が他トピック ${c.other.id} の title を含む(検索語の競合)`
+    : `${c.where}「${c.text}」が他トピック ${c.other.id} の primaryKeyword「${c.other.primaryKeyword}」を含む(検索語の競合)`;
+}
+
+export function findKeywordCollisions(page, topic, ledgerTopics = []) {
+  return collectKeywordCollisions(page, topic, ledgerTopics).map(describeCollision);
+}
+
+/**
+ * hub 記事の見出しが自分の spoke(label あり・on-hold でない)と衝突した場合、その見出しテキストを spoke の label に置換する。
+ * title の衝突や spoke 記事・spoke 以外との衝突は触らない(検証失敗のまま)。
+ * @returns {{body:string, replaced:Array<{before:string, after:string, spokeId:string}>}}
+ */
+export function replaceHubHeadingCollisions(body, topic, ledgerTopics = []) {
+  if (topic?.role !== 'hub') return { body, replaced: [] };
+  const own = collectKeywordCollisions({ title: '', body }, topic, ledgerTopics).filter(
+    (c) => c.where === '見出し' && c.other.hub === topic.id && typeof c.other.label === 'string' && c.other.label.trim()
+  );
+  if (own.length === 0) return { body, replaced: [] };
+  const labelByHeading = new Map();
+  for (const c of own) if (!labelByHeading.has(c.text)) labelByHeading.set(c.text, c.other);
+  const replaced = [];
+  const out = String(body)
+    .split('\n')
+    .map((line) => {
+      const m = /^(#{1,6}[ \t]+)(.+?)([ \t]*#*[ \t]*)$/.exec(line);
+      const spoke = m && labelByHeading.get(m[2]);
+      if (!spoke) return line;
+      replaced.push({ before: m[2], after: spoke.label.trim(), spokeId: spoke.id });
+      return `${m[1]}${spoke.label.trim()}`;
+    });
+  return { body: out.join('\n'), replaced };
+}
+
+/** 見出し置換の報告(PR本文・ログ用)。無ければ null。 */
+export function formatReplacedHeadingReport(replaced) {
+  if (!replaced || replaced.length === 0) return null;
+  const lines = [
+    '## 自動置換した見出し(要目視)',
+    '',
+    'hub 記事の見出しが配下の spoke の検索語と重なっていたため、見出しを spoke の `label` に置換しました。文脈に合っているか本文と見比べて確認してください。',
+    '',
+  ];
+  replaced.forEach((r, i) => lines.push(`${i + 1}. 「${r.before}」→「${r.after}」(spoke: \`${r.spokeId}\`)`));
+  return lines.join('\n');
 }
 
 /**
@@ -390,6 +440,8 @@ export function validateGuideOutput(output, { allowedUrls, extraAllowedUrls = []
   if (body.length < minChars) problems.push(`本文が短すぎる(${body.length}字 < ${minChars}字)`);
   if (!hasSection(body, 'この記事の要点')) problems.push('「この記事の要点」見出しがない');
   if (!hasSection(body, 'よくある質問')) problems.push('「よくある質問」見出しがない');
+  const headingFix = replaceHubHeadingCollisions(body, topic, ledgerTopics);
+  body = headingFix.body;
   problems.push(...findKeywordCollisions({ title, body }, topic, ledgerTopics));
 
   return {
@@ -398,6 +450,7 @@ export function validateGuideOutput(output, { allowedUrls, extraAllowedUrls = []
     value: problems.length === 0 ? { title, description, body, usedSourceUrls: used } : undefined,
     removedUrls: stripped.removed,
     removedDetails: stripped.details,
+    replacedHeadings: headingFix.replaced,
     droppedSourceUrls: dropped,
   };
 }
