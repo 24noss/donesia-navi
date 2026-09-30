@@ -12,7 +12,7 @@ references:
     url: "https://ecd.beacukai.go.id/cdonline.html?type=ekiosk"
 ymyl: true
 hasAffiliate: false
-draft: true
+draft: false
 ---
 
 ## この記事の要点
