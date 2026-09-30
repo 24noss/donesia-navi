@@ -20,7 +20,7 @@ references:
     url: "https://kanwilaceh.beacukai.go.id/mandatory/faq-barang-penumpang.html"
 ymyl: true
 hasAffiliate: false
-draft: true
+draft: false
 ---
 
 ## この記事の要点
