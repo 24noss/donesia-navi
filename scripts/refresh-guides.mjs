@@ -14,6 +14,7 @@
 import { existsSync } from 'node:fs';
 import { mkdir, mkdtemp, readFile, writeFile, appendFile } from 'node:fs/promises';
 import os from 'node:os';
+import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 import { callGeminiApi, isDryRun } from './crawl-and-draft.mjs';
 import {
@@ -367,7 +368,8 @@ async function main() {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+// パスに空白(例: "Application Support")があると import.meta.url は %20 になるため、file:// 文字列比較ではなく pathToFileURL で比べる。
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => {
     console.error(err.message || err);
     process.exit(1);

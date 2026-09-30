@@ -1,8 +1,9 @@
+# 定期実行(cron)は廃止した。日次生成・月次改訂は Mac の launchd(ops/launchd/、scripts/local/guide-job.sh)が実行する。
+# 理由: Actions のランナーからは imigrasi.go.id / evisa.imigrasi.go.id / lovebali.baliprov.go.id が 403 になり、出典が欠けるため。
+# このワークフローは workflow_dispatch(手動実行)のみ残している。詳細: docs/guide-pipeline.md「実行場所」
 name: Generate Guide Article
 
 on:
-  schedule:
-    - cron: '30 1 * * *' # 毎日 08:30 WIB (UTC+7)
   workflow_dispatch:
     inputs:
       topic_id:

@@ -14,6 +14,7 @@
 import { mkdir, mkdtemp, writeFile, appendFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import os from 'node:os';
+import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 import { callGeminiApi, filterTagsByVocabulary, isDryRun } from './crawl-and-draft.mjs';
 import {
@@ -43,6 +44,7 @@ import {
   extractGeminiText,
   extractUrlsFromTexts,
   formatRemovedUrlReport,
+  formatReplacedHeadingReport,
   parseArticleFile,
   parseGeminiObject,
   validateFrontmatterShape,
@@ -179,6 +181,10 @@ export async function runGenerate({ args, deps = {} }) {
     const validated = validateGuideOutput(output, { allowedUrls, extraAllowedUrls, topic, ledgerTopics: ledger.topics });
     if (validated.removedUrls.length) warnings.push(`資料に無い外部URLを本文から除去: ${validated.removedUrls.join(', ')}`);
     const removedUrlReport = formatRemovedUrlReport(validated.removedDetails);
+    const replacedHeadingReport = formatReplacedHeadingReport(validated.replacedHeadings);
+    for (const r of validated.replacedHeadings || []) {
+      warnings.push(`hub の見出しが spoke ${r.spokeId} と衝突したため label に置換: 「${r.before}」→「${r.after}」`);
+    }
     if (validated.droppedSourceUrls.length) warnings.push(`usedSourceUrls のうち渡していないURLを除去: ${validated.droppedSourceUrls.join(', ')}`);
     if (!validated.ok) throw new TopicSkipError(`生成結果の検証に失敗しました(${topic.id}): ${validated.problems.join(' / ')}`);
 
@@ -211,7 +217,7 @@ export async function runGenerate({ args, deps = {} }) {
     await mkdir(path.dirname(snapshotsPath), { recursive: true });
     await writeFile(snapshotsPath, serializeSnapshots(snapshots), 'utf-8');
 
-    return { status: 'generated', topic, filePath, snapshotsPath, markdown, usedSourceUrls: validated.value.usedSourceUrls, title: validated.value.title, warnings, removedUrlReport };
+    return { status: 'generated', topic, filePath, snapshotsPath, markdown, usedSourceUrls: validated.value.usedSourceUrls, title: validated.value.title, warnings, removedUrlReport, replacedHeadingReport };
   }
 }
 
@@ -229,6 +235,13 @@ export function buildSkipReport(skipped, { generatedId = null, today = '' } = {}
   return lines.join('\n');
 }
 
+// 報告ファイルの書き出し先。CI(GITHUB_OUTPUT あり)は RUNNER_TEMP、ローカル実行(scripts/local/guide-job.sh)は
+// GUIDE_REPORT_DIR で差し替える。どちらも無ければ null(ファイルは書かない)。
+function reportDir() {
+  if (process.env.GITHUB_OUTPUT) return process.env.RUNNER_TEMP || os.tmpdir();
+  return process.env.GUIDE_REPORT_DIR || null;
+}
+
 // CI(GitHub Actions)では job summary・アノテーション・失敗一覧JSON(Issue作成用)に残す。ローカルでは標準エラーのみ。
 async function reportSkipped(skipped, { generatedId, today }) {
   const report = buildSkipReport(skipped, { generatedId, today });
@@ -236,10 +249,12 @@ async function reportSkipped(skipped, { generatedId, today }) {
   console.warn(report);
   for (const sk of skipped) console.log(`::warning title=ガイド生成に失敗したトピック::${sk.id}: ${String(sk.reason).split('\n')[0]}`);
   if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `${report}\n`);
-  if (process.env.GITHUB_OUTPUT) {
-    await writeFile(path.join(process.env.RUNNER_TEMP || os.tmpdir(), 'guide-generate-failures.json'), JSON.stringify(skipped, null, 2), 'utf-8');
-    await appendFile(process.env.GITHUB_OUTPUT, `failed_topics=${skipped.map((sk) => sk.id).join(',')}\n`);
+  const dir = reportDir();
+  if (dir) {
+    await mkdir(dir, { recursive: true });
+    await writeFile(path.join(dir, 'guide-generate-failures.json'), JSON.stringify(skipped, null, 2), 'utf-8');
   }
+  if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, `failed_topics=${skipped.map((sk) => sk.id).join(',')}\n`);
 }
 
 // dry-run 用: フィクスチャ(pages.json / gemini-guide-response.json)から fetch と Gemini 応答を作る。
@@ -283,19 +298,35 @@ async function main() {
   }
   await reportSkipped(result.skipped, { generatedId: result.topic?.id ?? null, today: todayYmd() });
 
+  const dir = reportDir();
+  const writeResultJson = async (data) => {
+    if (!dir) return;
+    await mkdir(dir, { recursive: true });
+    await writeFile(path.join(dir, 'guide-result.json'), JSON.stringify(data, null, 2), 'utf-8');
+  };
   if (result.status === 'none') {
     if (process.env.GITHUB_OUTPUT && !args.dryRun) await appendFile(process.env.GITHUB_OUTPUT, 'generated=false\n');
+    await writeResultJson({ generated: false });
     return;
   }
   for (const w of result.warnings) console.warn(`警告: ${w}`);
-  if (result.removedUrlReport) {
-    console.warn(result.removedUrlReport);
-    // CI: PR本文に追記できるようファイルに出す(generate-guide.yml の「Compose PR body」が読む)。job summary にも残す。
-    if (process.env.GITHUB_OUTPUT) {
-      await writeFile(path.join(process.env.RUNNER_TEMP || os.tmpdir(), 'guide-removed-urls.md'), `${result.removedUrlReport}\n`, 'utf-8');
-      if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `${result.removedUrlReport}\n`);
+  // PR本文に追記するレビュー用の報告(除去したURL・置換した見出し)。generate-guide.yml の「Compose PR body」/ guide-job.sh が読む。
+  const reviewReport = [result.removedUrlReport, result.replacedHeadingReport].filter(Boolean).join('\n\n');
+  if (reviewReport) {
+    console.warn(reviewReport);
+    if (dir) {
+      await mkdir(dir, { recursive: true });
+      await writeFile(path.join(dir, 'guide-removed-urls.md'), `${reviewReport}\n`, 'utf-8');
     }
+    if (process.env.GITHUB_OUTPUT && process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `${reviewReport}\n`);
   }
+  await writeResultJson({
+    generated: true,
+    topic_id: result.topic.id,
+    title: result.title,
+    file: path.relative(process.cwd(), result.filePath),
+    snapshot: path.relative(process.cwd(), result.snapshotsPath),
+  });
   console.log(`作成: ${result.filePath}`);
   console.log(`スナップショット更新: ${result.snapshotsPath}`);
   if (args.dryRun) {
@@ -309,7 +340,8 @@ async function main() {
   }
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+// パスに空白(例: "Application Support")があると import.meta.url は %20 になるため、file:// 文字列比較ではなく pathToFileURL で比べる。
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((err) => {
     console.error(err.message || err);
     process.exit(1);

@@ -39,3 +39,8 @@
 - 何が起きた: ガイド生成用の公的出典を集めた際、在インドネシア日本大使館・在デンパサール総領事館・mofa.go.jp の渡航系ページはボット遮断(403)、All Indonesia・空港公式・OSS 等は JS 描画で本文が取れなかった。人間がブラウザで見られても自動取得できるとは限らない。
 - 正しいやり方: `official-sources.json` に追加する URL は、生成スクリプトと同じ User-Agent(`scripts/lib/guide-fetch.mjs` の `USER_AGENT`)で取得し、本文が十分に取れることを確認してから登録する。日本政府の渡航情報は anzen.mofa.go.jp(海外安全ホームページ)が取得可能。
 - 昇格先候補: test(official-sources の URL を実取得する定期チェック)
+
+## L-004 2026-09 [再発:1] [状態:記録]
+- 何が起きた: GitHub Actions のランナーから www.imigrasi.go.id / evisa.imigrasi.go.id / lovebali.baliprov.go.id が HTTP 403(データセンターIP遮断とみられる)で、出典90件中32件が取れなかった。出典を登録した時のローカル(自宅回線)での取得確認では成功していたため気付かなかった(L-003 の延長)。
+- 正しいやり方: 出典の取得確認は、実際に実行する環境と同じ場所(ランナー or 実行するMac)で行う。ローカルで取れても Actions で取れるとは限らない。取得元IPに依存する出典があるジョブは、取得できる環境(Mac の launchd)で実行する。
+- 昇格先候補: test(実行環境での official-sources 取得チェック。L-003 と統合)
