@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通規制", "交通", "渋滞", "EV"]
 pubDate: 2026-09-30
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/30/09560791/ganjil-genap-jakarta-dievaluasi-setelah-10-tahun-kadishub-dki-rute-perlu"
-draft: true
+draft: false
 ---
 
 ## ジャカルタの奇数偶数規制、開始10年で対象路線やEV免除を再検証へ
