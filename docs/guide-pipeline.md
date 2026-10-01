@@ -72,7 +72,7 @@
 
 **生成プロンプトの役割分け**(`buildRoleSection`、`scripts/lib/guide-article.mjs`): hub には所属 spoke を **`label` だけ**で渡し(title・primaryKeyword は hub のプロンプトに出さない。出すと spoke の title が H2 に転用され、hub が spoke の検索語を奪う。PR #124 で発生)、「各サブトピックは要点を2〜4文で要約し詳細は個別ガイドに譲る」「見出しは呼び名程度の短い総称にし、個別記事のタイトル・主キーワードを見出しや title に使わない」と指示する(`on-hold` の spoke は渡さない)。spoke には hub の title と、兄弟 spoke の `label`(兄弟の title・primaryKeyword は渡さない)を渡し、「primaryKeyword の検索意図だけに深く答え、hub・他 spoke の話題は1文程度」と指示する。どちらも title/description に自分の primaryKeyword を含めさせ、本文に他記事へのURLリンクは書かせない。
 
-**見出しの競合検証**(`findKeywordCollisions`、`validateGuideOutput` から呼ぶ): 生成された title と全見出し(`#`〜`######`)に、同じ台帳の他トピック(自分を除く。**`on-hold` は対象外**: hub に統合済みの内容を書くのは正しいため)の **title(`normalizeKeyword` で正規化して部分一致)** または **primaryKeyword(正規化後、空白区切りの全トークンが含まれる)** があれば検証失敗。失敗理由に該当の title/見出しと衝突トピック id が入り、`TopicSkipError`(自動選択時は次の候補へ、`GUIDE_TOPIC_ID` 明示指定時はエラー終了)になる。**例外(hub の見出し)**: hub 記事の**見出し**が自分の spoke(`hub` が自分・`label` あり・on-hold でない)と衝突した場合は失敗にせず、その見出しテキストを spoke の `label` に自動置換する(`replaceHubHeadingCollisions`)。置換した見出しは生成ログの警告と PR 本文の「自動置換した見出し(要目視)」に出る。title の衝突、spoke 記事での衝突、自分の spoke 以外との衝突は従来どおり検証失敗。primaryKeyword が自分の title に入っているかのコード側チェックはしていない(表記ゆれで誤検知するため。レビューで確認する)。
+**見出しの競合検証**(`findKeywordCollisions`、`validateGuideOutput` から呼ぶ): 生成された title と **H2 見出し(`## `)のみ**(H3以下は検査も自動置換もしない。FAQ の `### Q. ...` のような問いの文言が spoke の label に書き換わって消えた本番事故の再発防止)に、同じ台帳の他トピック(自分を除く。**`on-hold` は対象外**: hub に統合済みの内容を書くのは正しいため)の **title(`normalizeKeyword` で正規化して部分一致)** または **primaryKeyword(正規化後、空白区切りの全トークンが含まれる)** があれば検証失敗。失敗理由に該当の title/見出しと衝突トピック id が入り、`TopicSkipError`(自動選択時は次の候補へ、`GUIDE_TOPIC_ID` 明示指定時はエラー終了)になる。**例外(hub の見出し)**: hub 記事の**見出し**が自分の spoke(`hub` が自分・`label` あり・on-hold でない)と衝突した場合は失敗にせず、その見出しテキストを spoke の `label` に自動置換する(`replaceHubHeadingCollisions`)。置換した見出しは生成ログの警告と PR 本文の「自動置換した見出し(要目視)」に出る。title の衝突、spoke 記事での衝突、自分の spoke 以外との衝突は従来どおり検証失敗。primaryKeyword が自分の title に入っているかのコード側チェックはしていない(表記ゆれで誤検知するため。レビューで確認する)。
 
 **関連ガイド欄**: 記事ページ(`src/pages/articles/[...id].astro`)に、台帳に id がある記事だけ「関連ガイド」ボックスを出す。hub 記事には配下の spoke、spoke 記事には hub と兄弟 spoke。選択は純粋関数 `src/lib/relatedGuides.mjs`(`getRelatedGuides`)で、公開済み(`draft:false`。プレビューデプロイでは draft も含む)の記事だけを、記事の実タイトルで出す。0件なら非表示。hub の本文には他記事へのリンクを書かず、リンクはこの欄が担う。
 
@@ -120,6 +120,18 @@
 
 ### 週次提案の見方
 提案PRの本文に、各案の keywords・根拠(サジェスト/GSC)・`sourceThemes` が載る。`sourceThemes` に該当テーマが無い案は `status: "on-hold"` で追加され、理由がPR本文に出る。公的出典を `official-sources.json` に足してから `queued` に直す。不要な案はPR上で削除するかPRをcloseする。未処理の提案PRがある間は、次の週の提案は作られない。
+
+### 公開済みガイドの作り直し(`--replace`)
+出典の追加・見出し整理などで、公開済み(`draft: false`)の記事を最新ロジックで作り直したいとき。Mac から実行する:
+
+```bash
+bash "$HOME/Library/Application Support/donesia-navi-guide/bin/guide-launcher.sh" generate --topic <id> --replace
+```
+
+- `--topic <id>` 必須(自動選択では使わない)。`generate-guide.mjs` 単体では `--replace`(または `GUIDE_REPLACE=1`)+ `--topic=<id>` / `GUIDE_TOPIC_ID`。記事ファイルが無い id はエラー(通常生成にはフォールバックしない。新規生成は `--replace` なしで)。
+- 既存記事の frontmatter から `pubDate` / `draft` / `hasAffiliate` を引き継ぎ、`updatedDate` と `lastVerified` を当日にする。出典スナップショットも更新する。却下判定・オープンPR判定・同日ガードは見ない(topic 明示指定と同じ)。
+- PR は `auto/guide-refresh-<id>-<YYYYMMDD>`(JST)、タイトル「ガイド記事の改訂: <title>」。ブランチ名が `auto/guide-refresh-*` なので Slack 通知は refresh 種別(承認=mergeのみ。`draft:false` のままでも通知される)。本文に除去URL・見出し置換の報告が付く。差分を読んでから承認する。
+- 同名のリモートブランチがあれば force push せず通常の commit を積む。`--dry-run` を付けるとフィクスチャの既存記事(`scripts/fixtures/guide/articles/`)で最後まで通し、実行するはずのコマンドをログに出す。
 
 ### 月次改訂PRの扱い
 - 公開済みなので `draft: false` のまま。Slackの承認ボタンは「mergeのみ」を行う(記事の書き換え対象が無いため)。

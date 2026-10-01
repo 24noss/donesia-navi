@@ -337,9 +337,19 @@ describe('見出しのキーワード競合検証(hub が spoke の検索語を�
     assert.deepEqual(findKeywordCollisions({ title: spoke.title, body: '## バリ 観光税 払い方' }, spoke, ledger), []);
     assert.deepEqual(findKeywordCollisions({ title: spoke.title, body: '## x' }, undefined, ledger), []);
   });
-  test('H3以下の見出しも検査する', () => {
-    const p = findKeywordCollisions({ title: 'T', body: '### e-VOA 申請 バリ' }, hub, ledger);
-    assert.equal(p.length, 1);
+  test('H3以下の見出しは検査しない(H2は検査する)', () => {
+    assert.deepEqual(findKeywordCollisions({ title: 'T', body: '### e-VOA 申請 バリ\n#### e-VOA 申請 バリ' }, hub, ledger), []);
+    assert.equal(findKeywordCollisions({ title: 'T', body: '## e-VOA 申請 バリ' }, hub, ledger).length, 1);
+  });
+  test('本番ケース: hub の FAQ 見出し(H3)は spoke 衝突でも置換されず、H2 だけが置換される', () => {
+    const faq = '### Q. リモートワーカー向けビザ(E33G)の保有者にスポンサーは必要ですか？';
+    const led = [...ledger, { id: 'spoke-remote', role: 'spoke', hub: 'hub-a', title: 'バリ島リモートワーカー向けビザ(E33G)の申請ガイド', primaryKeyword: 'リモートワーカー ビザ E33G', label: 'リモートワーカー' }];
+    const body = `${bodyWith('観光税')}\n\n${faq}\n\nA. 必要です。\n\n## リモートワーカー向けビザ(E33G)の申請ガイド\n\n本文です。`;
+    const r = validateGuideOutput({ title: 'バリ島入国に必要なもの', description: 'D', usedSourceUrls: [A], body }, { allowedUrls: [A], topic: hub, ledgerTopics: led });
+    assert.deepEqual(r.problems, []);
+    assert.match(r.value.body, new RegExp(`^${faq.replace(/[()?？.]/g, '\\$&')}$`, 'm'));
+    assert.deepEqual(r.replacedHeadings.map((x) => [x.before, x.after]), [['リモートワーカー向けビザ(E33G)の申請ガイド', 'リモートワーカー']]);
+    assert.ok(!r.value.body.includes('### リモートワーカー\n'));
   });
 });
 

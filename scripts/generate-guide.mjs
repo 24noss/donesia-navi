@@ -8,10 +8,11 @@
 //   npm run generate-guide                       # 次のトピックを1件生成
 //   GUIDE_TOPIC_ID=bali-entry-checklist npm run generate-guide   # トピック指定(--topic=<id> でも可)
 //   npm run generate-guide -- --dry-run          # Gemini・出典取得・GitHub照会をせず、フィクスチャで最後まで通す
+//   GUIDE_TOPIC_ID=<id> npm run generate-guide -- --replace   # 公開済みガイドの作り直し(--replace または GUIDE_REPLACE=1。topic 明示指定が必須)
 //     --out-dir=<dir>      記事の書き出し先(dry-run の既定は一時ディレクトリ)
 //     --fixtures-dir=<dir> dry-run のフィクスチャ(既定 scripts/fixtures/guide)
 
-import { mkdir, mkdtemp, writeFile, appendFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, writeFile, appendFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import os from 'node:os';
 import { pathToFileURL } from 'node:url';
@@ -68,6 +69,7 @@ export function parseGenerateArgs(argv = [], env = {}) {
   return {
     dryRun: isDryRun(argv),
     topicId: get('topic') || env.GUIDE_TOPIC_ID || null,
+    replace: argv.includes('--replace') || ['1', 'true'].includes(String(env.GUIDE_REPLACE ?? '')),
     outDir: get('out-dir'),
     fixturesDir: get('fixtures-dir'),
     topicsPath: get('topics'),
@@ -110,14 +112,20 @@ export async function runGenerate({ args, deps = {} }) {
 
   const existingArticleIds = await listArticleIds(articlesDirForExisting);
 
+  // --replace: 公開済み記事の作り直し。topic 明示指定が必須(自動選択では使わない)。
+  if (args.replace && !args.topicId) throw new Error('--replace(GUIDE_REPLACE=1)には topic の明示指定(--topic=<id> / GUIDE_TOPIC_ID)が必要です');
+
   // --- トピック決定
   let candidates;
   if (args.topicId) {
     if (!TOPIC_ID_PATTERN.test(args.topicId)) throw new Error(`トピックID が不正です: ${args.topicId}`);
     const topic = ledger.topics.find((t) => t.id === args.topicId);
     if (!topic) throw new Error(`台帳にトピック ${args.topicId} がありません`);
-    if (existingArticleIds.has(topic.id)) throw new Error(`記事 ${topic.id}.md が既に存在します`);
-    log.log(`トピック指定: ${topic.id}(${topic.status})`);
+    if (args.replace) {
+      // 存在しない記事の作り直しは typo の可能性が高いので、通常生成にフォールバックせずエラーにする。
+      if (!existingArticleIds.has(topic.id)) throw new Error(`--replace: 作り直し対象の記事 ${topic.id}.md が存在しません(新規生成は --replace なしで実行してください)`);
+    } else if (existingArticleIds.has(topic.id)) throw new Error(`記事 ${topic.id}.md が既に存在します`);
+    log.log(`トピック指定: ${topic.id}(${topic.status})${args.replace ? ' [--replace: 公開済み記事の作り直し]' : ''}`);
     candidates = [topic];
   } else {
     let openPrArticleIds = new Set();
@@ -195,7 +203,13 @@ export async function runGenerate({ args, deps = {} }) {
       const s = refMeta.get(normalizeUrl(u));
       return { title: s?.title || u, url: u, publisher: s?.publisher };
     });
-    const markdown = buildGuideMarkdown({ topic, value: validated.value, tags, references, today });
+    // --replace: 既存記事の frontmatter から pubDate / draft / hasAffiliate を引き継ぎ、updatedDate・lastVerified を当日にする
+    let carryOver;
+    if (args.replace) {
+      const existing = parseArticleFile(await readFile(path.join(articlesDirForExisting, `${topic.id}.md`), 'utf-8')).data;
+      carryOver = { pubDate: existing.pubDate, draft: existing.draft, hasAffiliate: existing.hasAffiliate };
+    }
+    const markdown = buildGuideMarkdown({ topic, value: validated.value, tags, references, today, carryOver });
 
     const shapeProblems = validateFrontmatterShape(parseArticleFile(markdown).data);
     if (shapeProblems.length) throw new TopicSkipError(`frontmatter がスキーマに合いません(${topic.id}): ${shapeProblems.join(' / ')}`);
@@ -204,7 +218,7 @@ export async function runGenerate({ args, deps = {} }) {
     const outDir = args.outDir || ARTICLES_DIR;
     await mkdir(outDir, { recursive: true });
     const filePath = path.join(outDir, `${topic.id}.md`);
-    if (existsSync(filePath)) throw new Error(`${filePath} が既に存在します(上書きしません)`);
+    if (!args.replace && existsSync(filePath)) throw new Error(`${filePath} が既に存在します(上書きしません)`);
     await writeFile(filePath, markdown, 'utf-8');
 
     // --- スナップショット(実際に使った出典のみ。月次改訂の変更検知の基準)
@@ -281,6 +295,8 @@ async function main() {
     args.topicsPath ||= path.join(fixturesDir, 'guide-topics.json');
     args.sourcesPath ||= path.join(fixturesDir, 'official-sources.json');
     args.outDir ||= await mkdtemp(path.join(os.tmpdir(), 'guide-dry-run-'));
+    // --replace の dry-run は、実記事ではなくフィクスチャの既存記事(<fixtures>/articles/)を作り直し対象とする
+    if (args.replace) deps.articlesDirForExisting = path.join(fixturesDir, 'articles');
     args.snapshotsDir ||= path.join(args.outDir, 'guide-source-snapshots');
     console.log(`--dry-run: Gemini・出典取得・GitHub照会を行いません。出力先: ${args.outDir}`);
   } else if (!process.env.GEMINI_API_KEY) {
@@ -322,6 +338,7 @@ async function main() {
   }
   await writeResultJson({
     generated: true,
+    replace: args.replace === true,
     topic_id: result.topic.id,
     title: result.title,
     file: path.relative(process.cwd(), result.filePath),

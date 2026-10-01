@@ -329,7 +329,7 @@ function hasSection(body, keyword) {
 }
 
 /**
- * 生成された title と全見出し(#〜######)が、同じ台帳の他トピックの検索語を奪っていないか調べる。
+ * 生成された title と H2 見出し(`## `。H3以下は対象外)が、同じ台帳の他トピックの検索語を奪っていないか調べる。
  * 衝突 = 他トピックの title(正規化して部分一致) または primaryKeyword(正規化後、地名トークンを除いた2語以上の全トークンが含まれる)。
  * 自分自身のトピックは除外。topic が無ければ検査しない。
  * @returns {string[]} 問題の文言(該当の見出し/title と衝突トピック id を含む)
@@ -343,7 +343,8 @@ const COMMON_PLACE_TOKENS = new Set(['バリ', 'バリ島', 'インドネシア'
 export function collectKeywordCollisions({ title, body }, topic, ledgerTopics = []) {
   if (!topic?.id) return [];
   const targets = [{ where: 'title', text: title }];
-  for (const m of String(body).matchAll(/^#{1,6}[ \t]+(.+?)[ \t]*#*[ \t]*$/gm)) targets.push({ where: '見出し', text: m[1] });
+  // 対象は title と H2(`## `)のみ。H3以下(FAQの `### Q. ...` など)は問いの文言なので検査・置換しない。
+  for (const m of String(body).matchAll(/^##[ \t]+(.+?)[ \t]*#*[ \t]*$/gm)) targets.push({ where: '見出し', text: m[1] });
   const found = [];
   for (const other of ledgerTopics) {
     if (!other || other.id === topic.id || other.status === 'on-hold') continue;
@@ -386,7 +387,7 @@ export function replaceHubHeadingCollisions(body, topic, ledgerTopics = []) {
   const out = String(body)
     .split('\n')
     .map((line) => {
-      const m = /^(#{1,6}[ \t]+)(.+?)([ \t]*#*[ \t]*)$/.exec(line);
+      const m = /^(##[ \t]+)(.+?)([ \t]*#*[ \t]*)$/.exec(line);
       const spoke = m && labelByHeading.get(m[2]);
       if (!spoke) return line;
       replaced.push({ before: m[2], after: spoke.label.trim(), spokeId: spoke.id });
@@ -490,9 +491,14 @@ export function referenceTitle(ref) {
 
 /**
  * ガイド記事の Markdown 全文を組み立てる(draft: true)。
- * @param {{topic:object, value:{title,description,body,usedSourceUrls}, tags:string[], references:Array<{title,url,publisher?}>, today:string}} p
+ * @param {{topic:object, value:{title,description,body,usedSourceUrls}, tags:string[], references:Array<{title,url,publisher?}>, today:string, carryOver?:{pubDate?:string, draft?:boolean, hasAffiliate?:boolean}}} p
+ *   carryOver: 公開済み記事の作り直し(--replace)で、既存記事から引き継ぐ値。指定時は updatedDate も当日で付く。
  */
-export function buildGuideMarkdown({ topic, value, tags, references, today }) {
+export function buildGuideMarkdown({ topic, value, tags, references, today, carryOver }) {
+  const ymd = (v, fallback) => (v instanceof Date ? v.toISOString().slice(0, 10) : typeof v === 'string' && /^\d{4}-\d{2}-\d{2}/.test(v) ? v.slice(0, 10) : fallback);
+  const pubDate = carryOver ? ymd(carryOver.pubDate, today) : today;
+  const hasAffiliate = carryOver?.hasAffiliate === true;
+  const draft = carryOver ? carryOver.draft === true : true;
   const refLines = references.flatMap((r) => [`  - title: ${q(referenceTitle(r))}`, `    url: ${q(r.url)}`]);
   const frontmatter = [
     '---',
@@ -500,13 +506,14 @@ export function buildGuideMarkdown({ topic, value, tags, references, today }) {
     `description: ${q(value.description)}`,
     `category: ${q(topic.category)}`,
     `tags: [${tags.map(q).join(', ')}]`,
-    `pubDate: ${today}`,
+    `pubDate: ${pubDate}`,
+    ...(carryOver ? [`updatedDate: ${today}`] : []),
     `lastVerified: ${today}`,
     'references:',
     ...refLines,
     `ymyl: ${topic.ymyl === true ? 'true' : 'false'}`,
-    'hasAffiliate: false',
-    'draft: true',
+    `hasAffiliate: ${hasAffiliate}`,
+    `draft: ${draft}`,
     '---',
   ].join('\n');
 

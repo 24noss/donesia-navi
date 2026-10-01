@@ -1,7 +1,7 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
-import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { MAX_TOPIC_ATTEMPTS, buildDryRunDeps, buildSkipReport, noSourceMessage, parseGenerateArgs, runGenerate, todayYmd } from './generate-guide.mjs';
@@ -39,6 +39,51 @@ describe('parseGenerateArgs', () => {
     assert.equal(parseGenerateArgs([]).dryRun, false);
   });
   test('todayYmd', () => assert.equal(todayYmd(NOW), '2026-09-29'));
+});
+
+describe('--replace(公開済みガイドの作り直し)', () => {
+  const ID = 'fixture-bali-entry-checklist';
+  async function withExisting(fm) {
+    const { args, deps, outDir } = await setup({ topicId: ID, replace: true });
+    const dir = path.join(outDir, 'existing');
+    await mkdir(dir, { recursive: true });
+    await writeFile(path.join(dir, `${ID}.md`), `---\ntitle: "旧"\ndescription: "旧"\ncategory: "visa"\ntags: ["ビザ"]\n${fm}\n---\n\n旧本文\n`);
+    deps.articlesDirForExisting = dir;
+    return { args: { ...args, outDir: dir }, deps, dir };
+  }
+  test('parseGenerateArgs: --replace / GUIDE_REPLACE=1', () => {
+    assert.equal(parseGenerateArgs(['--replace']).replace, true);
+    assert.equal(parseGenerateArgs([], { GUIDE_REPLACE: '1' }).replace, true);
+    assert.equal(parseGenerateArgs([]).replace, false);
+  });
+  test('既存記事の pubDate / draft / hasAffiliate を引き継ぎ、updatedDate・lastVerified が当日になり、上書きされる', async () => {
+    const { args, deps, dir } = await withExisting('pubDate: 2026-08-01\nhasAffiliate: true\ndraft: false');
+    const r = await runGenerate({ args, deps });
+    assert.equal(r.status, 'generated');
+    const { data } = parseArticleFile(await readFile(path.join(dir, `${ID}.md`), 'utf-8'));
+    assert.deepEqual(validateFrontmatterShape(data), []);
+    assert.equal(String(data.pubDate), '2026-08-01');
+    assert.equal(String(data.updatedDate), '2026-09-29');
+    assert.equal(String(data.lastVerified), '2026-09-29');
+    assert.equal(data.draft, false);
+    assert.equal(data.hasAffiliate, true);
+    assert.notEqual(data.title, '旧');
+    assert.ok(existsSync(path.join(args.snapshotsDir, `${ID}.json`)));
+  });
+  test('既存が draft: true なら draft: true のまま', async () => {
+    const { args, deps, dir } = await withExisting('pubDate: 2026-09-01\nhasAffiliate: false\ndraft: true');
+    await runGenerate({ args, deps });
+    assert.equal(parseArticleFile(await readFile(path.join(dir, `${ID}.md`), 'utf-8')).data.draft, true);
+  });
+  test('topic 未指定はエラー / 記事が存在しない topic もエラー(通常生成にフォールバックしない)', async () => {
+    const { args, deps } = await setup({ replace: true });
+    await assert.rejects(() => runGenerate({ args, deps }), /topic の明示指定/);
+    await assert.rejects(() => runGenerate({ args: { ...args, topicId: ID }, deps }), /存在しません/);
+  });
+  test('--replace なしで既存記事があれば従来どおりエラー', async () => {
+    const { args, deps } = await withExisting('pubDate: 2026-08-01');
+    await assert.rejects(() => runGenerate({ args: { ...args, replace: false }, deps }), /既に存在/);
+  });
 });
 
 describe('runGenerate(フィクスチャ)', () => {
