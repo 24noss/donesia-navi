@@ -56,6 +56,12 @@ import Base from '../layouts/Base.astro';
         Google による広告での Cookie の取り扱いについては、
         <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" style="color:var(--teal)">Google のポリシーと規約（広告）</a>をご確認ください。
       </p>
+      <p>
+        当サイトでは初期設定でCookieを使用します（欧州経済領域・英国・スイスからのアクセスを除く）。下のボタンまたはバナーの「拒否」で、アクセス解析・広告のCookie使用を停止できます。
+      </p>
+      <p>
+        <button type="button" class="consent-btn consent-accept" id="consent-reset">Cookie設定を変更する</button>
+      </p>
     </div>
 
     <div class="about-section">
@@ -122,4 +128,16 @@ import Base from '../layouts/Base.astro';
     </div>
 
   </div>
+
+  <script is:inline>
+    (function(){
+      var btn = document.getElementById('consent-reset');
+      if (!btn) return;
+      btn.addEventListener('click', function(){
+        try { localStorage.removeItem('cookie_consent'); } catch (e) {}
+        var banner = document.getElementById('consent-banner');
+        if (banner) banner.classList.add('show');
+      });
+    })();
+  </script>
 </Base>
