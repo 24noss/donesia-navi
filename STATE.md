@@ -1,4 +1,4 @@
-最終更新: 2026-09-29
+最終更新: 2026-10-01
 
 # STATE — donesia-navi
 
@@ -29,7 +29,7 @@
 
 ## 次の一手
 
-1. [オーナー] バリ向けガイドの自動生成が稼働(毎日 08:30 WIB に1本の draft PR → Slack 承認、毎週月曜にトピック提案 PR、毎月1日に出典再確認・改訂 PR)。Slack で内容を確認して承認/PR close(却下)する。仕組みは `docs/guide-pipeline.md`、台帳は `src/data/guide-topics.json`(31本)。韓国語展開は日本語ガイドが軌道に乗った後に5〜10本で試験(未決定)。
+1. [オーナー] バリ向けガイドの自動生成が稼働(2026-10-01〜 Mac の launchd: 毎日10:30 JST に1本の draft PR、毎月1日11:00 に出典再確認。週次トピック提案は Actions の月曜)。Slack で**本文を読んでから**承認/PR close(却下)。公開済みを作り直すときは `docs/guide-pipeline.md` の `--replace`。Mac が停止中は生成されない。hub/spoke 構成・台帳31本(on-hold 2)。韓国語展開は日本語ガイドが軌道に乗った後に5〜10本で試験(未決定)。
 2. [オーナー] ASP に登録する: Trip.com → Klook(Wise はリファラルで提携済み。Agoda は後回し。保険・VPN は提携先要確認)。GA4 管理画面で `affiliate_click` の partner / placement をカスタムディメンション登録する。
 3. [エージェント] ASP 登録後、`docs/monetization/affiliate-candidates.md` の確度高・中の記事にリンク(`rel="sponsored"`)と `hasAffiliate: true` を入れる(Wise は税金・法人設立ガイドに実施済み)。
 4. [エージェント+オーナー確認] YMYL エバーグリーン4本(KITAS・税金・法人設立・病院)を公的情報と照合し `lastVerified` と `references` を記入する(`npm run check-ymyl` で検出。毎月1日に Issue 化)。
