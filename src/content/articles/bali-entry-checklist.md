@@ -4,7 +4,7 @@ description: "2026年最新のバリ島入国に必要なものや手続きを�
 category: "travel"
 tags: ["バリ島", "観光", "ビザ"]
 pubDate: 2026-09-29
-lastVerified: 2026-09-29
+lastVerified: 2026-10-01
 references:
   - title: "インドネシア 安全対策基礎データ(犯罪・入国・税関・医療・免許・緊急連絡先)（外務省 海外安全ホームページ）"
     url: "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html"
