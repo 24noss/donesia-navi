@@ -20,7 +20,7 @@ references:
     url: "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E28A"
 ymyl: true
 hasAffiliate: false
-draft: true
+draft: false
 ---
 
 ## この記事の要点
