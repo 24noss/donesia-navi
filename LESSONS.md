@@ -45,7 +45,7 @@
 - 正しいやり方: 出典の取得確認は、実際に実行する環境と同じ場所(ランナー or 実行するMac)で行う。ローカルで取れても Actions で取れるとは限らない。取得元IPに依存する出典があるジョブは、取得できる環境(Mac の launchd)で実行する。
 - 昇格先候補: test(実行環境での official-sources 取得チェック。L-003 と統合)
 
-## L-006 2026-10 [再発:1] [状態:記録]
+## L-005 2026-10 [再発:1] [状態:記録]
 - 何が起きた: `public/_redirects` に www→apex のリダイレクト(`https://www.indonesia-navi.com/* ...`)を書いていたが、Cloudflare Pages の `_redirects` はドメイン単位のリダイレクト非対応で効かず、www は HTTP 522 のまま気付かれていなかった(AdSense 審査後の確認で発覚)。
 - 正しいやり方: ホスト名をまたぐリダイレクトは Cloudflare ダッシュボードの Rules → Redirect Rules(テンプレ「Redirect from WWW to root」、`*://www.*` → `https://${2}`、301、クエリ保持)で行う。設定後は `curl -sI https://www.indonesia-navi.com/` で 301 を確認する。
 - 昇格先候補: test(verify 外の本番 smoke として www の 301 を定期確認)
