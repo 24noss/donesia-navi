@@ -1,26 +1,54 @@
 {
+  "https://evisa.imigrasi.go.id/front/faq/34723b14-5760-42e9-8aa8-73f54deb572f": {
+    "sha256": "984404c108c8747002f9f5db2ddbd084e8703a75713c305fca86948c212e43d7",
+    "fetchedAt": "2026-10-01T03:28:37.372Z"
+  },
+  "https://evisa.imigrasi.go.id/front/faq/e076131c-0d39-469b-afaf-75fc66aff923": {
+    "sha256": "f6074fcf26e2e2ee0a46bd3104094410b33f59c7f8efc4db5f4ae17289b9e6ca",
+    "fetchedAt": "2026-10-01T03:28:38.088Z"
+  },
+  "https://evisa.imigrasi.go.id/front/info/evoa": {
+    "sha256": "1d9a944ec935d6d1764ab43ae66d7a14b69e7b749cadfbc892391dc195fe6528",
+    "fetchedAt": "2026-10-01T03:28:37.201Z"
+  },
+  "https://www.imigrasi.go.id/berita/2022/07/20/how-to-get-visa-on-arrival-in-indonesia": {
+    "sha256": "76452215df248b424c74fa54bd71438482008717be95714ef4d3f217bed762b9",
+    "fetchedAt": "2026-10-01T03:28:39.535Z"
+  },
+  "https://www.imigrasi.go.id/berita/jangan-salah-pilih-ini-beda-visa-kunjungan-wisata-dan-visa-on-arrival": {
+    "sha256": "7f1789d0c3d968a8f9852215ebe12561804f4db18d1e1e3899b552345f14dd73",
+    "fetchedAt": "2026-10-01T03:28:38.991Z"
+  },
   "https://www.imigrasi.go.id/wna/daftar-visa-indonesia": {
     "sha256": "7a752e08566bfdfb761ba0a515d0fb30d24f0a4665f7dbb81260b48797d59fd6",
-    "fetchedAt": "2026-10-01T03:16:38.775Z"
+    "fetchedAt": "2026-10-01T03:28:34.419Z"
+  },
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/C1": {
+    "sha256": "87a07d321a36d88e216c763483417784258212854f7c35077b1d162660c16089",
+    "fetchedAt": "2026-10-01T03:28:40.164Z"
   },
   "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/D1": {
     "sha256": "cfec3b5c475bd314262fc4b38e9e5b0581b82320c996fc4beae24fba61aebfc4",
-    "fetchedAt": "2026-10-01T03:16:42.437Z"
+    "fetchedAt": "2026-10-01T03:28:40.728Z"
   },
   "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E28A": {
     "sha256": "4fbde4719d16e98a56999d625c79af14f525e6c39f2e995d12a7f111c8cfb4f0",
-    "fetchedAt": "2026-10-01T03:16:43.396Z"
+    "fetchedAt": "2026-10-01T03:28:41.393Z"
   },
   "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33": {
     "sha256": "4ff9de02819f6c38fbc5b976501c376583f76439d886523c35f82b4820d830d7",
-    "fetchedAt": "2026-10-01T03:16:39.680Z"
+    "fetchedAt": "2026-10-01T03:28:35.352Z"
   },
   "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33E": {
     "sha256": "47e8bfa86e9783550d217b084d7ea479f00e18b4a3f6774b95b2304fb9fafc1d",
-    "fetchedAt": "2026-10-01T03:16:40.554Z"
+    "fetchedAt": "2026-10-01T03:28:35.988Z"
+  },
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33F": {
+    "sha256": "2cca56aa9c01d23d0f80ec35a6b87a8f42a2cfe4fa26ab95a214103a8a989bdc",
+    "fetchedAt": "2026-10-01T03:28:37.942Z"
   },
   "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33G": {
     "sha256": "9cefc0eb7ea491c717f39b669e4d77542168f3108eb13f4b41547af728c1ddf1",
-    "fetchedAt": "2026-10-01T03:16:41.501Z"
+    "fetchedAt": "2026-10-01T03:28:36.634Z"
   }
 }
