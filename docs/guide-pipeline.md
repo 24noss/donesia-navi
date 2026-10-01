@@ -123,6 +123,7 @@
 
 ### 公開済みガイドの作り直し(`--replace`)
 出典の追加・見出し整理などで、公開済み(`draft: false`)の記事を最新ロジックで作り直したいとき。Mac から実行する:
+- 引き継ぐのは `pubDate`・`draft`・`hasAffiliate` のみ。`ymyl`・`category`・`tags` は台帳(`src/data/guide-topics.json`)が正で、記事側だけ手で変えた値は上書きされる。記事側を変えたら台帳も直すこと。
 
 ```bash
 bash "$HOME/Library/Application Support/donesia-navi-guide/bin/guide-launcher.sh" generate --topic <id> --replace
