@@ -56,7 +56,16 @@ const currentPath = Astro.url.pathname;
     function gtag(){dataLayer.push(arguments);}
     var storedConsent;
     try { storedConsent = localStorage.getItem('cookie_consent'); } catch (e) {}
-    var consentState = storedConsent === 'granted' ? 'granted' : 'denied';
+    var consentRegions = ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH'];
+    var regionState = storedConsent === 'granted' ? 'granted' : 'denied';
+    gtag('consent', 'default', {
+      'analytics_storage': regionState,
+      'ad_storage': regionState,
+      'ad_user_data': regionState,
+      'ad_personalization': regionState,
+      'region': consentRegions
+    });
+    var consentState = storedConsent === 'denied' ? 'denied' : 'granted';
     gtag('consent', 'default', {
       'analytics_storage': consentState,
       'ad_storage': consentState,
@@ -235,10 +244,10 @@ const currentPath = Astro.url.pathname;
 
   <!-- COOKIE CONSENT BANNER -->
   <div class="consent-banner" id="consent-banner" role="region" aria-label="Cookie使用に関する同意">
-    <p class="consent-text">当サイトはアクセス解析と広告配信のためCookieを使用します。詳しくは<a href="/policy/">ポリシー</a>をご確認ください。</p>
+    <p class="consent-text">当サイトはアクセス解析と広告配信のためCookieを使用しています。拒否する場合は「拒否」を押してください。詳しくは<a href="/policy/">ポリシー</a>をご確認ください。</p>
     <div class="consent-actions">
       <button type="button" class="consent-btn consent-decline" id="consent-decline">拒否</button>
-      <button type="button" class="consent-btn consent-accept" id="consent-accept">同意する</button>
+      <button type="button" class="consent-btn consent-accept" id="consent-accept">OK</button>
     </div>
   </div>
 
@@ -300,6 +309,9 @@ const currentPath = Astro.url.pathname;
         if (consentDecline) {
           consentDecline.addEventListener('click', function(){
             try { localStorage.setItem('cookie_consent', 'denied'); } catch (e) {}
+            if (typeof gtag === 'function') {
+              gtag('consent', 'update', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+            }
             consentBanner.classList.remove('show');
           });
         }
