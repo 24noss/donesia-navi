@@ -7,10 +7,12 @@
 #
 # 使い方:
 #   guide-job.sh generate [--topic <id>] [--dry-run] [--force]
+#   guide-job.sh generate --topic <id> --replace [--dry-run]   # 公開済みガイドの作り直し(PRは auto/guide-refresh-<id>-<YYYYMMDD>。承認=mergeのみ)
 #   guide-job.sh refresh [--dry-run]
 #     --dry-run : Gemini を呼ばずフィクスチャで生成し、commit/push/PR/Issue はせず「実行するはずのコマンド」をログに出す
 #     GUIDE_JOB_SKIP_SYNC=1 : 開発用。worktree を origin/main に合わせない
 #     --force   : generate の「同日に生成済みなら何もしない」ガードを無視する
+#     --replace : 公開済み記事の作り直し。--topic 必須。同日ガードは対象外(topic 明示指定と同じ)
 #
 # 通常は launchd → scripts/local/guide-launcher.sh(install-launchd.sh が設置)→ worktree 内のこのスクリプト(= origin/main 版)の順で実行される。
 # 本リポジトリの作業ツリーには触れない。専用 worktree("$HOME/Library/Application Support/donesia-navi-guide/worktree")で作業する。
@@ -30,7 +32,7 @@ LOG_DIR="$HOME/Library/Logs/donesia-navi-guide"
 KEYCHAIN_SERVICE="donesia-navi-gemini"
 
 usage() {
-  echo "usage: guide-job.sh generate [--topic <id>] [--dry-run] [--force] | refresh [--dry-run]" >&2
+  echo "usage: guide-job.sh generate [--topic <id> [--replace]] [--dry-run] [--force] | refresh [--dry-run]" >&2
   exit 2
 }
 
@@ -40,11 +42,13 @@ case "$JOB" in generate | refresh) ;; *) usage ;; esac
 
 DRY_RUN=0
 FORCE=0
+REPLACE=0
 TOPIC_ID=""
 while [ $# -gt 0 ]; do
   case "$1" in
     --dry-run) DRY_RUN=1 ;;
     --force) FORCE=1 ;;
+    --replace) REPLACE=1 ;;
     --topic)
       [ $# -ge 2 ] || usage
       TOPIC_ID="$2"; shift ;;
@@ -53,6 +57,10 @@ while [ $# -gt 0 ]; do
   shift
 done
 if [ -n "$TOPIC_ID" ] && [ "$JOB" != generate ]; then usage; fi
+if [ "$REPLACE" = 1 ] && { [ "$JOB" != generate ] || [ -z "$TOPIC_ID" ]; }; then
+  echo "--replace は 'generate --topic <id>' でのみ使えます" >&2
+  usage
+fi
 
 # ------------------------------------------------------------------ ログ・ロック
 mkdir -p "$LOG_DIR" "$STATE_DIR"
@@ -70,7 +78,7 @@ cleanup() {
 # 30日より古いジョブログを削除(launchd-*.log は launchd が追記するので対象外)
 find "$LOG_DIR" -maxdepth 1 -type f \( -name 'generate-*.log' -o -name 'refresh-*.log' \) -mtime +30 -delete 2>/dev/null || true
 
-log "開始 job=$JOB dry_run=$DRY_RUN topic=${TOPIC_ID:-(自動)} repo=$REPO_DIR"
+log "開始 job=$JOB dry_run=$DRY_RUN topic=${TOPIC_ID:-(自動)} replace=$REPLACE repo=$REPO_DIR"
 
 # 多重起動防止(generate と refresh は同じ worktree を使うため、ロックは共通)
 acquire_lock() {
@@ -215,6 +223,22 @@ compose_pr_body() {
   } >"$out"
 }
 
+# 公開済み記事の作り直しPR(--replace)の本文。除去URL・見出し置換の報告があれば末尾に付ける。
+compose_replace_pr_body() {
+  local id="$1" report="$2" out="$3"
+  {
+    printf '%s\n' "公開済みガイド記事の作り直しです(トピックID: \`$id\`)。" ""
+    printf '%s\n' '公開済み記事の作り直し(理由: 出典の追加・見出し整理)。差分を確認して承認してください。'
+    printf '%s\n' '- `pubDate` / `draft` / `hasAffiliate` は既存記事から引き継ぎ、`updatedDate` と `lastVerified` を当日にしています。出典スナップショットも更新します。'
+    printf '%s\n' '- 公開済み(`draft: false`)のまま変更されるため、Slackの承認(= merge)で本番に反映されます。' ""
+    printf '%s\n' '却下する場合はこのPRを **close** してください。(実行: Mac の launchd)'
+    if [ -f "$report" ]; then
+      echo
+      cat "$report"
+    fi
+  } >"$out"
+}
+
 job_generate() {
   local report_dir="$TMP_DIR/report" rc=0
   mkdir -p "$report_dir"
@@ -224,6 +248,7 @@ job_generate() {
     load_github_env
   fi
 
+  # 同日ガードは topic 明示指定(--replace を含む)のときは対象外
   if [ -z "$TOPIC_ID" ] && [ "$FORCE" = 0 ]; then
     local today_pr=""
     if [ "$DRY_RUN" = 1 ]; then
@@ -244,6 +269,7 @@ job_generate() {
 
   local -a node_args=()
   [ "$DRY_RUN" = 1 ] && node_args+=(--dry-run)
+  [ "$REPLACE" = 1 ] && node_args+=(--replace)
   log "node scripts/generate-guide.mjs ${node_args[*]:-}"
   set +e
   GUIDE_REPORT_DIR="$report_dir" GEMINI_API_KEY="$GEMINI_KEY" GUIDE_TOPIC_ID="$TOPIC_ID" node scripts/generate-guide.mjs ${node_args[@]+"${node_args[@]}"}
@@ -271,10 +297,22 @@ job_generate() {
   file="$(jq -r .file "$report_dir/guide-result.json")"
   snapshot="$(jq -r .snapshot "$report_dir/guide-result.json")"
   branch="auto/guide-$id"
-  log "生成されました: $id(「${title}」)"
-
-  compose_pr_body "$id" "$report_dir/guide-removed-urls.md" "$TMP_DIR/pr-body.md"
   local pr_title="ガイド記事ドラフト: $title"
+  local commit_new="Add guide draft: $id" commit_regen="Regenerate guide draft: $id"
+  if [ "$REPLACE" = 1 ]; then
+    # auto/guide-refresh-* は detectNotifyKind で 'refresh'(承認=mergeのみ)になり、日次生成の同日ガード・オープンPR判定からも外れる
+    branch="auto/guide-refresh-$id-$(TZ=Asia/Tokyo date +%Y%m%d)"
+    pr_title="ガイド記事の改訂: $title"
+    commit_new="Replace guide: $id"
+    commit_regen="Replace guide (update): $id"
+    log "作り直しました: $id(「${title}」)ブランチ=$branch"
+    compose_replace_pr_body "$id" "$report_dir/guide-removed-urls.md" "$TMP_DIR/pr-body.md"
+  else
+    log "生成されました: $id(「${title}」)"
+    compose_pr_body "$id" "$report_dir/guide-removed-urls.md" "$TMP_DIR/pr-body.md"
+  fi
+  log "PRタイトル: $pr_title"
+  log "ブランチ: $branch"
 
   if [ "$DRY_RUN" = 1 ]; then
     log "[dry-run] 生成物(一時ディレクトリ): $file / $snapshot"
@@ -283,7 +321,7 @@ job_generate() {
     if [ -f "$report_dir/guide-removed-urls.md" ]; then log "[dry-run] レビュー用の報告(除去URL・置換見出し)がPR本文に付きます"; fi
     act git checkout -B "$branch" origin/main
     act git add -- "src/content/articles/$id.md" "src/data/guide-source-snapshots/$id.json"
-    act git commit -m "Add guide draft: $id"
+    act git commit -m "$commit_new"
     act git push origin "$branch"
     act gh pr create --base main --head "$branch" --title "$pr_title" --body-file "$TMP_DIR/pr-body.md"
     return 0
@@ -294,9 +332,9 @@ job_generate() {
   mkdir -p "$stash/$(dirname "$file")" "$stash/$(dirname "$snapshot")"
   mv "$file" "$stash/$file"
   mv "$snapshot" "$stash/$snapshot"
-  local action_msg="Add guide draft: $id"
+  local action_msg="$commit_new"
   if remote_branch_exists "$branch"; then
-    action_msg="Regenerate guide draft: $id"
+    action_msg="$commit_regen"
     log "リモートに既存ブランチ $branch があります。その上に通常の commit を積みます"
     git fetch origin "$branch" --quiet
     git checkout -f -q -B "$branch" "origin/$branch"
