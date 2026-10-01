@@ -183,6 +183,12 @@ describe('resolveTopicReferences', () => {
     assert.deepEqual(refs.map((r) => r.url), ['https://x.example/a', 'https://x.example/b', 'https://x.example/e']);
     assert.equal(refs[0].publisher, 'P');
   });
+  test('テーマ間ラウンドロビン(各テーマの1件目→2件目…、extraは最後)', () => {
+    const u = (n) => ({ title: n, url: `https://x.example/${n}` });
+    const sources = { themes: { a: { sources: [u('a1'), u('a2'), u('a3')] }, b: { sources: [u('b1')] }, c: { sources: [u('c1'), u('c2')] } } };
+    const refs = resolveTopicReferences({ sourceThemes: ['a', 'b', 'c'], extraReferences: [u('e1')] }, sources);
+    assert.deepEqual(refs.map((r) => r.title), ['a1', 'b1', 'c1', 'a2', 'c2', 'a3', 'e1']);
+  });
   test('normalizeUrl: ハッシュと末尾スラッシュを無視する', () => {
     assert.equal(normalizeUrl('https://a.example/x/#h'), normalizeUrl('https://a.example/x'));
   });

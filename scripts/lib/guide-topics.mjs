@@ -269,7 +269,7 @@ export function normalizeUrl(url) {
 }
 
 /**
- * トピック → 参照URL一覧(sourceThemes の sources + extraReferences)。URLは重複排除(正規化キー)。
+ * トピック → 参照URL一覧(sourceThemes の sources をテーマ間ラウンドロビンで並べ、最後に extraReferences)。URLは重複排除(正規化キー)。
  * 存在しないテーマキーは無視する(検証は validateGuideTopics 側で行う)。
  * @returns {{title:string, url:string, publisher?:string, lang?:string}[]}
  */
@@ -283,8 +283,11 @@ export function resolveTopicReferences(topic, officialSources) {
     seen.add(key);
     refs.push({ title: r.title || r.url, url: r.url, ...(r.publisher ? { publisher: r.publisher } : {}), ...(r.lang ? { lang: r.lang } : {}) });
   };
-  for (const key of topic.sourceThemes || []) {
-    for (const s of officialSources?.themes?.[key]?.sources || []) add(s);
+  // テーマのラウンドロビン(各テーマの1件目→2件目→…)。合計上限で後ろが除外されても各テーマの1件目は残る。
+  const lists = (topic.sourceThemes || []).map((key) => officialSources?.themes?.[key]?.sources || []);
+  const maxLen = Math.max(0, ...lists.map((l) => l.length));
+  for (let i = 0; i < maxLen; i++) {
+    for (const l of lists) if (i < l.length) add(l[i]);
   }
   for (const r of topic.extraReferences || []) add(r);
   return refs;
