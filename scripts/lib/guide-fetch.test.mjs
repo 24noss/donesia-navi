@@ -68,14 +68,27 @@ describe('fetchSourceText', () => {
 });
 
 describe('applyTotalBudget', () => {
-  test('合計上限を超えた分は切り詰め、入らないものは omitted', () => {
-    const mk = (n, u) => ({ url: u, text: 'x'.repeat(n) });
-    const { included, omitted } = applyTotalBudget([mk(12000, 'a'), mk(12000, 'b'), mk(12000, 'c'), mk(12000, 'd')], 40000);
-    assert.deepEqual(included.map((s) => s.text.length), [12000, 12000, 12000, 4000]);
+  const mk = (n, u) => ({ url: u, text: 'x'.repeat(n), sha256: `h-${u}` });
+  test('長い1件が他を締め出さず、1件あたり min(12000, floor(total/n)) に均等化される', () => {
+    const srcs = Array.from({ length: 20 }, (_, i) => mk(12000, `u${i}`));
+    const { included, omitted } = applyTotalBudget(srcs, 120000);
     assert.equal(omitted.length, 0);
-    const r2 = applyTotalBudget([mk(12000, 'a'), mk(12000, 'b')], 12100);
-    assert.equal(r2.included.length, 1);
-    assert.equal(r2.omitted.length, 1);
+    assert.ok(included.every((s) => s.text.length === 6000));
+    const { included: i2 } = applyTotalBudget([mk(12000, 'a'), mk(500, 'b')], 120000);
+    assert.deepEqual(i2.map((s) => s.text.length), [12000, 500]);
+  });
+  test('1件あたりが3000字を割る場合のみ後ろから除外する', () => {
+    const srcs = Array.from({ length: 45 }, (_, i) => mk(12000, `u${i}`));
+    const { included, omitted } = applyTotalBudget(srcs, 120000);
+    assert.equal(included.length, 40);
+    assert.equal(omitted.length, 5);
+    assert.deepEqual(omitted.map((s) => s.url), ['u40', 'u41', 'u42', 'u43', 'u44']);
+    assert.ok(included.every((s) => s.text.length === 3000));
+  });
+  test('sha256 は割り当てに依存しない(元のまま)', () => {
+    const { included } = applyTotalBudget([mk(12000, 'a'), mk(12000, 'b'), mk(12000, 'c')], 9000);
+    assert.deepEqual(included.map((s) => s.sha256), ['h-a', 'h-b', 'h-c']);
+    assert.ok(included.every((s) => s.text.length === 3000));
   });
 });
 

@@ -9,7 +9,9 @@ import { isHttpUrl } from './guide-topics.mjs';
 
 export const FETCH_TIMEOUT_MS = 20_000;
 export const MAX_CHARS_PER_SOURCE = 12_000;
-export const MAX_CHARS_TOTAL = 40_000;
+export const MAX_CHARS_TOTAL = 120_000;
+// 公平割り当て時の1件あたり下限。n が多すぎてこれを割る場合のみ後ろから除外する。
+export const MIN_CHARS_PER_SOURCE_BUDGET = 3_000;
 // 本文がこれ未満なら「取れていない」(JS描画・ブロック・エラーページ)とみなす。
 export const MIN_SOURCE_CHARS = 200;
 export const USER_AGENT = 'donesia-navi-guide-bot/1.0 (+https://indonesia-navi.com)';
@@ -62,7 +64,7 @@ function hostKey(url) {
 
 /**
  * 1URLを取得してテキスト化する。失敗は例外にせず { ok:false, reason } で返す(呼び出し側で除外して続行するため)。
- * 成功時: text は1ソース上限(MAX_CHARS_PER_SOURCE)で切り詰め済み、sha256 はその切り詰め後テキストのハッシュ
+ * 成功時: text は1ソース上限(MAX_CHARS_PER_SOURCE)で切り詰め済み、sha256 はその切り詰め後(合計割り当て前)テキストのハッシュ
  * (他ソースの分量に影響されず、モデルが実際に読んだ範囲の変化だけを検知するため)。
  */
 export async function fetchSourceText(url, { fetchImpl = fetch, timeoutMs = FETCH_TIMEOUT_MS } = {}) {
@@ -106,21 +108,18 @@ export async function fetchSourceText(url, { fetchImpl = fetch, timeoutMs = FETC
   return { ok: true, url, text: capped, sha256: sha256Hex(capped), truncated: text.length > MAX_CHARS_PER_SOURCE, fetchedAt: new Date().toISOString() };
 }
 
-/** 合計上限内に収める(先頭のソースから優先)。上限を超えて入らないソースは omitted に入れる。 */
+/**
+ * 合計上限内に公平に収める。取得成功n件に対し1件あたり min(MAX_CHARS_PER_SOURCE, floor(maxTotal / n)) 字で切り詰める。
+ * 1件あたりが MIN_CHARS_PER_SOURCE_BUDGET を割る場合のみ、後ろのソースから omitted にする(先頭=各テーマの1件目が残る並びを呼び出し側が保証)。
+ * sha256 は fetchSourceText が「割り当て前(MAX_CHARS_PER_SOURCE で切った)テキスト」で計算済みで、ここでは変更しない
+ * (割り当て量でハッシュが変わると月次改訂の変化検知が誤作動するため)。
+ */
 export function applyTotalBudget(sources, maxTotal = MAX_CHARS_TOTAL) {
-  const included = [];
-  const omitted = [];
-  let used = 0;
-  for (const s of sources) {
-    const remaining = maxTotal - used;
-    if (remaining < MIN_SOURCE_CHARS) {
-      omitted.push(s);
-      continue;
-    }
-    const text = s.text.slice(0, remaining);
-    used += text.length;
-    included.push({ ...s, text });
-  }
+  const maxCount = Math.max(1, Math.floor(maxTotal / MIN_CHARS_PER_SOURCE_BUDGET));
+  const kept = sources.slice(0, maxCount);
+  const omitted = sources.slice(maxCount);
+  const per = Math.min(MAX_CHARS_PER_SOURCE, Math.floor(maxTotal / Math.max(1, kept.length)));
+  const included = kept.map((s) => ({ ...s, text: s.text.slice(0, per) }));
   return { included, omitted };
 }
 
