@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通規制", "交通", "EV", "生活情報"]
 pubDate: 2026-10-01
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8687172/pramono-kaji-ulang-penerapan-ganjil-genap-di-jl-gajah-mada-dan-hayam-wuruk"
-draft: true
+draft: false
 ---
 
 ## 導入10年のジャカルタ奇数偶数規制、抜本的見直しへ
