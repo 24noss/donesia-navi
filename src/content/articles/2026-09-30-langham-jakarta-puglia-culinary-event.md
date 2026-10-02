@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "中央ジャカルタ", "イタリアン", "レスト
 pubDate: 2026-09-30
 source: "Detik"
 sourceUrl: "https://food.detik.com/berita-boga/d-8686073/cita-rasa-puglia-dibawa-ke-jakarta-ada-ravioli-dengan-keju-24-bulan"
-draft: true
+draft: false
 ---
 
 ## ザ・ランガム・ジャカルタでイタリア・プーリア州の特別メニューを提供
