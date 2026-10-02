@@ -1,0 +1,18 @@
+{
+  "https://digitalkorlantas.polri.go.id/sim/": {
+    "sha256": "362ed0e2bc92a5d5bda5f0b177bbae4ebd4e7aa82a88d4f8740614c6c24aef16",
+    "fetchedAt": "2026-10-02T01:30:14.712Z"
+  },
+  "https://lovebali.baliprov.go.id/article/detail/1742819770564/bali-cracks-down-on-unruly-tourists:-governor-koster-issues-new-regulations": {
+    "sha256": "a9b3193e2a8f1ec6c423198442321656cef053da6c19a74d38460249b7421f3d",
+    "fetchedAt": "2026-10-02T01:30:16.660Z"
+  },
+  "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html": {
+    "sha256": "1fff7cc83bded7f623cc5cf84e3c59960fa4c184a4db50e48040c1b3e256948e",
+    "fetchedAt": "2026-10-02T01:30:13.850Z"
+  },
+  "https://www.indonesia.travel/gb/en/general-information/local-law": {
+    "sha256": "860e2d484fc1d1d31e3e30330749e29dfccd836188a79fbd82b96087f797d326",
+    "fetchedAt": "2026-10-02T01:30:15.700Z"
+  }
+}
