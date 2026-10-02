@@ -6,7 +6,7 @@ tags: ["北ジャカルタ", "洪水", "防災", "注意喚起", "生活情報"]
 pubDate: 2026-10-01
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/10/01/07411891/7-wilayah-pesisir-utara-jakarta-terancam-banjir-rob-13-14-dan-25-31"
-draft: true
+draft: false
 ---
 
 ## 満潮期に合わせた冠水リスク、物流施設や港湾エリアの通行に警戒を
