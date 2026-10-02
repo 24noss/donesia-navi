@@ -6,7 +6,7 @@ tags: ["プルタミナ", "物価", "インドネシア経済", "生活情報"]
 pubDate: 2026-10-01
 source: "Kompas"
 sourceUrl: "https://money.kompas.com/read/2026/10/01/123702126/harga-bbm-pertamina-oktober-tak-berubah-pertamax-tetap-rp-15950-per-liter"
-draft: true
+draft: false
 ---
 
 ## 国際原油価格の変動も国内給油価格は据え置き、自家用車利用者の負担増回避
