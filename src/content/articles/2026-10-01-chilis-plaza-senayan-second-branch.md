@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "中央ジャカルタ", "ファミリー", "デート
 pubDate: 2026-10-01
 source: "Detik"
 sourceUrl: "https://food.detik.com/foto-kuliner/d-8686246/restoran-tex-mex-legendaris-asal-amerika-ini-punya-fajitas-enak"
-draft: true
+draft: false
 ---
 
 ## アメリカ発のテキサス・メキシカン料理店チリーズがプラザ・スナヤンへ進出
