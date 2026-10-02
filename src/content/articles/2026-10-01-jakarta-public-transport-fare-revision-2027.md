@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "トランスジャカルタ", "バス", "鉄道", "�
 pubDate: 2026-10-01
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/09/30/11044601/selamat-tinggal-rp-3500-tarif-transjakarta-akhir-usai-lebih-dari"
-draft: true
+draft: false
 ---
 
 ## ジャカルタの公共交通機関、2027年1月から運賃改定へ
