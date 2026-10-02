@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "カフェ", "レストラン", "新店オープン"]
 pubDate: 2026-09-28
 source: "Fimela"
 sourceUrl: "https://www.fimela.com/food/read/8301335/tobys-estate-buka-di-lippo-mall-nusantara-hadirkan-cafe-dengan-bar-di-tengah-ruang"
-draft: true
+draft: false
 ---
 
 ## トビーズ・エステートがリッポ・モール・ヌサンラ店で新しいカフェ体験を提供
