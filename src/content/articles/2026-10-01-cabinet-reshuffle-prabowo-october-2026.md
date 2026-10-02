@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "生活情報", "注意喚起"]
 pubDate: 2026-10-01
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8687972/susunan-menteri-prabowo-gibran-terbaru-usai-reshuffle-ini-daftar-lengkapnya"
-draft: true
+draft: false
 ---
 
 ## 主要閣僚や警察首脳が相次ぎ交代、政権運営の体制強化へ
