@@ -6,7 +6,7 @@ tags: ["南ジャカルタ", "クマン", "交通規制", "渋滞", "注意喚�
 pubDate: 2026-10-01
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/10/01/18314921/jalan-kemang-raya-ditutup-akhir-pekan-ini-catat-waktu-dan-jalur"
-draft: true
+draft: false
 ---
 
 ## ケマン地区で週末の交通規制に注意
