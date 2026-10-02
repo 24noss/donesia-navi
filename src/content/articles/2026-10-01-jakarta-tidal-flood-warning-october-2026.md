@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "北ジャカルタ", "注意喚起", "防災", "BMKG"
 pubDate: 2026-10-01
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/10/01/21090801/waspada-banjir-rob-jakarta-hingga-4-oktober-ini-12-wilayah-yang"
-draft: true
+draft: false
 ---
 
 ## 首都圏沿岸部で高潮の警戒続く
