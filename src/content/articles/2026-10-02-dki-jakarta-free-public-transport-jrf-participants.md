@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "交通", "トランスジャカルタ", "鉄道", "�
 pubDate: 2026-10-02
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/10/02/16480701/pemprov-dki-gratiskan-transjakarta-mrt-lrt-jakarta-22-25-oktober-bagi"
-draft: true
+draft: false
 ---
 
 ## 10月22〜25日の4日間、マラソン参加証の提示等で交通機関が利用可能に
