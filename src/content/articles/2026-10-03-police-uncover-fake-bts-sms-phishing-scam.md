@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "治安", "注意喚起"]
 pubDate: 2026-10-03
 source: "Detik"
 sourceUrl: "https://news.detik.com/berita/d-8690266/3-fakta-pembobol-kartu-kredit-pakai-fake-bts-buat-sebar-sms-phishing"
-draft: true
+draft: false
 ---
 
 ## 車載の偽基地局から大量の詐欺SMSを送信、不審なリンクに警戒を
