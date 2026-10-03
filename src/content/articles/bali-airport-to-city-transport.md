@@ -16,7 +16,7 @@ references:
     url: "https://lovebali.baliprov.go.id/article/detail/1742819770564/bali-cracks-down-on-unruly-tourists:-governor-koster-issues-new-regulations"
 ymyl: false
 hasAffiliate: false
-draft: true
+draft: false
 ---
 
 ## この記事の要点
