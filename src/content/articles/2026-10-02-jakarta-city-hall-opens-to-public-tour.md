@@ -6,7 +6,7 @@ tags: ["ジャカルタ", "生活情報", "観光"]
 pubDate: 2026-10-02
 source: "Kompas"
 sourceUrl: "https://megapolitan.kompas.com/read/2026/10/02/11083971/balai-kota-dki-dibuka-untuk-umum-mulai-3-oktober-warga-bisa-lihat-ruang"
-draft: true
+draft: false
 ---
 
 ## 歴史的建築や知事の執務スペースを開放、身近な行政施設として親しまれる場へ
