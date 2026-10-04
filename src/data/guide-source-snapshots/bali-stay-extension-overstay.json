@@ -1,0 +1,22 @@
+{
+  "https://evisa.imigrasi.go.id/front/info/evoa": {
+    "sha256": "1d9a944ec935d6d1764ab43ae66d7a14b69e7b749cadfbc892391dc195fe6528",
+    "fetchedAt": "2026-10-04T01:30:14.229Z"
+  },
+  "https://www.anzen.mofa.go.jp/info/pcsafetymeasure_002.html": {
+    "sha256": "1fff7cc83bded7f623cc5cf84e3c59960fa4c184a4db50e48040c1b3e256948e",
+    "fetchedAt": "2026-10-04T01:30:15.500Z"
+  },
+  "https://www.imigrasi.go.id/berita/jangan-salah-pilih-ini-beda-visa-kunjungan-wisata-dan-visa-on-arrival": {
+    "sha256": "7f1789d0c3d968a8f9852215ebe12561804f4db18d1e1e3899b552345f14dd73",
+    "fetchedAt": "2026-10-04T01:30:16.465Z"
+  },
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia": {
+    "sha256": "7a752e08566bfdfb761ba0a515d0fb30d24f0a4665f7dbb81260b48797d59fd6",
+    "fetchedAt": "2026-10-04T01:30:15.395Z"
+  },
+  "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/C1": {
+    "sha256": "87a07d321a36d88e216c763483417784258212854f7c35077b1d162660c16089",
+    "fetchedAt": "2026-10-04T01:30:20.483Z"
+  }
+}
